@@ -1,5 +1,17 @@
 {
   "demo-ewbr.qmd": {
     "demo-ewbr.html": "0084763a"
+  },
+  "index.qmd": {
+    "index.html": "f58c4240"
+  },
+  "unidad1.qmd": {
+    "unidad1.html": "7636add3"
+  },
+  "unidad2.qmd": {
+    "unidad2.html": "947fa63b"
+  },
+  "unidad1_reestructurada.qmd": {
+    "unidad1_reestructurada.html": "6139d0ec"
   }
 }

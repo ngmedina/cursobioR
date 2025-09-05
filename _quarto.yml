@@ -1,5 +1,24 @@
-project:
-  title: "demo-ewbr"
 
-editor: visual
+project:
+  type: website
+
+website:
+  title: "Curso de R con webR"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: unidad1_reestructurada.qmd
+        text: Tema 1 Introducción a R
+      - href: unidad2.qmd
+        text: Unidad 2
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+engine: knitr
+filters:
+  - webr
+
 

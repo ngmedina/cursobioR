@@ -1,0 +1,76 @@
+---
+title: 'Unidad 1 - Introducción a R'
+format: html
+engine: knitr
+filters:
+  - webr
+---
+
+# Unidad 1: Introducción a R
+## Objetivos de aprendizaje
+- Comprender qué es R y cómo instalarlo.
+- Familiarizarse con RStudio y su interfaz.
+- Ejecutar comandos básicos en R.
+- Importar y exportar datos en distintos formatos.
+- Organizar el trabajo en proyectos de R.
+
+## 1. ¿Qué es R?
+R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.
+
+Puedes acceder al proyecto R en: <http://www.r-project.org>
+
+## 2. Instalación de R y RStudio
+Sigue las instrucciones en <https://cran.r-project.org/> para instalar R según tu sistema operativo.
+
+RStudio se descarga desde: <https://www.rstudio.com/products/rstudio/download/>
+
+## 3. Primeros pasos en RStudio
+Al abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.
+
+### Ejercicio 1: Suma básica
+```{webr-r}
+2 + 2
+```
+
+### Ejercicio 2: Crear un objeto
+```{webr-r}
+cosa <- 2 + 3
+cosa
+```
+
+## 4. Importar y exportar datos
+### Ejercicio 3: Cargar datos integrados
+```{webr-r}
+data(iris)
+head(iris)
+```
+
+### Ejercicio 4: Exportar e importar CSV
+```{webr-r}
+write.csv(iris, file = 'iris.csv')
+iris_import_csv <- read.csv('iris.csv')
+head(iris_import_csv)
+```
+
+## 5. Organización del trabajo
+Utiliza proyectos de R para mantener tus archivos organizados. Usa `getwd()` para ver tu directorio de trabajo y `setwd()` para cambiarlo.
+
+## 6. Evaluación y repaso
+### Preguntas de autoevaluación
+1. ¿Qué función se usa para instalar paquetes en R?
+
+2. ¿Cómo se guarda un objeto en formato `.RData`?
+
+3. ¿Qué diferencia hay entre `.RData` y `.rds`?
+
+### Ejercicio 5: Guardar y cargar objetos
+```{webr-r}
+save(iris, file = 'iris_object_only.RData')
+load('iris_object_only.RData')
+head(iris)
+```
+
+## 7. Recursos adicionales
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Cookbook for R](http://www.cookbook-r.com/)
+- [R Bloggers](https://www.r-bloggers.com/)
