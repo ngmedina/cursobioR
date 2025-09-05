@@ -12,5 +12,68 @@
     "title": "webR in Quarto HTML Documents",
     "section": "",
     "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html",
+    "href": "unidad1_reestructurada.html",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Comprender qué es R y cómo instalarlo.\nFamiliarizarse con RStudio y su interfaz.\nEjecutar comandos básicos en R.\nImportar y exportar datos en distintos formatos.\nOrganizar el trabajo en proyectos de R.\n\n\n\n\nR es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.\nPuedes acceder al proyecto R en: http://www.r-project.org\n\n\n\nSigue las instrucciones en https://cran.r-project.org/ para instalar R según tu sistema operativo.\nRStudio se descarga desde: https://www.rstudio.com/products/rstudio/download/\n\n\n\nAl abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nUtiliza proyectos de R para mantener tus archivos organizados. Usa getwd() para ver tu directorio de trabajo y setwd() para cambiarlo.\n\n\n\n\n\n\n¿Qué función se usa para instalar paquetes en R?\n¿Cómo se guarda un objeto en formato .RData?\n¿Qué diferencia hay entre .RData y .rds?\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\n\nR for Data Science\nCookbook for R\nR Bloggers"
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#objetivos-de-aprendizaje",
+    "href": "unidad1_reestructurada.html#objetivos-de-aprendizaje",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Comprender qué es R y cómo instalarlo.\nFamiliarizarse con RStudio y su interfaz.\nEjecutar comandos básicos en R.\nImportar y exportar datos en distintos formatos.\nOrganizar el trabajo en proyectos de R."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#qué-es-r",
+    "href": "unidad1_reestructurada.html#qué-es-r",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.\nPuedes acceder al proyecto R en: http://www.r-project.org"
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#instalación-de-r-y-rstudio",
+    "href": "unidad1_reestructurada.html#instalación-de-r-y-rstudio",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Sigue las instrucciones en https://cran.r-project.org/ para instalar R según tu sistema operativo.\nRStudio se descarga desde: https://www.rstudio.com/products/rstudio/download/"
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#primeros-pasos-en-rstudio",
+    "href": "unidad1_reestructurada.html#primeros-pasos-en-rstudio",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Al abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#importar-y-exportar-datos",
+    "href": "unidad1_reestructurada.html#importar-y-exportar-datos",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Please enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#organización-del-trabajo",
+    "href": "unidad1_reestructurada.html#organización-del-trabajo",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "Utiliza proyectos de R para mantener tus archivos organizados. Usa getwd() para ver tu directorio de trabajo y setwd() para cambiarlo."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#evaluación-y-repaso",
+    "href": "unidad1_reestructurada.html#evaluación-y-repaso",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "¿Qué función se usa para instalar paquetes en R?\n¿Cómo se guarda un objeto en formato .RData?\n¿Qué diferencia hay entre .RData y .rds?\n\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "unidad1_reestructurada.html#recursos-adicionales",
+    "href": "unidad1_reestructurada.html#recursos-adicionales",
+    "title": "Unidad 1 - Introducción a R",
+    "section": "",
+    "text": "R for Data Science\nCookbook for R\nR Bloggers"
   }
 ]
