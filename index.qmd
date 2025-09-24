@@ -1,15 +1,20 @@
 ---
-title: "Inicio"
 format: html
 editor: visual
 ---
 
-## Bienvenid\@ al curso de Análisis de la biodiversidad en R y SIG
+# Bienvenid\@ al curso de Análisis de la biodiversidad en R y SIG
 
 Este curso es parte de la asignatura "Análisis de la biodiversidad en R y SIG" del Máster en Biodiversida de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.
 
-Puedes consultar el programa de la asignatura [aquí](https://secretaria-virtual.uam.es/doa/consultaPublica/look[conpub]MostrarPubGuiaDocAs)
+Puedes consultar el programa de la asignatura [aquí](https://secretaria-virtual.uam.es/doa/consultaPublica/look%5Bconpub%5DBuscarPubGuiaDocAs?entradaPublica=true&idiomaPais=es.ES&_anoAcademico=2022&_centro=104&_planEstudio=768)
 
-Si no eres estudiante del curso y aun así te interesa ¡no te preocupes! El curso está diseñado para poder seguirlo de forma autónoma así que si te interesa dar tus primeros en R estas en el lugar adecuado.
+Este curso es el resultado del trabajo colectivo de varios profesores. Si quieres utilizarlo puedes hacerlo pero recuerda citar la fuente.
+
+Autores:
+
+Julia Chacón
+
+Nagore G. Medina
 
 ![](images/Imagen0_Bienvenida.png)

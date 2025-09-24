@@ -11,3 +11,224 @@ engine: knitr
 filters:
   - webr
 ---
+
+# Datos de composición específica
+
+En estas sesiones vamos a explorar índices de biodiversidad. Para ello vamos a emplear bases de datos de la abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
+
+Los datos de composición específica consisten tipicamente en observaciones de la presencia o abundancia de las especies en diferentes localidades.
+
+En el ejemplo que vamos a emplear los datos provienen de un estudio de plantas que se realizó en parcelas de 20 x 20 m. Los datos de abundancia corresponden la cobertura de cada especie en proporción al total de la parcela.
+
+## Cargar datos
+
+Vamos a cargar los datos directamente de una página web. En R esto es muy sencillo si los datos tienen el formato adecuado. De hecho, vamos a emplear el mismo código que empleamos cuando cargamos datos desde un archivo guardado en nuestro ordenador.
+
+Para ver el formato en el que los datos están almacenados en la nube pinchad [aquí](https://raw.githubusercontent.com/ngmedina/Rbiodiversidad/data/grassland.community.csv?token=GHSAT0AAAAAABW67JU2B2REWKV4YDPKDVTUYW62OKA)
+
+Cargamos los datos:
+
+```{r}
+comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+```
+
+y echamos un vistazo a las primeras filas para comprobar que los datos se han cargado correctamente
+
+```{r}
+head(comm_alberta)[,c(1:10)]
+```
+
+# Análisis exploratorio de datos
+
+Lo primero que hacemos cuando nos enfrentamos a una base de datos nueva es hacer un primer análisis exploratorio que consiste en hacer
+
+1.  Resumen de datos
+
+2.  Representación de los datos
+
+## Resumen de datos
+
+```{r}
+summary(comm_alberta)[,c(1:10)]
+```
+
+Y le echamos un vistazo a la matriz para comprobar que todo es correcto
+
+```{r}
+View(comm_alberta)
+```
+
+Comprobamos las dimensiones de nuestra matriz que nos dicen el número de especies
+
+```{r}
+dim(comm_alberta)
+```
+
+## Representación de datos
+
+Además, es buena idea representar histogramas de distribución de datos. Por ejemplo de las especies. Esta gráfica nos muestra que en la mayor parte de las cuadrículas *Antennaria parviflora* tiene un cobertura entre 0 y 10 % pero que en alguna de las cuadrículas puede llegar a ocupar el 70%
+
+```{r}
+hist(comm_alberta$Antennaria_parvifolia)
+```
+
+## Otras operaciones para explorar los datos
+
+Podemos ver qué especie es la más abundante. Para ello tenemos que sumar los valores de las columnas. Podríamos hacerlo columna a columna. Por ejemplo, para la especie de la segunda columna que es *Antennaria parviflora*
+
+```{r}
+colnames(comm_alberta)[2]
+sum(comm_alberta[,2])
+```
+
+Si tenemos 100 especies esto implicaría repetir el código de arriba 100 veces. Sin embargo, existe una forma rápida y sintética de hacer esto mismo utilizando la función .
+
+```{r}
+colsums <- colSums(comm_alberta[,-1])
+```
+
+Además podemos ver cuál de los cuadrados tiene la mayor cobertura de especies
+
+```{r}
+rowsums <- rowSums(comm_alberta[,-1])
+```
+
+# Índices de diversidad taxonómica
+
+Hay muchas maneras de analizar la diversidad taxonómica. La más sencilla es contar el número de especies de cada unidad geográfica (en nuestro ejemplo cuadrículas). De hecho hay muchísimos índices de diversidad y bastante controversia con respecto a cuáles deberían usarse.
+
+Si os interesa el tema tenéis algunos enlaces a páginas web y artículos interesantes sobre índices de biodiversidad aquí abajo:
+
+<https://archetypalecology.wordpress.com/2018/02/20/biodiversity-indices-concepts-and-r-implementations-in-progress/>
+
+<https://www.nature.com/articles/35012221>
+
+<https://onlinelibrary.wiley.com/doi/10.1111/oik.07202>
+
+#### [Ejercicio 7]{style="color: blue;"} Busca en internet otros paquetes de R que permitan calcular índices de diversidad taxonómica {.unnumbered}
+
+Nosotros vamos a utilizar la librería *vegan* para estimar diferentes índices de diversidad
+
+```{r echo=TRUE, message=FALSE}
+library(vegan)
+```
+
+En el código que sigue a continuación tenéis ejemplos que muestran como estimar índices de diversidad utilizando los datos de comunidad de las herbáceas de Alberta.
+
+Primero calculamos la riqueza de especies por cada cuadrícula
+
+```{r}
+## Riqueza de especies
+S <- specnumber(comm_alberta[,-1]) ## rowSums(comm_alberta > 0) hace lo mismo...
+```
+
+Y la riqueza total
+
+```{r}
+## Riqueza total
+Stot <- length(colnames(comm_alberta[-1]))
+```
+
+Ahora calculamos otros índices de diversidad, el índice de Shannon es uno de los más frecuentes
+
+```{r, message=FALSE}
+H <- diversity(comm_alberta[,-1], "shannon")
+```
+
+Pero la función nos permite calcular muchos más.
+```{r}
+# Simpson
+simp <- diversity(comm_alberta[,-1], "simpson")
+# Inv simp
+invsimp <- diversity(comm_alberta[,-1], "inv")
+
+## Fisher alpha
+alpha <- fisher.alpha(comm_alberta[,-1])
+```
+
+# Diversidad funcional
+
+Sin embargo, la diversidad taxonómica no es el único aspecto de la biodiversidad. Además, también podemos cuantificar la diversidad de rasgos funcionales. De hecho, cada vez es más habitual reconocer la imporancia de este aspecto.
+
+Para estimar la diversidad funcional vamos a emplear una base de datos de rasgos funcionales para las especies que están presentes en las cuadrículas de los datos de Alberta.
+
+Cargar la base de datos de rasgos
+
+```{r}
+traits <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/species.traits.csv")
+```
+
+Los rasgos que han medido en este estudio incluyen SLA, Area de las hojas, Grosor de las hojas, venación, densidad del tejido y longitud de las raíces, etc.
+
+Hay multitud de opciones pero para el ejemplo vamos a emplear el paquete FD
+
+```{r, message = FALSE}
+library(FD)
+help(FD)
+```
+
+```{r, error=TRUE}
+fd <- dbFD(traits, comm_alberta[,-1])
+```
+
+[**¿Qué nos dice el error?**]{style="color: blue;"}
+
+Conseguir que las bases de datos estén harmonizadas y en el formato que necesitamos para las diferentes funciones es una de las tareas que más tiempo nos va a llevar cuando estamos haciendo un análisis. Tenéis que asumir desde un principio que siempre va a ser así.
+
+En este caso tenemos que ordenar las especies en la comunidad exactamente igual en las dos matrices. Tenéis a continuacíon el código
+
+Primero ordenamos la base de datos de las abundancias de las especies para que las columnas estén en orden alfabético
+
+```{r}
+comm_alberta_ordered <- comm_alberta[,-1][,order(colnames(comm_alberta[,-1]))]
+```
+
+Después comprobamos si el orden de las especies en la tabla de rasgos es alfabético
+
+```{r}
+head(traits$species)
+```
+
+Además, la función necesita que los nombres de las filas sean los de las especies
+
+```{r}
+rownames(traits) <- traits$species
+
+traits <- traits[,-1]
+```
+
+Ahora ya podemos calcular el índice de diversidad funcional
+
+```{r, error=TRUE}
+fd <- dbFD(traits, comm_alberta_ordered)
+```
+
+
+# Diversidad filogenética
+
+Del mismo modo que hay varias formas de calcular la diversidad funcional también hay varias maneras de calcular la diversidad filogenética. Nosotros nos vamos a centrar tan solo en una de ellas, la diversidad filogenética de Faith.
+
+La diversidad filogenética de Faith (PD) es una medida de biodiversidad que resulta de sumar la longitud de todas las ramas de las especies en un árbol filogenético.
+
+Vamos a cargar el árbol filogenético de los datos de Alberta. Los análisis los haremos con la librería picante
+
+```{r message=FALSE}
+library(picante)
+```
+
+```{r}
+tree_alberta <- read.tree("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.phylogeny.newick")
+```
+
+```{r}
+
+pd <- picante::pd(comm_alberta_ordered, tree_alberta)
+
+```
+
+Hagamos un primer análisis exploratorio de la relación entre la riqueza, la diversidad filogenética y la funcional
+
+```{r}
+pairs(cbind(S, Fric =fd$FRic, FEve = fd$FEve, FDiv = fd$FDiv, FDis = fd$FDis, PD = pd$PD ), pch="+", col="blue")
+
+```

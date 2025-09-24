@@ -12,8 +12,6 @@ filters:
   - webr
 ---
 
-# Unidad 1: Introducción a R. Continuación
-
 ## 1. R: un lenguaje orientado a objetos
 
 `R` es un lenguaje orientado a objetos. Pero ¿qué significa esto? ¿Qué es un objeto en `R`, y qué tipos de objetos existen?
@@ -58,44 +56,65 @@ Acordaros que podemos generar un vector de datos numericos de esta manera, pero 
 
 ```{webr-r}
 misecuencia <- seq(from=2, to=10, by=2)
+misecuencia
 ```
 
 También podemos utilizar el símbolo `:` para hacer secuencias de números, o de números y texto. Podemos utilizar la función `class()` para preguntar de qué clase son los elementos que contiene un vector. La única regla para un vector es que solo puede contener elementos de una misma clase.
 
 ```{webr-r}
-1:10  # valores numericos
-c(1,7:9)
+c(1:10)  # valores numéricos
+```
+
+```{webr-r}
+c(1,7:9) # secuencia de números discontínia
+```
+
+```{webr-r}
 class(c(1,7:9)) # preguntamos que clase de objeto se trata. Es un objeto numerico.
-c(1:5, 10.5, "next") # todos los elementos dentro de un vector deben ser de la misma categoria
+```
+
+```{webr-r}
+c(1:5, 10.5, "next") # OJO todos los elementos dentro de un vector deben ser de la misma categoría
 class(c(1:5, 10.5, "next"))
 ```
 
 Otra función interesante es la función `length()`. Sirve para conocer la longitud de un vector.
 
 ```{webr-r}
-v <- 1:10
-v
+v <- c(1:10)
 length(v)
+```
 
-# Podemos jugar con este vector para qué veáis que ocurre
+¿Cuál es la longitud de este otro vector?
+```{webr-r}
 length(v) <- 10
 v
 ```
 
 #### 2.1.2 Cómo acceder a los elementos de un vector
 
-Otras operaciones con vectores. Podemos utilizar los `[]` para preguntarle a un vector por valores en posiciones concretas. Por ejemplo en el vector v, consulto el valor del elemento en la posición 3.
+Podemos utilizar los `[]` para preguntarle a un vector por valores en posiciones concretas. Por ejemplo en el vector v, consulto el valor del elemento en la posición 3.
 
 ```{webr-r}
-v <- 1:12 # genero el vector v
-v
-length(v) # pregunto por su longitud
+v <- c(1:12)
 v[3] # consulto el valor del elemento en la posición 3
+```
 
+```{webr-r}
 v[15] # puedo preguntar por un elemento que no existe. Veréis qué ocurre.
-v[15] <- 30 # incluso asignarle un valor
+```
+
+```{webr-r}
+v[15] <- 30 # incluso asignarle un valor numérico
+
+```
+
+OJO ¿Qué crees que pasará si le asigno un valor no numérico?
+```{webr-r}
 v[14]<-"julia" 
-v
+```
+
+```{webr-r}
 rm(v) # finalmente podemos eliminar v
 ```
 
@@ -120,7 +139,9 @@ Podemos acceder por al posición de cada elemento dentro de la lista utilizando 
 
 ```{webr-r}
 milista[1]
+```
 
+```{webr-r}
 milista[[1]]
 ```
 
@@ -130,8 +151,18 @@ Primero vamos a asignarle nombre a cada elemento de la lista con la función `na
 
 ```{webr-r}
 names(milista)  # comprobamos si tiene nombres
+```
+
+```{webr-r}
 names(milista) <- c("sp1", "sp2", "sp3", "sp4", "sp5") # le asignamos nombres
+```
+
+```{webr-r}
 names(milista)  # comprobamos si tiene nombres
+milista
+```
+
+```{webr-r}
 milista
 ```
 
@@ -170,17 +201,13 @@ mimatriz[3,] # indicando solamente la fila y una coma nos muestra solo la tercer
 
 mimatriz[,4] # muestra solamente la cuarta columna
 
-mimatriz[1:2, 1:2] # selecciona una parte de la matriz
+mimatriz[c(1:2), c(1:2)] # selecciona una parte de la matriz
 
-mimatriz[1:2,] # Filas de la 1 a la 2, columnas todas
+mimatriz[c(1:2),] # Filas de la 1 a la 2, columnas todas
 
-mimatriz[,3:4] # Filas todas, columnas de la 3 a la 4
+mimatriz[,c(3:4)] # Filas todas, columnas de la 3 a la 4
 
-mimatriz[3:4] # Nos muestra los datos en orden, como en un vector
-
-mimatriz[6:7]
-
-mimatriz[3]
+mimatriz[c(3:4)] # Nos muestra los datos en orden, como en un vector
 ```
 
 #### 2.3.3 Cambiar valores dentro de una matriz
@@ -218,9 +245,9 @@ mimatriz[1:2,1:2] <- matrix(c(1:4),nrow=2,ncol=2) # simplemente asignamos una co
 
 ```
 
-### 2.4 Data frames (marcos de datos)
+### 2.4 Data frames
 
-Los data frames se utilizan para almacenar datos en formas de tablas. Es decir, en filas y columnas como se utilizan habitualmente en Excell. Esta tablas o data frames pueden almacenar datos de diferentes tipos: números, character, enteros (integer)...En un data frame cada columna representa una variable, y cada columna puede contener un tipo de elemento diferente. A diferencia de las matrices que solo pueden contener elementos numéricos o enteros.
+Los data frames se utilizan para almacenar datos en formas de tablas. Es decir, en filas y columnas como se utilizan habitualmente en Excell. Esta tablas o data frames pueden almacenar datos de diferentes tipos: números, character, enteros (integer)...En un data frame cada columna representa una variable, y cada columna puede contener un tipo de elemento diferente. A diferencia de las matrices que solo pueden contener elementos del mismo tipo.
 
 Una de las limitaciones del data frame, es que todas las columnas tienen que tener la misma longitud. Si no fuese así, sería UNA LISTA, es decir una coleccion de objetos o variables de cualquier, tipo, longitud o estructura.
 

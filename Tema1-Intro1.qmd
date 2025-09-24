@@ -26,7 +26,7 @@ filters:
 
 R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.
 
-Todo el código de R está disponible como software [libre](https://es.wikipedia.org/wiki/Software_libre) bajo las condiciones de [licencia GNU-GPL{target="_blank"}](https://es.wikipedia.org/wiki/GNU_General_Public_License). Esto implica que cualquier usuario final puede **usar, estudiar, compartir (copiar) y modificar el software**.
+Todo el código de R está disponible como software [libre](https://es.wikipedia.org/wiki/Software_libre) bajo las condiciones de [licencia GNU-GPL](https://es.wikipedia.org/wiki/GNU_General_Public_License){.external target="_blank"}. Esto implica que cualquier usuario final puede **usar, estudiar, compartir (copiar) y modificar el software**.
 
 Puedes acceder al proyecto R en: <http://www.r-project.org>
 
@@ -83,7 +83,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 
 ![](images/Imagen2.png)
 
-#### Ejercicio 1: Imprimir valores
+#### Ejercicio 1:{style="color: blue;"} Imprimir valores 
 
 ```{web-r}
 "Bienvenidos al curso de R y SIG"
@@ -93,7 +93,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 1
 ```
 
-#### Ejercicio 2: Operar
+#### Ejercicio 2:{style="color: blue;"} Operar 
 
 El uso más sencillo que se le puede dar a R es el de una calculadora. Consideremos las siguientes operaciones:
 
@@ -127,7 +127,7 @@ El módulo (mod) %% calcula el residuo de la división del número a la izquierd
 2+7+2
 ```
 
-#### Ejercicio 3: Crear objetos con `<-`
+#### Ejercicio 3:{style="color: blue;"} Crear objetos con `<-` 
 
 **Objetivo**: Guardar valores en objetos para usarlos más adelante.
 
@@ -147,7 +147,7 @@ y <- 3
 x
 ```
 
-#### Ejercicio 4: Operar con objetos
+#### Ejercicio 4:{style="color: blue;"} Operar con objetos 
 
 ```{webr-r}
 x/2
@@ -160,7 +160,7 @@ z <- x^y
 z
 ```
 
-#### Ejercicio 5: Utilizar funciones
+#### Ejercicio 5:{style="color: blue;"} Utilizar funciones 
 
 **¿Qué es una función en R?**
 
@@ -192,7 +192,7 @@ Algunas funciones en R necesitan más de un dato para funcionar. Por ejemplo, si
 round(x = 3.14159, digits = 2)
 ```
 
-```{r}
+```{webr-r}
 # round(x, digits)
 round(digits = 2, x = 3.14159)
 ```
@@ -278,7 +278,7 @@ Es igual que la consola que hemos manejado cuando hemos abierto R sin Rstudio (v
 
 Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.
 
-#### Ejercicio 6: Crea y guarda tu primer script
+#### Ejercicio 6: {style="color: blue;"} Crea y guarda tu primer script
 
 En este ejercicio aprenderás a crear tu primer script en R usando RStudio. Un script es un archivo donde puedes escribir y guardar tu código para ejecutarlo más tarde.
 
@@ -312,7 +312,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 5.  Haz clic en **Guardar**.
 
-#### Ejercicio 7: Ejecuta el código del script
+#### Ejercicio 7:{style="color: blue;"} Ejecuta el código del script 
 
 **Ejecutar una sola línea**
 
@@ -347,7 +347,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 En R, el entorno de trabajo es el espacio donde se almacenan los objetos que creamos (vectores, funciones, data frames, etc.). Podemos inspeccionar, modificar y limpiar este entorno usando funciones específicas.
 
-#### Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo
+#### Ejercicio 8:{style="color: blue;"} Crear, listar y borrar objetos en el entorno de trabajo 
 
 ```{webr-r}
 # Crear algunos objetos
@@ -395,7 +395,7 @@ Para cargar los datos integrados basta con escribir data() y el nombre de los da
 
 ![](images/Imagen5.png)
 
-#### Ejercicio 9: Cargar datos integrados
+#### Ejercicio 9:{style="color: blue;"} Cargar datos integrados {style="color: blue;"}
 
 Durante este ejercicio vamos a utilizar el conjunto o set de datos `iris`. Este conjunto de datos, contiene datos sobre características florales de tres especies del género *Iris*.
 
@@ -404,15 +404,33 @@ Para cargarlo utilizaremos la función `data()`, y lo exploraremos utilizando la
 ```{webr-r}
 
 data(iris)# para cargar los datos 
-?iris # consulta sobre el data set 
-head(iris) # muestra las primeras 6 filas de un data set 
-head(iris, n = 10) 
-dim(iris) # dimensiones del data set iris 
-tail(iris) # muestra las ultimas 6 filas de un data set 
-colnames(iris)# la funcion colnames() nos muestra los nombres de las variables de iris 
-names(iris) # la funcion names() nos muestra los nombres de las variables de iris
+
 ```
 
+```{webr-r}
+?iris # consulta sobre el data set 
+```
+
+```{webr-r}
+head(iris) # muestra las primeras 6 filas de un data set 
+```
+
+```{webr-r}
+
+dim(iris) # dimensiones del data set iris 
+```
+
+```{webr-r}
+tail(iris) # muestra las ultimas 6 filas de un data set 
+```
+
+```{webr-r}
+colnames(iris)# la funcion colnames() nos muestra los nombres de las variables de iris 
+```
+
+```{webr-r}
+names(iris) # la funcion names() nos muestra los nombres de las variables de iris
+```
 ### **6.3 Importar datos desde CSV**
 
 Aunque esta forma de importar datos puede ser muy útil para probar funciones o aprender a escribir código lo normal es que queramos cargar una base de datos propia. Uno de los formatos más sencillo de importar y que además ofrece buenas propiedades de interoperabilidad es el `.csv`
@@ -470,7 +488,7 @@ datos_alberta <- read.csv("C:/Users/TuNombre/grassland.community.csv")
     Verás una vista previa del archivo y RStudio te mostrará el código que usará para cargarlo.\
     Puedes copiar ese código para usarlo en tus scripts.
 
-### **6.4 EXTRA: Importar datos desde Excell**
+### **6.4 EXTRA: Importar datos desde Excell** {style="color: blue;"}
 
 Importar datos desde Excell es muy parecido a la importación de datos desde `.csv`. Las funciones que utilizaremos son `write.xlsx()` para la exportación y `read.xlsx()` para la importación.
 
@@ -519,7 +537,7 @@ Intenta cargar el archivo tal cual. ¿Qué ves?
 
 ```{webr-r}
 datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv")
-head(datos)
+datos
 ```
 
 **Pregunta:** ¿Qué problemas puedes detectar en los datos cargados?
@@ -532,7 +550,7 @@ Algunos acentos pueden verse mal. Prueba con otra codificación:
 
 ```{webr-r}
 datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1")
-head(datos)
+datos
 ```
 
 ------------------------------------------------------------------------
@@ -543,7 +561,7 @@ La última fila usa punto y coma. ¿Cómo lo solucionamos?
 
 ```{webr-r}
 datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
-head(datos)
+datos
 ```
 
 ------------------------------------------------------------------------
@@ -574,7 +592,7 @@ datos$Edad <- as.numeric(datos$Edad)
 
 ```
 
-#### Ejercicio extra. Trabajando con fechas
+#### Ejercicio extra. Trabajando con fechas {style="color: blue;"}
 
 ¿Fecha es tipo Date?
 
