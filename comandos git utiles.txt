@@ -1,0 +1,16 @@
+git config --global user.name "ngmedina"
+git config --global user.email "ngmedina@gmail.com"
+
+
+git init -b main
+git add .gitignore
+git add .
+git commit -m "Versión inicial del proyecto Quarto + webR"
+
+git remote add origin https://github.com/ngmedina/cursobioR.git
+git push -u origin main
+
+git add .
+git commit -m "Actualización del Tema 1 y configuración del YAML"
+
+git push
