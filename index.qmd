@@ -4,23 +4,12 @@ format: html
 editor: visual
 ---
 
-## Quarto
+## Bienvenid\@ al curso de Análisis de la biodiversidad en R y SIG
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+Este curso es parte de la asignatura "Análisis de la biodiversidad en R y SIG" del Máster en Biodiversida de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.
 
-## Running Code
+Puedes consultar el programa de la asignatura [aquí](https://secretaria-virtual.uam.es/doa/consultaPublica/look[conpub]MostrarPubGuiaDocAs)
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+Si no eres estudiante del curso y aun así te interesa ¡no te preocupes! El curso está diseñado para poder seguirlo de forma autónoma así que si te interesa dar tus primeros en R estas en el lugar adecuado.
 
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
+![](images/Imagen0_Bienvenida.png)

@@ -12,8 +12,6 @@ filters:
   - webr
 ---
 
-# Unidad 1: Introducción a R
-
 ## Objetivos de aprendizaje
 
 -   Comprender qué es R y cómo instalarlo.
@@ -28,7 +26,7 @@ filters:
 
 R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.
 
-Todo el código de R está disponible como software [libre](https://es.wikipedia.org/wiki/Software_libre) bajo las condiciones de [licencia GNU-GPL](https://es.wikipedia.org/wiki/GNU_General_Public_License). Esto implica que cualquier usuario final puede **usar, estudiar, compartir (copiar) y modificar el software**.
+Todo el código de R está disponible como software [libre](https://es.wikipedia.org/wiki/Software_libre) bajo las condiciones de [licencia GNU-GPL{target="_blank"}](https://es.wikipedia.org/wiki/GNU_General_Public_License). Esto implica que cualquier usuario final puede **usar, estudiar, compartir (copiar) y modificar el software**.
 
 Puedes acceder al proyecto R en: <http://www.r-project.org>
 
@@ -520,8 +518,8 @@ getwd()
 Intenta cargar el archivo tal cual. ¿Qué ves?
 
 ```{webr-r}
-datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv")
-View(datos)
+datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv")
+head(datos)
 ```
 
 **Pregunta:** ¿Qué problemas puedes detectar en los datos cargados?
@@ -533,8 +531,8 @@ View(datos)
 Algunos acentos pueden verse mal. Prueba con otra codificación:
 
 ```{webr-r}
-datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv", fileEncoding = "latin1")
-View(datos)
+datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1")
+head(datos)
 ```
 
 ------------------------------------------------------------------------
@@ -544,8 +542,8 @@ View(datos)
 La última fila usa punto y coma. ¿Cómo lo solucionamos?
 
 ```{webr-r}
-datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
-View(datos)
+datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
+head(datos)
 ```
 
 ------------------------------------------------------------------------
