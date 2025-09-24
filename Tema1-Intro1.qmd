@@ -519,7 +519,7 @@ getwd()
 
 Intenta cargar el archivo tal cual. ¿Qué ves?
 
-```{webr-r}
+```{r}
 datos <- read.csv("data/datos_con_errores.csv")
 View(datos)
 ```
