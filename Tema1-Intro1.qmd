@@ -495,13 +495,13 @@ iris_import_xlsx <- read.xlsx("data/iris.xlsx", 1) # debemos indicar la hoja de 
 
 ## 7. Errores comunes al cargar archivos CSV en R
 
-Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv)
+Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv)
 
 Intenta cargar el archivo datos_con_errores.csv
 
-```{r}
-# read.csv("C:/Users/TuNombre/datos_con_errores.csv") # Tú código debería ser algo así
-read.csv("data/datos_con_errores.csv")
+```{webr-r}
+# read.csv("C:/Users/TuNombre/datos_con_errores.csv") # Tú código debería ser algo así o bien selecciona el archivo ejecutando el siguiente código
+read.csv(choose.files())
 ```
 
 ### Paso 1: Verificar el entorno
@@ -519,8 +519,8 @@ getwd()
 
 Intenta cargar el archivo tal cual. ¿Qué ves?
 
-```{r}
-datos <- read.csv("data/datos_con_errores.csv")
+```{webr-r}
+datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv")
 View(datos)
 ```
 
@@ -533,7 +533,7 @@ View(datos)
 Algunos acentos pueden verse mal. Prueba con otra codificación:
 
 ```{webr-r}
-datos <- read.csv("data/datos_con_errores.csv", fileEncoding = "latin1")
+datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv", fileEncoding = "latin1")
 View(datos)
 ```
 
@@ -544,13 +544,13 @@ View(datos)
 La última fila usa punto y coma. ¿Cómo lo solucionamos?
 
 ```{webr-r}
-datos <- read.csv("data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
+datos <- read.csv("https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
 View(datos)
 ```
 
 ------------------------------------------------------------------------
 
-### Paso 5: Valores faltantes
+### Paso 5: Valores ausentes
 
 Algunas celdas están vacías. ¿Cómo las identificamos?
 
@@ -563,7 +563,7 @@ summary(datos)
 
 ### Paso 6: Tipos de datos
 
-¿Edad es numérica? ¿Fecha es tipo Date?
+¿Edad es numérica?
 
 ```{webr-r}
 str(datos)
@@ -573,8 +573,25 @@ Corrige los tipos:
 
 ```{webr-r}
 datos$Edad <- as.numeric(datos$Edad)
+
+```
+
+#### Ejercicio extra. Trabajando con fechas
+
+¿Fecha es tipo Date?
+
+```{webr-r}
+str(datos)
 datos$Fecha <- as.Date(datos$Fecha, format = "%Y-%m-%d")
 ```
+
+NOTA: Fechas en R. Si quieres ampliar pincha [aquí](https://excelkingdom.blogspot.com/2018/11/how-to-format-date-values-in-r.html)
+
+| **Símbolo** | **Significado**  | **Ejemplo** |
+|:------------|:-----------------|:------------|
+| `%Y`        | Año con 4 cifras | `2025`      |
+| `%m`        | Mes con 2 cifras | `09`        |
+| `%d`        | Día con 2 cifras | `24`        |
 
 ------------------------------------------------------------------------
 
