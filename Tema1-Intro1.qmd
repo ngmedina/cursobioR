@@ -83,7 +83,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 
 ![](images/Imagen2.png)
 
-#### Ejercicio 1:{style="color: blue;"} Imprimir valores 
+#### Ejercicio 1: Imprimir valores 
 
 ```{web-r}
 "Bienvenidos al curso de R y SIG"
@@ -93,7 +93,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 1
 ```
 
-#### Ejercicio 2:{style="color: blue;"} Operar 
+#### Ejercicio 2: Operar 
 
 El uso más sencillo que se le puede dar a R es el de una calculadora. Consideremos las siguientes operaciones:
 
@@ -127,7 +127,7 @@ El módulo (mod) %% calcula el residuo de la división del número a la izquierd
 2+7+2
 ```
 
-#### Ejercicio 3:{style="color: blue;"} Crear objetos con `<-` 
+#### Ejercicio 3: Crear objetos con `<-` 
 
 **Objetivo**: Guardar valores en objetos para usarlos más adelante.
 
@@ -147,7 +147,7 @@ y <- 3
 x
 ```
 
-#### Ejercicio 4:{style="color: blue;"} Operar con objetos 
+#### Ejercicio 4: Operar con objetos 
 
 ```{webr-r}
 x/2
@@ -160,7 +160,7 @@ z <- x^y
 z
 ```
 
-#### Ejercicio 5:{style="color: blue;"} Utilizar funciones 
+#### Ejercicio 5: Utilizar funciones 
 
 **¿Qué es una función en R?**
 
@@ -278,7 +278,7 @@ Es igual que la consola que hemos manejado cuando hemos abierto R sin Rstudio (v
 
 Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.
 
-#### Ejercicio 6: {style="color: blue;"} Crea y guarda tu primer script
+#### Ejercicio 6: Crea y guarda tu primer script
 
 En este ejercicio aprenderás a crear tu primer script en R usando RStudio. Un script es un archivo donde puedes escribir y guardar tu código para ejecutarlo más tarde.
 
@@ -312,7 +312,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 5.  Haz clic en **Guardar**.
 
-#### Ejercicio 7:{style="color: blue;"} Ejecuta el código del script 
+#### Ejercicio 7: Ejecuta el código del script 
 
 **Ejecutar una sola línea**
 
@@ -347,7 +347,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 En R, el entorno de trabajo es el espacio donde se almacenan los objetos que creamos (vectores, funciones, data frames, etc.). Podemos inspeccionar, modificar y limpiar este entorno usando funciones específicas.
 
-#### Ejercicio 8:{style="color: blue;"} Crear, listar y borrar objetos en el entorno de trabajo 
+#### Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo 
 
 ```{webr-r}
 # Crear algunos objetos
@@ -395,7 +395,7 @@ Para cargar los datos integrados basta con escribir data() y el nombre de los da
 
 ![](images/Imagen5.png)
 
-#### Ejercicio 9:{style="color: blue;"} Cargar datos integrados {style="color: blue;"}
+#### Ejercicio 9: Cargar datos integrados 
 
 Durante este ejercicio vamos a utilizar el conjunto o set de datos `iris`. Este conjunto de datos, contiene datos sobre características florales de tres especies del género *Iris*.
 
