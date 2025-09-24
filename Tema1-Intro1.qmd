@@ -533,7 +533,7 @@ View(datos)
 Algunos acentos pueden verse mal. Prueba con otra codificación:
 
 ```{webr-r}
-datos <- read.csv("datos_con_errores.csv", fileEncoding = "latin1")
+datos <- read.csv("data/datos_con_errores.csv", fileEncoding = "latin1")
 View(datos)
 ```
 

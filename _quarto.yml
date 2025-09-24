@@ -2,6 +2,9 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - data/datos_con_errores.csv
+
 
 website:
   title: "Análisis de la biodiversidad en R y SIG"
