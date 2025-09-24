@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.23">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>webR in Quarto HTML Documents – Curso de R con webR</title>
+<title>Tema 1 - Introducción general a R. Segunda parte – Análisis de la biodiversidad en R y SIG</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,17 +55,17 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
@@ -346,7 +346,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = [''];
+globalThis.qwebrInstallRPackagesList = ['dplyr', 'ggplot2'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -356,7 +356,7 @@ globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1)
 globalThis.qwebrAutoloadRPackages = true;
 
 // Display a startup message?
-globalThis.qwebrShowStartupMessage = true;
+globalThis.qwebrShowStartupMessage = false;
 globalThis.qwebrShowHeaderMessage = false;
 
 // Describe the webR settings that should be used
@@ -364,11 +364,11 @@ globalThis.qwebrCustomizedWebROptions = {
   "baseURL": "https://webr.r-wasm.org/v0.5.2/",
   "serviceWorkerUrl": "",
   "homedir": "/home/web_user", 
-  "channelType": "ChannelType.Automatic"
+  "channelType": "ChannelType.PostMessage"
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"1 + 1","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"mivector <- c(\"julia\",\"nagore\",\"alejandro\")\nmivector","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mivector2 <- c(2,4,6,8,10,12,14,16)\nmivector2","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"seq(from = 5, to = 25, by = 5)\n\nseq(from = 2, to = 20, by = 2)\n\nseq(from=2, to=10, by=2)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"misecuencia <- seq(from=2, to=10, by=2)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"1:10  # valores numericos\nc(1,7:9)\nclass(c(1,7:9)) # preguntamos que clase de objeto se trata. Es un objeto numerico.\nc(1:5, 10.5, \"next\") # todos los elementos dentro de un vector deben ser de la misma categoria\nclass(c(1:5, 10.5, \"next\"))","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- 1:10\nv\nlength(v)\n\n# Podemos jugar con este vector para qué veáis que ocurre\nlength(v) <- 10\nv","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- 1:12 # genero el vector v\nv\nlength(v) # pregunto por su longitud\nv[3] # consulto el valor del elemento en la posición 3\n\nv[15] # puedo preguntar por un elemento que no existe. Veréis qué ocurre.\nv[15] <- 30 # incluso asignarle un valor\nv[14]<-\"julia\" \nv\nrm(v) # finalmente podemos eliminar v","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"milista <- list(\"Quercus\",\"Betula\",\"Abies\",\"Fagus\",\"Taxus\")  # lista de 5 elementos, cada uno de ellos es una especie\nmilista","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"milista[1]\n\nmilista[[1]]","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"names(milista)  # comprobamos si tiene nombres\nnames(milista) <- c(\"sp1\", \"sp2\", \"sp3\", \"sp4\", \"sp5\") # le asignamos nombres\nnames(milista)  # comprobamos si tiene nombres\nmilista","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"milista$sp1\nmilista[[1]]","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"milista[1]","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mimatriz <- matrix(data=c(101:112), nrow=3, ncol=4) # crear una matriz\nmimatriz","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mimatriz[3,1] # muestra el dato de la tercera fila, primera columna\n\nmimatriz[3,] # indicando solamente la fila y una coma nos muestra solo la tercera fila de la matriz\n\nmimatriz[,4] # muestra solamente la cuarta columna\n\nmimatriz[1:2, 1:2] # selecciona una parte de la matriz\n\nmimatriz[1:2,] # Filas de la 1 a la 2, columnas todas\n\nmimatriz[,3:4] # Filas todas, columnas de la 3 a la 4\n\nmimatriz[3:4] # Nos muestra los datos en orden, como en un vector\n\nmimatriz[6:7]\n\nmimatriz[3]","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mimatriz[,-3] # eliminar la tercera columna de una matriz\nmimatriz[,-2] # eliminar solola segunda columna de una matriz\nmimatriz[,-c(2:3)] # para eliminar varias columnas, las selecciono como un vector\nmatriz_peque <- mimatriz[,-c(2:3)] # asignar un nombre a la nueva matriz","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mimatriz[1] # este elemento lo queremos modificar, queremos que ahora sea un 5\nmimatriz[1] <- 5 # le asignamos el nuevo valor con <-\nmimatriz\n\nmimatriz[2,3] # Podemos seleccionar un elemento por su posición en la matriz, por filas o columnas.\nmimatriz[8] # o como si fuera un vector (es más complicado...)\n\nmimatriz[2,3] <- 1000 # Podemos seleccionar un elemento por su posición en la matriz y sustituirlo.","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mimatriz[1:2,1:2] ## trozo de matriz que queremos cambiar\n\nmatrix(c(1:4),nrow=2,ncol=2) ## queremos cambiarlo por esta otra matriz que creamos ahora con matrix()\n\nmimatriz[1:2,1:2] <- matrix(c(1:4),nrow=2,ncol=2) # simplemente asignamos una cosa a la otra.","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"?data.frame #consultamos la información de ayuda","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-18","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Generamos primero tres vectores, de la misma longitud. Estos van a ser las tres variables de mi tabla de datos.\nespecies <- c(\"Iris_setosa\", \"Iris_virginica\", \"Iris_versicolor\") \nID <- c(1:3)\npresencia <- c(TRUE, TRUE, FALSE)\n\n# Ahora contruimos el data frame con la funcion data.frame() y los tres vectores. Le asignamos un nombre al nuevo objeto.\nmidataframe <- data.frame(especies, ID, presencia)","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-19","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data.frame(especies = c(\"Iris_setosa\", \"Iris_virginica\", \"Iris_versicolor\"),\n           ID = c(1:3), presencia = c(TRUE, TRUE, FALSE))","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-20","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"class(midataframe) # nos indica que tipo de objeto es\nmode(midataframe) # nos indica que es una lista, porque un data frame es un tipo de lista\nis.data.frame(midataframe) # para preguntar si se trata de un data frame.\nis.list(midataframe) # para preguntar si se trata de una lista","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-21","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"nrow(midataframe) # número de filas\nncol(midataframe) # número de columnas\ndim(midataframe) # número de filas y columnas","id":22,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-22","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"head(midataframe) # para explorar el data frame\nmidataframe[1] # puedo ir consultando cada una de las variables/columnas del data frame\nmidataframe[2]\nmidataframe[3]","id":23,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-23","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"midataframe[,1] # le estaría diciendo: muestrame todas las filas, y la primera columna\nmidataframe[1] # observa la diferencia\nmidataframe[1,] # así le estaría consultando por la primera fila y todas las columnas","id":24,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-24","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"midataframe[,1] # le estaría diciendo: muestrame todas las filas, y la primera columna\nmidataframe$especies # es otra forma de acceder a los datos.","id":25,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-25","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"dimnames(midataframe) #nombres de las filas y de las columnas\nrownames(midataframe)  # nombres de las filas, que en este caso no tiene y nos da una numeracion\ncolnames(midataframe) # nombres de las columnas\ntable(midataframe$especies) # nos hace una tabla resumen de las especies, en este caso hay un individuo de cada uno en el data frame.","id":26,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-26","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1623,9 +1623,10 @@ globalThis.qwebrExecuteCode = async function (
 </script>
 
 
+<link rel="stylesheet" href="estilos.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1635,11 +1636,11 @@ globalThis.qwebrExecuteCode = async function (
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Curso de R con webR</span>
+    <span class="navbar-title">Análisis de la biodiversidad en R y SIG</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -1648,13 +1649,32 @@ globalThis.qwebrExecuteCode = async function (
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tema-1.-introducción-general-a-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tema 1. Introducción general a R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tema-1.-introducción-general-a-r">    
+        <li>
+    <a class="dropdown-item" href="./Tema1-Intro1.html">
+ <span class="dropdown-text">Primera parte</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Tema1-Intro2.html">
+ <span class="dropdown-text">Segunda parte</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link" href="./unidad1_reestructurada.html"> 
-<span class="menu-text">Tema 1 Introducción a R</span></a>
+    <a class="nav-link" href="./Tema2.html"> 
+<span class="menu-text">Tema 2. Manejo y filtrado de datos de biodiversidad</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./unidad2.html"> 
-<span class="menu-text">Unidad 2</span></a>
+    <a class="nav-link" href="./Tema3.html"> 
+<span class="menu-text">Tema 3. Métodos de comparaciones</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Tema4.html"> 
+<span class="menu-text">Tema 4. Representación gráfica y presentación de resultados</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -1666,15 +1686,45 @@ globalThis.qwebrExecuteCode = async function (
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto">Quarto</a></li>
+  <li><a href="#unidad-1-introducción-a-r.-continuación" id="toc-unidad-1-introducción-a-r.-continuación" class="nav-link active" data-scroll-target="#unidad-1-introducción-a-r.-continuación">Unidad 1: Introducción a R. Continuación</a>
+  <ul>
+  <li><a href="#r-un-lenguaje-orientado-a-objetos" id="toc-r-un-lenguaje-orientado-a-objetos" class="nav-link" data-scroll-target="#r-un-lenguaje-orientado-a-objetos">1. R: un lenguaje orientado a objetos</a></li>
+  <li><a href="#tipos-de-objetos" id="toc-tipos-de-objetos" class="nav-link" data-scroll-target="#tipos-de-objetos">2. Tipos de objetos</a>
+  <ul class="collapse">
+  <li><a href="#vectores" id="toc-vectores" class="nav-link" data-scroll-target="#vectores">2.1 Vectores</a>
+  <ul class="collapse">
+  <li><a href="#cómo-crear-vectores" id="toc-cómo-crear-vectores" class="nav-link" data-scroll-target="#cómo-crear-vectores">2.1.1 Cómo crear vectores</a></li>
+  <li><a href="#cómo-acceder-a-los-elementos-de-un-vector" id="toc-cómo-acceder-a-los-elementos-de-un-vector" class="nav-link" data-scroll-target="#cómo-acceder-a-los-elementos-de-un-vector">2.1.2 Cómo acceder a los elementos de un vector</a></li>
+  </ul></li>
+  <li><a href="#listas" id="toc-listas" class="nav-link" data-scroll-target="#listas">2.2 Listas</a>
+  <ul class="collapse">
+  <li><a href="#cómo-crear-listas" id="toc-cómo-crear-listas" class="nav-link" data-scroll-target="#cómo-crear-listas">2.2.1 Cómo crear listas</a></li>
+  <li><a href="#como-acceder-a-los-elementos-de-una-lista" id="toc-como-acceder-a-los-elementos-de-una-lista" class="nav-link" data-scroll-target="#como-acceder-a-los-elementos-de-una-lista">2.2.2 Como acceder a los elementos de una lista</a></li>
+  </ul></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices">2.3 Matrices</a>
+  <ul class="collapse">
+  <li><a href="#como-crear-una-matriz" id="toc-como-crear-una-matriz" class="nav-link" data-scroll-target="#como-crear-una-matriz">2.3.1 Como crear una matriz</a></li>
+  <li><a href="#acceso-a-los-elementos-de-una-matriz" id="toc-acceso-a-los-elementos-de-una-matriz" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-una-matriz">2.3.2 Acceso a los elementos de una matriz</a></li>
+  <li><a href="#cambiar-valores-dentro-de-una-matriz" id="toc-cambiar-valores-dentro-de-una-matriz" class="nav-link" data-scroll-target="#cambiar-valores-dentro-de-una-matriz">2.3.3 Cambiar valores dentro de una matriz</a></li>
+  </ul></li>
+  <li><a href="#data-frames-marcos-de-datos" id="toc-data-frames-marcos-de-datos" class="nav-link" data-scroll-target="#data-frames-marcos-de-datos">2.4 Data frames (marcos de datos)</a>
+  <ul class="collapse">
+  <li><a href="#como-crear-un-data-frame" id="toc-como-crear-un-data-frame" class="nav-link" data-scroll-target="#como-crear-un-data-frame">2.4.1 Como crear un data frame</a></li>
+  <li><a href="#acceso-a-los-elementos-de-un-data-frame" id="toc-acceso-a-los-elementos-de-un-data-frame" class="nav-link" data-scroll-target="#acceso-a-los-elementos-de-un-data-frame">2.4.1 Acceso a los elementos de un data frame</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1965,7 +2015,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">webR in Quarto HTML Documents</h1>
+<h1 class="title">Tema 1 - Introducción general a R. Segunda parte</h1>
 </div>
 
 
@@ -1982,13 +2032,144 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="unidad-1-introducción-a-r.-continuación" class="level1">
+<h1>Unidad 1: Introducción a R. Continuación</h1>
+<section id="r-un-lenguaje-orientado-a-objetos" class="level2">
+<h2 class="anchored" data-anchor-id="r-un-lenguaje-orientado-a-objetos">1. R: un lenguaje orientado a objetos</h2>
+<p><code>R</code> es un lenguaje orientado a objetos. Pero ¿qué significa esto? ¿Qué es un objeto en <code>R</code>, y qué tipos de objetos existen?</p>
+<p>En R, un objeto es una estructura que almacena información: pueden ser datos (números, textos, tablas, imágenes, etc.) y/o funciones que operan sobre esos datos. Cada vez que ejecutamos una operación, como una suma o una función, el resultado puede guardarse en un objeto. Para guardar un objeto utilizamos el comando</p>
+<p>En nuestro ejemplo de la cocina, un objeto de R es cualquier cosa que tengamos guardada en nuestro almacen, puede ser desde algo tan sencillo como cuchara a un plato ya preparado.</p>
+</section>
+<section id="tipos-de-objetos" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-objetos">2. Tipos de objetos</h2>
+<p>Cada tipo de objeto tiene unas propiedades determinadas que estudiaremos poco a poco. Los objetos más sencillos son los vectores. Los tipos objetos de <code>R</code> qué trabajaremos son en principio: vectores, listas, matrices, data frames y formato tibble.</p>
+<section id="vectores" class="level3">
+<h3 class="anchored" data-anchor-id="vectores">2.1 Vectores</h3>
+<p>Un vector es una secuencia o concatenacion de valores.</p>
+<section id="cómo-crear-vectores" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-crear-vectores">2.1.1 Cómo crear vectores</h4>
+<p>Para definir un vector utilizamos la función <code>c()</code>. Dentro de los paréntesis indicamos los valores que queremos concatenar. Algunos ejemplos son:</p>
 <div id="qwebr-insertion-location-1"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-2"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>También podemos utilizar la función <code>seq()</code> para generar secuencias de números en un rango determinado</p>
+<div id="qwebr-insertion-location-3"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Acordaros que podemos generar un vector de datos numericos de esta manera, pero si queremos guardarlo como un objeto debemos asignarle un nombre utilizando este simbolo <code>&lt;-</code></p>
+<div id="qwebr-insertion-location-4"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>También podemos utilizar el símbolo <code>:</code> para hacer secuencias de números, o de números y texto. Podemos utilizar la función <code>class()</code> para preguntar de qué clase son los elementos que contiene un vector. La única regla para un vector es que solo puede contener elementos de una misma clase.</p>
+<div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Otra función interesante es la función <code>length()</code>. Sirve para conocer la longitud de un vector.</p>
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="cómo-acceder-a-los-elementos-de-un-vector" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-acceder-a-los-elementos-de-un-vector">2.1.2 Cómo acceder a los elementos de un vector</h4>
+<p>Otras operaciones con vectores. Podemos utilizar los <code>[]</code> para preguntarle a un vector por valores en posiciones concretas. Por ejemplo en el vector v, consulto el valor del elemento en la posición 3.</p>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+</section>
+<section id="listas" class="level3">
+<h3 class="anchored" data-anchor-id="listas">2.2 Listas</h3>
+<p>Las listas son un tipo especial de vector que pueden contener objetos de diferentes clases. Podemos pensar en una lista como en un arbol o en un esquema, es decir como un una colección de ramas de las cuales pueden salir otras ramas.</p>
+<p>Un vector sería una rama, donde todos los elementos tienen la misma clase. En una lista, podemos tener muchas ramas de diferentes clases cada una. En un vector, la longitud es el numero de elementos que contiene. En una lista, su longitud es el numero de ramas, y a su vez, cada rama tendría una longitud propia.</p>
+<section id="cómo-crear-listas" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-crear-listas">2.2.1 Cómo crear listas</h4>
+<p>Las listas se crean con la función <code>list()</code>, la cual puede tomar un número arbitrario de argumentos. Veamos:</p>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="como-acceder-a-los-elementos-de-una-lista" class="level4">
+<h4 class="anchored" data-anchor-id="como-acceder-a-los-elementos-de-una-lista">2.2.2 Como acceder a los elementos de una lista</h4>
+<p>Podemos acceder por al posición de cada elemento dentro de la lista utilizando los <code>[]</code>, parecido a cómo hacíamos con los vectores.</p>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Si los elementos de la lista tienen nombre, tambien puedo hacer consultas por sus nombres. Esto se hace utilizando el simbolo del <code>$</code> seguido del nombre del elemento concreto.</p>
+<p>Primero vamos a asignarle nombre a cada elemento de la lista con la función <code>names()</code></p>
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Ahora consultamos el primer elemento de las dos formas que conocemos:</p>
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Comprueba ahora la diferencia entre utilizar <code>[]</code> y <code>[[]]</code></p>
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+</section>
+<section id="matrices" class="level3">
+<h3 class="anchored" data-anchor-id="matrices">2.3 Matrices</h3>
+<section id="como-crear-una-matriz" class="level4">
+<h4 class="anchored" data-anchor-id="como-crear-una-matriz">2.3.1 Como crear una matriz</h4>
+<p>Para crear matrices utilizamos la función <code>matrix()</code>. La función <code>matrix()</code> permite organizar los datos en una matriz con tantas filas y columnas como se indiquen. Debemos indicar por lo tanto, el número de filas, el número de columnas y los datos que queremos que aparezcan en su interior. En este caso, los datos se aportan en forma de vector. Te animo a consultar la ayuda de <code>matrix()</code> utilizando la función <code>help()</code>.</p>
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="acceso-a-los-elementos-de-una-matriz" class="level4">
+<h4 class="anchored" data-anchor-id="acceso-a-los-elementos-de-una-matriz">2.3.2 Acceso a los elementos de una matriz</h4>
+<p>Para acceder a los elementos de una matriz utilizamos los [], pero indicamos en su interior la posición de la fila y la columna a la cual queremos acceder. Con la , indicamos “todo” (todas las filas o todas las columnas)</p>
+<div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="cambiar-valores-dentro-de-una-matriz" class="level4">
+<h4 class="anchored" data-anchor-id="cambiar-valores-dentro-de-una-matriz">2.3.3 Cambiar valores dentro de una matriz</h4>
+<p>Veamos primero cómo recortar la matriz y asignarle un nombre:</p>
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Para cambiar valores concretos dentro de la matriz, primero accedermos a ese elemento y le asignamos otro valor:</p>
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>También podemos seleccionar una submatriz, y sustituirla por otra matriz del mismo tamaño:</p>
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+</section>
+<section id="data-frames-marcos-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="data-frames-marcos-de-datos">2.4 Data frames (marcos de datos)</h3>
+<p>Los data frames se utilizan para almacenar datos en formas de tablas. Es decir, en filas y columnas como se utilizan habitualmente en Excell. Esta tablas o data frames pueden almacenar datos de diferentes tipos: números, character, enteros (integer)…En un data frame cada columna representa una variable, y cada columna puede contener un tipo de elemento diferente. A diferencia de las matrices que solo pueden contener elementos numéricos o enteros.</p>
+<p>Una de las limitaciones del data frame, es que todas las columnas tienen que tener la misma longitud. Si no fuese así, sería UNA LISTA, es decir una coleccion de objetos o variables de cualquier, tipo, longitud o estructura.</p>
+<p>Normalmente cuando cargamos una base de datos, o importamos una colección de datos, estamos creando un data frame. Ahora podéis comprobar que la colección de datos <code>iris</code> que hemos cargado anteriormente es un data frame.</p>
+<section id="como-crear-un-data-frame" class="level4">
+<h4 class="anchored" data-anchor-id="como-crear-un-data-frame">2.4.1 Como crear un data frame</h4>
+<p>Vamos a pedir ayuda a R sobre la función <code>data.frame()</code></p>
+<div id="qwebr-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Podemos crear un data frame con la función <code>data.frame()</code></p>
+<div id="qwebr-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>También se puede crear el data frame de forma directa, sin generar los vectores previamente, así:</p>
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Ahora vamos a consultar diferentes atributos con las funciones <code>class()</code>, <code>mode()</code>, <code>is.data.frame()</code> y <code>is.list()</code></p>
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Una característica interesantes es que un data frame también es una lista. Pero cuidado, una lista no es un data.frame. Para serlo tiene que cumplir el requisito de que todos los elementos que contiene tengan la misma longitud.</p>
+<p>otras funciones interesantes para conocer un data frame:</p>
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="acceso-a-los-elementos-de-un-data-frame" class="level4">
+<h4 class="anchored" data-anchor-id="acceso-a-los-elementos-de-un-data-frame">2.4.1 Acceso a los elementos de un data frame</h4>
+<p>Para acceder a los elementos de un data frame se utilizan los <code>[]</code> y <code>$</code>, de forma similar a como hemos venido haciendo con vectores y listas.</p>
+<div id="qwebr-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Se pueden hacer otro tipo de consultas que nos devuelven un vector.</p>
+<div id="qwebr-insertion-location-24"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Vamos a acceder a los datos utilizando el simbolo <code>$</code></p>
+<div id="qwebr-insertion-location-25"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Otras consultas que puedo hacer sobre los datos del data frame es con las funciones <code>dimnames()</code>, <code>rownames()</code>, <code>colnames()</code>, <code>table()</code>, <code>head()</code> y <code>tail()</code></p>
+<div id="qwebr-insertion-location-26"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 
 
+</section>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2017,12 +2198,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Copiado");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Copiado");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",

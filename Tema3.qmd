@@ -1,0 +1,13 @@
+---
+title: "Tema 3. Métodos de comparaciones"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc_float: true
+    css: estilos.css
+engine: knitr
+filters:
+  - webr
+---

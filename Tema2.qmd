@@ -1,9 +1,16 @@
 ---
-title: "Inicio"
-format: html
-editor: visual
+title: "Tema 2. Manejo y filtrado de datos de biodiversidad."
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc_float: true
+    css: estilos.css
+engine: knitr
+filters:
+  - webr
 ---
-
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.

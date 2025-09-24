@@ -1,0 +1,309 @@
+---
+title: "Tema 1 - Introducción general a R. Segunda parte"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc_float: true
+    css: estilos.css
+engine: knitr
+filters:
+  - webr
+---
+
+# Unidad 1: Introducción a R. Continuación
+
+## 1. R: un lenguaje orientado a objetos
+
+`R` es un lenguaje orientado a objetos. Pero ¿qué significa esto? ¿Qué es un objeto en `R`, y qué tipos de objetos existen?
+
+En R, un objeto es una estructura que almacena información: pueden ser datos (números, textos, tablas, imágenes, etc.) y/o funciones que operan sobre esos datos. Cada vez que ejecutamos una operación, como una suma o una función, el resultado puede guardarse en un objeto. Para guardar un objeto utilizamos el comando
+
+En nuestro ejemplo de la cocina, un objeto de R es cualquier cosa que tengamos guardada en nuestro almacen, puede ser desde algo tan sencillo como cuchara a un plato ya preparado.
+
+## 2. Tipos de objetos
+
+Cada tipo de objeto tiene unas propiedades determinadas que estudiaremos poco a poco. Los objetos más sencillos son los vectores. Los tipos objetos de `R` qué trabajaremos son en principio: vectores, listas, matrices, data frames y formato tibble.
+
+### 2.1 Vectores
+
+Un vector es una secuencia o concatenacion de valores.
+
+#### 2.1.1 Cómo crear vectores
+
+Para definir un vector utilizamos la función `c()`. Dentro de los paréntesis indicamos los valores que queremos concatenar. Algunos ejemplos son:
+
+```{webr-r}
+mivector <- c("julia","nagore","alejandro")
+mivector
+```
+
+```{webr-r}
+mivector2 <- c(2,4,6,8,10,12,14,16)
+mivector2
+```
+
+También podemos utilizar la función `seq()` para generar secuencias de números en un rango determinado
+
+```{webr-r}
+seq(from = 5, to = 25, by = 5)
+
+seq(from = 2, to = 20, by = 2)
+
+seq(from=2, to=10, by=2)
+```
+
+Acordaros que podemos generar un vector de datos numericos de esta manera, pero si queremos guardarlo como un objeto debemos asignarle un nombre utilizando este simbolo `<-`
+
+```{webr-r}
+misecuencia <- seq(from=2, to=10, by=2)
+```
+
+También podemos utilizar el símbolo `:` para hacer secuencias de números, o de números y texto. Podemos utilizar la función `class()` para preguntar de qué clase son los elementos que contiene un vector. La única regla para un vector es que solo puede contener elementos de una misma clase.
+
+```{webr-r}
+1:10  # valores numericos
+c(1,7:9)
+class(c(1,7:9)) # preguntamos que clase de objeto se trata. Es un objeto numerico.
+c(1:5, 10.5, "next") # todos los elementos dentro de un vector deben ser de la misma categoria
+class(c(1:5, 10.5, "next"))
+```
+
+Otra función interesante es la función `length()`. Sirve para conocer la longitud de un vector.
+
+```{webr-r}
+v <- 1:10
+v
+length(v)
+
+# Podemos jugar con este vector para qué veáis que ocurre
+length(v) <- 10
+v
+```
+
+#### 2.1.2 Cómo acceder a los elementos de un vector
+
+Otras operaciones con vectores. Podemos utilizar los `[]` para preguntarle a un vector por valores en posiciones concretas. Por ejemplo en el vector v, consulto el valor del elemento en la posición 3.
+
+```{webr-r}
+v <- 1:12 # genero el vector v
+v
+length(v) # pregunto por su longitud
+v[3] # consulto el valor del elemento en la posición 3
+
+v[15] # puedo preguntar por un elemento que no existe. Veréis qué ocurre.
+v[15] <- 30 # incluso asignarle un valor
+v[14]<-"julia" 
+v
+rm(v) # finalmente podemos eliminar v
+```
+
+### 2.2 Listas
+
+Las listas son un tipo especial de vector que pueden contener objetos de diferentes clases. Podemos pensar en una lista como en un arbol o en un esquema, es decir como un una colección de ramas de las cuales pueden salir otras ramas.
+
+Un vector sería una rama, donde todos los elementos tienen la misma clase. En una lista, podemos tener muchas ramas de diferentes clases cada una. En un vector, la longitud es el numero de elementos que contiene. En una lista, su longitud es el numero de ramas, y a su vez, cada rama tendría una longitud propia.
+
+#### 2.2.1 Cómo crear listas
+
+Las listas se crean con la función `list()`, la cual puede tomar un número arbitrario de argumentos. Veamos:
+
+```{webr-r}
+milista <- list("Quercus","Betula","Abies","Fagus","Taxus")  # lista de 5 elementos, cada uno de ellos es una especie
+milista
+```
+
+#### 2.2.2 Como acceder a los elementos de una lista
+
+Podemos acceder por al posición de cada elemento dentro de la lista utilizando los `[]`, parecido a cómo hacíamos con los vectores.
+
+```{webr-r}
+milista[1]
+
+milista[[1]]
+```
+
+Si los elementos de la lista tienen nombre, tambien puedo hacer consultas por sus nombres. Esto se hace utilizando el simbolo del `$` seguido del nombre del elemento concreto.
+
+Primero vamos a asignarle nombre a cada elemento de la lista con la función `names()`
+
+```{webr-r}
+names(milista)  # comprobamos si tiene nombres
+names(milista) <- c("sp1", "sp2", "sp3", "sp4", "sp5") # le asignamos nombres
+names(milista)  # comprobamos si tiene nombres
+milista
+```
+
+Ahora consultamos el primer elemento de las dos formas que conocemos:
+
+```{webr-r}
+milista$sp1
+milista[[1]]
+```
+
+Comprueba ahora la diferencia entre utilizar `[]` y `[[]]`
+
+```{webr-r}
+milista[1]
+```
+
+### 2.3 Matrices
+
+#### 2.3.1 Como crear una matriz
+
+Para crear matrices utilizamos la función `matrix()`. La función `matrix()` permite organizar los datos en una matriz con tantas filas y columnas como se indiquen. Debemos indicar por lo tanto, el número de filas, el número de columnas y los datos que queremos que aparezcan en su interior. En este caso, los datos se aportan en forma de vector. Te animo a consultar la ayuda de `matrix()` utilizando la función `help()`.
+
+```{webr-r}
+mimatriz <- matrix(data=c(101:112), nrow=3, ncol=4) # crear una matriz
+mimatriz
+```
+
+#### 2.3.2 Acceso a los elementos de una matriz
+
+Para acceder a los elementos de una matriz utilizamos los \[\], pero indicamos en su interior la posición de la fila y la columna a la cual queremos acceder. Con la , indicamos "todo" (todas las filas o todas las columnas)
+
+```{webr-r}
+mimatriz[3,1] # muestra el dato de la tercera fila, primera columna
+
+mimatriz[3,] # indicando solamente la fila y una coma nos muestra solo la tercera fila de la matriz
+
+mimatriz[,4] # muestra solamente la cuarta columna
+
+mimatriz[1:2, 1:2] # selecciona una parte de la matriz
+
+mimatriz[1:2,] # Filas de la 1 a la 2, columnas todas
+
+mimatriz[,3:4] # Filas todas, columnas de la 3 a la 4
+
+mimatriz[3:4] # Nos muestra los datos en orden, como en un vector
+
+mimatriz[6:7]
+
+mimatriz[3]
+```
+
+#### 2.3.3 Cambiar valores dentro de una matriz
+
+Veamos primero cómo recortar la matriz y asignarle un nombre:
+
+```{webr-r}
+mimatriz[,-3] # eliminar la tercera columna de una matriz
+mimatriz[,-2] # eliminar solola segunda columna de una matriz
+mimatriz[,-c(2:3)] # para eliminar varias columnas, las selecciono como un vector
+matriz_peque <- mimatriz[,-c(2:3)] # asignar un nombre a la nueva matriz
+```
+
+Para cambiar valores concretos dentro de la matriz, primero accedermos a ese elemento y le asignamos otro valor:
+
+```{webr-r}
+mimatriz[1] # este elemento lo queremos modificar, queremos que ahora sea un 5
+mimatriz[1] <- 5 # le asignamos el nuevo valor con <-
+mimatriz
+
+mimatriz[2,3] # Podemos seleccionar un elemento por su posición en la matriz, por filas o columnas.
+mimatriz[8] # o como si fuera un vector (es más complicado...)
+
+mimatriz[2,3] <- 1000 # Podemos seleccionar un elemento por su posición en la matriz y sustituirlo.
+```
+
+También podemos seleccionar una submatriz, y sustituirla por otra matriz del mismo tamaño:
+
+```{webr-r}
+mimatriz[1:2,1:2] ## trozo de matriz que queremos cambiar
+
+matrix(c(1:4),nrow=2,ncol=2) ## queremos cambiarlo por esta otra matriz que creamos ahora con matrix()
+
+mimatriz[1:2,1:2] <- matrix(c(1:4),nrow=2,ncol=2) # simplemente asignamos una cosa a la otra.
+
+```
+
+### 2.4 Data frames (marcos de datos)
+
+Los data frames se utilizan para almacenar datos en formas de tablas. Es decir, en filas y columnas como se utilizan habitualmente en Excell. Esta tablas o data frames pueden almacenar datos de diferentes tipos: números, character, enteros (integer)...En un data frame cada columna representa una variable, y cada columna puede contener un tipo de elemento diferente. A diferencia de las matrices que solo pueden contener elementos numéricos o enteros.
+
+Una de las limitaciones del data frame, es que todas las columnas tienen que tener la misma longitud. Si no fuese así, sería UNA LISTA, es decir una coleccion de objetos o variables de cualquier, tipo, longitud o estructura.
+
+Normalmente cuando cargamos una base de datos, o importamos una colección de datos, estamos creando un data frame. Ahora podéis comprobar que la colección de datos `iris` que hemos cargado anteriormente es un data frame.
+
+#### 2.4.1 Como crear un data frame
+
+Vamos a pedir ayuda a R sobre la función `data.frame()`
+
+```{webr-r}
+?data.frame #consultamos la información de ayuda
+```
+
+Podemos crear un data frame con la función `data.frame()`
+
+```{webr-r}
+# Generamos primero tres vectores, de la misma longitud. Estos van a ser las tres variables de mi tabla de datos.
+especies <- c("Iris_setosa", "Iris_virginica", "Iris_versicolor") 
+ID <- c(1:3)
+presencia <- c(TRUE, TRUE, FALSE)
+
+# Ahora contruimos el data frame con la funcion data.frame() y los tres vectores. Le asignamos un nombre al nuevo objeto.
+midataframe <- data.frame(especies, ID, presencia)
+```
+
+También se puede crear el data frame de forma directa, sin generar los vectores previamente, así:
+
+```{webr-r}
+data.frame(especies = c("Iris_setosa", "Iris_virginica", "Iris_versicolor"),
+           ID = c(1:3), presencia = c(TRUE, TRUE, FALSE))
+```
+
+Ahora vamos a consultar diferentes atributos con las funciones `class()`, `mode()`, `is.data.frame()` y `is.list()`
+
+```{webr-r}
+class(midataframe) # nos indica que tipo de objeto es
+mode(midataframe) # nos indica que es una lista, porque un data frame es un tipo de lista
+is.data.frame(midataframe) # para preguntar si se trata de un data frame.
+is.list(midataframe) # para preguntar si se trata de una lista
+```
+
+Una característica interesantes es que un data frame también es una lista. Pero cuidado, una lista no es un data.frame. Para serlo tiene que cumplir el requisito de que todos los elementos que contiene tengan la misma longitud.
+
+otras funciones interesantes para conocer un data frame:
+
+```{webr-r}
+nrow(midataframe) # número de filas
+ncol(midataframe) # número de columnas
+dim(midataframe) # número de filas y columnas
+```
+
+#### 2.4.1 Acceso a los elementos de un data frame
+
+Para acceder a los elementos de un data frame se utilizan los `[]` y `$`, de forma similar a como hemos venido haciendo con vectores y listas.
+
+```{webr-r}
+head(midataframe) # para explorar el data frame
+midataframe[1] # puedo ir consultando cada una de las variables/columnas del data frame
+midataframe[2]
+midataframe[3]
+```
+
+Se pueden hacer otro tipo de consultas que nos devuelven un vector.
+
+```{webr-r}
+midataframe[,1] # le estaría diciendo: muestrame todas las filas, y la primera columna
+midataframe[1] # observa la diferencia
+midataframe[1,] # así le estaría consultando por la primera fila y todas las columnas
+```
+
+Vamos a acceder a los datos utilizando el simbolo `$`
+
+```{webr-r}
+midataframe[,1] # le estaría diciendo: muestrame todas las filas, y la primera columna
+midataframe$especies # es otra forma de acceder a los datos.
+```
+
+Otras consultas que puedo hacer sobre los datos del data frame es con las funciones `dimnames()`, `rownames()`, `colnames()`, `table()`, `head()` y `tail()`
+
+```{webr-r}
+dimnames(midataframe) #nombres de las filas y de las columnas
+rownames(midataframe)  # nombres de las filas, que en este caso no tiene y nos da una numeracion
+colnames(midataframe) # nombres de las columnas
+table(midataframe$especies) # nos hace una tabla resumen de las especies, en este caso hay un individuo de cada uno en el data frame.
+```
+

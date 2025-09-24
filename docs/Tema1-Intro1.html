@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.23">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Unidad 1 - Introducción a R – Curso de R con webR</title>
+<title>Tema 1 - Introducción general a R. Primera parte – Análisis de la biodiversidad en R y SIG</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -55,17 +90,17 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css">
@@ -346,7 +381,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = [''];
+globalThis.qwebrInstallRPackagesList = ['dplyr', 'ggplot2'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -356,7 +391,7 @@ globalThis.qwebrSetupRPackages = !(qwebrInstallRPackagesList.indexOf("") !== -1)
 globalThis.qwebrAutoloadRPackages = true;
 
 // Display a startup message?
-globalThis.qwebrShowStartupMessage = true;
+globalThis.qwebrShowStartupMessage = false;
 globalThis.qwebrShowHeaderMessage = false;
 
 // Describe the webR settings that should be used
@@ -364,11 +399,11 @@ globalThis.qwebrCustomizedWebROptions = {
   "baseURL": "https://webr.r-wasm.org/v0.5.2/",
   "serviceWorkerUrl": "",
   "homedir": "/home/web_user", 
-  "channelType": "ChannelType.Automatic"
+  "channelType": "ChannelType.PostMessage"
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"2 + 2","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"cosa <- 2 + 3\ncosa","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data(iris)\nhead(iris)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"write.csv(iris, file = 'iris.csv')\niris_import_csv <- read.csv('iris.csv')\nhead(iris_import_csv)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"save(iris, file = 'iris_object_only.RData')\nload('iris_object_only.RData')\nhead(iris)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"1","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"2 + 2","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"10/2","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"2+7+2","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x <- 2","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"y <- 3","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x/2","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"x + y\nx * y\nz <- x^y\nz","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"mean(4)\nsqrt(4)","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# round(x, digits)\nround(x = 3.14159, digits = 2)","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# round(x, digits)\nround(3.14159, 2)","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# round(x, digits)\nround(2, 3.14159)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Mi primer script en R\nx <- 5\ny <- 3\nsuma <- x + y\nprint(suma)","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Crear algunos objetos\nx <- 10\ny <- c(1, 2, 3)\nnombre <- \"mi nombre\"","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Ver todos los objetos en el entorno\nls()","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Eliminar un objeto\nrm(x)\n\n# Verificar que se ha eliminado\nls()","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-18","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data(iris)# para cargar los datos \n?iris # consulta sobre el data set \nhead(iris) # muestra las primeras 6 filas de un data set \nhead(iris, n = 10) \ndim(iris) # dimensiones del data set iris \ntail(iris) # muestra las ultimas 6 filas de un data set \ncolnames(iris)# la funcion colnames() nos muestra los nombres de las variables de iris \nnames(iris) # la funcion names() nos muestra los nombres de las variables de iris","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-19","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"read.csv(\"C:/Users/TuNombre/grassland.community.csv\")","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-20","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos_alberta <- read.csv(\"C:/Users/TuNombre/grassland.community.csv\")","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-21","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# read.csv(\"C:/Users/TuNombre/datos_con_errores.csv\") # Tú código debería ser algo así\nread.csv(\"data/datos_con_errores.csv\")","id":22,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-22","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"getwd()\n# ¿Ves el archivo 'datos_con_errores.csv' aquí?","id":23,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-23","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos <- read.csv(\"data/datos_con_errores.csv\")\nView(datos)","id":24,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-24","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos <- read.csv(\"datos_con_errores.csv\", fileEncoding = \"latin1\")\nView(datos)","id":25,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-25","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos <- read.csv(\"data/datos_con_errores.csv\", fileEncoding = \"latin1\", sep = \",\")\nView(datos)","id":26,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-26","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos <- read.csv(\"data/datos_con_errores.csv\", fileEncoding = \"latin1\", na.strings = c(\"\", \"NA\", \".\", \"?\"))\nsummary(datos)","id":27,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-27","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"str(datos)","id":28,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-28","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos$Edad <- as.numeric(datos$Edad)\ndatos$Fecha <- as.Date(datos$Fecha, format = \"%Y-%m-%d\")","id":29,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-29","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos$Nombre <- gsub('\"', '', datos$Nombre)","id":30,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-30","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Antes\n\ndatos$Nombre\n\n# [1] \"\\\"Carlos\\\"\" \"Ana\" \"Luis\"\n\n# Después\n\ndatos$Nombre <- gsub('\"', '', datos$Nombre)\n\ndatos$Nombre\n\n#[1] \"Carlos\" \"Ana\" \"Luis\"","id":31,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-31","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"View(datos)","id":32,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-32","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1623,9 +1658,10 @@ globalThis.qwebrExecuteCode = async function (
 </script>
 
 
+<link rel="stylesheet" href="estilos.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -1635,11 +1671,11 @@ globalThis.qwebrExecuteCode = async function (
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Curso de R con webR</span>
+    <span class="navbar-title">Análisis de la biodiversidad en R y SIG</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -1648,13 +1684,32 @@ globalThis.qwebrExecuteCode = async function (
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tema-1.-introducción-general-a-r" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Tema 1. Introducción general a R</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tema-1.-introducción-general-a-r">    
+        <li>
+    <a class="dropdown-item" href="./Tema1-Intro1.html">
+ <span class="dropdown-text">Primera parte</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Tema1-Intro2.html">
+ <span class="dropdown-text">Segunda parte</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./unidad1_reestructurada.html" aria-current="page"> 
-<span class="menu-text">Tema 1 Introducción a R</span></a>
+    <a class="nav-link" href="./Tema2.html"> 
+<span class="menu-text">Tema 2. Manejo y filtrado de datos de biodiversidad</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./unidad2.html"> 
-<span class="menu-text">Unidad 2</span></a>
+    <a class="nav-link" href="./Tema3.html"> 
+<span class="menu-text">Tema 3. Métodos de comparaciones</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Tema4.html"> 
+<span class="menu-text">Tema 4. Representación gráfica y presentación de resultados</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -1666,37 +1721,85 @@ globalThis.qwebrExecuteCode = async function (
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
    
   <ul>
   <li><a href="#unidad-1-introducción-a-r" id="toc-unidad-1-introducción-a-r" class="nav-link active" data-scroll-target="#unidad-1-introducción-a-r">Unidad 1: Introducción a R</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link" data-scroll-target="#objetivos-de-aprendizaje">Objetivos de aprendizaje</a></li>
   <li><a href="#qué-es-r" id="toc-qué-es-r" class="nav-link" data-scroll-target="#qué-es-r">1. ¿Qué es R?</a></li>
-  <li><a href="#instalación-de-r-y-rstudio" id="toc-instalación-de-r-y-rstudio" class="nav-link" data-scroll-target="#instalación-de-r-y-rstudio">2. Instalación de R y RStudio</a></li>
-  <li><a href="#primeros-pasos-en-rstudio" id="toc-primeros-pasos-en-rstudio" class="nav-link" data-scroll-target="#primeros-pasos-en-rstudio">3. Primeros pasos en RStudio</a>
+  <li><a href="#instalación-de-r" id="toc-instalación-de-r" class="nav-link" data-scroll-target="#instalación-de-r">2. Instalación de R</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-1-suma-básica" id="toc-ejercicio-1-suma-básica" class="nav-link" data-scroll-target="#ejercicio-1-suma-básica">Ejercicio 1: Suma básica</a></li>
-  <li><a href="#ejercicio-2-crear-un-objeto" id="toc-ejercicio-2-crear-un-objeto" class="nav-link" data-scroll-target="#ejercicio-2-crear-un-objeto">Ejercicio 2: Crear un objeto</a></li>
-  </ul></li>
-  <li><a href="#importar-y-exportar-datos" id="toc-importar-y-exportar-datos" class="nav-link" data-scroll-target="#importar-y-exportar-datos">4. Importar y exportar datos</a>
+  <li><a href="#usuarios-de-windows" id="toc-usuarios-de-windows" class="nav-link" data-scroll-target="#usuarios-de-windows">2.1 Usuarios de Windows</a></li>
+  <li><a href="#usuarios-de-mac" id="toc-usuarios-de-mac" class="nav-link" data-scroll-target="#usuarios-de-mac">2.2 Usuarios de Mac</a></li>
+  <li><a href="#usuarios-de-linux" id="toc-usuarios-de-linux" class="nav-link" data-scroll-target="#usuarios-de-linux">2.3 Usuarios de Linux</a></li>
+  <li><a href="#primeros-ejercicios-aprende-a-utilizar-la-consola-de-r" id="toc-primeros-ejercicios-aprende-a-utilizar-la-consola-de-r" class="nav-link" data-scroll-target="#primeros-ejercicios-aprende-a-utilizar-la-consola-de-r">2.4 Primeros ejercicios: Aprende a utilizar la consola de R</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-3-cargar-datos-integrados" id="toc-ejercicio-3-cargar-datos-integrados" class="nav-link" data-scroll-target="#ejercicio-3-cargar-datos-integrados">Ejercicio 3: Cargar datos integrados</a></li>
-  <li><a href="#ejercicio-4-exportar-e-importar-csv" id="toc-ejercicio-4-exportar-e-importar-csv" class="nav-link" data-scroll-target="#ejercicio-4-exportar-e-importar-csv">Ejercicio 4: Exportar e importar CSV</a></li>
+  <li><a href="#abre-la-consola-de-r" id="toc-abre-la-consola-de-r" class="nav-link" data-scroll-target="#abre-la-consola-de-r">Abre la consola de R</a></li>
+  <li><a href="#ejercicio-1-imprimir-valores" id="toc-ejercicio-1-imprimir-valores" class="nav-link" data-scroll-target="#ejercicio-1-imprimir-valores">Ejercicio 1: Imprimir valores</a></li>
+  <li><a href="#ejercicio-2-operar" id="toc-ejercicio-2-operar" class="nav-link" data-scroll-target="#ejercicio-2-operar">Ejercicio 2: Operar</a></li>
+  <li><a href="#ejercicio-3-crear-objetos-con--" id="toc-ejercicio-3-crear-objetos-con--" class="nav-link" data-scroll-target="#ejercicio-3-crear-objetos-con--">Ejercicio 3: Crear objetos con <code>&lt;-</code></a></li>
+  <li><a href="#ejercicio-4-operar-con-objetos" id="toc-ejercicio-4-operar-con-objetos" class="nav-link" data-scroll-target="#ejercicio-4-operar-con-objetos">Ejercicio 4: Operar con objetos</a></li>
+  <li><a href="#ejercicio-5-utilizar-funciones" id="toc-ejercicio-5-utilizar-funciones" class="nav-link" data-scroll-target="#ejercicio-5-utilizar-funciones">Ejercicio 5: Utilizar funciones</a></li>
   </ul></li>
-  <li><a href="#organización-del-trabajo" id="toc-organización-del-trabajo" class="nav-link" data-scroll-target="#organización-del-trabajo">5. Organización del trabajo</a></li>
-  <li><a href="#evaluación-y-repaso" id="toc-evaluación-y-repaso" class="nav-link" data-scroll-target="#evaluación-y-repaso">6. Evaluación y repaso</a>
+  </ul></li>
+  <li><a href="#qué-es-rstudio" id="toc-qué-es-rstudio" class="nav-link" data-scroll-target="#qué-es-rstudio">3. ¿Qué es RStudio?</a></li>
+  <li><a href="#instalación-de-rstudio" id="toc-instalación-de-rstudio" class="nav-link" data-scroll-target="#instalación-de-rstudio">4 Instalación de Rstudio</a>
   <ul class="collapse">
-  <li><a href="#preguntas-de-autoevaluación" id="toc-preguntas-de-autoevaluación" class="nav-link" data-scroll-target="#preguntas-de-autoevaluación">Preguntas de autoevaluación</a></li>
-  <li><a href="#ejercicio-5-guardar-y-cargar-objetos" id="toc-ejercicio-5-guardar-y-cargar-objetos" class="nav-link" data-scroll-target="#ejercicio-5-guardar-y-cargar-objetos">Ejercicio 5: Guardar y cargar objetos</a></li>
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows"><strong>4.1 Windows</strong></a></li>
+  <li><a href="#linux" id="toc-linux" class="nav-link" data-scroll-target="#linux">4.2 Linux</a></li>
+  <li><a href="#macos" id="toc-macos" class="nav-link" data-scroll-target="#macos"><strong>4.3 macOS</strong></a></li>
   </ul></li>
-  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales">7. Recursos adicionales</a></li>
+  <li><a href="#primeros-pasos-en-rstudio" id="toc-primeros-pasos-en-rstudio" class="nav-link" data-scroll-target="#primeros-pasos-en-rstudio">5 Primeros pasos en RStudio</a>
+  <ul class="collapse">
+  <li><a href="#consola" id="toc-consola" class="nav-link" data-scroll-target="#consola">5.1 Consola</a></li>
+  <li><a href="#panel-de-edición-script" id="toc-panel-de-edición-script" class="nav-link" data-scroll-target="#panel-de-edición-script">5.2 Panel de edición (Script)</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-6-crea-y-guarda-tu-primer-script" id="toc-ejercicio-6-crea-y-guarda-tu-primer-script" class="nav-link" data-scroll-target="#ejercicio-6-crea-y-guarda-tu-primer-script">Ejercicio 6: Crea y guarda tu primer script</a></li>
+  <li><a href="#ejercicio-7-ejecuta-el-código-del-script" id="toc-ejercicio-7-ejecuta-el-código-del-script" class="nav-link" data-scroll-target="#ejercicio-7-ejecuta-el-código-del-script">Ejercicio 7: Ejecuta el código del script</a></li>
+  </ul></li>
+  <li><a href="#entorno-de-trabajo-historial" id="toc-entorno-de-trabajo-historial" class="nav-link" data-scroll-target="#entorno-de-trabajo-historial">5.3 Entorno de trabajo / Historial</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo" id="toc-ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo" class="nav-link" data-scroll-target="#ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo">Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo</a></li>
+  <li><a href="#archivos-gráficos-paquetes-ayuda-viewer" id="toc-archivos-gráficos-paquetes-ayuda-viewer" class="nav-link" data-scroll-target="#archivos-gráficos-paquetes-ayuda-viewer">5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#aprender-a-cargar-y-guardar-datos" id="toc-aprender-a-cargar-y-guardar-datos" class="nav-link" data-scroll-target="#aprender-a-cargar-y-guardar-datos">6. Aprender a cargar y guardar datos</a>
+  <ul class="collapse">
+  <li><a href="#importar-datos-al-entorno-de-trabajo" id="toc-importar-datos-al-entorno-de-trabajo" class="nav-link" data-scroll-target="#importar-datos-al-entorno-de-trabajo">6.1 Importar datos al entorno de trabajo</a></li>
+  <li><a href="#cargar-datos-integrados" id="toc-cargar-datos-integrados" class="nav-link" data-scroll-target="#cargar-datos-integrados">6.2 Cargar datos integrados</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-9-cargar-datos-integrados" id="toc-ejercicio-9-cargar-datos-integrados" class="nav-link" data-scroll-target="#ejercicio-9-cargar-datos-integrados">Ejercicio 9: Cargar datos integrados</a></li>
+  </ul></li>
+  <li><a href="#importar-datos-desde-csv" id="toc-importar-datos-desde-csv" class="nav-link" data-scroll-target="#importar-datos-desde-csv"><strong>6.3 Importar datos desde CSV</strong></a>
+  <ul class="collapse">
+  <li><a href="#truco-usar-el-panel-área-de-trabajo-environment-para-cargar-archivos" id="toc-truco-usar-el-panel-área-de-trabajo-environment-para-cargar-archivos" class="nav-link" data-scroll-target="#truco-usar-el-panel-área-de-trabajo-environment-para-cargar-archivos"><strong>Truco: Usar el panel Área de trabajo “Environment” para cargar archivos</strong></a></li>
+  </ul></li>
+  <li><a href="#extra-importar-datos-desde-excell" id="toc-extra-importar-datos-desde-excell" class="nav-link" data-scroll-target="#extra-importar-datos-desde-excell"><strong>6.4 EXTRA: Importar datos desde Excell</strong></a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-extra-importar-datos-desde-excel" id="toc-ejercicio-extra-importar-datos-desde-excel" class="nav-link" data-scroll-target="#ejercicio-extra-importar-datos-desde-excel">Ejercicio Extra Importar datos desde excel</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#errores-comunes-al-cargar-archivos-csv-en-r" id="toc-errores-comunes-al-cargar-archivos-csv-en-r" class="nav-link" data-scroll-target="#errores-comunes-al-cargar-archivos-csv-en-r">7. Errores comunes al cargar archivos CSV en R</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-verificar-el-entorno" id="toc-paso-1-verificar-el-entorno" class="nav-link" data-scroll-target="#paso-1-verificar-el-entorno">Paso 1: Verificar el entorno</a></li>
+  <li><a href="#paso-2-cargar-el-archivo-sin-argumentos" id="toc-paso-2-cargar-el-archivo-sin-argumentos" class="nav-link" data-scroll-target="#paso-2-cargar-el-archivo-sin-argumentos">Paso 2: Cargar el archivo sin argumentos</a></li>
+  <li><a href="#paso-3-codificación-de-caracteres" id="toc-paso-3-codificación-de-caracteres" class="nav-link" data-scroll-target="#paso-3-codificación-de-caracteres">Paso 3: Codificación de caracteres</a></li>
+  <li><a href="#paso-4-separadores-incorrectos" id="toc-paso-4-separadores-incorrectos" class="nav-link" data-scroll-target="#paso-4-separadores-incorrectos">Paso 4: Separadores incorrectos</a></li>
+  <li><a href="#paso-5-valores-faltantes" id="toc-paso-5-valores-faltantes" class="nav-link" data-scroll-target="#paso-5-valores-faltantes">Paso 5: Valores faltantes</a></li>
+  <li><a href="#paso-6-tipos-de-datos" id="toc-paso-6-tipos-de-datos" class="nav-link" data-scroll-target="#paso-6-tipos-de-datos">Paso 6: Tipos de datos</a></li>
+  <li><a href="#paso-7-limpiar-comillas-y-comentarios" id="toc-paso-7-limpiar-comillas-y-comentarios" class="nav-link" data-scroll-target="#paso-7-limpiar-comillas-y-comentarios">Paso 7: Limpiar comillas y comentarios</a></li>
+  <li><a href="#paso-final-ver-datos-limpios" id="toc-paso-final-ver-datos-limpios" class="nav-link" data-scroll-target="#paso-final-ver-datos-limpios">Paso final: Ver datos limpios</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1987,7 +2090,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Unidad 1 - Introducción a R</h1>
+<h1 class="title">Tema 1 - Introducción general a R. Primera parte</h1>
 </div>
 
 
@@ -2010,78 +2113,421 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h2 class="anchored" data-anchor-id="objetivos-de-aprendizaje">Objetivos de aprendizaje</h2>
 <ul>
 <li>Comprender qué es R y cómo instalarlo.</li>
-<li>Familiarizarse con RStudio y su interfaz.</li>
 <li>Ejecutar comandos básicos en R.</li>
+<li>Familiarizarse con RStudio y su interfaz.</li>
 <li>Importar y exportar datos en distintos formatos.</li>
 <li>Organizar el trabajo en proyectos de R.</li>
 </ul>
 </section>
 <section id="qué-es-r" class="level2">
 <h2 class="anchored" data-anchor-id="qué-es-r">1. ¿Qué es R?</h2>
+<p><img src="images/Imagen1.png" class="img-fluid" width="138"></p>
 <p>R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.</p>
+<p>Todo el código de R está disponible como software <a href="https://es.wikipedia.org/wiki/Software_libre">libre</a> bajo las condiciones de <a href="https://es.wikipedia.org/wiki/GNU_General_Public_License">licencia GNU-GPL</a>. Esto implica que cualquier usuario final puede <strong>usar, estudiar, compartir (copiar) y modificar el software</strong>.</p>
 <p>Puedes acceder al proyecto R en: <a href="http://www.r-project.org" class="uri">http://www.r-project.org</a></p>
+<hr>
 </section>
-<section id="instalación-de-r-y-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="instalación-de-r-y-rstudio">2. Instalación de R y RStudio</h2>
+<section id="instalación-de-r" class="level2">
+<h2 class="anchored" data-anchor-id="instalación-de-r">2. Instalación de R</h2>
 <p>Sigue las instrucciones en <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> para instalar R según tu sistema operativo.</p>
-<p>RStudio se descarga desde: <a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a></p>
+<section id="usuarios-de-windows" class="level3">
+<h3 class="anchored" data-anchor-id="usuarios-de-windows">2.1 Usuarios de Windows</h3>
+<p>Para usuarios de Windows, selecciona el enlace <strong>‘Download R for Windows’</strong>, luego haz clic en el enlace <strong>‘base’</strong> y finalmente en <strong>‘Download R 4.3.3 for Windows’</strong>. Esto iniciará la descarga del archivo de instalación <code>.exe</code>.</p>
+<p>Una vez completada la descarga, haz doble clic en el archivo ejecutable de R y sigue las instrucciones en pantalla.</p>
+<p>Las instrucciones completas de instalación se pueden encontrar en el sitio web de <a href="https://cran.r-project.org/">CRAN</a>.</p>
+<hr>
 </section>
-<section id="primeros-pasos-en-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="primeros-pasos-en-rstudio">3. Primeros pasos en RStudio</h2>
-<p>Al abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.</p>
-<section id="ejercicio-1-suma-básica" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-1-suma-básica">Ejercicio 1: Suma básica</h3>
+<section id="usuarios-de-mac" class="level3">
+<h3 class="anchored" data-anchor-id="usuarios-de-mac">2.2 Usuarios de Mac</h3>
+<p>Para usuarios de Mac, selecciona el enlace <strong>‘Download R for (Mac) OS X’</strong>. El archivo binario se puede descargar seleccionando <strong>‘R-4.3.3.pkg’</strong>.</p>
+<p>Una vez descargado, haz doble clic en el icono del archivo y sigue las instrucciones en pantalla para completar los pasos necesarios.</p>
+<p>Consulta el documento <a href="https://cran.r-project.org/bin/macosx/">‘R for Mac OS X FAQ’</a> para más información sobre la instalación.</p>
+<hr>
+</section>
+<section id="usuarios-de-linux" class="level3">
+<h3 class="anchored" data-anchor-id="usuarios-de-linux">2.3 Usuarios de Linux</h3>
+<p>Para usuarios de Linux, el método de instalación dependerá de la distribución que estés utilizando. Hay instrucciones bastante completas para <strong>Debian</strong>, <strong>Redhat</strong>, <strong>Suse</strong> y <strong>Ubuntu</strong>.</p>
+<p>En la mayoría de los casos, puedes usar el gestor de paquetes de tu sistema operativo para instalar R desde el repositorio oficial.</p>
+<p>En Ubuntu, abre una terminal y ejecuta los siguientes comandos (necesitarás permisos de administrador):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install r-base</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Si recibes un error al ejecutar los comandos anteriores, puede que necesites añadir una entrada a tu archivo sources.list. Para hacerlo, abre el archivo /etc/apt/sources.list en tu editor de texto favorito (gedit, vim, nano, etc.) y añade la siguiente línea (también necesitarás permisos de administrador):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deb</span> https://cloud.r-project.org/bin/linux/ubuntu disco-cran35/</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías estar listo para comenzar.</p>
+</section>
+<section id="primeros-ejercicios-aprende-a-utilizar-la-consola-de-r" class="level3">
+<h3 class="anchored" data-anchor-id="primeros-ejercicios-aprende-a-utilizar-la-consola-de-r">2.4 Primeros ejercicios: Aprende a utilizar la consola de R</h3>
+<section id="abre-la-consola-de-r" class="level4">
+<h4 class="anchored" data-anchor-id="abre-la-consola-de-r">Abre la consola de R</h4>
+<p><img src="images/Imagen2.png" class="img-fluid"></p>
+</section>
+<section id="ejercicio-1-imprimir-valores" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-1-imprimir-valores">Ejercicio 1: Imprimir valores</h4>
+<pre class="{web-r}"><code>"Bienvenidos al curso de R y SIG"</code></pre>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
-<section id="ejercicio-2-crear-un-objeto" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-2-crear-un-objeto">Ejercicio 2: Crear un objeto</h3>
+<section id="ejercicio-2-operar" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-2-operar">Ejercicio 2: Operar</h4>
+<p>El uso más sencillo que se le puede dar a R es el de una calculadora. Consideremos las siguientes operaciones:</p>
+<ul>
+<li><p>Sumar: +</p></li>
+<li><p>Restar: -</p></li>
+<li><p>Multiplicar: *</p></li>
+<li><p>Dividir: /</p></li>
+<li><p>Exponenciar: ^</p></li>
+<li><p>Módulo: %%</p></li>
+</ul>
+<p>Los últimos dos necesitan una breve explicación:</p>
+<p>El operador ^ eleva el número a la izquierda a la potencia a la derecha 3^2 es 9</p>
+<p>El módulo (mod) %% calcula el residuo de la división del número a la izquierda por el número a la derecha, por ejemplo 5 mod 3 o 5%%3 es 2.</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-</section>
-<section id="importar-y-exportar-datos" class="level2">
-<h2 class="anchored" data-anchor-id="importar-y-exportar-datos">4. Importar y exportar datos</h2>
-<section id="ejercicio-3-cargar-datos-integrados" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-3-cargar-datos-integrados">Ejercicio 3: Cargar datos integrados</h3>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="ejercicio-4-exportar-e-importar-csv" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-4-exportar-e-importar-csv">Ejercicio 4: Exportar e importar CSV</h3>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
-</section>
-<section id="organización-del-trabajo" class="level2">
-<h2 class="anchored" data-anchor-id="organización-del-trabajo">5. Organización del trabajo</h2>
-<p>Utiliza proyectos de R para mantener tus archivos organizados. Usa <code>getwd()</code> para ver tu directorio de trabajo y <code>setwd()</code> para cambiarlo.</p>
-</section>
-<section id="evaluación-y-repaso" class="level2">
-<h2 class="anchored" data-anchor-id="evaluación-y-repaso">6. Evaluación y repaso</h2>
-<section id="preguntas-de-autoevaluación" class="level3">
-<h3 class="anchored" data-anchor-id="preguntas-de-autoevaluación">Preguntas de autoevaluación</h3>
-<ol type="1">
-<li><p>¿Qué función se usa para instalar paquetes en R?</p></li>
-<li><p>¿Cómo se guarda un objeto en formato <code>.RData</code>?</p></li>
-<li><p>¿Qué diferencia hay entre <code>.RData</code> y <code>.rds</code>?</p></li>
-</ol>
-</section>
-<section id="ejercicio-5-guardar-y-cargar-objetos" class="level3">
-<h3 class="anchored" data-anchor-id="ejercicio-5-guardar-y-cargar-objetos">Ejercicio 5: Guardar y cargar objetos</h3>
+<section id="ejercicio-3-crear-objetos-con--" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-3-crear-objetos-con--">Ejercicio 3: Crear objetos con <code>&lt;-</code></h4>
+<p><strong>Objetivo</strong>: Guardar valores en objetos para usarlos más adelante.</p>
 <div id="qwebr-insertion-location-5"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-6"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="ejercicio-4-operar-con-objetos" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-4-operar-con-objetos">Ejercicio 4: Operar con objetos</h4>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="ejercicio-5-utilizar-funciones" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-5-utilizar-funciones">Ejercicio 5: Utilizar funciones</h4>
+<p><strong>¿Qué es una función en R?</strong></p>
+<p>Una <strong>función</strong> en R es una herramienta que realiza una tarea específica. Si piensas en analizar datos como si fuera cocinar las funciones son como <strong>robots de cocina</strong>: le das una entrada (argumentos o ingredientes), realiza una operación (pica, tritura o calienta), y te devuelve una salida (resultado, plato hecho).</p>
+<p>R viene con un montón de funciones listas para usar. Por ejemplo, la función <code>mean()</code> calcula la media de un conjunto de números.</p>
+<p><strong>¿Cómo usar funciones ya creadas?</strong></p>
+<p>Para utilizar las funciones en R solo necesitas:</p>
+<ol type="1">
+<li><p><strong>Escribir el nombre de la función</strong>.</p></li>
+<li><p><strong>Proporcionar los argumentos necesarios entre paréntesis</strong>.</p></li>
+</ol>
+<p><strong>Ejemplo 1: Funciones con un argumento. Calcular la media y la raíz cuadrada</strong></p>
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>Ejemplo 2: Funciones con más de un argumento. Logaritmo y redondeo</strong></p>
+<p>Algunas funciones en R necesitan más de un dato para funcionar. Por ejemplo, si quieres redondear un número, puedes decirle cuántos decimales usar. Puedes escribir los datos en orden o decirle a R cuál es cuál usando el nombre del argumento. Así tienes más control sobre lo que hace la función.</p>
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round(x, digits)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="fl">3.14159</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+<p>En los ejemplos de arriba hemos nombrado los argumentos de forma explícita pero esto no es estrictamente necesario. Si no se nombran la función opera igualmente</p>
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Pero <strong>OJO 👀</strong> si no nombramos los argumentos no se pueden cambiar de orden</p>
+<div id="qwebr-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 </section>
-<section id="recursos-adicionales" class="level2">
-<h2 class="anchored" data-anchor-id="recursos-adicionales">7. Recursos adicionales</h2>
+</section>
+<section id="qué-es-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-rstudio">3. ¿Qué es RStudio?</h2>
+<p>RStudio es un entorno de desarrollo integrado (IDE, por sus siglas en inglés) diseñado específicamente para trabajar con el lenguaje de programación R. Es una herramienta que facilita la escritura de código, la visualización de datos, la creación de gráficos y la elaboración de informes.</p>
+<p><img src="images/Imagen3.png" class="img-fluid" width="236"></p>
+<hr>
+</section>
+<section id="instalación-de-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="instalación-de-rstudio">4 Instalación de Rstudio</h2>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows"><strong>4.1 Windows</strong></h3>
+<ol type="1">
+<li><p>Ve a la página oficial: https://posit.co/download/rstudio-desktop/</p></li>
+<li><p>Haz clic en <strong>Download RStudio for Windows</strong>.</p></li>
+<li><p>Ejecuta el archivo <code>.exe</code> descargado.</p></li>
+<li><p>Sigue los pasos del instalador (siguiente, siguiente… ¡listo!).</p></li>
+</ol>
+</section>
+<section id="linux" class="level3">
+<h3 class="anchored" data-anchor-id="linux">4.2 Linux</h3>
+<ol type="1">
+<li><p>Elige tu distribución (Ubuntu, Fedora, etc.) en la página de descargas.</p></li>
+<li><p><strong>Descarga el archivo .deb</strong> (para Ubuntu/Debian) o .rpm (para Fedora).</p></li>
+<li><p>Instala desde <strong>terminal</strong>:</p></li>
+</ol>
+<pre><code>sudo dpkg -i rstudio-x.yy.zzz-amd64.deb</code></pre>
+</section>
+<section id="macos" class="level3">
+<h3 class="anchored" data-anchor-id="macos"><strong>4.3 macOS</strong></h3>
+<ol type="1">
+<li><p>Descarga el instalador para macOS desde la misma página.</p></li>
+<li><p>Abre el archivo <code>.dmg</code> y arrastra RStudio a la carpeta <strong>Aplicaciones</strong>.</p></li>
+<li><p>Ábrelo desde <strong>Launchpad</strong> o <strong>Finder</strong>.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="primeros-pasos-en-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="primeros-pasos-en-rstudio">5 Primeros pasos en RStudio</h2>
+<p>Al abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.</p>
+<p><img src="images/Imagen4.png" class="img-fluid"></p>
+<section id="consola" class="level3">
+<h3 class="anchored" data-anchor-id="consola">5.1 Consola</h3>
 <ul>
-<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
-<li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
-<li><a href="https://www.r-bloggers.com/">R Bloggers</a></li>
+<li>Función: Ejecutar código y ver resultados inmediatos</li>
+<li>Consejo: Ideal para pruebas rápidas y exploración</li>
 </ul>
+<p>Es igual que la consola que hemos manejado cuando hemos abierto R sin Rstudio (ver ejercicios 1 a 5)</p>
+</section>
+<section id="panel-de-edición-script" class="level3">
+<h3 class="anchored" data-anchor-id="panel-de-edición-script">5.2 Panel de edición (Script)</h3>
+<ul>
+<li><p>Función: Escribir y guardar código en archivos <code>.R</code>, <code>.Rmd</code> o <code>.qmd</code></p></li>
+<li><p>Consejo: Ejecuta líneas con <code>Ctrl + Enter</code> (Windows/Linux) o <code>Cmd + Enter</code> (macOS</p></li>
+</ul>
+<p>🧾 <strong>¿Qué es un script en R?</strong> Un script en R es un archivo de texto donde puedes escribir, guardar y reutilizar conjuntos de instrucciones. Es como una libreta de recetas para tus análisis de datos.</p>
+<p>🧑‍🍳 <strong>Una metáfora culinaria:</strong> Si pensamos en el análisis de datos como si fuera una actividad de cocina, un script sería como tu libro de cocina:</p>
+<p>Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.</p>
+<section id="ejercicio-6-crea-y-guarda-tu-primer-script" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-6-crea-y-guarda-tu-primer-script">Ejercicio 6: Crea y guarda tu primer script</h4>
+<p>En este ejercicio aprenderás a crear tu primer script en R usando RStudio. Un script es un archivo donde puedes escribir y guardar tu código para ejecutarlo más tarde.</p>
+<p><strong>Paso 1: Abrir el editor de scripts</strong></p>
+<p>Ve al menú <em>File &gt; New File &gt; R Script</em>.</p>
+<p><strong>Paso 2: Escribir tu primer script de código</strong></p>
+<p>Escribe el siguiente código en el script:</p>
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>Paso 3: Guarda tu primer script</strong></p>
+<p>Una vez que hayas escrito tu código en el editor de panel de edición, sigue estos pasos para guardarlo:</p>
+<ol type="1">
+<li><p>Haz clic en el menú <strong>File</strong> (Archivo).</p></li>
+<li><p>Selecciona <strong>Save</strong> o presiona el atajo de teclado <code>Ctrl + S</code> (Windows/Linux) o <code>Cmd + S</code> (macOS).</p></li>
+<li><p>Elige una carpeta donde quieras guardar tu archivo.</p></li>
+<li><p>Escribe un nombre para tu script, por ejemplo: <code>primer_script.R</code></p></li>
+<li><p>Haz clic en <strong>Guardar</strong>.</p></li>
+</ol>
+</section>
+<section id="ejercicio-7-ejecuta-el-código-del-script" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-7-ejecuta-el-código-del-script">Ejercicio 7: Ejecuta el código del script</h4>
+<p><strong>Ejecutar una sola línea</strong></p>
+<ol type="1">
+<li><p>Coloca el cursor en la línea que quieres ejecutar.</p></li>
+<li><p>Presiona <code>Ctrl + Enter</code> (Windows/Linux) o <code>Cmd + Enter</code> (macOS).</p></li>
+<li><p>El resultado aparecerá en la <strong>consola</strong> (panel inferior izquierdo).</p></li>
+</ol>
+<p><strong>Ejecutar varias líneas</strong></p>
+<ol type="1">
+<li><p>Selecciona varias líneas de código con el ratón o el teclado.</p></li>
+<li><p>Presiona <code>Ctrl + Enter</code> o <code>Cmd + Enter</code>.</p></li>
+<li><p>Todas las líneas seleccionadas se ejecutarán en orden.</p></li>
+</ol>
+<p><strong>Ejecutar todo el script</strong></p>
+<ol type="1">
+<li><p>Ve al menú <strong>Code &gt; Run Region &gt; Run All</strong><br>
+o haz clic en el botón <strong>Source</strong> (ícono de hoja con flecha verde) en la parte superior del script.</p></li>
+<li><p>También puedes usar el atajo <code>Ctrl + Shift + Enter</code> (<code>Cmd + Shift + Enter</code> en macOS).</p></li>
+<li><p>Todo el contenido del script se ejecutará en la consola.</p></li>
+</ol>
+</section>
+</section>
+<section id="entorno-de-trabajo-historial" class="level3">
+<h3 class="anchored" data-anchor-id="entorno-de-trabajo-historial">5.3 Entorno de trabajo / Historial</h3>
+<ul>
+<li>Función: Ver objetos creados (variables, funciones, etc.) y el historial de comandos</li>
+</ul>
+<p><strong>Consejo</strong>: Útil para revisar qué has hecho y qué está disponible</p>
+<p>En R, el entorno de trabajo es el espacio donde se almacenan los objetos que creamos (vectores, funciones, data frames, etc.). Podemos inspeccionar, modificar y limpiar este entorno usando funciones específicas.</p>
+<section id="ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo">Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo</h4>
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div id="qwebr-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="archivos-gráficos-paquetes-ayuda-viewer" class="level4">
+<h4 class="anchored" data-anchor-id="archivos-gráficos-paquetes-ayuda-viewer">5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer</h4>
+<ul>
+<li>Función:
+<ul>
+<li>Ver gráficos generados</li>
+<li>Gestionar paquetes</li>
+<li>Consultar ayuda de funciones</li>
+<li>Navegar por archivos del proyecto</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="aprender-a-cargar-y-guardar-datos" class="level2">
+<h2 class="anchored" data-anchor-id="aprender-a-cargar-y-guardar-datos">6. Aprender a cargar y guardar datos</h2>
+<section id="importar-datos-al-entorno-de-trabajo" class="level3">
+<h3 class="anchored" data-anchor-id="importar-datos-al-entorno-de-trabajo">6.1 Importar datos al entorno de trabajo</h3>
+<p>Para poder proceder con un análisis de datos, debemos cargar los datos en <code>R</code>. En este tutorial aprenderemos a importar y exportar datos en diferentes formatos. Hemos seleccionado los más comunmente utilizados.</p>
+<p>Podemos importar en formato texto o tabulares desde un archivo <code>.txt</code> o <code>.csv</code> Podemos importar directamente desde Excel, archivos <code>.xls</code> o <code>.xlxs</code> También existen formatos propios de R, como los <code>.Rdata</code> o <code>.rda</code> y los serialized <code>R</code> objects <code>.rds</code></p>
+</section>
+<section id="cargar-datos-integrados" class="level3">
+<h3 class="anchored" data-anchor-id="cargar-datos-integrados">6.2 Cargar datos integrados</h3>
+<p>R viene con varios conjuntos de datos ya cargados que puedes usar para practicar sin tener que importar nada. Puedes escribir&nbsp;<code>data()</code>&nbsp;para ver la lista completa.</p>
+<p>Para cargar los datos integrados basta con escribir data() y el nombre de los datos.</p>
+<p><img src="images/Imagen5.png" class="img-fluid"></p>
+<section id="ejercicio-9-cargar-datos-integrados" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-9-cargar-datos-integrados">Ejercicio 9: Cargar datos integrados</h4>
+<p>Durante este ejercicio vamos a utilizar el conjunto o set de datos <code>iris</code>. Este conjunto de datos, contiene datos sobre características florales de tres especies del género <em>Iris</em>.</p>
+<p>Para cargarlo utilizaremos la función <code>data()</code>, y lo exploraremos utilizando la función <code>head()</code> que nos permite visualizar las primeras 6 filas. También vamos a introducir nuevas funciones que nos permitirán explorar el conjunto de datos iris: <code>dim()</code> <code>colnames()</code> y <code>tail()</code></p>
+<div id="qwebr-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+</section>
+<section id="importar-datos-desde-csv" class="level3">
+<h3 class="anchored" data-anchor-id="importar-datos-desde-csv"><strong>6.3 Importar datos desde CSV</strong></h3>
+<p>Aunque esta forma de importar datos puede ser muy útil para probar funciones o aprender a escribir código lo normal es que queramos cargar una base de datos propia. Uno de los formatos más sencillo de importar y que además ofrece buenas propiedades de interoperabilidad es el <code>.csv</code></p>
+<p>Vamos a trabajar con los datos de una base de datos de la abundancia de especies en herbazales de Alberta en Estados Unidos.</p>
+<p>Comenzaremos por descargar los datos desde <a href="https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv">aquí</a></p>
+<section id="nota-los-datos-originales-provienen-de-un-taller-sobre-análisis-de-la-biodiversidad-en-r-que-se-pueden-encontrar-aquí." class="level5">
+<h5 class="anchored" data-anchor-id="nota-los-datos-originales-provienen-de-un-taller-sobre-análisis-de-la-biodiversidad-en-r-que-se-pueden-encontrar-aquí.">NOTA: Los datos originales provienen de un taller sobre análisis de la biodiversidad en R que se pueden encontrar <a href="https://kembellab.ca/r-workshop/">aquí</a>.</h5>
+<p>Para cargar el archivo tienes que cambiar el texto “path_to_my_data” por la ruta del archivo. Para ello:</p>
+<ol type="1">
+<li><p>Busca el archivo en la carpeta “Descargas”</p>
+<p>Abre el Explorador de archivos. Ve a Descargas y localiza el archivo que quieres usar (por ejemplo, datos.csv).</p></li>
+<li><p>Haz clic derecho sobre el archivo</p>
+<p>Selecciona “<em>Propiedades</em>”.</p>
+<p>Copia la Ruta de acceso que aparece (por ejemplo: C:\Users\TuNombre\Downloads\datos.csv).</p></li>
+<li><p>Cambia las barras invertidas \ por barras normales /</p></li>
+</ol>
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>OJO ¿Qué ha pasado?</strong></p>
+<p>Cuando ejecutamos el código, R&nbsp;<strong>lee el archivo</strong>&nbsp;y muestra el contenido en la consola, pero&nbsp;<strong>no lo guarda</strong>. Es como mirar el resultado sin ponerle nombre: lo ves, pero no puedes volver a usarlo fácilmente.</p>
+<p><strong>¿Cómo guardarlo?</strong></p>
+<p>Para guardar el resultado, hay que <strong>asignarlo a un objeto</strong> usando <code>&lt;-</code>:</p>
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="truco-usar-el-panel-área-de-trabajo-environment-para-cargar-archivos" class="level4">
+<h4 class="anchored" data-anchor-id="truco-usar-el-panel-área-de-trabajo-environment-para-cargar-archivos"><strong>Truco: Usar el panel Área de trabajo “Environment” para cargar archivos</strong></h4>
+<ol type="1">
+<li><p><strong>Haz clic en el botón “Import Dataset”</strong><br>
+En el panel <em>Environment</em>, busca el botón que dice <strong>“Import Dataset”</strong> y haz clic.</p></li>
+<li><p><strong>Selecciona “From Text (base)”</strong><br>
+Si tu archivo es <code>.csv</code> o <code>.txt</code>, elige esta opción.</p></li>
+<li><p><strong>Haz clic en “Browse…”</strong><br>
+Se abrirá una ventana para buscar el archivo.<br>
+📁 Navega a la carpeta <strong>Descargas</strong> y selecciona tu archivo.</p></li>
+<li><p><strong>RStudio genera el código automáticamente</strong><br>
+Verás una vista previa del archivo y RStudio te mostrará el código que usará para cargarlo.<br>
+Puedes copiar ese código para usarlo en tus scripts.</p></li>
+</ol>
+</section>
+</section>
+<section id="extra-importar-datos-desde-excell" class="level3">
+<h3 class="anchored" data-anchor-id="extra-importar-datos-desde-excell"><strong>6.4 EXTRA: Importar datos desde Excell</strong></h3>
+<p>Importar datos desde Excell es muy parecido a la importación de datos desde <code>.csv</code>. Las funciones que utilizaremos son <code>write.xlsx()</code> para la exportación y <code>read.xlsx()</code> para la importación.</p>
+<p>Debemos instalar primero el paquete <code>xlsx</code></p>
+<section id="ejercicio-extra-importar-datos-desde-excel" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-extra-importar-datos-desde-excel">Ejercicio Extra Importar datos desde excel</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instalar el paquete</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("xlsx")  </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># abrir la librería</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx)  </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(iris, <span class="st">"data/iris.xlsx"</span>)  <span class="co"># acuerdate que los vamos a guardar en la carpeta datos  </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>iris_import_xlsx <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/iris.xlsx"</span>, <span class="dv">1</span>) <span class="co"># debemos indicar la hoja de Excell desde la cual importar los datos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="errores-comunes-al-cargar-archivos-csv-en-r" class="level2">
+<h2 class="anchored" data-anchor-id="errores-comunes-al-cargar-archivos-csv-en-r">7. Errores comunes al cargar archivos CSV en R</h2>
+<p>Comenzaremos por descargar los datos desde <a href="https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv">aquí</a></p>
+<p>Intenta cargar el archivo datos_con_errores.csv</p>
+<div id="qwebr-insertion-location-22"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<section id="paso-1-verificar-el-entorno" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-verificar-el-entorno">Paso 1: Verificar el entorno</h3>
+<p>¿Está el archivo en el directorio correcto?</p>
+<div id="qwebr-insertion-location-23"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-2-cargar-el-archivo-sin-argumentos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-cargar-el-archivo-sin-argumentos">Paso 2: Cargar el archivo sin argumentos</h3>
+<p>Intenta cargar el archivo tal cual. ¿Qué ves?</p>
+<div id="qwebr-insertion-location-24"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>Pregunta:</strong> ¿Qué problemas puedes detectar en los datos cargados?</p>
+<hr>
+</section>
+<section id="paso-3-codificación-de-caracteres" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-codificación-de-caracteres">Paso 3: Codificación de caracteres</h3>
+<p>Algunos acentos pueden verse mal. Prueba con otra codificación:</p>
+<div id="qwebr-insertion-location-25"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-4-separadores-incorrectos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-separadores-incorrectos">Paso 4: Separadores incorrectos</h3>
+<p>La última fila usa punto y coma. ¿Cómo lo solucionamos?</p>
+<div id="qwebr-insertion-location-26"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-5-valores-faltantes" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5-valores-faltantes">Paso 5: Valores faltantes</h3>
+<p>Algunas celdas están vacías. ¿Cómo las identificamos?</p>
+<div id="qwebr-insertion-location-27"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-6-tipos-de-datos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-6-tipos-de-datos">Paso 6: Tipos de datos</h3>
+<p>¿Edad es numérica? ¿Fecha es tipo Date?</p>
+<div id="qwebr-insertion-location-28"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Corrige los tipos:</p>
+<div id="qwebr-insertion-location-29"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-7-limpiar-comillas-y-comentarios" class="level3">
+<h3 class="anchored" data-anchor-id="paso-7-limpiar-comillas-y-comentarios">Paso 7: Limpiar comillas y comentarios</h3>
+<p>A veces, al importar datos, los nombres vienen entre comillas, como “Carlos” en lugar de Carlos. Esto puede causar problemas al filtrar, comparar o visualizar los datos.</p>
+<div id="qwebr-insertion-location-30"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>¿Qué hace esta línea?</strong></p>
+<ul>
+<li><p><code>gsub()</code> es una función que <strong>busca y reemplaza texto</strong>.</p></li>
+<li><p>El primer argumento (<code>'"'</code>) indica qué queremos eliminar: las comillas dobles.</p></li>
+<li><p>El segundo (<code>''</code>) indica con qué lo queremos reemplazar: en este caso, con nada.</p></li>
+<li><p>El tercero (<code>datos$Nombre</code>) es la columna donde aplicamos el cambio.</p></li>
+</ul>
+<div id="qwebr-insertion-location-31"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<hr>
+</section>
+<section id="paso-final-ver-datos-limpios" class="level3">
+<h3 class="anchored" data-anchor-id="paso-final-ver-datos-limpios">Paso final: Ver datos limpios</h3>
+<div id="qwebr-insertion-location-32"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p><strong>Reflexión:</strong> ¿Qué aprendiste sobre los errores comunes al cargar datos?</p>
 
 
+</section>
 </section>
 </section>
 
@@ -2111,12 +2557,12 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "Copiado");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "Copiado");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
