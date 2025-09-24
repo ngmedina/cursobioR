@@ -499,7 +499,7 @@ Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/U
 
 Intenta cargar el archivo datos_con_errores.csv
 
-```{webr-r}
+```{r}
 # read.csv("C:/Users/TuNombre/datos_con_errores.csv") # Tú código debería ser algo así
 read.csv("data/datos_con_errores.csv")
 ```
