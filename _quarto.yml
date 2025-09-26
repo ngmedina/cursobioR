@@ -4,7 +4,7 @@ project:
   output-dir: docs
   resources:
     - data/datos_con_errores.csv
-
+    - images
 
 website:
   title: "Análisis de la biodiversidad en R y SIG"
@@ -28,14 +28,6 @@ website:
   page-navigation: true
 
 lang: es
-
-format:
-  html:
-    theme: cosmo
-    toc: true
-
-engine: knitr
-
 # Opciones por defecto para todas las páginas con webR
 webr:
   show-startup-message: false

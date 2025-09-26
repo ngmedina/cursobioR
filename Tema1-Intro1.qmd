@@ -10,6 +10,8 @@ format:
 engine: knitr
 filters:
   - webr
+editor_options: 
+  chunk_output_type: console
 ---
 
 ## Objetivos de aprendizaje
@@ -22,7 +24,7 @@ filters:
 
 ## 1. ¿Qué es R?
 
-![](images/Imagen1.png){width="138"}
+![](images/Imagen1.png){width="331"}
 
 R es un lenguaje de programación libre y gratuito, especialmente indicado para análisis estadístico y elaboración de gráficos.
 
@@ -139,12 +141,16 @@ x <- 2
 x
 ```
 
-```{webr-r}
-y <- 3
-```
+Ejercicio 3. Crea el objeto `y` y asignale el valor `3`
 
 ```{webr-r}
-x
+
+```
+
+Imprime el objeto `y`
+
+```{webr-r}
+
 ```
 
 #### Ejercicio 4: Operar con objetos
@@ -369,7 +375,7 @@ rm(x)
 ls()
 ```
 
-#### 5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer
+### 5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer
 
 -   Función:
     -   Ver gráficos generados
@@ -383,20 +389,24 @@ Paquetes Los paquetes en R son colecciones de funciones, datos y documentación 
 
 #### ¿Cómo se instalan y cargan?
 
-::: {.callout-warning}
+ADVERTENCIA: Los siguientes ejercicios requieren el paquete `vegan`, que no está disponible en webR. Para ejecutarlo, usa R en tu ordenador local.
 
-Los siguientes jercicioes requieren el paquete \`vegan\`, que no está disponible en webR. Para ejecutarlo, usa R en tu ordenador local.
+```r
+#| echo: true
+#| eval: false
 
-:::
 
-```{reval=false}
 install.packages("vegan")   # Instalación
 library(vegan)              # Carga del paquete
 ```
 
 #### ¿Cómo se usan los paquetes?
 
-```{reval=false}
+
+```r
+#| echo: true
+#| eval: false
+
 ?vegan
 help("vegan")
 
@@ -404,7 +414,11 @@ help("vegan")
 
 #### Ejercicio 9. Uso de la función `specnumber` del paquete `vegan`
 
-```{reval=false}
+
+```r
+#| echo: true
+#| eval: false
+
 # Datos de abundancia de especies en dos sitios para el ejercicio
 datos <- data.frame(
   sitio1 = c(3, 0, 1, 5),

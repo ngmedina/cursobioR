@@ -13,51 +13,7 @@ Este curso es el resultado del trabajo colectivo de varios profesores. Si quiere
 
 Para empezar a abrir boca vamos a rellenar una encuesta
 
-`r emo::qmd_quarto()`
 
-**Instrucciones:** Por favor, responda las siguientes preguntas para ayudarnos a mejorar.
 
-::: survey-section
-**Pregunta 1**
-
-¿Qué tan satisfecho estás con este documento?
-
--   Opción Múltiple
-
-¿Qué te pareció el contenido?
-
-a.  Muy bueno
-b.  Bueno
-c.  Regular
-d.  Malo
-
-`r surveydown::multi_choice(c("Muy bueno", "Bueno", "Regular", "Malo"))`
-
-**Pregunta 2**
-
-¿Qué podemos mejorar?
-
--   Pregunta Abierta
-
-`r surveydown::open_ended()`
-:::
-
-## Pregunta 1
-
-¿Sabes lo que es \*\*R\*\*?
-
-- \[ \] El ruido que hace mi gato cuando lo acaricio 🐱
-
-- \[ \] Una letra que aparece justo antes de la S
-
-- \[ \] Un lenguaje de programación para análisis de datos 📊
-
-- \[ \] Algo que me persigue desde que empecé el TFM 😅
-
-💡 Ver explicación
-
-\*\*R\*\* es un lenguaje de programación especializado en análisis estadístico, visualización de datos y ciencia de datos.  
-
-Si tu gato hace ese ruido, probablemente también esté haciendo estadística sin saberlo 😸.
 
 ![](images/Imagen0_Bienvenida.png)
