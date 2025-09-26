@@ -13,24 +13,26 @@ website:
     left:
       - href: index.qmd
         text: "Inicio"
-      - text: "Tema 1. Introducción general a R"
+      - text: "Tema 1. Intro"
         menu:
           - href: Tema1-Intro1.qmd
             text: "Primera parte"
           - href: Tema1-Intro2.qmd
             text: "Segunda parte"
+      
       - href: Tema2.qmd
-        text: "Tema 2. Manejo y filtrado de datos de biodiversidad"
-      - text: "Tema 3. Índices de biodiversidad y Métodos de comparaciones"
+        text: "Tema 2. Manejo datos"
+      
+      - text: "Tema 3. Índices y Métodos"
         menu:
-        
           - href: Tema3-1-Indices.qmd
             text: "Índices de Biodiversidad"
           - href: Tema3-2-Metodos.qmd
             text: "Métodos de comparaciones"
       
       - href: Tema4.qmd
-        text: "Tema 4. Representación gráfica y presentación de resultados"
+        text: "Tema 4. Gráficos"
+  
   page-navigation: true
   
 lang: es
