@@ -1,5 +1,5 @@
 ---
-title: "Tema 1 - Introducción general a R. Primera parte"
+title: "Tema 1. Primera parte - Introducción general a R"
 format:
   html:
     toc: true
@@ -109,14 +109,6 @@ El uso más sencillo que se le puede dar a R es el de una calculadora. Considere
 
 -   Exponenciar: \^
 
--   Módulo: %%
-
-Los últimos dos necesitan una breve explicación:
-
-El operador \^ eleva el número a la izquierda a la potencia a la derecha 3\^2 es 9
-
-El módulo (mod) %% calcula el residuo de la división del número a la izquierda por el número a la derecha, por ejemplo 5 mod 3 o 5%%3 es 2.
-
 ```{webr-r}
 2 + 2
 ```
@@ -126,7 +118,7 @@ El módulo (mod) %% calcula el residuo de la división del número a la izquierd
 ```
 
 ```{webr-r}
-2+7+2
+2^7
 ```
 
 #### Ejercicio 3: Crear objetos con `<-`
@@ -178,9 +170,9 @@ R viene con un montón de funciones listas para usar. Por ejemplo, la función `
 
 Para utilizar las funciones en R solo necesitas:
 
-1.  **Escribir el nombre de la función**.
+1.  Escribir el nombre de la función.
 
-2.  **Proporcionar los argumentos necesarios entre paréntesis**.
+2.  Proporcionar los argumentos necesarios entre paréntesis.
 
 **Ejemplo 1: Funciones con un argumento. Calcular la media y la raíz cuadrada**
 
@@ -225,9 +217,9 @@ RStudio es un entorno de desarrollo integrado (IDE, por sus siglas en inglés) d
 
 ------------------------------------------------------------------------
 
-## 4 Instalación de Rstudio
+## 4. Instalación de Rstudio
 
-### **4.1 Windows**
+### 4.1 Windows
 
 1.  Ve a la página oficial: https://posit.co/download/rstudio-desktop/
 
@@ -249,7 +241,7 @@ RStudio es un entorno de desarrollo integrado (IDE, por sus siglas en inglés) d
 sudo dpkg -i rstudio-x.yy.zzz-amd64.deb
 ```
 
-### **4.3 macOS**
+### 4.3 macOS
 
 1.  Descarga el instalador para macOS desde la misma página.
 
@@ -259,7 +251,7 @@ sudo dpkg -i rstudio-x.yy.zzz-amd64.deb
 
 ------------------------------------------------------------------------
 
-## 5 Primeros pasos en RStudio
+## 5. Primeros pasos en RStudio
 
 Al abrir RStudio verás cuatro paneles principales. El más importante es la consola, donde puedes ejecutar comandos.
 
@@ -267,22 +259,23 @@ Al abrir RStudio verás cuatro paneles principales. El más importante es la con
 
 ### 5.1 Consola
 
--   Función: Ejecutar código y ver resultados inmediatos
--   Consejo: Ideal para pruebas rápidas y exploración
+Función: Ejecutar código y ver resultados inmediatos
+
+Consejo: Ideal para pruebas rápidas y exploración
 
 Es igual que la consola que hemos manejado cuando hemos abierto R sin Rstudio (ver ejercicios 1 a 5)
 
 ### 5.2 Panel de edición (Script)
 
--   Función: Escribir y guardar código en archivos `.R`, `.Rmd` o `.qmd`
+Función: Escribir y guardar código en archivos `.R`, `.Rmd` o `.qmd`
 
--   Consejo: Ejecuta líneas con `Ctrl + Enter` (Windows/Linux) o `Cmd + Enter` (macOS
+Consejo: Ejecuta líneas con `Ctrl + Enter` (Windows/Linux) o `Cmd + Enter` (macOS
 
 🧾 **¿Qué es un script en R?** Un script en R es un archivo de texto donde puedes escribir, guardar y reutilizar conjuntos de instrucciones. Es como una libreta de recetas para tus análisis de datos.
 
 🧑‍🍳 **Una metáfora culinaria:** Si pensamos en el análisis de datos como si fuera una actividad de cocina, un script sería como tu libro de cocina:
 
-Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.
+-   Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.
 
 #### Ejercicio 6: Crea y guarda tu primer script
 
@@ -338,8 +331,8 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 **Ejecutar todo el script**
 
-1.  Ve al menú **Code \> Run Region \> Run All**\
-    o haz clic en el botón **Source** (ícono de hoja con flecha verde) en la parte superior del script.
+1.  Ve al menú `Code > Run Region > Run All`\
+    o haz clic en el botón `Source` (ícono de hoja con flecha verde) en la parte superior del script.
 
 2.  También puedes usar el atajo `Ctrl + Shift + Enter` (`Cmd + Shift + Enter` en macOS).
 
@@ -347,7 +340,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 ### 5.3 Entorno de trabajo / Historial
 
--   Función: Ver objetos creados (variables, funciones, etc.) y el historial de comandos
+Función: Ver objetos creados (variables, funciones, etc.) y el historial de comandos
 
 **Consejo**: Útil para revisar qué has hecho y qué está disponible
 
@@ -377,7 +370,7 @@ ls()
 
 ### 5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer
 
--   Función:
+-   Funciones:
     -   Ver gráficos generados
     -   Gestionar paquetes
     -   Consultar ayuda de funciones
@@ -391,31 +384,28 @@ Paquetes Los paquetes en R son colecciones de funciones, datos y documentación 
 
 ADVERTENCIA: Los siguientes ejercicios requieren el paquete `vegan`, que no está disponible en webR. Para ejecutarlo, usa R en tu ordenador local.
 
-```r
+```{r}
 #| echo: true
 #| eval: false
 
-
-install.packages("vegan")   # Instalación
-library(vegan)              # Carga del paquete
+install.packages("vegan")
+library(vegan)
 ```
+
 
 #### ¿Cómo se usan los paquetes?
 
-
-```r
+``` {r}
 #| echo: true
 #| eval: false
 
 ?vegan
 help("vegan")
-
 ```
 
 #### Ejercicio 9. Uso de la función `specnumber` del paquete `vegan`
 
-
-```r
+``` {r}
 #| echo: true
 #| eval: false
 
@@ -491,7 +481,7 @@ colnames(iris)# la funcion colnames() nos muestra los nombres de las variables d
 names(iris) # la funcion names() nos muestra los nombres de las variables de iris
 ```
 
-### **6.3 Importar datos desde CSV**
+### 6.3 Importar datos desde CSV
 
 Aunque esta forma de importar datos puede ser muy útil para probar funciones o aprender a escribir código lo normal es que queramos cargar una base de datos propia. Uno de los formatos más sencillo de importar y que además ofrece buenas propiedades de interoperabilidad es el `.csv`
 
@@ -516,13 +506,13 @@ Para cargar el archivo tienes que cambiar el texto "path_to_my_data" por la ruta
 3.  Cambia las barras invertidas \\ por barras normales /
 
 ```{webr-r}
-
+library(vegan)
 read.csv("C:/Users/TuNombre/grassland.community.csv")
 ```
 
 **OJO ¿Qué ha pasado?**
 
-Cuando ejecutamos el código, R **lee el archivo** y muestra el contenido en la consola, pero **no lo guarda**. Es como mirar el resultado sin ponerle nombre: lo ves, pero no puedes volver a usarlo fácilmente.
+Cuando ejecutamos el código, R **lee el archivo** y muestra el contenido en la consola, pero **no lo guarda**. Es como mirar el resultado sin ponerle nombre: lo ves, pero no puedes volver a usarlo.
 
 **¿Cómo guardarlo?**
 
@@ -532,7 +522,7 @@ Para guardar el resultado, hay que **asignarlo a un objeto** usando `<-`:
 datos_alberta <- read.csv("C:/Users/TuNombre/grassland.community.csv")
 ```
 
-#### **Truco: Usar el panel Área de trabajo "Environment" para cargar archivos**
+#### **Truco: Usar el panel "Área de trabajo" para cargar archivos**
 
 1.  **Haz clic en el botón "Import Dataset"**\
     En el panel *Environment*, busca el botón que dice **"Import Dataset"** y haz clic.
@@ -548,13 +538,12 @@ datos_alberta <- read.csv("C:/Users/TuNombre/grassland.community.csv")
     Verás una vista previa del archivo y RStudio te mostrará el código que usará para cargarlo.\
     Puedes copiar ese código para usarlo en tus scripts.
 
-### **6.4 EXTRA: Importar datos desde Excell** {style="color: blue;"}
+### <span style="color:darkblue">6.4 EXTRA: Importar datos desde Excell</span>
 
 Importar datos desde Excell es muy parecido a la importación de datos desde `.csv`. Las funciones que utilizaremos son `write.xlsx()` para la exportación y `read.xlsx()` para la importación.
 
-Debemos instalar primero el paquete `xlsx`
 
-#### Ejercicio Extra Importar datos desde excel
+#### Ejercicio Extra Importar datos desde excel{.blue-title}
 
 ```{r}
 # instalar el paquete

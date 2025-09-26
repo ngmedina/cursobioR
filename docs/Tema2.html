@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -381,7 +346,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['dplyr', 'ggplot2'];
+globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -403,7 +368,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"# Escribe aquí tu respuesta","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% mean() - 2","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# cargamos la base de datos de comunidades de Alberta (fijáos que lo estoy cargando directamente desde la web)\nalberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/refs/heads/main/Alberta%20grassland/grassland.community.csv\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"subset <- alberta[grepl(\"mix\", alberta$plot), ]\nsubset$total_cover <- subset$Antennaria_parvifolia + subset$Artemisia_cana + subset$Symphyotrichum_ericoides_var._ericoides\n","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  filter(str_detect(plot, \"mix\")) %>%\n  mutate(total_cover = Antennaria_parvifolia + Artemisia_cana + Symphyotrichum_ericoides_v)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  filter(str_detect(plot, \"mix\")) %>% head()","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"install.packages(\"tidyverse\")\nlibrary(tidyverse)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv\")","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, plot, Carex_filifolia)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, starts_with(\"Artemisia\"))","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. Filtrar parcelas con Antennaria_parvifolia > 0\nfilter(alberta, Antennaria_parvifolia > 0)\n\n# 2. Filtrar parcelas con Artemisia_frigida > 20\nfilter(alberta, Artemisia_frigida > 20)\n\n# 3. Filtrar parcelas con Antennaria_parvifolia > 0 Y Artemisia_frigida > 20\nfilter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% mean()","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Escribe aquí tu respuesta","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% mean() %>% sqrt()","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Seleccionar columnas de Antennaria\nalberta %>%\n  select(plot, starts_with(\"Antennaria\")) %>%\n  filter(Artemisia_frigida > 20)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(double_antennaria = Antennaria_parvifolia * 2)","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(high_antennaria = if_else(Antennaria_parvifolia > 10, \"Sí\", \"No\"))","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(total_abund = rowSums(select(., -plot)),\n         perc_frigida = (Artemisia_frigida / total_abund) * 100)","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  ggplot(aes(x = plot, y = Artemisia_frigida)) +  # eje x = parcelas, eje y = abundancia\n  geom_col() +                                   # tipo de gráfico: barras\n  labs(title = \"Abundancia de Artemisia_frigida por parcela\",\n       x = \"Parcela\",\n       y = \"Abundancia\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1))  # girar etiquetas del eje x","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1729,9 +1694,22 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#objetivos" id="toc-objetivos" class="nav-link active" data-scroll-target="#objetivos">Objetivos</a></li>
   <li><a href="#introducción-y-filosofía-de-tidyverse" id="toc-introducción-y-filosofía-de-tidyverse" class="nav-link" data-scroll-target="#introducción-y-filosofía-de-tidyverse">Introducción y filosofía de <code>tidyverse</code></a>
   <ul>
-  <li><a href="#qué-es-el-universo-tidyverse" id="toc-qué-es-el-universo-tidyverse" class="nav-link" data-scroll-target="#qué-es-el-universo-tidyverse"><strong>¿Qué es el universo tidyverse?</strong></a>
+  <li><a href="#qué-es-el-universo-tidyverse" id="toc-qué-es-el-universo-tidyverse" class="nav-link" data-scroll-target="#qué-es-el-universo-tidyverse">¿Qué es el universo tidyverse?</a></li>
+  <li><a href="#seleccionar-columnas-y-filtrar-filas" id="toc-seleccionar-columnas-y-filtrar-filas" class="nav-link" data-scroll-target="#seleccionar-columnas-y-filtrar-filas">1. Seleccionar columnas y filtrar filas</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-1-y-si-queremos-restarle-2-a-la-media-cómo-haríamos" id="toc-ejercicio-1-y-si-queremos-restarle-2-a-la-media-cómo-haríamos" class="nav-link" data-scroll-target="#ejercicio-1-y-si-queremos-restarle-2-a-la-media-cómo-haríamos">Ejercicio 1 ¿Y si queremos restarle 2 a la media? ¿Cómo haríamos?</a></li>
+  <li><a href="#ejercicio-1.-recuérdas-cómo-se-cargaba" id="toc-ejercicio-1.-recuérdas-cómo-se-cargaba" class="nav-link" data-scroll-target="#ejercicio-1.-recuérdas-cómo-se-cargaba">Ejercicio 1. ¿Recuérdas cómo se cargaba?</a></li>
+  <li><a href="#seleccionar-columnas" id="toc-seleccionar-columnas" class="nav-link" data-scroll-target="#seleccionar-columnas">Seleccionar columnas</a></li>
+  <li><a href="#filtrar-filas" id="toc-filtrar-filas" class="nav-link" data-scroll-target="#filtrar-filas">Filtrar filas</a></li>
+  </ul></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">2. Pipes</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando" id="toc-ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando" class="nav-link" data-scroll-target="#ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando">Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando <code>%&gt;%</code>?</a></li>
+  <li><a href="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." id="toc-ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." class="nav-link" data-scroll-target="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.</a></li>
+  </ul></li>
+  <li><a href="#mutate-crear-y-modificar-columnas" id="toc-mutate-crear-y-modificar-columnas" class="nav-link" data-scroll-target="#mutate-crear-y-modificar-columnas">3. Mutate: Crear y modificar columnas</a>
+  <ul class="collapse">
+  <li><a href="#tidyverse-y-los-gráficos.-introducción-a-ggplot2" id="toc-tidyverse-y-los-gráficos.-introducción-a-ggplot2" class="nav-link" data-scroll-target="#tidyverse-y-los-gráficos.-introducción-a-ggplot2">4. Tidyverse y los gráficos. Introducción a ggplot2</a></li>
+  <li><a href="#pasos-para-hacer-un-gráfico" id="toc-pasos-para-hacer-un-gráfico" class="nav-link" data-scroll-target="#pasos-para-hacer-un-gráfico"><strong>Pasos para hacer un gráfico</strong></a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -2059,63 +2037,128 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="introducción-y-filosofía-de-tidyverse" class="level1">
 <h1>Introducción y filosofía de <code>tidyverse</code></h1>
 <p>Cuando empezamos a trabajar con datos en R, es fácil sentirse abrumado por los corchetes, los signos raros y las funciones que parecen acertijos. Aquí es donde entra el <strong>universo</strong> <strong>tidyverse</strong>, una colección de paquetes que hacen que trabajar con datos sea más <strong>intuitivo</strong>, <strong>ordenado</strong> y, sobre todo, <strong>legible</strong>.</p>
-<section id="qué-es-el-universo-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="qué-es-el-universo-tidyverse"><strong>¿Qué es el universo tidyverse?</strong></h3>
+<section id="qué-es-el-universo-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-el-universo-tidyverse">¿Qué es el universo tidyverse?</h2>
 <p>El universo tidyverse es como una caja de herramientas moderna para R. Incluye paquetes como <code>dplyr</code>, <code>ggplot2</code>, <code>tidyr</code>, <code>readr</code>, entre otros, que están diseñados para que el código se lea <strong>de izquierda a derecha</strong>, como si estuvieras contando una historia.</p>
-<p>Por ejemplo, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse usamos el operador <code>%&gt;%</code> (pipe), que conecta pasos de forma secuencial.</p>
-<p>Vamos con un ejemplo sencillo:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">5</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
-<p>Fíjaos que el código de arriba es equivalente a <code>mean(n)</code>. El operador pipe <code>%&gt;%</code> se puede entender como “y después haz”. Coge lo que hay a la izquierda y lo envía al primer argumento del código que hay después</p>
-<section id="ejercicio-1-y-si-queremos-restarle-2-a-la-media-cómo-haríamos" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-1-y-si-queremos-restarle-2-a-la-media-cómo-haríamos">Ejercicio 1 ¿Y si queremos restarle 2 a la media? ¿Cómo haríamos?</h4>
+<p>Lo primero que hay que hacer es instalarse los paquetes de tidyverse.</p>
 <div id="qwebr-insertion-location-1"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Ahora aprenderemos a usar algunas de las funciones más importantes de <code>tidyverse</code></p>
+</section>
+<section id="seleccionar-columnas-y-filtrar-filas" class="level2">
+<h2 class="anchored" data-anchor-id="seleccionar-columnas-y-filtrar-filas">1. Seleccionar columnas y filtrar filas</h2>
+<p>Vamos a seguir trabajando con la base de datos de comunidades de Alberta que puedes descargar <a href="https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv">aquí</a></p>
+<section id="ejercicio-1.-recuérdas-cómo-se-cargaba" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-1.-recuérdas-cómo-se-cargaba">Ejercicio 1. ¿Recuérdas cómo se cargaba?</h4>
 <button onclick="let x=document.getElementById('sol1'); x.style.display = (x.style.display==='none') ? 'block':'none';">
 <p>Mostrar/Ocultar solución</p>
 </button>
 <div id="sol1" style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;">
-<p><strong>Solución:</strong><br>
-Podemos hacerlo así:</p>
+<p>Solución:<br>
+</p>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </div>
+</section>
+<section id="seleccionar-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="seleccionar-columnas">Seleccionar columnas</h3>
+<p>Para seleccionar columnas usamos la función <code>select()</code>. Empecemos con un ejemplo sencillo, escoger las columnas plot y Carex filifolia.</p>
 <div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>En este fragmento de código queremos :</p>
-<ol type="1">
-<li><p>Filtrar las parcelas que contienen <code>"mix"</code> en el nombre.</p></li>
-<li><p>Quedarnos solo con las columnas de especies.</p></li>
-<li><p>Calcular la cobertura total sumando las especies <em>Antennaria parviflora</em>, <em>Artemisia cana</em> y <em>Symphyotrichum ericoides</em>.</p></li>
-</ol>
-<p>Bamos a hacerlo con r base</p>
+<p><strong>TIP</strong>: Prueba a seleccionar otras columnas</p>
+<p>La función <code>select()</code> es muy flexible y tiene muchos argumentos, dentro de esos argumentos podemos usar funciones. Por ejemplo, podemos seleccionar todas las columnas de las especies de Artemisia utilizando la función <code>starts_with()</code> dentro de <code>select()</code></p>
 <div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>y ahora con tidyverse</p>
+<p>Hay muchas otras funciones para facilitar seleccionar conjuntos de columnas como <code>ends_with()</code>, <code>contains()</code>. Puedes encontrar más ejemplos en este <a href="https://tidyselect.r-lib.org/reference/starts_with.html">enlace</a></p>
+</section>
+<section id="filtrar-filas" class="level3">
+<h3 class="anchored" data-anchor-id="filtrar-filas">Filtrar filas</h3>
+<p>También podemos filtrar filas. Para ello usamos la función filter().</p>
+<p>Por ejemplo, para filtrar todas las parcelas donde Antennaria parviflora tiene más de 2 individuos usamos:</p>
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Para explorar cómo funcionan los pipes y entenderlo mejor podéis ejecutar el siguiente código/</p>
+</section>
+</section>
+<section id="pipes" class="level2">
+<h2 class="anchored" data-anchor-id="pipes">2. Pipes</h2>
+<p>El operador pipe <code>%&gt;%</code> (pipe) es uno de los más interesantes en tidyverse, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse podemos conectar pasos de forma secuencial usando este operador.</p>
+<p>Vamos con un ejemplo sencillo:</p>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Lo que véis es el objeto que se va a utilizar en el siguiente paso…</p>
+<p>Fíjaos que el código de arriba es equivalente a <code>mean(n)</code>. El operador pipe <code>%&gt;%</code> se puede entender como “y después haz”. Lo que hace es coger el resultado del código que está a la izquierda y pasarlo como primer argumento a la función que está a la derecha</p>
+<section id="ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando">Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando <code>%&gt;%</code>?</h4>
+<div id="qwebr-insertion-location-7"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<button onclick="let x=document.getElementById('sol1'); x.style.display = (x.style.display==='none') ? 'block':'none';">
+<p>Mostrar/Ocultar solución</p>
+</button>
+<div style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;">
+<p>Solución:<br>
+</p>
+<div id="qwebr-insertion-location-8"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</div>
+<p>Ahora vamos a trabajar con la base de datos de Alberta</p>
+</section>
+<section id="ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.</h4>
+<button onclick="let x=document.getElementById('sol1'); x.style.display = (x.style.display==='none') ? 'block':'none';">
+<p>Mostrar/Ocultar solución</p>
+</button>
+<p>Solución:<br>
+</p>
+<div id="qwebr-insertion-location-9"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Es importante tener en cuenta que el pipe pasa al primer argumento de la función. Cuando queremos pasar el resultado del pipe a un arguemnto que no es el primero de la función hay que poner un punto . para especificar donde debería ir.</p>
+</section>
+</section>
+<section id="mutate-crear-y-modificar-columnas" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-crear-y-modificar-columnas">3. Mutate: Crear y modificar columnas</h2>
+<p>Vamos a explorar la forma en la que podemos crear y modificar columnas con la función <code>mutate</code>. Por ejemplo, vamos a crear una nueva columna multiplicando por 10 la abundancida de la especie Antennaria parviflora</p>
+<div id="qwebr-insertion-location-10"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>La función es muy flexible y nos permite hacer operaciones bastante complejas en un solo paso. Por ejemplo, podemos crear una variable categórica que sea “sí” cuando <em>Antennaria parviflora</em> es mayor 10 y “No” cuando es menor o igual a 10.</p>
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>O calcular el porcentaje de la especie con respecto al total</p>
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<section id="tidyverse-y-los-gráficos.-introducción-a-ggplot2" class="level4">
+<h4 class="anchored" data-anchor-id="tidyverse-y-los-gráficos.-introducción-a-ggplot2">4. Tidyverse y los gráficos. Introducción a ggplot2</h4>
+<p><code>ggplot2</code> es un paquete del tidyverse para crear gráficos de manera declarativa. La idea básica es <strong>“gramática de gráficos”</strong>. Se utiliza la función <code>ggplot</code>, hay que definir tres elementos:</p>
+<ol type="1">
+<li><p>Los datos que quieres graficar (<code>data = …</code>)</p></li>
+<li><p>Estética (<code>aes()</code>), qué variables van a los ejes, colores, tamaños, etc.</p></li>
+<li><p>Geometría (<code>geom_…</code>), cómo se representa la información (puntos, barras, líneas, cajas…).</p></li>
+</ol>
+<p>Así, los pasos para hacer un gráfico son:</p>
+</section>
+<section id="pasos-para-hacer-un-gráfico" class="level3">
+<h3 class="anchored" data-anchor-id="pasos-para-hacer-un-gráfico"><strong>Pasos para hacer un gráfico</strong></h3>
+<ol type="1">
+<li><p>Elegir la variable para el eje x y el eje y.</p></li>
+<li><p>Elegir el tipo de gráfico:</p></li>
+</ol>
+<pre><code>-   `geom_point()` → scatterplot (puntos)
+
+-   `geom_col()` → barras
+
+-   `geom_boxplot()` → cajas
+
+-    `geom_line()` → líneas</code></pre>
+<ol start="3" type="1">
+<li>Añadir etiquetas y títulos para que el gráfico sea fácil de entender.</li>
+</ol>
+<p>Veamos un ejemplo con la base de datos de Alberta en el que representaremos la abundancia de <em>Artemisia frigida</em> en todas las parcelas</p>
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<ul>
+<li><p><code>aes(x = plot, y = Artemisia_frigida)</code> indica qué variables van a los ejes,</p></li>
+<li><p><code>geom_col()</code> dibuja barras verticales.</p></li>
+<li><p><code>labs()</code> añade títulos y etiquetas.</p></li>
+<li><p><code>theme(axis.text.x = element_text(angle = 90, hjust = 1))</code> gira los nombres de las parcelas para que se lean mejor.</p></li>
+</ul>
 
 
 </section>

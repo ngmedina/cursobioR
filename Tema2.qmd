@@ -22,27 +22,93 @@ filters:
 
 -   Diagnosticar errores comunes al manipular datos.
 
-# Introducción y filosofía de  `tidyverse`
+# Introducción y filosofía de `tidyverse`
 
 Cuando empezamos a trabajar con datos en R, es fácil sentirse abrumado por los corchetes, los signos raros y las funciones que parecen acertijos. Aquí es donde entra el **universo** **tidyverse**, una colección de paquetes que hacen que trabajar con datos sea más **intuitivo**, **ordenado** y, sobre todo, **legible**.
 
-### **¿Qué es el universo tidyverse?**
+## ¿Qué es el universo tidyverse?
 
 El universo tidyverse es como una caja de herramientas moderna para R. Incluye paquetes como `dplyr`, `ggplot2`, `tidyr`, `readr`, entre otros, que están diseñados para que el código se lea **de izquierda a derecha**, como si estuvieras contando una historia.
 
-Por ejemplo, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse usamos el operador `%>%` (pipe), que conecta pasos de forma secuencial.
+Lo primero que hay que hacer es instalarse los paquetes de tidyverse.
+
+```{webr-r}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+Ahora aprenderemos a usar algunas de las funciones más importantes de `tidyverse`
+
+## 1. Seleccionar columnas y filtrar filas
+
+Vamos a seguir trabajando con la base de datos de comunidades de Alberta que puedes descargar [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv)
+
+#### Ejercicio 1. ¿Recuérdas cómo se cargaba?
+
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;">
+
+Mostrar/Ocultar solución
+
+</button>
+
+::: {#sol1 style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+Solución:\
+
+```{webr-r}
+alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+```
+:::
+
+### Seleccionar columnas
+
+Para seleccionar columnas usamos la función `select()`. Empecemos con un ejemplo sencillo, escoger las columnas plot y Carex filifolia.
+
+```{webr-r}
+select(alberta, plot, Carex_filifolia)
+```
+
+**TIP**: Prueba a seleccionar otras columnas
+
+La función `select()` es muy flexible y tiene muchos argumentos, dentro de esos argumentos podemos usar funciones. Por ejemplo, podemos seleccionar todas las columnas de las especies de Artemisia utilizando la función `starts_with()` dentro de `select()`
+
+```{webr-r}
+select(alberta, starts_with("Artemisia"))
+```
+
+Hay muchas otras funciones para facilitar seleccionar conjuntos de columnas como `ends_with()`, `contains()`. Puedes encontrar más ejemplos en este [enlace](https://tidyselect.r-lib.org/reference/starts_with.html)
+
+### Filtrar filas
+
+También podemos filtrar filas. Para ello usamos la función filter().
+
+Por ejemplo, para filtrar todas las parcelas donde Antennaria parviflora tiene más de 2 individuos usamos:
+
+```{webr-r}
+# 1. Filtrar parcelas con Antennaria_parvifolia > 0
+filter(alberta, Antennaria_parvifolia > 0)
+
+# 2. Filtrar parcelas con Artemisia_frigida > 20
+filter(alberta, Artemisia_frigida > 20)
+
+# 3. Filtrar parcelas con Antennaria_parvifolia > 0 Y Artemisia_frigida > 20
+filter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)
+
+```
+
+## 2. Pipes
+
+El operador pipe `%>%` (pipe) es uno de los más interesantes en tidyverse, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse podemos conectar pasos de forma secuencial usando este operador.
 
 Vamos con un ejemplo sencillo:
 
-```{r}
-library(tidyverse)
+```{webr-r}
 v <- c(4, 6, 5)
 v %>% mean()
 ```
 
-Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%>%` se puede entender como "y después haz". Coge lo que hay a la izquierda y lo envía al primer argumento del código que hay después
+Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%>%` se puede entender como "y después haz". Lo que hace es coger el resultado del código que está a la izquierda y pasarlo como primer argumento a la función que está a la derecha
 
-#### Ejercicio 1 ¿Y si queremos restarle 2 a la media? ¿Cómo haríamos?
+#### Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando `%>%`?
 
 ```{webr-r}
 # Escribe aquí tu respuesta
@@ -54,53 +120,104 @@ Mostrar/Ocultar solución
 
 </button>
 
-::: {#sol1 style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
-**Solución:**\
-Podemos hacerlo así:
+::: {style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+Solución:\
 
 ```{webr-r}
 v <- c(4, 6, 5)
-v %>% mean() - 2
+v %>% mean() %>% sqrt()
 ```
 :::
 
-```{webr-r}
-# cargamos la base de datos de comunidades de Alberta (fijáos que lo estoy cargando directamente desde la web)
-alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/refs/heads/main/Alberta%20grassland/grassland.community.csv")
+Ahora vamos a trabajar con la base de datos de Alberta
 
-```
+#### Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.
 
-En este fragmento de código queremos :
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;">
 
-1.  Filtrar las parcelas que contienen `"mix"` en el nombre.
+Mostrar/Ocultar solución
 
-2.  Quedarnos solo con las columnas de especies.
+</button>
 
-3.  Calcular la cobertura total sumando las especies *Antennaria parviflora*, *Artemisia cana* y *Symphyotrichum ericoides*.
-
-Bamos a hacerlo con r base
+Solución:\
 
 ```{webr-r}
-
-subset <- alberta[grepl("mix", alberta$plot), ]
-subset$total_cover <- subset$Antennaria_parvifolia + subset$Artemisia_cana + subset$Symphyotrichum_ericoides_var._ericoides
-
-
+# Seleccionar columnas de Antennaria
+alberta %>%
+  select(plot, starts_with("Antennaria")) %>%
+  filter(Artemisia_frigida > 20)
 ```
 
-y ahora con tidyverse
+Es importante tener en cuenta que el pipe pasa al primer argumento de la función. Cuando queremos pasar el resultado del pipe a un arguemnto que no es el primero de la función hay que poner un punto . para especificar donde debería ir.
+
+## 3. Mutate: Crear y modificar columnas
+
+Vamos a explorar la forma en la que podemos crear y modificar columnas con la función `mutate`. Por ejemplo, vamos a crear una nueva columna multiplicando por 10 la abundancida de la especie Antennaria parviflora
 
 ```{webr-r}
 alberta %>%
-  filter(str_detect(plot, "mix")) %>%
-  mutate(total_cover = Antennaria_parvifolia + Artemisia_cana + Symphyotrichum_ericoides_v)
+  mutate(double_antennaria = Antennaria_parvifolia * 2)
 ```
 
-Para explorar cómo funcionan los pipes y entenderlo mejor podéis ejecutar el siguiente código/
+La función es muy flexible y nos permite hacer operaciones bastante complejas en un solo paso. Por ejemplo, podemos crear una variable categórica que sea "sí" cuando *Antennaria parviflora* es mayor 10 y "No" cuando es menor o igual a 10.
 
 ```{webr-r}
 alberta %>%
-  filter(str_detect(plot, "mix")) %>% head()
+  mutate(high_antennaria = if_else(Antennaria_parvifolia > 10, "Sí", "No"))
 ```
 
-Lo que véis es el objeto que se va a utilizar en el siguiente paso...
+O calcular el porcentaje de la especie con respecto al total
+
+```{webr-r}
+alberta %>%
+  mutate(total_abund = rowSums(select(., -plot)),
+         perc_frigida = (Artemisia_frigida / total_abund) * 100)
+```
+
+#### 4. Tidyverse y los gráficos. Introducción a ggplot2
+
+`ggplot2` es un paquete del tidyverse para crear gráficos de manera declarativa. La idea básica es **“gramática de gráficos”**. Se utiliza la función `ggplot`, hay que definir tres elementos:
+
+1.   Los datos que quieres graficar (`data = …`)
+
+2.   Estética (`aes()`), qué variables van a los ejes, colores, tamaños, etc.
+
+3.   Geometría (`geom_…`), cómo se representa la información (puntos, barras, líneas, cajas…).
+
+Así, los pasos para hacer un gráfico son:
+
+### **Pasos para hacer un gráfico**
+
+1.  Elegir la variable para el eje x y el eje y.
+
+2.   Elegir el tipo de gráfico:
+
+    -   `geom_point()` → scatterplot (puntos)
+
+    -   `geom_col()` → barras
+
+    -   `geom_boxplot()` → cajas
+
+    -    `geom_line()` → líneas
+
+3.   Añadir etiquetas y títulos para que el gráfico sea fácil de entender.
+
+Veamos un ejemplo con la base de datos de Alberta en el que representaremos la abundancia de *Artemisia frigida* en todas las parcelas
+
+```{webr-r}
+alberta %>%
+  ggplot(aes(x = plot, y = Artemisia_frigida)) +  # eje x = parcelas, eje y = abundancia
+  geom_col() +                                   # tipo de gráfico: barras
+  labs(title = "Abundancia de Artemisia_frigida por parcela",
+       x = "Parcela",
+       y = "Abundancia") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))  # girar etiquetas del eje x
+```
+
+-   `aes(x = plot, y = Artemisia_frigida)` indica qué variables van a los ejes,
+
+-   `geom_col()` dibuja barras verticales.
+
+-   `labs()` añade títulos y etiquetas.
+
+-   `theme(axis.text.x = element_text(angle = 90, hjust = 1))` gira los nombres de las parcelas para que se lean mejor.

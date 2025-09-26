@@ -23,15 +23,26 @@ website:
         text: "Tema 2. Manejo y filtrado de datos de biodiversidad"
       - href: Tema3.qmd
         text: "Tema 3. Métodos de comparaciones"
+        menu:
+          - href: Tema3-1-Indices.qmd
+            text: "Índices de Biodiversidad"
+          - href: Tema3.qmd
+            text: "Métodos de comparaciones"
       - href: Tema4.qmd
         text: "Tema 4. Representación gráfica y presentación de resultados"
   page-navigation: true
-
+  
 lang: es
+
 # Opciones por defecto para todas las páginas con webR
 webr:
   show-startup-message: false
   channel-type: post-message   # recomendado para GitHub Pages
-  packages: [dplyr, ggplot2]
+  packages: [tidyverse, ggplot2,vegan,FD, picante]
+
 filters:
-  - webr
+    - webr
+
+format:
+  html:
+    css: estilos.css  
