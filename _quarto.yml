@@ -21,8 +21,7 @@ website:
             text: "Segunda parte"
       - href: Tema2.qmd
         text: "Tema 2. Manejo y filtrado de datos de biodiversidad"
-      - href: Tema3.qmd
-        text: "Tema 3. Métodos de comparaciones"
+      - text: "Tema 3. Índices de biodiversidad y Métodos de comparaciones"
         menu:
           - href: Tema3-1-Indices.qmd
             text: "Índices de Biodiversidad"
