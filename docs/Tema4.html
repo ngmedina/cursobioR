@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis de la biodiversidad en R y SIG</title>
+<title>Tema 4. Representación gráfica y presentación de resultados – Análisis de la biodiversidad en R y SIG</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -70,9 +70,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
+<link rel="stylesheet" href="estilos.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -92,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -119,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Tema 3. Métodos de comparaciones</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Tema4.html"> 
+    <a class="nav-link active" href="./Tema4.html" aria-current="page"> 
 <span class="menu-text">Tema 4. Representación gráfica y presentación de resultados</span></a>
   </li>  
 </ul>
@@ -132,64 +133,37 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">En esta página</h2>
-   
-  <ul>
-  <li><a href="#bienvenid-al-curso-de-análisis-de-la-biodiversidad-en-r-y-sig" id="toc-bienvenid-al-curso-de-análisis-de-la-biodiversidad-en-r-y-sig" class="nav-link active" data-scroll-target="#bienvenid-al-curso-de-análisis-de-la-biodiversidad-en-r-y-sig">Bienvenid@ al curso de Análisis de la biodiversidad en R y SIG</a></li>
-  </ul>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    
 </nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
-
-
-
-<section id="bienvenid-al-curso-de-análisis-de-la-biodiversidad-en-r-y-sig" class="level1">
-<h1>Bienvenid@ al curso de Análisis de la biodiversidad en R y SIG</h1>
-<p>Este curso es parte de la asignatura “Análisis de la biodiversidad en R y SIG” del Máster en Biodiversida de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.</p>
-<p>Puedes consultar el programa de la asignatura <a href="https://secretaria-virtual.uam.es/doa/consultaPublica/look%5Bconpub%5DBuscarPubGuiaDocAs?entradaPublica=true&amp;idiomaPais=es.ES&amp;_anoAcademico=2022&amp;_centro=104&amp;_planEstudio=768">aquí</a></p>
-<p>Este curso es el resultado del trabajo colectivo de varios profesores. Si quieres utilizarlo puedes hacerlo pero recuerda citar la fuente.</p>
-<p>Para empezar a abrir boca vamos a rellenar una encuesta</p>
-<p><code>r emo::qmd_quarto()</code></p>
-<p><strong>Instrucciones:</strong> Por favor, responda las siguientes preguntas para ayudarnos a mejorar.</p>
-<div class="survey-section">
-<p><strong>Pregunta 1</strong></p>
-<p>¿Qué tan satisfecho estás con este documento?</p>
-<ul>
-<li>Opción Múltiple</li>
-</ul>
-<p>¿Qué te pareció el contenido?</p>
-<ol type="a">
-<li>Muy bueno</li>
-<li>Bueno</li>
-<li>Regular</li>
-<li>Malo</li>
-</ol>
-<p><code>r surveydown::multi_choice(c("Muy bueno", "Bueno", "Regular", "Malo"))</code></p>
-<p><strong>Pregunta 2</strong></p>
-<p>¿Qué podemos mejorar?</p>
-<ul>
-<li>Pregunta Abierta</li>
-</ul>
-<p><code>r surveydown::open_ended()</code></p>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tema 4. Representación gráfica y presentación de resultados</h1>
 </div>
-<p>##&nbsp;Pregunta&nbsp;1</p>
-<p>¿Sabes&nbsp;lo&nbsp;que&nbsp;es&nbsp;**R**?</p>
-<p>-&nbsp;[&nbsp;]&nbsp;El&nbsp;ruido&nbsp;que&nbsp;hace&nbsp;mi&nbsp;gato&nbsp;cuando&nbsp;lo&nbsp;acaricio&nbsp;🐱</p>
-<p>-&nbsp;[&nbsp;]&nbsp;Una&nbsp;letra&nbsp;que&nbsp;aparece&nbsp;justo&nbsp;antes&nbsp;de&nbsp;la&nbsp;S</p>
-<p>-&nbsp;[&nbsp;]&nbsp;Un&nbsp;lenguaje&nbsp;de&nbsp;programación&nbsp;para&nbsp;análisis&nbsp;de&nbsp;datos&nbsp;📊</p>
-<p>-&nbsp;[&nbsp;]&nbsp;Algo&nbsp;que&nbsp;me&nbsp;persigue&nbsp;desde&nbsp;que&nbsp;empecé&nbsp;el&nbsp;TFM&nbsp;😅</p>
-<p>💡&nbsp;Ver&nbsp;explicación</p>
-<p>**R**&nbsp;es&nbsp;un&nbsp;lenguaje&nbsp;de&nbsp;programación&nbsp;especializado&nbsp;en&nbsp;análisis&nbsp;estadístico,&nbsp;visualización&nbsp;de&nbsp;datos&nbsp;y&nbsp;ciencia&nbsp;de&nbsp;datos.&nbsp;&nbsp;</p>
-<p>Si&nbsp;tu&nbsp;gato&nbsp;hace&nbsp;ese&nbsp;ruido,&nbsp;probablemente&nbsp;también&nbsp;esté&nbsp;haciendo&nbsp;estadística&nbsp;sin&nbsp;saberlo&nbsp;😸.</p>
-<p><img src="images/Imagen0_Bienvenida.png" class="img-fluid"></p>
 
 
-</section>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

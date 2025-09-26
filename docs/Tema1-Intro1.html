@@ -1762,6 +1762,9 @@ globalThis.qwebrExecuteCode = async function (
   <ul class="collapse">
   <li><a href="#ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo" id="toc-ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo" class="nav-link" data-scroll-target="#ejercicio-8-crear-listar-y-borrar-objetos-en-el-entorno-de-trabajo">Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo</a></li>
   <li><a href="#archivos-gráficos-paquetes-ayuda-viewer" id="toc-archivos-gráficos-paquetes-ayuda-viewer" class="nav-link" data-scroll-target="#archivos-gráficos-paquetes-ayuda-viewer">5.4 Archivos / Gráficos / Paquetes / Ayuda / Viewer</a></li>
+  <li><a href="#cómo-se-instalan-y-cargan" id="toc-cómo-se-instalan-y-cargan" class="nav-link" data-scroll-target="#cómo-se-instalan-y-cargan">¿Cómo se instalan y cargan?</a></li>
+  <li><a href="#cómo-se-usan-los-paquetes" id="toc-cómo-se-usan-los-paquetes" class="nav-link" data-scroll-target="#cómo-se-usan-los-paquetes">¿Cómo se usan los paquetes?</a></li>
+  <li><a href="#ejercicio-9.-uso-de-la-función-specnumber-del-paquete-vegan" id="toc-ejercicio-9.-uso-de-la-función-specnumber-del-paquete-vegan" class="nav-link" data-scroll-target="#ejercicio-9.-uso-de-la-función-specnumber-del-paquete-vegan">Ejercicio 9. Uso de la función <code>specnumber</code> del paquete <code>vegan</code></a></li>
   </ul></li>
   </ul></li>
   <li><a href="#aprender-a-cargar-y-guardar-datos" id="toc-aprender-a-cargar-y-guardar-datos" class="nav-link" data-scroll-target="#aprender-a-cargar-y-guardar-datos">6. Aprender a cargar y guardar datos</a>
@@ -1769,7 +1772,7 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#importar-datos-al-entorno-de-trabajo" id="toc-importar-datos-al-entorno-de-trabajo" class="nav-link" data-scroll-target="#importar-datos-al-entorno-de-trabajo">6.1 Importar datos al entorno de trabajo</a></li>
   <li><a href="#cargar-datos-integrados" id="toc-cargar-datos-integrados" class="nav-link" data-scroll-target="#cargar-datos-integrados">6.2 Cargar datos integrados</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-9-cargar-datos-integrados" id="toc-ejercicio-9-cargar-datos-integrados" class="nav-link" data-scroll-target="#ejercicio-9-cargar-datos-integrados">Ejercicio 9: Cargar datos integrados</a></li>
+  <li><a href="#ejercicio-10-cargar-datos-integrados" id="toc-ejercicio-10-cargar-datos-integrados" class="nav-link" data-scroll-target="#ejercicio-10-cargar-datos-integrados">Ejercicio 10: Cargar datos integrados</a></li>
   </ul></li>
   <li><a href="#importar-datos-desde-csv" id="toc-importar-datos-desde-csv" class="nav-link" data-scroll-target="#importar-datos-desde-csv"><strong>6.3 Importar datos desde CSV</strong></a>
   <ul class="collapse">
@@ -2360,7 +2363,42 @@ o haz clic en el botón <strong>Source</strong> (ícono de hoja con flecha verde
 <li>Navegar por archivos del proyecto</li>
 </ul></li>
 </ul>
-<hr>
+<p>Este panel de RStudio permite gestionar varios aspectos clave del entorno de trabajo. Vamos a centrarnos en paquetes, con ejemplos aplicados a biodiversidad.</p>
+<p>Paquetes Los paquetes en R son colecciones de funciones, datos y documentación que amplían las capacidades básicas del lenguaje. Para trabajar con biodiversidad, hay paquetes muy útiles que permiten cargar datos ecológicos, calcular índices de diversidad, y visualizar mapas o redes de especies.</p>
+</section>
+<section id="cómo-se-instalan-y-cargan" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-se-instalan-y-cargan">¿Cómo se instalan y cargan?</h4>
+<div class="&nbsp;{.callout-warning}">
+<p>Los siguientes jercicioes&nbsp;requieren&nbsp;el&nbsp;paquete&nbsp;`vegan`,&nbsp;que&nbsp;no&nbsp;está&nbsp;disponible&nbsp;en&nbsp;webR.&nbsp;Para&nbsp;ejecutarlo,&nbsp;usa&nbsp;R&nbsp;en&nbsp;tu&nbsp;ordenador&nbsp;local.</p>
+</div>
+<pre data-reval="false"><code>install.packages("vegan")   # Instalación
+library(vegan)              # Carga del paquete</code></pre>
+</section>
+<section id="cómo-se-usan-los-paquetes" class="level4">
+<h4 class="anchored" data-anchor-id="cómo-se-usan-los-paquetes">¿Cómo se usan los paquetes?</h4>
+<pre data-reval="false"><code>?vegan
+help("vegan")
+</code></pre>
+</section>
+<section id="ejercicio-9.-uso-de-la-función-specnumber-del-paquete-vegan" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-9.-uso-de-la-función-specnumber-del-paquete-vegan">Ejercicio 9. Uso de la función <code>specnumber</code> del paquete <code>vegan</code></h4>
+<pre data-reval="false"><code># Datos de abundancia de especies en dos sitios para el ejercicio
+datos &lt;- data.frame(
+  sitio1 = c(3, 0, 1, 5),
+  sitio2 = c(0, 2, 0, 4),
+  row.names = c("Aves", "Mamíferos", "Reptiles", "Insectos")
+)
+datos
+
+# Cargar el paquete
+library(vegan)
+
+# explorar para qué sirve la función specnumber
+?specnumber
+
+# Calcular riqueza (número de especies presentes)
+riqueza &lt;- specnumber(datos)
+riqueza</code></pre>
 </section>
 </section>
 </section>
@@ -2376,8 +2414,8 @@ o haz clic en el botón <strong>Source</strong> (ícono de hoja con flecha verde
 <p>R viene con varios conjuntos de datos ya cargados que puedes usar para practicar sin tener que importar nada. Puedes escribir&nbsp;<code>data()</code>&nbsp;para ver la lista completa.</p>
 <p>Para cargar los datos integrados basta con escribir data() y el nombre de los datos.</p>
 <p><img src="images/Imagen5.png" class="img-fluid"></p>
-<section id="ejercicio-9-cargar-datos-integrados" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-9-cargar-datos-integrados">Ejercicio 9: Cargar datos integrados</h4>
+<section id="ejercicio-10-cargar-datos-integrados" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-10-cargar-datos-integrados">Ejercicio 10: Cargar datos integrados</h4>
 <p>Durante este ejercicio vamos a utilizar el conjunto o set de datos <code>iris</code>. Este conjunto de datos, contiene datos sobre características florales de tres especies del género <em>Iris</em>.</p>
 <p>Para cargarlo utilizaremos la función <code>data()</code>, y lo exploraremos utilizando la función <code>head()</code> que nos permite visualizar las primeras 6 filas. También vamos a introducir nuevas funciones que nos permitirán explorar el conjunto de datos iris: <code>dim()</code> <code>colnames()</code> y <code>tail()</code></p>
 <div id="qwebr-insertion-location-20"></div>
@@ -2444,15 +2482,15 @@ Puedes copiar ese código para usarlo en tus scripts.</p></li>
 <section id="ejercicio-extra-importar-datos-desde-excel" class="level4">
 <h4 class="anchored" data-anchor-id="ejercicio-extra-importar-datos-desde-excel">Ejercicio Extra Importar datos desde excel</h4>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instalar el paquete</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("xlsx")  </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># abrir la librería</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx)  </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(iris, <span class="st">"data/iris.xlsx"</span>)  <span class="co"># acuerdate que los vamos a guardar en la carpeta datos  </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>iris_import_xlsx <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/iris.xlsx"</span>, <span class="dv">1</span>) <span class="co"># debemos indicar la hoja de Excell desde la cual importar los datos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># instalar el paquete</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("xlsx")  </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># abrir la librería</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xlsx)  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.xlsx</span>(iris, <span class="st">"data/iris.xlsx"</span>)  <span class="co"># acuerdate que los vamos a guardar en la carpeta datos  </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>iris_import_xlsx <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">"data/iris.xlsx"</span>, <span class="dv">1</span>) <span class="co"># debemos indicar la hoja de Excell desde la cual importar los datos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>

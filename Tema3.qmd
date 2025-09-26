@@ -105,7 +105,7 @@ Si os interesa el tema tenéis algunos enlaces a páginas web y artículos inter
 
 <https://onlinelibrary.wiley.com/doi/10.1111/oik.07202>
 
-#### [Ejercicio 7]{style="color: blue;"} Busca en internet otros paquetes de R que permitan calcular índices de diversidad taxonómica {.unnumbered}
+#### [Ejercicio 7] Busca en internet otros paquetes de R que permitan calcular índices de diversidad taxonómica {.unnumbered}
 
 Nosotros vamos a utilizar la librería *vegan* para estimar diferentes índices de diversidad
 

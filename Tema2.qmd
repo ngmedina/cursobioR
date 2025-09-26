@@ -10,3 +10,97 @@ format:
 engine: knitr
 filters:
   - webr
+---
+
+# Objetivos
+
+-   Introducir el paquete `tidyverse` y su filosofía.
+
+-   Aprender a importar, explorar, transformar y filtrar datos.
+
+-   Aplicar funciones clave de `dplyr` y `tidyr` en datos reales de biodiversidad.
+
+-   Diagnosticar errores comunes al manipular datos.
+
+# Introducción y filosofía de  `tidyverse`
+
+Cuando empezamos a trabajar con datos en R, es fácil sentirse abrumado por los corchetes, los signos raros y las funciones que parecen acertijos. Aquí es donde entra el **universo** **tidyverse**, una colección de paquetes que hacen que trabajar con datos sea más **intuitivo**, **ordenado** y, sobre todo, **legible**.
+
+### **¿Qué es el universo tidyverse?**
+
+El universo tidyverse es como una caja de herramientas moderna para R. Incluye paquetes como `dplyr`, `ggplot2`, `tidyr`, `readr`, entre otros, que están diseñados para que el código se lea **de izquierda a derecha**, como si estuvieras contando una historia.
+
+Por ejemplo, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse usamos el operador `%>%` (pipe), que conecta pasos de forma secuencial.
+
+Vamos con un ejemplo sencillo:
+
+```{r}
+library(tidyverse)
+v <- c(4, 6, 5)
+v %>% mean()
+```
+
+Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%>%` se puede entender como "y después haz". Coge lo que hay a la izquierda y lo envía al primer argumento del código que hay después
+
+#### Ejercicio 1 ¿Y si queremos restarle 2 a la media? ¿Cómo haríamos?
+
+```{webr-r}
+# Escribe aquí tu respuesta
+```
+
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;">
+
+Mostrar/Ocultar solución
+
+</button>
+
+::: {#sol1 style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+**Solución:**\
+Podemos hacerlo así:
+
+```{webr-r}
+v <- c(4, 6, 5)
+v %>% mean() - 2
+```
+:::
+
+```{webr-r}
+# cargamos la base de datos de comunidades de Alberta (fijáos que lo estoy cargando directamente desde la web)
+alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/refs/heads/main/Alberta%20grassland/grassland.community.csv")
+
+```
+
+En este fragmento de código queremos :
+
+1.  Filtrar las parcelas que contienen `"mix"` en el nombre.
+
+2.  Quedarnos solo con las columnas de especies.
+
+3.  Calcular la cobertura total sumando las especies *Antennaria parviflora*, *Artemisia cana* y *Symphyotrichum ericoides*.
+
+Bamos a hacerlo con r base
+
+```{webr-r}
+
+subset <- alberta[grepl("mix", alberta$plot), ]
+subset$total_cover <- subset$Antennaria_parvifolia + subset$Artemisia_cana + subset$Symphyotrichum_ericoides_var._ericoides
+
+
+```
+
+y ahora con tidyverse
+
+```{webr-r}
+alberta %>%
+  filter(str_detect(plot, "mix")) %>%
+  mutate(total_cover = Antennaria_parvifolia + Artemisia_cana + Symphyotrichum_ericoides_v)
+```
+
+Para explorar cómo funcionan los pipes y entenderlo mejor podéis ejecutar el siguiente código/
+
+```{webr-r}
+alberta %>%
+  filter(str_detect(plot, "mix")) %>% head()
+```
+
+Lo que véis es el objeto que se va a utilizar en el siguiente paso...
