@@ -27,8 +27,12 @@ website:
         menu:
           - href: Tema3-1-Indices.qmd
             text: "Índices de Biodiversidad"
-          - href: Tema3-2-Metodos.qmd
-            text: "Métodos de comparaciones"
+          - href: Tema3-2-Metodos-anova.qmd
+            text: "Anova"
+          - href: Tema3-3-Metodos-regresion.qmd
+            text: "Regresión"
+          - href: Tema3-4-Metodos-ordenacion.qmd
+            text: "Ordenación"
       
       - href: Tema4.qmd
         text: "Tema 4. Gráficos"

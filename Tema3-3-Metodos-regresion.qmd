@@ -1,0 +1,126 @@
+---
+title: "Tema 3. Primera parte - Índices de diversidad"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    toc_float: true
+    css: estilos.css
+engine: knitr
+filters:
+  - webr
+---
+
+# Breve introducción
+
+En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.
+
+Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
+
+Vamos a comenzar con una pregunta sencilla. En la base de datos de los herbazales de Alberta tenemos dos tipos de hábitat diferentes unas comunidades dominadas por *Festuca* "Fescue" y otras en las que encontamos comunidades mixtas de gramíneas "Mixedgrass".
+
+Comenzamos por cargar las librerías
+
+```{r message = FALSE}
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(picante)
+library(vegan)
+```
+
+# Análisis de la varianza
+
+El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
+
+## Análisis de la varianza, factores con un nivel
+
+Ver aquí <https://biocosas.github.io/R/050_anova.html>
+
+Cargamos los datos de la base de datos de herbazales de Alberta
+
+```{r}
+env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
+
+env_alberta$habitat
+```
+
+En esta misma base de datos hay recogidas una serie de características ambientales de las cuadrículas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
+
+¿Varían estos dos hábitats en cuanto a su pendiente, orientación y humedad relativa?
+
+Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
+
+#### [Ejercicio 1]{style="color: blue;"} --\> Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R {.unnumbered}
+
+### Estimar el modelo ANOVA
+
+Primero representamos los datos utilizando un gráfico de caja y bigotes
+
+```{r}
+boxplot(env_alberta$slope ~ env_alberta$habitat)
+```
+
+Ahora vamos a utilizar la función `aov` para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos
+
+La función **aov** tiene dos argumentos
+
+**formula** una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla \~ la (o las) variables cualitativas
+
+**data** los datos que vamos a emplear
+
+```{r eval=FALSE}
+anova <- aov(slope ~ habitat, data = env_alberta)
+summary(anova)
+```
+
+```{r echo=FALSE}
+anova <- aov(slope ~ habitat, data = env_alberta)
+summary(anova)
+```
+
+#### [Ejercicio 2]{style="color: blue;"} --\> Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor. {.unnumbered}
+
+¿Qué nos dice cada uno de estos valores?
+
+Podéis encontrar un tutorial un poco más técnico sobre anovas [aquí](https://biocosas.github.io/R/050_anova.html)
+
+### Validar el modelo ANOVA
+
+Los resultados de estos análisis son robustos si y solo si se cumplen una serie de condiciones
+
+-   Independencia de los datos
+
+-   Normalidad
+
+-   Homocedasticidad
+
+Para comprobar si se cumplen analizamos los residuos
+
+```{r}
+plot(anova$fitted.values, anova$residuals, xlab="Measurement", ylab="Residuals")
+abline(0,0)
+
+```
+
+```{r}
+hist(anova$residuals)
+```
+
+```{r}
+qqnorm(anova$residuals) 
+qqline(anova$residuals)
+```
+
+Ahora realizamos un test formal que comprueba si lo residuos son normales. Se contrasta la hipótesis nula "los residuos son normales". Si el test es significativo hay desviación con respecto a la normalidad.
+
+```{r}
+shapiro.test(anova$residuals)
+```
+
+Ahora analizamos si hay homcedasticidad
+
+```{r}
+boxplot(anova$residuals~env_alberta$habitat)  
+```

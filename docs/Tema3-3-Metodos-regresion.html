@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis de la biodiversidad en R y SIG</title>
+<title>Tema 3. Primera parte - Índices de diversidad – Análisis de la biodiversidad en R y SIG</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="estilos.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -93,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -152,23 +187,206 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#breve-introducción" id="toc-breve-introducción" class="nav-link active" data-scroll-target="#breve-introducción">Breve introducción</a></li>
+  <li><a href="#análisis-de-la-varianza" id="toc-análisis-de-la-varianza" class="nav-link" data-scroll-target="#análisis-de-la-varianza">Análisis de la varianza</a>
+  <ul>
+  <li><a href="#análisis-de-la-varianza-factores-con-un-nivel" id="toc-análisis-de-la-varianza-factores-con-un-nivel" class="nav-link" data-scroll-target="#análisis-de-la-varianza-factores-con-un-nivel">Análisis de la varianza, factores con un nivel</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1-busca-en-internet-qué-funciónes-podemos-utilizar-para-hacer-un-análisis-de-la-varianza-en-r" id="toc-ejercicio-1-busca-en-internet-qué-funciónes-podemos-utilizar-para-hacer-un-análisis-de-la-varianza-en-r" class="nav-link" data-scroll-target="#ejercicio-1-busca-en-internet-qué-funciónes-podemos-utilizar-para-hacer-un-análisis-de-la-varianza-en-r"><span style="color: blue;">Ejercicio 1</span> –&gt; Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R</a></li>
+  <li><a href="#estimar-el-modelo-anova" id="toc-estimar-el-modelo-anova" class="nav-link" data-scroll-target="#estimar-el-modelo-anova">Estimar el modelo ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-2-identifica-en-la-tabla-anova-los-grados-de-libertad-del-factor-los-grados-de-libertad-residuales-la-suma-de-cuadrados-de-los-grupos-la-suma-de-cuadrados-del-error-el-valor-del-estadístico-f-y-el-p-valor." id="toc-ejercicio-2-identifica-en-la-tabla-anova-los-grados-de-libertad-del-factor-los-grados-de-libertad-residuales-la-suma-de-cuadrados-de-los-grupos-la-suma-de-cuadrados-del-error-el-valor-del-estadístico-f-y-el-p-valor." class="nav-link" data-scroll-target="#ejercicio-2-identifica-en-la-tabla-anova-los-grados-de-libertad-del-factor-los-grados-de-libertad-residuales-la-suma-de-cuadrados-de-los-grupos-la-suma-de-cuadrados-del-error-el-valor-del-estadístico-f-y-el-p-valor."><span style="color: blue;">Ejercicio 2</span> –&gt; Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor.</a></li>
+  </ul></li>
+  <li><a href="#validar-el-modelo-anova" id="toc-validar-el-modelo-anova" class="nav-link" data-scroll-target="#validar-el-modelo-anova">Validar el modelo ANOVA</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Tema 3. Primera parte - Índices de diversidad</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="bienvenid-al-curso-de-análisis-de-la-biodiversidad-en-r-y-sig" class="level1">
-<h1>Bienvenid@ al curso de Análisis de la biodiversidad en R y SIG</h1>
-<p>Este curso es parte de la asignatura “Análisis de la biodiversidad en R y SIG” del Máster en Biodiversidad de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.</p>
-<p>Puedes consultar el programa de la asignatura <a href="https://secretaria-virtual.uam.es/doa/consultaPublica/look%5Bconpub%5DBuscarPubGuiaDocAs?entradaPublica=true&amp;idiomaPais=es.ES&amp;_anoAcademico=2022&amp;_centro=104&amp;_planEstudio=768">aquí</a></p>
-<p>Este curso es el resultado del trabajo colectivo de varios profesores. Si quieres utilizarlo puedes hacerlo pero recuerda citar la fuente.</p>
-<p>Para empezar a abrir boca vamos a rellenar una encuesta</p>
-<p><img src="images/Imagen0_Bienvenida.png" class="img-fluid"></p>
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<section id="breve-introducción" class="level1">
+<h1>Breve introducción</h1>
+<p>En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.</p>
+<p>Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar <a href="https://kembellab.ca/r-workshop/">aquí</a></p>
+<p>Vamos a comenzar con una pregunta sencilla. En la base de datos de los herbazales de Alberta tenemos dos tipos de hábitat diferentes unas comunidades dominadas por <em>Festuca</em> “Fescue” y otras en las que encontamos comunidades mixtas de gramíneas “Mixedgrass”.</p>
+<p>Comenzamos por cargar las librerías</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(picante)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'picante' was built under R version 4.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ape' was built under R version 4.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'vegan' was built under R version 4.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'permute' was built under R version 4.5.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="análisis-de-la-varianza" class="level1">
+<h1>Análisis de la varianza</h1>
+<p>El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.</p>
+<section id="análisis-de-la-varianza-factores-con-un-nivel" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-de-la-varianza-factores-con-un-nivel">Análisis de la varianza, factores con un nivel</h2>
+<p>Ver aquí <a href="https://biocosas.github.io/R/050_anova.html" class="uri">https://biocosas.github.io/R/050_anova.html</a></p>
+<p>Cargamos los datos de la base de datos de herbazales de Alberta</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>env_alberta <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>env_alberta<span class="sc">$</span>habitat</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Mixedgrass" "Mixedgrass" "Mixedgrass" "Mixedgrass" "Mixedgrass"
+ [6] "Mixedgrass" "Mixedgrass" "Fescue"     "Fescue"     "Fescue"    
+[11] "Fescue"     "Fescue"     "Fescue"     "Fescue"     "Fescue"    
+[16] "Fescue"     "Fescue"     "Mixedgrass" "Mixedgrass" "Mixedgrass"
+[21] "Mixedgrass" "Mixedgrass" "Mixedgrass" "Mixedgrass" "Mixedgrass"
+[26] "Mixedgrass" "Mixedgrass"</code></pre>
+</div>
+</div>
+<p>En esta misma base de datos hay recogidas una serie de características ambientales de las cuadrículas como son la pendiente “slope”, la orientación “aspect” y la humedad relativa “rel.moisture”.</p>
+<p>¿Varían estos dos hábitats en cuanto a su pendiente, orientación y humedad relativa?</p>
+<p>Para contestar a esta pregunta vamos a utilizar un análisis de la varianza</p>
+<section id="ejercicio-1-busca-en-internet-qué-funciónes-podemos-utilizar-para-hacer-un-análisis-de-la-varianza-en-r" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="ejercicio-1-busca-en-internet-qué-funciónes-podemos-utilizar-para-hacer-un-análisis-de-la-varianza-en-r"><span style="color: blue;">Ejercicio 1</span> –&gt; Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R</h4>
+</section>
+<section id="estimar-el-modelo-anova" class="level3">
+<h3 class="anchored" data-anchor-id="estimar-el-modelo-anova">Estimar el modelo ANOVA</h3>
+<p>Primero representamos los datos utilizando un gráfico de caja y bigotes</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(env_alberta<span class="sc">$</span>slope <span class="sc">~</span> env_alberta<span class="sc">$</span>habitat)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tema3-3-Metodos-regresion_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ahora vamos a utilizar la función <code>aov</code> para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos</p>
+<p>La función <strong>aov</strong> tiene dos argumentos</p>
+<p><strong>formula</strong> una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla ~ la (o las) variables cualitativas</p>
+<p><strong>data</strong> los datos que vamos a emplear</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>anova <span class="ot">&lt;-</span> <span class="fu">aov</span>(slope <span class="sc">~</span> habitat, <span class="at">data =</span> env_alberta)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)
+habitat      1    0.2    0.21   0.005  0.946
+Residuals   25 1121.4   44.85               </code></pre>
+</div>
+</div>
+<section id="ejercicio-2-identifica-en-la-tabla-anova-los-grados-de-libertad-del-factor-los-grados-de-libertad-residuales-la-suma-de-cuadrados-de-los-grupos-la-suma-de-cuadrados-del-error-el-valor-del-estadístico-f-y-el-p-valor." class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="ejercicio-2-identifica-en-la-tabla-anova-los-grados-de-libertad-del-factor-los-grados-de-libertad-residuales-la-suma-de-cuadrados-de-los-grupos-la-suma-de-cuadrados-del-error-el-valor-del-estadístico-f-y-el-p-valor."><span style="color: blue;">Ejercicio 2</span> –&gt; Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor.</h4>
+<p>¿Qué nos dice cada uno de estos valores?</p>
+<p>Podéis encontrar un tutorial un poco más técnico sobre anovas <a href="https://biocosas.github.io/R/050_anova.html">aquí</a></p>
+</section>
+</section>
+<section id="validar-el-modelo-anova" class="level3">
+<h3 class="anchored" data-anchor-id="validar-el-modelo-anova">Validar el modelo ANOVA</h3>
+<p>Los resultados de estos análisis son robustos si y solo si se cumplen una serie de condiciones</p>
+<ul>
+<li><p>Independencia de los datos</p></li>
+<li><p>Normalidad</p></li>
+<li><p>Homocedasticidad</p></li>
+</ul>
+<p>Para comprobar si se cumplen analizamos los residuos</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anova<span class="sc">$</span>fitted.values, anova<span class="sc">$</span>residuals, <span class="at">xlab=</span><span class="st">"Measurement"</span>, <span class="at">ylab=</span><span class="st">"Residuals"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tema3-3-Metodos-regresion_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(anova<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tema3-3-Metodos-regresion_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(anova<span class="sc">$</span>residuals) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(anova<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tema3-3-Metodos-regresion_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ahora realizamos un test formal que comprueba si lo residuos son normales. Se contrasta la hipótesis nula “los residuos son normales”. Si el test es significativo hay desviación con respecto a la normalidad.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(anova<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  anova$residuals
+W = 0.80202, p-value = 0.0001484</code></pre>
+</div>
+</div>
+<p>Ahora analizamos si hay homcedasticidad</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(anova<span class="sc">$</span>residuals<span class="sc">~</span>env_alberta<span class="sc">$</span>habitat)  </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Tema3-3-Metodos-regresion_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
