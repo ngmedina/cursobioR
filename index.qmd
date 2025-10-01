@@ -5,7 +5,7 @@ editor: visual
 
 # Bienvenid\@ al curso de Análisis de la biodiversidad en R y SIG
 
-Este curso es parte de la asignatura "Análisis de la biodiversidad en R y SIG" del Máster en Biodiversida de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.
+Este curso es parte de la asignatura "Análisis de la biodiversidad en R y SIG" del Máster en Biodiversidad de la Universidad Autónoma de Madrid. Lo que está aquí recogido es la parte que corresponde al análisis de la biodiversidad en R.
 
 Puedes consultar el programa de la asignatura [aquí](https://secretaria-virtual.uam.es/doa/consultaPublica/look%5Bconpub%5DBuscarPubGuiaDocAs?entradaPublica=true&idiomaPais=es.ES&_anoAcademico=2022&_centro=104&_planEstudio=768)
 

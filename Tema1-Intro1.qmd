@@ -487,6 +487,11 @@ Aunque esta forma de importar datos puede ser muy útil para probar funciones o 
 
 Vamos a trabajar con los datos de una base de datos de la abundancia de especies en herbazales de Alberta en Estados Unidos.
 
+Los datos de composición específica consisten típicamente en observaciones de la presencia o abundancia de las especies en diferentes localidades.
+
+En el ejemplo que vamos a emplear los datos provienen de un estudio de plantas que se realizó en parcelas de 20 x 20 m. Los datos de abundancia corresponden la cobertura de cada especie en proporción al total de la parcela.
+
+
 Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv)
 
 ##### NOTA: Los datos originales provienen de un taller sobre análisis de la biodiversidad en R que se pueden encontrar [aquí](https://kembellab.ca/r-workshop/).
