@@ -110,7 +110,8 @@ Vamos con un ejemplo sencillo:
 
 ```{webr-r}
 v <- c(4, 6, 5)
-v %>% mean()
+v %>% 
+  mean()
 ```
 
 Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%>%` se puede entender como "y después haz". Lo que hace es coger el resultado del código que está a la izquierda y pasarlo como primer argumento a la función que está a la derecha
@@ -135,7 +136,9 @@ Solución:\
 
 ```{webr-r}
 v <- c(4, 6, 5)
-v %>% mean() %>% sqrt()
+v %>% 
+  mean() %>% 
+  sqrt()
 ```
 :::
 
@@ -193,52 +196,4 @@ alberta %>%
          perc_frigida = (Artemisia_frigida / total_abund) * 100)
 ```
 
-#### 4. Tidyverse y los gráficos. Introducción a ggplot2
 
-`ggplot2` es un paquete del tidyverse para crear gráficos de manera declarativa. La idea básica es **“gramática de gráficos”**. Se utiliza la función `ggplot`, hay que definir tres elementos:
-
-1.  Los datos que quieres graficar (`data = …`)
-
-2.  Estética (`aes()`), qué variables van a los ejes, colores, tamaños, etc.
-
-3.  Geometría (`geom_…`), cómo se representa la información (puntos, barras, líneas, cajas…).
-
-Así, los pasos para hacer un gráfico son:
-
-### **Pasos para hacer un gráfico**
-
-1.  Elegir la variable para el eje x y el eje y.
-
-2.  Elegir el tipo de gráfico:
-
-```         
--   `geom_point()` → scatterplot (puntos)
-
--   `geom_col()` → barras
-
--   `geom_boxplot()` → cajas
-
--    `geom_line()` → líneas
-```
-
-3.  Añadir etiquetas y títulos para que el gráfico sea fácil de entender.
-
-Veamos un ejemplo con la base de datos de Alberta en el que representaremos la abundancia de *Artemisia frigida* en todas las parcelas
-
-```{webr-r}
-alberta %>%
-  ggplot(aes(x = plot, y = Artemisia_frigida)) +  # eje x = parcelas, eje y = abundancia
-  geom_col() +                                   # tipo de gráfico: barras
-  labs(title = "Abundancia de Artemisia_frigida por parcela",
-       x = "Parcela",
-       y = "Abundancia") +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))  # girar etiquetas del eje x
-```
-
--   `aes(x = plot, y = Artemisia_frigida)` indica qué variables van a los ejes,
-
--   `geom_col()` dibuja barras verticales.
-
--   `labs()` añade títulos y etiquetas.
-
--   `theme(axis.text.x = element_text(angle = 90, hjust = 1))` gira los nombres de las parcelas para que se lean mejor.

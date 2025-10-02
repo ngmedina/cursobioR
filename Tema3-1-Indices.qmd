@@ -170,7 +170,32 @@ fd <- dbFD(traits, comm_alberta[,-1])
 
 Conseguir que las bases de datos estén harmonizadas y en el formato que necesitamos para las diferentes funciones es una de las tareas que más tiempo nos va a llevar cuando estamos haciendo un análisis. Tenéis que asumir desde un principio que siempre va a ser así.
 
-Siempre que os enfrentéis a una función nueva conviene explorar la ayuda y ver los ejemplos
+En este caso tenemos que ordenar las especies en la comunidad exactamente igual en las dos matrices.
+
+Primero ordenamos la base de datos de las abundancias de las especies para que las columnas estén el mismo orden que en la base de datos de rasgos
+
+```{webr-r}
+
+order <- match(traits$species, colnames(comm_alberta[,-1]))
+
+comm_alberta_ordered <- comm_alberta[,-1][,order]
+```
+
+Después comprobamos si el orden de las especies en la tabla de rasgos es alfabético
+
+```{webr-r}
+traits$species == colnames(comm_alberta_ordered)
+```
+
+¿Ahora funciona?
+
+```{webr-r}
+fd <- dbFD(traits, comm_alberta_ordered)
+```
+
+[**¿Por qué sigue dando el mismo error?**]{style="color: blue;"}
+
+Los errores de R no siempre son intuitivos, por eso siempre que os enfrentéis a una función nueva conviene explorar la ayuda y ver los ejemplos de la función para ver si podéis encontrar el error. Vamos a ello
 
 ```{webr-r}
 ?dbFD
@@ -180,7 +205,6 @@ Veamos el ejemplo 1 de la ayuda
 
 ```{webr-r}
 ex1 <- dbFD(dummy$trait, dummy$abun)
-ex1
 ```
 
 Vamos a explorar qué datos emplean
@@ -205,7 +229,7 @@ class(dummy)
 ```
 :::
 
-#### Ejercicio 3: ¿Qué contiene el objeto dummy?
+#### Ejercicio 3: ¿Qué estructura tiene el objeto dummy?
 
 ```{webr-r}
 # Escribe aquí tu respuesta
@@ -227,19 +251,11 @@ str(dummy)
 
 Como véis el objeto tiene dos tablas. Los objetos de la lista tienen nombres, uno es una "data.frame" en la que están los rasgos (trait) y y el otro contiene la abundancia (abun) de las especies.
 
-Veamos que pinta tienen
+Ahora comparemos esa tabla con la de los rasgos del ejemplo con la de las comunidades de Alberta
 
 ```{webr-r}
+head(traits)
 head(dummy$trait)
-head(traits)
-
-```
-
-Ahora comparemos esa tabla con la de los rasgos de las comunidades de Alberta
-
-```{webr-r}
-head(traits)
-class(dummy$trait)
 ```
 
 [**Pregunta: ¿Notas alguna diferencia?**]{style="color: blue;"}
@@ -258,40 +274,15 @@ Mostrar/Ocultar solución
 Solución:\
 
 ```{webr-r}
-Los nombres de las especies estén como **nombres de filas** en dummy mientras que en la tabla traits aparece como columna
+# Los nombres de las especies están como **nombres de filas** en "dummy" mientras que en la tabla traits aparece como columna
 ```
 :::
 
+Las especies en la tabla del ejemplo ("dummy") están como nombres de fila, no como una columna separada. Para adaptar el formato de nuestra tabla tenemos que asignar los nombres de las filas y eliminar la columna sp
 
 ```{webr-r}
 rownames(traits) <- traits$species
 traits <- traits[,-1]
-```
-
-Hacemos lo mismo con la tabla de abundancia
-
-```{webr-r}
-head(dummy$abun)
-class(dummy$abun)
-```
-
-```{webr-r}
-head(comm_alberta)
-class(comm_alberta)
-```
-
-En este caso tenemos que ordenar las especies en la comunidad exactamente igual en las dos matrices. Tenéis a continuacíon el código:
-
-Primero ordenamos la base de datos de las abundancias de las especies para que las columnas estén en orden alfabético
-
-```{webr-r}
-comm_alberta_ordered <- comm_alberta[,-1][,order(colnames(comm_alberta[,-1]))]
-```
-
-Después comprobamos si el orden de las especies en la tabla de rasgos es alfabético
-
-```{webr-r}
-traits$species == colnames(comm_alberta_ordered)
 ```
 
 Ahora ya podemos calcular el índice de diversidad funcional

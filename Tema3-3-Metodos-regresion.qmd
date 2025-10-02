@@ -1,5 +1,5 @@
 ---
-title: "Tema 3. Primera parte - Índices de diversidad"
+title: "Tema 3. Tercera parte - Métodos regresión"
 format:
   html:
     toc: true
@@ -14,81 +14,68 @@ filters:
 
 # Breve introducción
 
-En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.
+Una regresión es un modelo que analiza la relación entre una variable respuesta y una o más variables explicativas.
 
-Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
+# 1. Regresión lineal
 
-Vamos a comenzar con una pregunta sencilla. En la base de datos de los herbazales de Alberta tenemos dos tipos de hábitat diferentes unas comunidades dominadas por *Festuca* "Fescue" y otras en las que encontamos comunidades mixtas de gramíneas "Mixedgrass".
+La regresión lineal es un tipo de regresión en la que se analizan relaciones lineales. Es el tipo de regresión más frecuentemente en trabajos de investigación.
 
-Comenzamos por cargar las librerías
+Vamos a seguir trabajando con la base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
 
-```{r message = FALSE}
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(picante)
+Cargamos la base de datos de comunidades de alberta y la base de datos de características ambientales y la de rasgos funcionales
+
+```{webr-r}
+env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
+
+comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+
+traits_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/species.traits.csv")
+```
+
+Vamos a explorar qué factores afectan a la riqueza taxonómica.
+
+Para ello primero calculamos la riqueza taxonómica con la librería vegan
+
+```{webr-r}
 library(vegan)
 ```
 
-# Análisis de la varianza
-
-El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
-
-## Análisis de la varianza, factores con un nivel
-
-Ver aquí <https://biocosas.github.io/R/050_anova.html>
-
-Cargamos los datos de la base de datos de herbazales de Alberta
-
-```{r}
-env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
-
-env_alberta$habitat
+```{webr-r}
+# Riqueza
+S_alberta <- specnumber(comm_alberta)
 ```
 
-En esta misma base de datos hay recogidas una serie de características ambientales de las cuadrículas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
+Para facilitar el análisis vamos a crear una columnas nuevas en la tabla de datos de variables ambientales de Alberta con los datos de riqueza y diversidad de Simpson
 
-¿Varían estos dos hábitats en cuanto a su pendiente, orientación y humedad relativa?
-
-Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
-
-#### [Ejercicio 1]{style="color: blue;"} --\> Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R {.unnumbered}
-
-### Estimar el modelo ANOVA
-
-Primero representamos los datos utilizando un gráfico de caja y bigotes
-
-```{r}
-boxplot(env_alberta$slope ~ env_alberta$habitat)
+```{webr-r}
+env_alberta$S <- S_alberta
 ```
 
-Ahora vamos a utilizar la función `aov` para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos
+## 1.1 Regresión lineal simple
 
-La función **aov** tiene dos argumentos
+### Regresión lineal simple con variables cuantitativas
 
-**formula** una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla \~ la (o las) variables cualitativas
+Vamos a comenzar por analizar la relación entre la pendiente y la riqueza
 
-**data** los datos que vamos a emplear
+Lo primero antes de hacer un análisis es representar los datos
 
-```{r eval=FALSE}
-anova <- aov(slope ~ habitat, data = env_alberta)
-summary(anova)
+```{webr-r}
+plot(env_alberta$slope, env_alberta$S)
 ```
 
-```{r echo=FALSE}
-anova <- aov(slope ~ habitat, data = env_alberta)
-summary(anova)
+Hacemos la regresión empleando la función **`lm`** que tiene los siguientes argumentos
+
+**formula** con la forma **`y ~ x`** en la que se especifica cuál es la variable respuesta (y) y cuál la variable explicativa (x)
+
+**data** en el que hay que especificar la tabla en la que están los datos
+
+El resultado es una lista que contiene toda la información sobre los análisis. 
+
+```{webr-r}
+lmS <- lm(S ~ slope, data = env_alberta) # Regresión linear
 ```
 
-#### [Ejercicio 2]{style="color: blue;"} --\> Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor. {.unnumbered}
-
-¿Qué nos dice cada uno de estos valores?
-
-Podéis encontrar un tutorial un poco más técnico sobre anovas [aquí](https://biocosas.github.io/R/050_anova.html)
-
-### Validar el modelo ANOVA
-
-Los resultados de estos análisis son robustos si y solo si se cumplen una serie de condiciones
+Una vez que hemos hecho el análisis y **antes de ver los resultados** vamos a comprobar que los supuestos del análisis se cumplen. Igual que en el análisis de la varianza en los modelos de regresión lineal asumimos
 
 -   Independencia de los datos
 
@@ -96,31 +83,311 @@ Los resultados de estos análisis son robustos si y solo si se cumplen una serie
 
 -   Homocedasticidad
 
-Para comprobar si se cumplen analizamos los residuos
+Para ello analizaremos los residuos
 
-```{r}
-plot(anova$fitted.values, anova$residuals, xlab="Measurement", ylab="Residuals")
-abline(0,0)
+```{webr-r}
+resid <- rstandard(lmS) # residuos estandarizados
+fitted <- fitted(lmS)
+hist(resid)
+plot(fitted, resid)
+```
+
+Además, podemos hacer un gráfico Q-Q
+
+```{webr-r}
+qqnorm(resid)
+qqline(resid)
+```
+
+Además, en los modelos de regresión suele ser necesario inspeccionar si existen puntos influyentes que tengan un peso excesivo en el análisis. Los puntos influyentes más comunes son los valores atípicos que son aquellos puntos en los que la respuesta observada no sigue el patrón establecido por el resto de los datos.
+
+Una forma de detectar puntos atípicos es empleando la distancia de Cook. La distancia de Cook se calcula eliminando un punto en el modelo y volviendo a calcular la regresión. Esto se repite para cada uno de los puntos.
+
+```{webr-r}
+plot(cooks.distance(lmS))
+```
+
+Como ejercicio vamos a cambiar uno de los valores de la pendiente por un valor que sea 10 veces el máximo de pendiente observado
+
+```{webr-r}
+val <- env_alberta$slope[3] # guardamos el valor para restaurar los datos después de comprobar el efecto
+env_alberta$slope[3] <- 10* max(env_alberta$slope)
+```
+
+Volvemos a hacer el modelo de regresión y representamos las ditancias de cook
+
+```{webr-r}
+lmS_test <- lm(S ~ slope, data = env_alberta) # Regresión linear
+plot(cooks.distance(lmS_test))
+```
+
+Restauramos el valor original
+
+```{webr-r}
+env_alberta$slope[3] <- val
+```
+
+La función summary nos permite obtener un resumen de los resultados contenidos en el objeto lmS
+
+```{webr-r}
+summary(lmS)
+```
+
+El resultado indica que no hay una asociación significativa entre la pendiente y la riqueza de especies. Lo cual concuerda con el gráfico de dispersión en el que ya se intuía que no había relación alguna.
+
+#### Ejercicio 1 Analiza si existe relación entre la diversidad de simpson y la pendiente
+
+```{r eval=FALSE, include=FALSE}
+lmSimp <- lm(invsimp ~ slope, data = env_alberta) # Regresión linear
+summary(lmSimp)
+```
+
+### Regresión lineal con variables categóricas
+
+Los modelos de regresión son muy flexibles y permiten analizar la relación entre una variable respuesta continua y variables explicativas categóricas. Por ejemplo, vamos a analizar el efecto del hábitat en la pendiente
+
+```{webr-r}
+lmslope <- lm(slope ~ habitat, data = env_alberta)
+```
+
+inspeccionamos los resultados
+
+```{webr-r}
+summary(lmslope)
+```
+
+Cuando hay una variable categórica el modelo se construye en dos pasos.
+
+1.  Se transforma la variable categórica en tantas variables dummy (valor 0,1) como niveles -1.
+
+Una regresión con un único factor y un ANOVA son equivalentes. Vamos a comprobarlo
+
+```{webr-r}
+summary(aov(slope ~ habitat, data = env_alberta))
+```
+
+# 2. Regresión lineal múltiple
+
+Una de las propiedades más interesantes de los análisis de regresión lineal es que nos permiten evaluar el efecto de más de una variable al mismo tiempo. Además, los modelos de regresión lineal admiten tanto variables cuantitativas como cualitativas. A continuación realizaremos un modelo de regresión lineal múltiple.
+
+La regresión lineal múltiple tiene que cumplir una serie de condiciones adicionales a las que tienen que cumplirse en la regresión lineal simple. Una de las más importantes a tener en cuenta es la multicolinealidad.
+
+La multicolinealidad es la correlación alta entre variables explicativas
+
+Cuando la multicolinealidad es alta puede causar los siguientes problemas:
+
+-   El valor de los coeficientes es inestable y depende mucho de las otras variables que incluyamos en el modelo.
+
+-   Disminuye la precisión del modelo y hace que los p-valores obtenidos no sean robustos
+
+Pero **¡ojo!** la multicolinealidad no siempre es un problema:
+
+-   El efecto de la multicolinealidad depende de cuan grande sea ésta. Si el grado de multicolinealidad es bajo o medio es posible que el efecto sobre la regresión no sea importante. De hecho, casi siempre tenemos algo de multicolinealidad.
+
+-   Cuando la multicolinealidad es consecuencia de añadir variables elevadas a una potencia o la multiplicación de otras variables en el modelo. En estos casos los p-valores no se verán afectados por la multicolinealidad. Nota: Si queremos eliminar totalmente el problema podemos centrar las variables sustrayendo a cada valor su media.
+
+-   Las variables con alta colinealidad son variables dummy que representan variables categóricas con tres o más niveles.
+
+Para analizar el grado de multicolinealidad podemos emplear el factor de inflacción de la varianza o VIF por sus siglas en inglés.
+
+Vamos a explorar unos datos en los que la multicolinealidad es muy alta para ver sus efectos. El ejemplo es una de las bases de datos que vienen con el paquete *mtcars.*
+
+Cargamos los datos
+
+```{webr-r}
+data(mtcars)
+```
+
+Ajustamos un modelo de regresión
+
+```{webr-r}
+model <- lm(mpg ~ disp + hp + wt + drat, data = mtcars)
+```
+
+Y calculamos el factor de inflacción de la varianza (VIF). Para ello emplearemos el paquete `car`
+
+```{webr-r}
+library(car)
+```
+
+```{webr-r}
+vif(model)
+```
+
+Para corregir los problemas de multicolinealidad existen varias estrategias.
+
+La más habitual es eliminar una de las variables que estén altamente correlacionadas. Si dos variables están altamente correlacionadas es porque contienen información muy similar y por lo tanto son redundantes. En este escenario podemos eliminar una de ellas. Para ello:
+
+1.  Hacemos un análisis de correlación entre pares de variables
+
+2.  Identificamos las variables más correlacionadas
+
+3.  Eliminamos una de las correlacionadas
+
+4.  Repetimos el proceso hasta que el VIF se estabilice
+
+```{webr-r}
+cor(mtcars[,c("disp", "hp", "wt", "drat")])
+```
+
+#### Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R {.unnumbered}
+
+```{r eval=FALSE, include=FALSE}
+cormat <- cor(mtcars[,c("disp", "hp", "wt", "drat")])
+cormat[cormat == 1] <- 0
+which(cormat==max(cormat), arr.ind=TRUE)
+```
+
+La variable displacement indica la cilindrada del motor en cm^3^ la variable wt indica el peso del vehículo. Dado que tienen una correlación \>0.8 podemos optar por eliminar una de las dos. Por ejemplo peso del vehíulo
+
+Volvemos a estimar la regresión linear pero eliminando la variable wt
+
+```{webr-r}
+model <- lm(mpg ~ disp + hp + drat, data = mtcars)
+vif(model)
+```
+
+También podríamos:
+
+-   Combinar las dos variables relacionadas, por ejemplo sumando sus valores o empleando un índice que resuma ambas variables.
+
+-   Si las variables correlacionadas son muchas podemos realizar un análisis de ordenación (ver tema 3.4) con esas variables antes de hacer la regresión. Este análisis extrae unos ejes resumen de modo que podemos emplear esos ejes como variables explicativas en la regresión.
+
+-   Hay modelos de regresión que como los modelos LASSO y Ridge que están diseñados para trabajar en casos de alta multicolinealidad. Tenéis una descripción de lo que hacen estos modelos y cómo calcularlos [aquí](https://rubenfcasal.github.io/aprendizaje_estadistico/shrinkage.html). Estos modelos reducen los coeficientes de algunas variables a valores cercanos o iguales a cero. Simplifican los modelos y favorecen una interpretación más sencilla pero aumentan el posible sesgo.
+
+    NOTA: Si es posible es preferible emplear el método de eliminar variables redundantes manualmente empleando criterios científicos claros.
+
+#### Ejercicio 3 Calcula la diversidad funcional de las comunidades herbáceas de alberta 
+
+```{webr-r}
+library(FD)
+comm_alberta_ordered <- comm_alberta[,-1][,order(colnames(comm_alberta[,-1]))]
+rownames(traits_alberta) <- traits_alberta$species
+traits_alberta <- traits_alberta[,-1]
+fd <- dbFD(traits_alberta, comm_alberta_ordered)
+```
+
+#### Ejercicio 4 Estima una regresión múltiple con los herbazales de alberta en la que se emplee el índice riqueza funcional (Fric) de como variable respuesta y las variables, habitat, pendiente, orientación y humedad relativa como variables explicativas
+
+```{webr-r}
+env_alberta$Fric <- fd$FRic 
+env_alberta$rel.moisture <- factor(env_alberta$rel.moisture)
+
+lmFric <- lm(Fric ~ + habitat + slope + aspect + factor(rel.moisture), data = env_alberta)
+
 
 ```
 
-```{r}
-hist(anova$residuals)
+Vamos a ver si se cumplen los supuestos del modelo.
+
+```{webr-r}
+vif(lmFric) # comprobamos la inflacción de la varianza
+
+resid <- rstandard(lmFric) # estimamos los residuos estandarizados
+fitted <- fitted(lmFric) # los valores ajustados
+plot(fitted, resid) # representados los residuos frente a los valores ajustados
+hist(resid) # hacemos un histograma de los residuos para comprobar la normalidad
+qqnorm(resid) # hacemos un gráfico q-q
+qqline(resid)
 ```
 
-```{r}
-qqnorm(anova$residuals) 
-qqline(anova$residuals)
+Los residuos son normales pero hay signos de heterocedasticidad. Una forma de habitual de solucionar el problema es hacer transformaciones de datos. **El objetivo de la transformación de datos es que los residuos tengan una distribución verifique los supuestos del modelo.**
+
+Suele ser útil por comprobar si nuestra variable respuesta o alguna de las variables explicativas tienen distribuciones sesgadas.
+
+```{webr-r}
+apply(env_alberta[,c("Fric","slope", "aspect")], 2, hist)
 ```
 
-Ahora realizamos un test formal que comprueba si lo residuos son normales. Se contrasta la hipótesis nula "los residuos son normales". Si el test es significativo hay desviación con respecto a la normalidad.
+Como podemos ver en el gráfico la variable Fric tiene una distribución sesgada hacia valores bajos. Las tranformaciones más empleadas en estos casos son el logaritmo, la raíz cuadrada. Podemos ir probando las transformaciones para ver si alguna de ellas mejora los residuos. Sin embargo, existe un método rápido para analizar la mejora que producen diferenes tranformaciones. El método se llama Box-Cox. Cargamos la librería `car`
 
-```{r}
-shapiro.test(anova$residuals)
+```{webr-r}
+library(MASS)
 ```
 
-Ahora analizamos si hay homcedasticidad
+```{webr-r}
+bm <- boxcox(lmFric)
 
-```{r}
-boxplot(anova$residuals~env_alberta$habitat)  
 ```
+
+Extraer el lambda del resultado
+
+```{webr-r}
+lambda <- bm$x[which.max(bm$y)] 
+```
+
+Tranformar la variable. Aquí hay dos opciones. Emplear el valor de lambda exacto o bien mirar al gráfico y elegir el tipo de tranformación más cercana. Por ejemplo, en este caso el valor exacto de lambda es 0,22. Hay dos transformaciones posibles. Lambda = 0 que equivale al logaritmo o Lambda = a 0,5 que equivale a la raíz cuadrada. Dado que la curva tiene un descenso más suave hacia mayores valores de Lambda elejimos 0,5. Además, este tipo de tranformación es muy común en datos de este tipo.
+
+```{webr-r}
+env_alberta$TFric <- env_alberta$Fric ^0.5
+```
+
+Ajustar el modelo empleando la variable tranformada
+
+```{webr-r}
+lmTFric <- lm(TFric ~ + habitat + slope + aspect + rel.moisture, data = env_alberta)
+```
+
+Comprobamos los residuos
+
+```{webr-r}
+residT <- rstandard(lmTFric) # estimamos los residuos estandarizados
+fittedT <- fitted(lmTFric) # los valores ajustados
+plot(fittedT, residT) # representados los residuos frente a los valores ajustados
+hist(residT) # hacemos un histograma de los residuos para comprobar la normalidad
+qqnorm(residT) # hacemos un gráfico q-q
+qqline(residT)
+```
+
+Por último, ajustamos el modelo, inspeccionamos la significación del modelo empleando un anova y los resultados de los coeficientes con el comando summary
+
+```{webr-r}
+aov(lmTFric)
+summary(lmTFric)
+```
+
+Los **coeficientes de una regresión múltiple** se llaman coeficientes o pendientes parciales y se interpretan en el contexto del resto de variables del modelo.
+
+Por ejemplo, cuando el resto de variables es constante (normalmente igual a la media) podemos decir que el nivel medio de humead tiene un mayor número de especies que el nivel bajo de humedad.
+
+Es muy útil representar los efectos de cada variable explicativa sobre la variable respuesta cuando el resto de variables explicativas son constantes. Esto muestra el efecto parcial de una variable sobre la respuesta.
+
+```{webr-r}
+library(effects)
+```
+
+```{webr-r}
+plot(allEffects(lmTFric))
+```
+
+## Selección de modelos en regresión lineal múltiple
+
+Es frecuente que una o varias de las variables del modelo de regresión lineal no estén asociadas a la variable respuesta. Incluir variables que no son relevantes conlleva ajustar modelos innecesariamente complejos. Por lo tanto, es frecuente realizar un paso previo de selección antes de ajustar el modelo definitivo.
+
+Una función útil en este sentido el la función `stepAIC`del paquete **MASS**.
+
+```{webr-r}
+library(MASS)
+```
+
+```{webr-r}
+step_lmTFric <- stepAIC(lmTFric, trace = TRUE, direction = "backward")
+```
+
+Para obtener un resumen del proceso usamos:
+
+```{webr-r}
+step_lmTFric$anova
+```
+
+También podemos ver la tabla de resultados del modelo
+
+```{webr-r}
+summary(step_lmTFric)
+```
+
+Estas dos opciones son válidas pero tienen algunas limitaciones ya que no garantiza que la combinación de variables sea optima y puede sergar tanto los valores de los parámetros. Una solución es calcular todos los modelos posibles y seleccionar el mejor. Esto se puede hacer con el paquete **glmulti**. Tenéis un ejemplo de uso del paquete [aquí](https://www.r-bloggers.com/2013/02/model-selection-and-multi-model-inference/)
+
+Sin embargo, incluso cuando calculamos todos los modelos muchas veces no hay certeza de que el modelo seleccionado sea el mejor porque sabemos que aquellos modelos que distan dos puntos de AIC en realidad son equivalentes entre sí. Por eso, recientemente se ha propuesto incorporar la incertidumbre en la selección de modelos a la hora de describir los resultados. Para esto podéis emplear el paquete **MuMIn**. Tenéis un ejemplo de aplicación en esta [página](https://www.r-bloggers.com/2013/02/model-selection-and-multi-model-inference/)
+
+En cualquier caso es importante que tengáis en cuenta que ningún método es perfecto y que lo ideal es seleccionar las variables a incluir en el modelo con criterios científicos.

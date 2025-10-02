@@ -73,15 +73,15 @@ c(1,7:9) # secuencia de números discontínia
 
 Otra función interesante es la función `length()`. Sirve para conocer la longitud de un vector.
 
-```{webr-r} 
+```{webr-r}
 v <- c(1:10) 
 length(v)
 ```
 
 ¿Cuál es la longitud de este otro vector?
 
-```{webr-r} 
-V <- 10 
+```{webr-r}
+v <- 10 
 length(v)
 ```
 
@@ -89,25 +89,26 @@ length(v)
 
 Podemos utilizar los `[]` para preguntarle a un vector por valores en posiciones concretas. Por ejemplo en el vector v, consulto el valor del elemento en la posición 3.
 
-```{webr-r} 
-v <- c(1:12) v[3] # consulto el valor del elemento en la posición 3
+```{webr-r}
+v <- c(1:12) 
+v[3] # consulto el valor del elemento en la posición 3
 ```
 
-```{webr-r} 
+```{webr-r}
 v[15] # puedo preguntar por un elemento que no existe.
 ```
 
-```{webr-r} 
+```{webr-r}
 v[15] <- 30 # incluso asignarle un valor numérico
 ```
 
 **OJO** ¿Qué crees que pasará si le asigno un valor no numérico?
 
-```{webr-r} 
+```{webr-r}
 v[14]<-"tomates"
 ```
 
-```{webr-r} 
+```{webr-r}
 rm(v) # finalmente podemos eliminar v
 ```
 
@@ -268,7 +269,7 @@ names(milista)  # comprobamos si tiene nombres
 milista
 ```
 
-#### Ejercicio 7. Buscar el elemento de la lista por nombre 
+#### Ejercicio 7. Buscar el elemento de la lista por nombre
 
 ```{webr-r}
 milista$sp1

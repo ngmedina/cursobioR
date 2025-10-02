@@ -40,7 +40,7 @@ Sigue las instrucciones en <https://cran.r-project.org/> para instalar R según 
 
 ### 2.1 Usuarios de Windows
 
-Para usuarios de Windows, selecciona el enlace **‘Download R for Windows’**, luego haz clic en el enlace **‘base’** y finalmente en **‘Download R 4.3.3 for Windows’**. Esto iniciará la descarga del archivo de instalación `.exe`.
+Para usuarios de Windows, selecciona el enlace **‘Download R for Windows’**, luego haz clic en el enlace **‘base’** y finalmente en **‘Download R 4.5.1 for Windows’**. Esto iniciará la descarga del archivo de instalación `.exe`.
 
 Una vez completada la descarga, haz doble clic en el archivo ejecutable de R y sigue las instrucciones en pantalla.
 

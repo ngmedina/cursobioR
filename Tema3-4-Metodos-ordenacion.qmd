@@ -12,115 +12,110 @@ filters:
   - webr
 ---
 
-# Breve introducción
+### Breve introducción
 
-En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.
+Los métodos de ordenación se emplean habitualmente para representar datos que tienen muchas dimensiones (como por ejemmplo los datos de composición específica) a lo largo de un número reducido de ejes.Las bases de datos con multitud de variables son difíciles de representar. En las ordenaciones se asume que la información que contiene nuestra base de datos multivariante tiene información redundante. Así, el análisis de ordenación simplifica o "reduce" esa información para que podamos visualizar las muestras. Esta visualización ofrece una forma sencilla de analizar cómo se ordenan las muestras y ver cuáles son más parecidas entre sí.
 
-Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
+Además, una vez que tenemos las muestras "ordenadas" es frecuente que queramos saber si ese orden se corresponde con algún grupo en particular (por ejemplo, el hábitat en el que recogimos las muestras) o con variables ambientales (por ejemplo, si las muestras se ordenan a lo largo de un gradiente de humedad). Algunos métodos de ordenación permiten hacer este tipo de análsis.
 
-Vamos a comenzar con una pregunta sencilla. En la base de datos de los herbazales de Alberta tenemos dos tipos de hábitat diferentes unas comunidades dominadas por *Festuca* "Fescue" y otras en las que encontamos comunidades mixtas de gramíneas "Mixedgrass".
+En este tema vamos centrarnos en análisis de componentes principales que es muy útil para comunidades de especies en las que las diferencias entre comunidades no son muy grandes y, por lo tanto, no hay muchas especies que están ausentes de buena parte de las localidades (la base de datos tiene pocos ceros).
+
+Cuando la composición específica es muy heterogénea o tenemos otro tipo de datos lo mejor es optar por otro tipo de análisis de ordenación. Una buena muy página en la que podéis explorar todas las posibilidades que ofrecen este tipo de análisis es la publicada por David Zeleny [vínculo aquí](https://www.davidzeleny.net/anadat-r/doku.php/en:ordination)
+
+Como siempre vamos a trabajar con la base de datos de herbáceas de Alberta.
+
+```{webr-r}
+comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+```
+
+Existen varias funciones que permiten hacer PCAs en R. Por ejemplo, la función `rda()` en el paquete vegan, la función `prcomp` en el paquete stats y la función `pca` en el paquete labdsv.
+
+Vamos a utilizar la función `rda` del paquete vegan.
 
 Comenzamos por cargar las librerías
 
-```{r message = FALSE}
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(picante)
+```{webr-r}
 library(vegan)
 ```
 
-# Análisis de la varianza
+La función `rda` permite hacer Principal component Analysis (PCA), redundancy analysis (RDA),
 
-El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
-
-## Análisis de la varianza, factores con un nivel
-
-Ver aquí <https://biocosas.github.io/R/050_anova.html>
-
-Cargamos los datos de la base de datos de herbazales de Alberta
-
-```{r}
-env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
-
-env_alberta$habitat
-```
-
-En esta misma base de datos hay recogidas una serie de características ambientales de las cuadrículas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
-
-¿Varían estos dos hábitats en cuanto a su pendiente, orientación y humedad relativa?
-
-Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
-
-#### [Ejercicio 1]{style="color: blue;"} --\> Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R {.unnumbered}
-
-### Estimar el modelo ANOVA
-
-Primero representamos los datos utilizando un gráfico de caja y bigotes
-
-```{r}
-boxplot(env_alberta$slope ~ env_alberta$habitat)
-```
-
-Ahora vamos a utilizar la función `aov` para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos
-
-La función **aov** tiene dos argumentos
-
-**formula** una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla \~ la (o las) variables cualitativas
-
-**data** los datos que vamos a emplear
-
-```{r eval=FALSE}
-anova <- aov(slope ~ habitat, data = env_alberta)
-summary(anova)
-```
-
-```{r echo=FALSE}
-anova <- aov(slope ~ habitat, data = env_alberta)
-summary(anova)
-```
-
-#### [Ejercicio 2]{style="color: blue;"} --\> Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor. {.unnumbered}
-
-¿Qué nos dice cada uno de estos valores?
-
-Podéis encontrar un tutorial un poco más técnico sobre anovas [aquí](https://biocosas.github.io/R/050_anova.html)
-
-### Validar el modelo ANOVA
-
-Los resultados de estos análisis son robustos si y solo si se cumplen una serie de condiciones
-
--   Independencia de los datos
-
--   Normalidad
-
--   Homocedasticidad
-
-Para comprobar si se cumplen analizamos los residuos
-
-```{r}
-plot(anova$fitted.values, anova$residuals, xlab="Measurement", ylab="Residuals")
-abline(0,0)
+```{webr-r}
+pca_alb_com <- rda(comm_alberta[, -1], method ="pa", scale =F)
 
 ```
 
-```{r}
-hist(anova$residuals)
+```{webr-r}
+pca_alb_com
 ```
 
-```{r}
-qqnorm(anova$residuals) 
-qqline(anova$residuals)
+Para acceder a los elementos de resultados podemo utilizar el comando `summary`
+
+```{webr-r}
+sum <- summary(pca_alb_com)
 ```
 
-Ahora realizamos un test formal que comprueba si lo residuos son normales. Se contrasta la hipótesis nula "los residuos son normales". Si el test es significativo hay desviación con respecto a la normalidad.
+El resumen del análisis nos muestra la proporción de la varianza explicada por cada eje. Esto lo podemos interpretar como la cantidad de información que contienen nuestros ejes con respecto a la información que contiene la base de datos.
 
-```{r}
-shapiro.test(anova$residuals)
+#### [Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?]{style="color: blue;"} {.unnumbered}
+
+#### [Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?]{style="color: blue;"} {.unnumbered}
+
+#### [Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?]{style="color: blue;"} {.unnumbered}
+
+#### [Ejercicio resuelto. ¿Qué peso tiene las especies *Artemisia cana* y *Artemisia rigida* en el eje 1?]{style="color: blue;"} {.unnumbered}
+
+```{webr-r}
+rows <- rownames(sum$species) %in% c("Artemisia_cana", "Artemisia_frigida")
+sum$species[rows,]
 ```
 
-Ahora analizamos si hay homcedasticidad
+Ahora pasamos a representar los datos
 
-```{r}
-boxplot(anova$residuals~env_alberta$habitat)  
+También podemos hacer una representación gráfica del peso de la varianza que recoje cada eje
+
+```{webr-r}
+plot(pca_alb_com)
+```
+
+Como podéis ver los nombres de las especies no se leen porque ocupan demasiado espacio. Una posibilidad para solucionarlo es abreviar los nombres de las especies. Para eso, por convención se cogen las cuatro letras del epiteto genérico y las cuatro primeras letras del epiteto de especie o subespecie.
+
+¡OJO! En la base de datos las especies están separadas por un guión bajo. Lo primero que tenemos que hacer es sustituir el guión bajo por un espacio para lo que usaremos la función `gsub`
+
+```{webr-r}
+sp <- colnames(comm_alberta)
+sp <- gsub(pattern =  "_", replacement = " ", sp, fixed = TRUE)
+```
+
+```{webr-r}
+sp_abrev <- make.cepnames(sp)
+```
+
+Cambiamos el nombre de las columnas de la matriz.
+
+```{webr-r}
+colnames(comm_alberta) <- sp_abrev
+```
+
+Y recalculamos
+
+```{webr-r}
+pca_alb_com <- rda(comm_alberta[, -1], method ="pa", scale =F)
+ordiplot(pca_alb_com, type = "text")
+```
+
+NOTA: En análisis de componentes principales (PCA) también se puede emplear para resumir información ambiental. Es adecuado cuando tenemos muchas variables ambientales y queremos simplificar (reducir las dimensiones). Por ejemplo, lo podríamos emplear para resumir la información climática de la base de datos de AFLIBER.
+
+```{webr-r}
+env_afliber <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Cistus%20database/afiber_clim_sel.csv")
+```
+
+```{webr-r}
+colnames(env_afliber) <- 
+pca_afl_com <- rda(env_afliber[,-c(1:4)], method ="pa", scale =T)
+plot(pca_afl_com)
+```
+
+```{webr-r}
+summary(pca_afl_com)
 ```

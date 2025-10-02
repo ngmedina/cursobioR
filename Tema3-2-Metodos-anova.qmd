@@ -1,5 +1,5 @@
 ---
-title: "Tema 3. Primera parte - Índices de diversidad"
+title: "Tema 3. Segunda parte - Anova"
 format:
   html:
     toc: true
@@ -18,109 +18,224 @@ En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemo
 
 Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
 
-Vamos a comenzar con una pregunta sencilla. En la base de datos de los herbazales de Alberta tenemos dos tipos de hábitat diferentes unas comunidades dominadas por *Festuca* "Fescue" y otras en las que encontamos comunidades mixtas de gramíneas "Mixedgrass".
+En esta misma base de datos hay recogidas una serie de características ambientales de las parcelas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
 
-Comenzamos por cargar las librerías
+Comenzamos por cargar los datos:
 
-```{r message = FALSE}
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(picante)
-library(vegan)
+```{webr-r}
+comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+
+env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
 ```
+
+Vamos a comenzar con una pregunta sencilla. Queremos averiguar si hay diferencias en riqueza de especies en función de las características ambientales de las parcelas.
+
+Para ello a partir de la tabla de comunidades calculamos la riqueza
+
+```{webr-r}
+library(vegan)
+S_alberta <- specnumber(comm_alberta[,-1]) 
+```
+
+Comprobamos que las cuadrículas están ordenadas de la misma manera en la tabla de condiciones ambientales y la de composición específica ¡esto es muy importante!
+
+```{webr-r}
+order <- match(comm_alberta$plot, env_alberta$plot)
+```
+
+Si no lo estuvieran podemos reordenarlos con la siguiente línea
+
+```{webr-r}
+comm_alberta <- comm_alberta[order,]
+```
+
 
 # Análisis de la varianza
 
 El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
 
-## Análisis de la varianza, factores con un nivel
+## Análisis de la varianza, factores con dos níveles
 
 Ver aquí <https://biocosas.github.io/R/050_anova.html>
 
-Cargamos los datos de la base de datos de herbazales de Alberta
-
-```{r}
-env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
-
-env_alberta$habitat
-```
-
-En esta misma base de datos hay recogidas una serie de características ambientales de las cuadrículas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
 
 ¿Varían estos dos hábitats en cuanto a su pendiente, orientación y humedad relativa?
 
 Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
 
-#### [Ejercicio 1]{style="color: blue;"} --\> Busca en internet qué función(es) podemos utilizar para hacer un análisis de la varianza en R {.unnumbered}
-
 ### Estimar el modelo ANOVA
 
 Primero representamos los datos utilizando un gráfico de caja y bigotes
 
-```{r}
+```{webr-}
 boxplot(env_alberta$slope ~ env_alberta$habitat)
 ```
 
 Ahora vamos a utilizar la función `aov` para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos
 
-La función **aov** tiene dos argumentos
+La función **aov** tiene dos argumentos:
 
-**formula** una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla \~ la (o las) variables cualitativas
+-   **formula** una fórmula que especifique el modelo en la que a la izquierda tenemos la variable cuantitativa y a la derecha separado por una virgulilla \~ la (o las) variables cualitativas
 
-**data** los datos que vamos a emplear
+-   **data** los datos que vamos a emplear
 
-```{r eval=FALSE}
+```{webr-r}
 anova <- aov(slope ~ habitat, data = env_alberta)
 summary(anova)
 ```
 
-```{r echo=FALSE}
+```{webr-r}
 anova <- aov(slope ~ habitat, data = env_alberta)
 summary(anova)
 ```
 
-#### [Ejercicio 2]{style="color: blue;"} --\> Identifica en la tabla ANOVA los grados de libertad del factor, los grados de libertad residuales, la suma de cuadrados de los grupos, la suma de cuadrados del error, el valor del estadístico F y el p-valor. {.unnumbered}
+#### Ejercicio 1: Calcula la riqueza de especies de cada cuadrícula. Nota: Crea una nueva variable que se llame S_alberta
 
-¿Qué nos dice cada uno de estos valores?
+```{webr-r}
+S_alberta <- specnumber(comm_alberta[,-1]) 
+```
 
-Podéis encontrar un tutorial un poco más técnico sobre anovas [aquí](https://biocosas.github.io/R/050_anova.html)
 
-### Validar el modelo ANOVA
 
-Los resultados de estos análisis son robustos si y solo si se cumplen una serie de condiciones
+#### Ejercicio 2: Haz un gráfico de caja y bigotes que compare la riqueza entre los dos hábitat {.unnumbered}
 
--   Independencia de los datos
-
--   Normalidad
-
--   Homocedasticidad
-
-Para comprobar si se cumplen analizamos los residuos
-
-```{r}
-plot(anova$fitted.values, anova$residuals, xlab="Measurement", ylab="Residuals")
-abline(0,0)
+```{webr-r}
+boxplot(S_alberta ~ env_alberta$habitat)
 
 ```
 
-```{r}
-hist(anova$residuals)
+#### Ejercicio 3: Teniendo en cuenta este gráfico ¿Crees que habrá diferencias significativas entre hábitats? 
+
+#### Ejercicio 4: Haz un análisis de la varianza para comprobar si existen diferencias significativas entre muestras los resultados. Guarda el análisis en un objeto que se llame "anova" y explora los resultados 
+
+```{webr-r}
+anova <- aov(S_alberta ~ env_alberta$habitat)
+summary(anova)
 ```
 
-```{r}
-qqnorm(anova$residuals) 
-qqline(anova$residuals)
+Comprobamos los residuos
+
+```{webr-r}
+par(mfrow = c(1,2))
+plot(anova)
 ```
 
-Ahora realizamos un test formal que comprueba si lo residuos son normales. Se contrasta la hipótesis nula "los residuos son normales". Si el test es significativo hay desviación con respecto a la normalidad.
+```{webr-r}
+boxplot(S_alberta ~ env_alberta$habitat)
 
-```{r}
-shapiro.test(anova$residuals)
 ```
 
-Ahora analizamos si hay homcedasticidad
+¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
 
-```{r}
-boxplot(anova$residuals~env_alberta$habitat)  
+## Análisis de la varianza, factores con varios niveles
+
+Hasta ahora hemos visto ejemplos con ANOVAS en los que nuestro factor solo tiene dos niveles. Ahora vamos a ver un ejemplo en el que tenemos más niveles.
+
+Aunque habíamos tratado la humedad relativa como variable cuantitativa en realidad es un índice que toma los valores 1, 2, 3. Así que vamos a tranformar la variable en un factor.
+
+**¡OJO!** Es muy común que si habéis codificado factores con números R entienda que son valores cuantitativos. Siempre que no sea así tranformad las variables en cualitativas
+
+```{webr-r}
+env_alberta$rel.moisture <- as.factor(env_alberta$rel.moisture)
 ```
+
+Como siempre, lo primero es representar los datos
+
+```{webr-r}
+boxplot(S_alberta ~ env_alberta$rel.moisture)
+```
+
+```{webr-r}
+anova_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
+summary(anova_moist)
+```
+
+#### Ejercicio 5: ¿Cómo intepretamos este resultado? 
+
+Gráficos de diagnostico
+
+```{webr-r}
+par(mfrow = c(2,2))
+plot(anova_moist)
+hist(anova_moist$residuals)
+```
+
+# Comparaciones múltiples
+
+Pero el anova no nos dice nada sobre qué especies son diferentes entre sí. Para eso tenemos que hacer pruebas de contraste a posteriori o pruebas post-hoc.
+
+Para ello vamos a emplear el test de Tukey que funciona muy bien en los casos en los que no hay mucha variación en el número de muestras en cada clase. Podéis encontrar una explicación sencilla sobre qué test post-hoc usar [aquí](https://www.statology.org/tukey-vs-bonferroni-vs-scheffe/)
+
+El test compara todos los niveles de nuestro factor, esto es, todas las parejas de especies y nos dice si hay diferencias significativas entre ellas.
+
+```{webr-r}
+library(multcomp)
+library(emmeans)
+```
+
+```{webr-r}
+aov_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
+
+```
+
+Calculamos las medias y los intervalos de confianza para cada grupo
+
+```{webr-r}
+em_moist <- emmeans::emmeans(object = aov_moist, specs = "rel.moisture", type = "response")
+
+```
+
+Y hacemos las comparaciones múltiples
+
+```{webr-r}
+pairs(em_moist)
+```
+
+A veces cuando tenemos muchos grupos los resultados son muy poco visuales y por lo tanto difíciles de interpretar. Para facilitar la interpretación podemos acudir a una forma de representación compacta. Tenéis [aquí](https://schmidtpaul.github.io/DSFAIR/compactletterdisplay.html) una explicación detallada sobre esta forma de representar los datos.
+
+```{webr-r}
+cld <- multcomp::cld(em_moist, alpha = 0.05, Letters = LETTERS)
+cld
+```
+
+#### Ejercicio extra ¿Cómo interpretamos el resultado de la representación compacta de las comparaciones múltiples? 
+
+Leed con cuidado esta [página 1](http://statistics-help-for-students.com/How_do_I_report_a_1_way_between_subjects_ANOVA_in_APA_style.htm#.Yy1ZA3ZByUk) y escribid un texto que describa los resultados del ANOVA y las comparaciones múltiples en el que se analiza las diferencias en temperatura media anual (bio1) entre especies.
+
+# Análisis de la varianza, varios factores
+
+Por último, vamos a analizar un caso en el que tenemos dos factores con varios niveles cada uno. Vamos a emplear de nuevo la base de datos de los herbazales de Alberta y vamos a contestar a la pregunta. si recordáis en los apartados previos habíamos visto que la humedad relativa variaba con el hábitat.
+
+**¿Depende la diversidad del hábitat y la humedad relativa?**
+
+Para ello calculamos un índice de diversidad por cada cuadrícula, por ejemplo, la riqueza
+
+```{webr-r}
+S_alberta <- specnumber(comm_alberta)
+```
+
+Y creamos una nueva columna en la matriz de variables ambientales en la que guardamos los datos de riqueza.
+
+```{webr-r}
+env_alberta$S <- S_alberta
+```
+
+Ahora realizamos un análisis de la varianza que compare la riqueza entre hábitat "habitat" y lugares "site"
+
+```{webr-r}
+aovtw_alberta <- aov(S ~ habitat + rel.moisture, data = env_alberta)
+summary(aovtw_alberta)
+```
+
+**¿Cómo interpretamos el resultado?**
+
+Siempre que tengamos más de una variable existe la posibilidad de que haya interacciones entre ellas.
+
+Por ejemplo, es posible que el efecto del hábitat dependa de la humedad relativa. Así que, vamos a comprobar si hay efecto de la interacción
+
+```{webr-r}
+aovint_alberta <- aov(S ~ habitat + rel.moisture + habitat:rel.moisture, data = env_alberta)
+summary(aovint_alberta)
+```
+
+#### Ejercicio 6: ¿Cómo interpretamos el resultado? ¿Existe interacción entre el hábitat y la humedad relativa? {.unnumbered}
