@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.23">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,15 +32,14 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-1fe81d0376b2c50856e68e651e390326.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1d4f84655f446305ac42a8f1abcf7405.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-991b1886d3c685c7aa2b62b80640c7af.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -55,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No se han encontrado resultados",
+    "search-no-results-text": "Sin resultados",
     "search-matching-documents-text": "documentos encontrados",
     "search-copy-link-title": "Copiar el enlace en la búsqueda",
     "search-hide-matches-text": "Ocultar resultados adicionales",
@@ -368,7 +367,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"data(penguins)\npenguins <- penguins %>% \n  filter(!is.na(body_mass_g),\n         !is.na(bill_length_mm),\n         !is.na(bill_depth_mm),\n         !is.na(sex))\nhead(penguins)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(data = penguins, mapping = aes(x = body_mass_g, y = bill_length_mm))+\n  geom_point()","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(data = penguins, mapping = aes(x = body_mass_g, y = bill_length_mm))+\n  geom_point(color = \"blue\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm, color = species))+\n  geom_point()","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     color = species,\n                     size = bill_depth_mm))+\n  geom_point(alpha = 0.25)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm))+\n  geom_point(colour = \"blue\")+\n  geom_smooth(method = \"lm\", color = \"red\")","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g))+\n  geom_histogram(bins = 50) # bins = número de agrupaciones","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species,))+\n  geom_boxplot()+\n  geom_jitter()\n  geom_violin()","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species))+\n  geom_violin()","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species))+\n  geom_violin()+\n  scale_fill_manual(values = c(Adelie = \"red\", Gentoo = \"yellow\", Chinstrap = \"blue\"))","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  scale_color_continuous(palette = c(\"red\", \"yellow\"))\n  # scale_color_viridis_c()","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  facet_wrap(~species)+\n  scale_color_viridis_c()","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  facet_wrap(sex~species)+\n  scale_color_viridis_c()","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")+\n  \n  theme_bw()","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass_g, \n                     y = bill_length_mm, \n                     colour = bill_depth_mm))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")+\n  \n  theme_bw()+\n  \n  theme(axis.text.x.bottom = element_text(face = 3, angle = 45, vjust = 0.4),\n        panel.grid.major.y = element_line(linewidth = 0.75, color = \"red\"),\n        panel.grid.minor.y = element_blank(),\n        panel.grid.major.x = element_line(linewidth = 0.75, linetype = 2, colour = \"black\"),\n        panel.background = element_rect(fill = \"aliceblue\")\n        )","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(ggplot2)\n\ndata(penguins)\npenguins <- penguins %>% \n  filter(!is.na(body_mass),\n         !is.na(bill_len),\n         !is.na(bill_dep),\n         !is.na(sex))\nhead(penguins)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+\n  geom_point()","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     color = species,\n                     size = bill_dep))+\n  geom_point(alpha = 0.25)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_len, fill = species,))+\n  geom_boxplot()+\n  geom_jitter()","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_len, fill = species))+\n  geom_violin()","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = species, y = bill_len, fill = species))+\n  geom_violin()+\n  scale_fill_manual(values = c(Adelie = \"red\", Gentoo = \"yellow\", Chinstrap = \"blue\"))","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                   y = bill_len, \n                   colour = bill_dep))+\ngeom_point()+\nscale_color_continuous(palette = c(\"red\", \"yellow\"))\n# scale_color_viridis_c()","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     colour = bill_dep))+\n  geom_point()+\n  facet_wrap(~species)+\n  scale_color_viridis_c()","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     colour = bill_dep))+\n  geom_point()+\n  facet_wrap(sex~species)+\n  scale_color_viridis_c()","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     colour = bill_dep))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     colour = bill_dep))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")+\n  \n  theme_bw()","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(penguins, aes(x = body_mass, \n                     y = bill_len, \n                     colour = bill_dep))+\n  geom_point()+\n  scale_color_viridis_c()+\n  \n  labs(x = \"Masa corporal (g)\", \n       y = \"longitud de pico (mm)\",\n       title = \"Tamaño de pingüinos\",\n       subtitle = \"Estudio de las especies del Archipiélago de Palmer\",\n       caption = \"*datos no definitivos\")+\n  \n  theme_bw()+\n  \n  theme(axis.text.x.bottom = element_text(face = 3, angle = 45, vjust = 0.4),\n        panel.grid.major.y = element_line(linewidth = 0.75, color = \"red\"),\n        panel.grid.minor.y = element_blank(),\n        panel.grid.major.x = element_line(linewidth = 0.75, linetype = 2, colour = \"black\"),\n        panel.background = element_rect(fill = \"aliceblue\")\n  )","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"bp <- ggplot(penguins)+\n        geom_boxplot(aes(x = species, y = body_mass, fill = species))+\n        scale_fill_viridis_d()+\n        theme(legend.position = \"none\")\n\nbp\n\n\nsp <- ggplot(penguins)+\n        geom_point(aes(x = bill_len, y =body_mass , color = bill_dep))+\n        scale_color_viridis_c(name = \"Bill depth (mm)\")\n\nsp","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(patchwork)\n\nbp+sp\n# bp/sp\n\n# ggsave(\"plot.png\", height = 100, width = 200, units = \"mm\", dpi=300)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(terra)\nlibrary(ggplot2)\nlibrary(tidyterra)\nworld <- vect(\"https://github.com/ngmedina/cursobioR/main/data/world-administrative-boundaries.shp\")\n\nView(as.data.frame(world))\n\ncols <- c(\"#4573a8\", \"#f08c13\", \"#307047\", \"#70304b\", \"#f0f04f\", \"#80807a\")\nnames(cols) <- c(\"Oceania\", \"Asia\", \"Europe\", \"Americas\", \"Africa\", \"Antarctica\")\n\n\nggplot(world)+\n  geom_spatvector(aes(fill=continent), colour = \"#00000033\")+\n  \n  scale_fill_manual(values = cols)+\n  scale_x_continuous(breaks = seq(from = -180, to = 180, by = 30))+\n  \n  theme(legend.position = \"none\",\n        panel.grid = element_blank(),\n        panel.background = element_rect(fill = \"aliceblue\"),\n        axis.text.x = element_text(angle = 90, hjust = 0))\n","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(terra)\nlibrary(ggplot2)\nlibrary(tidyterra)\n\nmdt <- rast(\"https://github.com/ngmedina/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif\")\n\nggplot()+\n  geom_spatraster(data = mdt, na.rm = TRUE)+\n  \n  scale_fill_continuous(palette = \"magma\", na.value = \"transparent\")+\n  # scale_fill_binned(palette = \"magma\", breaks = c(0,500, 1000, 2000), na.value = \"transparent\")+\n  \n  theme(panel.background = element_rect(fill = \"aliceblue\"))\n","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# install.packages(\"BiocManager\")\n# BiocManager::install(\"ggtree\")\nlibrary(ape)\nlibrary(ggtree)\n\nphylo <- read.tree(\"https://github.com/ngmedina/cursobioR/main/data/pinus.tre\")\n\n\nggtree(phylo, layout=\"fan\", size=0.15, open.angle=15,) +\n  geom_tiplab(size = 3, color = \"grey\", offset = 1.5)+\n  \n  theme(plot.margin = margin(20, 20, 20, 20, \"mm\"))\n  \n","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1633,8 +1632,6 @@ globalThis.qwebrExecuteCode = async function (
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Análisis de la biodiversidad en R y SIG</span>
     </a>
@@ -1716,17 +1713,21 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#la-capa-mapping" id="toc-la-capa-mapping" class="nav-link" data-scroll-target="#la-capa-mapping">la capa <code>mapping</code></a>
   <ul class="collapse">
   <li><a href="#ejemplo-1.-hay-una-correlación-entre-masa-corporal-y-longitud-del-pico" id="toc-ejemplo-1.-hay-una-correlación-entre-masa-corporal-y-longitud-del-pico" class="nav-link" data-scroll-target="#ejemplo-1.-hay-una-correlación-entre-masa-corporal-y-longitud-del-pico">Ejemplo 1. ¿Hay una correlación entre masa corporal y longitud del pico?</a></li>
-  <li><a href="#ejemplo-2.-mejor-coloréalos-dependiendo-de-la-especie." id="toc-ejemplo-2.-mejor-coloréalos-dependiendo-de-la-especie." class="nav-link" data-scroll-target="#ejemplo-2.-mejor-coloréalos-dependiendo-de-la-especie.">Ejemplo 2. Mejor coloréalos dependiendo de la especie.</a></li>
   </ul></li>
   <li><a href="#tipos-de-gráfico-la-capa-geometries" id="toc-tipos-de-gráfico-la-capa-geometries" class="nav-link" data-scroll-target="#tipos-de-gráfico-la-capa-geometries">Tipos de gráfico (la capa <code>geometries</code>)</a>
   <ul class="collapse">
   <li><a href="#línea-de-regresión" id="toc-línea-de-regresión" class="nav-link" data-scroll-target="#línea-de-regresión">Línea de regresión</a></li>
-  <li><a href="#histogramas" id="toc-histogramas" class="nav-link" data-scroll-target="#histogramas">Histogramas</a></li>
   <li><a href="#comparaciones-entre-grupos" id="toc-comparaciones-entre-grupos" class="nav-link" data-scroll-target="#comparaciones-entre-grupos">Comparaciones entre grupos</a></li>
   </ul></li>
   <li><a href="#edición-de-colores-la-capa-scales." id="toc-edición-de-colores-la-capa-scales." class="nav-link" data-scroll-target="#edición-de-colores-la-capa-scales.">Edición de colores (la capa <code>scales</code>).</a></li>
   <li><a href="#separación-de-casos-la-capa-facets" id="toc-separación-de-casos-la-capa-facets" class="nav-link" data-scroll-target="#separación-de-casos-la-capa-facets">Separación de casos (la capa <code>facets</code>)</a></li>
   <li><a href="#tema-del-gráfico" id="toc-tema-del-gráfico" class="nav-link" data-scroll-target="#tema-del-gráfico">“Tema” del gráfico</a></li>
+  <li><a href="#combinar-gráficos-con-patchwork" id="toc-combinar-gráficos-con-patchwork" class="nav-link" data-scroll-target="#combinar-gráficos-con-patchwork">Combinar gráficos con <code>patchwork</code></a></li>
+  <li><a href="#extensiones-de-ggplot" id="toc-extensiones-de-ggplot" class="nav-link" data-scroll-target="#extensiones-de-ggplot">Extensiones de ggplot</a>
+  <ul class="collapse">
+  <li><a href="#mapas-con-tidyterra" id="toc-mapas-con-tidyterra" class="nav-link" data-scroll-target="#mapas-con-tidyterra">1. mapas con <code>tidyterra</code></a></li>
+  <li><a href="#filogenias-con-ggtree" id="toc-filogenias-con-ggtree" class="nav-link" data-scroll-target="#filogenias-con-ggtree">2. filogenias con <code>ggtree</code></a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -2059,17 +2060,15 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h4 class="anchored" data-anchor-id="ejemplo-1.-hay-una-correlación-entre-masa-corporal-y-longitud-del-pico">Ejemplo 1. ¿Hay una correlación entre masa corporal y longitud del pico?</h4>
 <div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>¿Podríamos colorear todo de azul?</p>
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="ejemplo-2.-mejor-coloréalos-dependiendo-de-la-especie." class="level4">
-<h4 class="anchored" data-anchor-id="ejemplo-2.-mejor-coloréalos-dependiendo-de-la-especie.">Ejemplo 2. Mejor coloréalos dependiendo de la especie.</h4>
-<div id="qwebr-insertion-location-4"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>¿Podríamos colorear todo de azul? ```iobklkdx ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+ geom_point(color = “blue”)</p>
+<pre><code>
+#### Ejemplo 2. Mejor coloréalos dependiendo de la especie.
+```{webr-r}
+ggplot(penguins, aes(x = body_mass, y = bill_len, color = species))+
+  geom_point()</code></pre>
 <p>En este caso, color va dentro de <code>aes()</code> ya que está referido a una columna.</p>
 <p>Se pueden modificar muchos parámetros, como transparencia, tamaño del punto…</p>
-<div id="qwebr-insertion-location-5"></div>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 </section>
@@ -2078,58 +2077,74 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Hasta ahora, lo único que hemos graficado han sido gráficos de dispersión(<code>geom_piont()</code>), pero podemos hacer muchos otros tipos de gráfico.</p>
 <section id="línea-de-regresión" class="level3">
 <h3 class="anchored" data-anchor-id="línea-de-regresión">Línea de regresión</h3>
-<p>Por ejemplo, podemos añadir una línea de regresión a nuestro gráfico previo:</p>
-<div id="qwebr-insertion-location-6"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="histogramas" class="level3">
-<h3 class="anchored" data-anchor-id="histogramas">Histogramas</h3>
-<p>Un gráfico comun para ver la distribución de valores de una variable es un histograma. En este caso solo hay valor <code>x</code> (continua), ya que la <code>y</code> es el conteo de veces que se toma el valor.</p>
-<p>Para ver cómo se distribuyen los valores de masa corporal:</p>
-<div id="qwebr-insertion-location-7"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Por ejemplo, podemos añadir una línea de regresión a nuestro gráfico previo: <code>iobklkdx ggplot(penguins, aes(x = body_mass, y = bill_len))+   geom_point(colour = "blue")+   geom_smooth(method = "lm", color = "red")</code> ### Histogramas Un gráfico comun para ver la distribución de valores de una variable es un histograma. En este caso solo hay valor <code>x</code> (continua), ya que la <code>y</code> es el conteo de veces que se toma el valor.</p>
+<p>Para ver cómo se distribuyen los valores de masa corporal: <code>iobklkdx ggplot(penguins, aes(x = body_mass))+   geom_histogram(bins = 50) # bins = número de agrupaciones</code></p>
 </section>
 <section id="comparaciones-entre-grupos" class="level3">
 <h3 class="anchored" data-anchor-id="comparaciones-entre-grupos">Comparaciones entre grupos</h3>
 <p>De manera clásica, se han utilizado boxplots para ver si hay diferencias entre grupos. Además, si queremos ver los datos “brutos” podemos poner las observaciones “agitadas” para ver cómo se distribuyen.</p>
-<div id="qwebr-insertion-location-8"></div>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Una alternativa a esto sería hacer un gráfico de violones, en el que se muestra la distribución de la densidad de puntos por grupo.</p>
-<div id="qwebr-insertion-location-9"></div>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 </section>
 <section id="edición-de-colores-la-capa-scales." class="level2">
 <h2 class="anchored" data-anchor-id="edición-de-colores-la-capa-scales.">Edición de colores (la capa <code>scales</code>).</h2>
 <p>Los cambios de valores (color, relleno, transparencia) por defecto hay que cambiarlos utilizando la capa <code>scales</code>.</p>
-<div id="qwebr-insertion-location-10"></div>
+<div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>O para una variable continua:</p>
-<div id="qwebr-insertion-location-11"></div>
+<div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="separación-de-casos-la-capa-facets" class="level2">
 <h2 class="anchored" data-anchor-id="separación-de-casos-la-capa-facets">Separación de casos (la capa <code>facets</code>)</h2>
 <p>Para ver cómo se distribuyen los casos en nuestro dataset podemos “romperlo” en función de una (wrap) o dos (grid) variables, dejando todo lo demás igual.</p>
-<div id="qwebr-insertion-location-12"></div>
+<div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-13"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 <section id="tema-del-gráfico" class="level2">
 <h2 class="anchored" data-anchor-id="tema-del-gráfico">“Tema” del gráfico</h2>
 <p>La capa <code>theme</code> hace referencia a todo lo que se refiere al “marco”, pero no afecta a la salida de nuestros datos (es decir, nombres de ejes, visualización, etc.).</p>
 <p>La función <code>labs()</code> permite fijar el nombre del eje x, y, título y descripción.</p>
-<div id="qwebr-insertion-location-14"></div>
+<div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Además, podemos quitar el tema por defecto (gris) y poner otro en blanco y negro (por ejemplo).</p>
-<div id="qwebr-insertion-location-15"></div>
+<div id="qwebr-insertion-location-11"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Y editar el texto de los ejes, color de la cuadrícula, etc..</p>
+<div id="qwebr-insertion-location-12"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="combinar-gráficos-con-patchwork" class="level2">
+<h2 class="anchored" data-anchor-id="combinar-gráficos-con-patchwork">Combinar gráficos con <code>patchwork</code></h2>
+<p>Pongamos que tenemos dos gráficos complementarios que queremos mostrar</p>
+<div id="qwebr-insertion-location-13"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Podemos hacer una única figura para guardarla después</p>
+<div id="qwebr-insertion-location-14"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="extensiones-de-ggplot" class="level2">
+<h2 class="anchored" data-anchor-id="extensiones-de-ggplot">Extensiones de ggplot</h2>
+<section id="mapas-con-tidyterra" class="level3">
+<h3 class="anchored" data-anchor-id="mapas-con-tidyterra">1. mapas con <code>tidyterra</code></h3>
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="filogenias-con-ggtree" class="level3">
+<h3 class="anchored" data-anchor-id="filogenias-con-ggtree">2. filogenias con <code>ggtree</code></h3>
+<div id="qwebr-insertion-location-17"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 
 
+</section>
 </section>
 </section>
 
@@ -2185,14 +2200,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-      const outerScaffold = trigger.parentElement.cloneNode(true);
-      const codeEl = outerScaffold.querySelector('code');
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
         }
-      }
-      return codeEl.innerText;
+        return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
