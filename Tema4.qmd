@@ -15,7 +15,7 @@ filters:
 # El paquete ggplot2
   
 El paquete ggplot2 se basa en la gramática interna de un gráfico; no es una función para hacer cada tipo de gráfico, sino una manera de entenderlos, y por tanto "universal". 
-Ver [presentación complementaria](https://github.com/iramosgutierrez/intro2R/blob/main/presentaciones/ggplot2.pdf)
+Ver [presentación complementaria](https://raw.githubusercontent.com/iramosgutierrez/intro2R/main/presentaciones/ggplot2.pdf)
 
 En este caso también vamos a ir añadiendo capas línea a línea, pero en vez de pipes ( %>% ) usaremos símbolo de suma ( + ) para encadenar instrucciones.
 
@@ -38,7 +38,8 @@ ggplot2 entiende los gráficos como una serie de capas (datos, posición de ejes
 
 
 Argumentos obligatorios:
-  -   Data: un dataset. *penguins* en nuestro ejemplo.
+
+-   Data: un dataset. *penguins* en nuestro ejemplo.
 -   Mapping: el enlace entre nuestos datos y el gráfico. ¿Qué información guardada en cada columna va a ser referida en el gráfico (ejes, color/relleno, tamaño...)? Todo esto se encuadra dentro de la función `aes()`.
 -   Geometries: qué tipo de gráfico queremos (puntos, líneas, barras, histograma...).
 
@@ -51,7 +52,7 @@ ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+
 ```
 
 ¿Podríamos colorear todo de azul?
-  ```{webr-r}
+```{webr-r}
 ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+
   geom_point(color = "blue")
 
@@ -76,13 +77,14 @@ ggplot(penguins, aes(x = body_mass,
 
 ## Tipos de gráfico (la capa `geometries`)
 
-Hasta ahora, lo único que hemos graficado han sido gráficos de dispersión(`geom_piont()`), pero podemos hacer muchos otros tipos de gráfico.
+Hasta ahora, lo único que hemos graficado han sido gráficos de dispersión(`geom_point()`), pero podemos hacer muchos otros tipos de gráfico.
 
 
 
 ### Línea de regresión
 Por ejemplo, podemos añadir una línea de regresión a nuestro gráfico previo:
-  ```{webr-r}
+
+```{webr-r}
 ggplot(penguins, aes(x = body_mass, y = bill_len))+
   geom_point(colour = "blue")+
   geom_smooth(method = "lm", color = "red")
@@ -91,7 +93,7 @@ ggplot(penguins, aes(x = body_mass, y = bill_len))+
 Un gráfico comun para ver la distribución de valores de una variable es un histograma. En este caso solo hay valor `x` (continua), ya que la `y` es el conteo de veces que se toma el valor.
 
 Para ver cómo se distribuyen los valores de masa corporal:
-  ```{webr-r}
+```{webr-r}
 ggplot(penguins, aes(x = body_mass))+
   geom_histogram(bins = 50) # bins = número de agrupaciones
 ```
@@ -106,7 +108,7 @@ ggplot(penguins, aes(x = species, y = bill_len, fill = species,))+
 
 ```
 
-Una alternativa a esto sería hacer un gráfico de violones, en el que se muestra la distribución de la densidad de puntos por grupo.
+Una alternativa a esto sería hacer un gráfico de violines, en el que se muestra la distribución de la densidad de puntos por grupo.
 
 ```{webr-r}
 ggplot(penguins, aes(x = species, y = bill_len, fill = species))+
@@ -258,7 +260,7 @@ bp/sp
 library(terra)
 library(ggplot2)
 library(tidyterra)
-world <- vect("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/world-administrative-boundaries.shp")
+world <- vect("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/world-administrative-boundaries.shp")
 
 View(as.data.frame(world))
 
@@ -285,7 +287,7 @@ library(terra)
 library(ggplot2)
 library(tidyterra)
 
-mdt <- rast("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif")
+mdt <- rast("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif")
 
 ggplot()+
   geom_spatraster(data = mdt, na.rm = TRUE)+
@@ -307,7 +309,7 @@ ggplot()+
 library(ape)
 library(ggtree)
 
-phylo <- read.tree("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/pinus.tre")
+phylo <- read.tree("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/pinus.tre")
 
 
 ggtree(phylo, layout="fan", size=0.15, open.angle=15,) +
