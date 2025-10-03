@@ -1,10 +1,9 @@
-Nombre,Edad,Fecha,Ciudad
-Ana,25,2022-05-01,Madrid
-Luis,treinta,01/06/2022,Barcelona
-Mar�a,,2022-07-15,Sevilla
-Jos�,28,15-08-2022,M�laga
-Luc�a,30,2022/09/01,Zaragoza
-Andr�s,35,2022-10-01,Val�ncia
-"""Carlos",40,2022-11-01,Bilbao
-# Comentario,,,
-Sof�a;32;2022-12-01;Granada
+Nombre;Edad;Fecha;Ciudad
+Ana;25;2022-05-01;Madrid
+Luis;30;2022-01-06;Barcelona
+Maria;;2022-07-15;Sevilla
+Jose;28;2022-08-03;Malaga
+Lucia;30;2022-09-01;Zaragoza
+Andres;35;2022-10-01;Valencia
+Carlos;40;2022-11-01;Bilbao
+Sofia;32;2022-12-01;Granada

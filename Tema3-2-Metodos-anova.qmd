@@ -12,8 +12,6 @@ filters:
   - webr
 ---
 
-# Breve introducción
-
 En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.
 
 Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
@@ -50,11 +48,11 @@ comm_alberta <- comm_alberta[order,]
 ```
 
 
-# Análisis de la varianza
+# 1. Análisis de la varianza
 
 El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
 
-## Análisis de la varianza, factores con dos níveles
+## 1.2. Análisis de la varianza, factores con dos níveles
 
 Ver aquí <https://biocosas.github.io/R/050_anova.html>
 
@@ -127,7 +125,7 @@ boxplot(S_alberta ~ env_alberta$habitat)
 
 ¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
 
-## Análisis de la varianza, factores con varios niveles
+## 1.3 Análisis de la varianza, factores con varios niveles
 
 Hasta ahora hemos visto ejemplos con ANOVAS en los que nuestro factor solo tiene dos niveles. Ahora vamos a ver un ejemplo en el que tenemos más niveles.
 
@@ -160,7 +158,7 @@ plot(anova_moist)
 hist(anova_moist$residuals)
 ```
 
-# Comparaciones múltiples
+# 2. Comparaciones múltiples
 
 Pero el anova no nos dice nada sobre qué especies son diferentes entre sí. Para eso tenemos que hacer pruebas de contraste a posteriori o pruebas post-hoc.
 
@@ -202,7 +200,7 @@ cld
 
 Leed con cuidado esta [página 1](http://statistics-help-for-students.com/How_do_I_report_a_1_way_between_subjects_ANOVA_in_APA_style.htm#.Yy1ZA3ZByUk) y escribid un texto que describa los resultados del ANOVA y las comparaciones múltiples en el que se analiza las diferencias en temperatura media anual (bio1) entre especies.
 
-# Análisis de la varianza, varios factores
+# 3. Análisis de la varianza, varios factores
 
 Por último, vamos a analizar un caso en el que tenemos dos factores con varios niveles cada uno. Vamos a emplear de nuevo la base de datos de los herbazales de Alberta y vamos a contestar a la pregunta. si recordáis en los apartados previos habíamos visto que la humedad relativa variaba con el hábitat.
 

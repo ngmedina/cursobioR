@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -346,7 +381,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects'];
+globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects', 'Bio'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -368,7 +403,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"install.packages(\"tidyverse\")\nlibrary(tidyverse)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# # Escribe aquí tu respuesta","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, plot, Carex_filifolia)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, starts_with(\"Artemisia\"))","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. Filtrar parcelas con Antennaria_parvifolia > 0\nf1 <- filter(alberta, Antennaria_parvifolia > 0)\nhead(f1)\n# 2. Filtrar parcelas con Artemisia_frigida > 20\nf2 <- filter(alberta, Artemisia_frigida > 20)\nhead(f2)\n# 3. Filtrar parcelas con Antennaria_parvifolia > 0 Y Artemisia_frigida > 20\nf3 <- filter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)\nhead(f3)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% \n  mean()","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Escribe aquí tu respuesta","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% \n  mean() %>% \n  sqrt()","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Escribe aquí tu respuesta","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Seleccionar columnas de Antennaria\nalberta %>%\n  select(plot, starts_with(\"Antennaria\")) %>%\n  filter(Artemisia_frigida > 20)","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(double_antennaria = Antennaria_parvifolia * 2)","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(high_antennaria = if_else(Antennaria_parvifolia > 10, \"Sí\", \"No\"))","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(total_abund = rowSums(select(., -plot)),\n         perc_frigida = (Artemisia_frigida / total_abund) * 100)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"install.packages(\"tidyverse\")\nlibrary(tidyverse)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# # Escribe aquí tu respuesta","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv\")","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, plot, Carex_filifolia)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"select(alberta, starts_with(\"Artemisia\"))","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# 1. Filtrar parcelas con Antennaria_parvifolia > 0\nf1 <- filter(alberta, Antennaria_parvifolia > 0)\nhead(f1)\n# 2. Filtrar parcelas con Artemisia_frigida > 20\nf2 <- filter(alberta, Artemisia_frigida > 20)\nhead(f2)\n# 3. Filtrar parcelas con Antennaria_parvifolia > 0 Y Artemisia_frigida > 20\nf3 <- filter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)\nhead(f3)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% \n  mean()","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Escribe aquí tu respuesta","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"v <- c(4, 6, 5)\nv %>% \n  mean() %>% \n  sqrt()","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Escribe aquí tu respuesta","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Seleccionar columnas de Antennaria\nalberta %>%\n  select(plot, starts_with(\"Antennaria\")) %>%\n  filter(Artemisia_frigida > 20)","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(double_antennaria = Antennaria_parvifolia * 2)","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(high_antennaria = if_else(Antennaria_parvifolia > 10, \"Sí\", \"No\"))","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta %>%\n  mutate(total_abund = rowSums(select(., -plot)),\n         perc_frigida = (Artemisia_frigida / total_abund) * 100)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos <- data.frame(\nplot = 1:3,\nsp1 = c(5, 3, 0),\nsp2 = c(12, 20, 5),\nsp3 = c(0, 4, 8)\n)","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos_long <- datos %>%\npivot_longer(cols = -plot,\nnames_to = \"species\",\nvalues_to = \"abundance\")\ndatos_long","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos_long","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"datos_wide <- datos_long %>%\npivot_wider(names_from = species,\nvalues_from = abundance)\ndatos_wide","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-18","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\ndf <- iris %>% \n  rename(taxon = Species,\n         long_pet = Petal.Length,\n         anch_pet = Petal.Width,\n         long_sep = Sepal.Length,\n         anch_sep = Sepal.Width)\nhead(df)","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-19","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(tidyverse)\n# ordenar por 'length' creciente, en caso de empate por 'width' decreciente\n# se pueden poner tantos niveles como se quieran, pero el orden importa\ndf <- iris %>% \n  arrange(Sepal.Length, desc(Sepal.Width)) \nhead(df)","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-20","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv\") %>% \n  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) %>% \n  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) %>%\n  mutate(category = case_when(richness < 20 ~ \"low\",\n                              richness >= 20 & richness < 40 ~ \"medium\",\n                              richness >= 40 & richness < 55 ~ \"high\",\n                              richness >= 55 ~ \"extreme\" ))","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-21","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1723,9 +1758,27 @@ globalThis.qwebrExecuteCode = async function (
   <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes">2. Pipes</a>
   <ul class="collapse">
   <li><a href="#ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando" id="toc-ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando" class="nav-link" data-scroll-target="#ejercicio-2-y-si-queremos-hacer-la-raíz-cuadrada-de-la-media-cómo-haríamos-usando">Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando <code>%&gt;%</code>?</a></li>
-  <li><a href="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." id="toc-ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." class="nav-link" data-scroll-target="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.</a></li>
+  <li><a href="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." id="toc-ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." class="nav-link" data-scroll-target="#ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de <em>Antennaria</em> y filtra las parcelas donde <em>Artemisia_frigida</em> tenga abundancia mayor que 20.</a></li>
   </ul></li>
   <li><a href="#mutate-crear-y-modificar-columnas" id="toc-mutate-crear-y-modificar-columnas" class="nav-link" data-scroll-target="#mutate-crear-y-modificar-columnas">3. Mutate: Crear y modificar columnas</a></li>
+  <li><a href="#reestructuración-de-datos-pivot_longer-y-pivot_wider" id="toc-reestructuración-de-datos-pivot_longer-y-pivot_wider" class="nav-link" data-scroll-target="#reestructuración-de-datos-pivot_longer-y-pivot_wider">4. Reestructuración de datos: pivot_longer() y pivot_wider()</a>
+  <ul class="collapse">
+  <li><a href="#argumentos-principales" id="toc-argumentos-principales" class="nav-link" data-scroll-target="#argumentos-principales">Argumentos principales</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  <li><a href="#ejercicio-4.-pasa-la-tabla-de-datos-de-comunidades-de-alberta-a-formato-largo" id="toc-ejercicio-4.-pasa-la-tabla-de-datos-de-comunidades-de-alberta-a-formato-largo" class="nav-link" data-scroll-target="#ejercicio-4.-pasa-la-tabla-de-datos-de-comunidades-de-alberta-a-formato-largo">Ejercicio 4. Pasa la tabla de datos de comunidades de Alberta a formato largo</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#pivot_wider-pasar-a-formato-ancho" id="toc-pivot_wider-pasar-a-formato-ancho" class="nav-link" data-scroll-target="#pivot_wider-pasar-a-formato-ancho"><code>pivot_wider()</code>: pasar a formato ancho</a>
+  <ul class="collapse">
+  <li><a href="#argumentos-principales-1" id="toc-argumentos-principales-1" class="nav-link" data-scroll-target="#argumentos-principales-1">Argumentos principales</a></li>
+  <li><a href="#ejemplo-1" id="toc-ejemplo-1" class="nav-link" data-scroll-target="#ejemplo-1">Ejemplo</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-5-reconstruye-la-tabla-ancha-de-datos-de-alberta-usando-pivot_wider" id="toc-ejercicio-5-reconstruye-la-tabla-ancha-de-datos-de-alberta-usando-pivot_wider" class="nav-link" data-scroll-target="#ejercicio-5-reconstruye-la-tabla-ancha-de-datos-de-alberta-usando-pivot_wider">Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider()</a></li>
+  </ul></li>
+  <li><a href="#la-función-rename" id="toc-la-función-rename" class="nav-link" data-scroll-target="#la-función-rename">la función rename</a></li>
+  <li><a href="#la-función-arrange" id="toc-la-función-arrange" class="nav-link" data-scroll-target="#la-función-arrange">la función arrange</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -2119,7 +2172,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>Ahora vamos a trabajar con la base de datos de Alberta</p>
 </section>
 <section id="ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20." class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.</h4>
+<h4 class="anchored" data-anchor-id="ejercicio-3-selecciona-solo-las-columnas-de-antennaria-y-filtra-las-parcelas-donde-artemisia_frigida-tenga-abundancia-mayor-que-20.">Ejercicio 3 Selecciona solo las columnas de <em>Antennaria</em> y filtra las parcelas donde <em>Artemisia_frigida</em> tenga abundancia mayor que 20.</h4>
 <div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <button onclick="let x=document.getElementById('sol3'); x.style.display = (x.style.display==='none') ? 'block':'none';" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
@@ -2145,8 +2198,93 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <p>O calcular el porcentaje de la especie con respecto al total</p>
 <div id="qwebr-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="reestructuración-de-datos-pivot_longer-y-pivot_wider" class="level2">
+<h2 class="anchored" data-anchor-id="reestructuración-de-datos-pivot_longer-y-pivot_wider">4. Reestructuración de datos: pivot_longer() y pivot_wider()</h2>
+<p>Cuando trabajamos con datos de biodiversidad, muchas veces las tablas que recibimos no tienen la forma que necesitamos. A veces son anchas (muchas columnas para las especies) y queremos pasarlas a largas (una sola columna con los nombres de especies y otra con sus valores).</p>
+<p>En otras ocasiones ocurre lo contrario: tenemos los datos en formato largo y queremos volver a un formato ancho.</p>
+<p>Aquí es donde entran dos funciones clave de tidyr:</p>
+<p><code>pivot_longer()</code> → convierte columnas en filas.</p>
+<p><code>pivot_wider()</code> → convierte filas en columnas.</p>
+<p><strong>¿Por qué es importante?</strong></p>
+<ul>
+<li><p>El formato largo es mucho más flexible para análisis y visualización (por ejemplo, para graficar con ggplot2).</p></li>
+<li><p>El formato ancho es útil para reportes y cálculos más directos.</p></li>
+<li><p>Saber moverse entre ambos formatos es esencial en ecología y biodiversidad, donde trabajamos con comunidades de especies.</p></li>
+</ul>
+<p>Cuando trabajamos con datos de biodiversidad, a menudo tenemos tablas en <strong>formato ancho</strong> (una columna por especie) y necesitamos transformarlas a <strong>formato largo</strong> (una columna para especies y otra para sus valores). La función que usamos en <code>tidyr</code> para esto es:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(data,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cols,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">names_to =</span> <span class="st">"nombre_columna"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">values_to =</span> <span class="st">"nombre_valores"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="argumentos-principales" class="level3">
+<h3 class="anchored" data-anchor-id="argumentos-principales">Argumentos principales</h3>
+<ul>
+<li><p><strong>data</strong>: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (<code>%&gt;%</code>).</p></li>
+<li><p><strong>cols</strong>: columnas que quieres transformar en filas. Ejemplo: <code>cols = -plot</code> o <code>cols = c(Carex_filifolia, Artemisia_frigida)</code>.</p></li>
+<li><p><strong>names_to</strong>: nombre de la nueva columna con los nombres de las variables originales. Ejemplo: <code>names_to = "species"</code>.</p></li>
+<li><p><strong>values_to</strong>: nombre de la nueva columna con los valores de esas variables. Ejemplo: <code>values_to = "abundance"</code>.</p></li>
+</ul>
+<section id="ejemplo" class="level4">
+<h4 class="anchored" data-anchor-id="ejemplo">Ejemplo</h4>
+<p>Supongamos que tenemos esta tabla:</p>
+<div id="qwebr-insertion-location-15"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Transformamos con <code>pivot_longer()</code>:</p>
+<div id="qwebr-insertion-location-16"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="ejercicio-4.-pasa-la-tabla-de-datos-de-comunidades-de-alberta-a-formato-largo" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-4.-pasa-la-tabla-de-datos-de-comunidades-de-alberta-a-formato-largo">Ejercicio 4. Pasa la tabla de datos de comunidades de Alberta a formato largo</h4>
+</section>
+</section>
+</section>
+<section id="pivot_wider-pasar-a-formato-ancho" class="level2">
+<h2 class="anchored" data-anchor-id="pivot_wider-pasar-a-formato-ancho"><code>pivot_wider()</code>: pasar a formato ancho</h2>
+<p>Cuando trabajamos con datos de biodiversidad, a veces los tenemos en <strong>formato largo</strong> (una fila por especie y parcela) y necesitamos transformarlos a <strong>formato ancho</strong> (una columna por especie). La función que usamos en <code>tidyr</code> es:</p>
+<p><code>{webr-r, eval=FALSE} pivot_wider(data, names_from = "nombre_columna", values_from = "nombre_valores")</code></p>
+<section id="argumentos-principales-1" class="level3">
+<h3 class="anchored" data-anchor-id="argumentos-principales-1">Argumentos principales</h3>
+<ol type="1">
+<li><strong>data</strong>: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (<code>%&gt;%</code>).</li>
+<li><strong>names_from</strong>: columna que contiene los <strong>nombres de las variables</strong> que se convertirán en columnas. Por ejemplo, si tenemos una columna <code>species</code> con los nombres de las especies, cada especie se convertirá en una nueva columna.</li>
+<li><strong>values_from</strong>: columna que contiene los <strong>valores asociados</strong> a las variables que se convertirán en columnas. Por ejemplo, si tenemos una columna <code>abundance</code> con las abundancias de cada especie, esos valores se colocarán en las nuevas columnas.</li>
+<li><strong>id_cols</strong> (opcional): columnas que identifican de manera única cada fila. Si no se especifica, <code>pivot_wider()</code> intenta deducirlas automáticamente.</li>
+<li><strong>names_prefix</strong> (opcional): prefijo que se puede añadir a los nombres de las nuevas columnas.</li>
+<li><strong>values_fill</strong> (opcional): valor con el que rellenar las celdas vacías en el caso de que no haya datos. Por ejemplo, <code>values_fill = 0</code>.</li>
+</ol>
+</section>
+<section id="ejemplo-1" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-1">Ejemplo</h3>
+<p>A partir de la tabla en formato largo que acabamos de crear:</p>
+<div id="qwebr-insertion-location-17"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Transformamos con <code>pivot_wider()</code>:</p>
+<div id="qwebr-insertion-location-18"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<section id="ejercicio-5-reconstruye-la-tabla-ancha-de-datos-de-alberta-usando-pivot_wider" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-5-reconstruye-la-tabla-ancha-de-datos-de-alberta-usando-pivot_wider">Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider()</h4>
+</section>
+</section>
+<section id="la-función-rename" class="level3">
+<h3 class="anchored" data-anchor-id="la-función-rename">la función rename</h3>
+<p>Sirve para renombrar una variable, manteniendo todo el contenido idéntico.</p>
+<div id="qwebr-insertion-location-19"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+</section>
+<section id="la-función-arrange" class="level3">
+<h3 class="anchored" data-anchor-id="la-función-arrange">la función arrange</h3>
+<p>Sirve para cambiar el orden de la tabla en función de una o más variables. Por defecto, ordena por orden creciente (alfabético para character). Para hacerlo descendiente, se pone desc(variable).</p>
+<div id="qwebr-insertion-location-20"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Categorización múltiple con case_when</p>
+<p>Se utiliza dentro de mutate, de modo similar a if_else, pero permitiendo más niveles.</p>
+<p>Hay que tener cuidado con casos que cumplan más de una condición (prioriza el criterio que está antes) o no cumplan ninguna (resultará un NA).</p>
+<div id="qwebr-insertion-location-21"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 
 
+</section>
 </section>
 </section>
 

@@ -57,13 +57,13 @@ sum <- summary(pca_alb_com)
 
 El resumen del análisis nos muestra la proporción de la varianza explicada por cada eje. Esto lo podemos interpretar como la cantidad de información que contienen nuestros ejes con respecto a la información que contiene la base de datos.
 
-#### [Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?]{style="color: blue;"} {.unnumbered}
+#### Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?
 
-#### [Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?]{style="color: blue;"} {.unnumbered}
+#### Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?
 
-#### [Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?]{style="color: blue;"} {.unnumbered}
+#### Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?
 
-#### [Ejercicio resuelto. ¿Qué peso tiene las especies *Artemisia cana* y *Artemisia rigida* en el eje 1?]{style="color: blue;"} {.unnumbered}
+#### Ejercicio resuelto. ¿Qué peso tiene las especies *Artemisia cana* y *Artemisia rigida* en el eje 1?
 
 ```{webr-r}
 rows <- rownames(sum$species) %in% c("Artemisia_cana", "Artemisia_frigida")
@@ -78,7 +78,7 @@ También podemos hacer una representación gráfica del peso de la varianza que 
 plot(pca_alb_com)
 ```
 
-Como podéis ver los nombres de las especies no se leen porque ocupan demasiado espacio. Una posibilidad para solucionarlo es abreviar los nombres de las especies. Para eso, por convención se cogen las cuatro letras del epiteto genérico y las cuatro primeras letras del epiteto de especie o subespecie.
+Como podéis ver los nombres de las especies no se leen porque ocupan demasiado espacio. Una posibilidad para solucionarlo es abreviar los nombres de las especies. Para eso, por convención se cogen las tres letras del epiteto genérico y las primeras tres del epiteto de especie o subespecie.
 
 ¡OJO! En la base de datos las especies están separadas por un guión bajo. Lo primero que tenemos que hacer es sustituir el guión bajo por un espacio para lo que usaremos la función `gsub`
 

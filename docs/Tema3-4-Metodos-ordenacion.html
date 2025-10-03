@@ -346,7 +346,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects'];
+globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects', 'Bio'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -1712,10 +1712,10 @@ globalThis.qwebrExecuteCode = async function (
   <ul>
   <li><a href="#breve-introducción" id="toc-breve-introducción" class="nav-link active" data-scroll-target="#breve-introducción">Breve introducción</a>
   <ul>
-  <li><a href="#ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" id="toc-ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" class="nav-link" data-scroll-target="#ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje"><span style="color: blue;">Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?</span></a></li>
-  <li><a href="#ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" id="toc-ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" class="nav-link" data-scroll-target="#ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1"><span style="color: blue;">Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?</span></a></li>
-  <li><a href="#ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" id="toc-ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" class="nav-link" data-scroll-target="#ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2"><span style="color: blue;">Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?</span></a></li>
-  <li><a href="#ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" id="toc-ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" class="nav-link" data-scroll-target="#ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1"><span style="color: blue;">Ejercicio resuelto. ¿Qué peso tiene las especies <em>Artemisia cana</em> y <em>Artemisia rigida</em> en el eje 1?</span></a></li>
+  <li><a href="#ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" id="toc-ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" class="nav-link" data-scroll-target="#ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje">Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?</a></li>
+  <li><a href="#ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" id="toc-ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" class="nav-link" data-scroll-target="#ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1">Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?</a></li>
+  <li><a href="#ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" id="toc-ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" class="nav-link" data-scroll-target="#ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2">Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?</a></li>
+  <li><a href="#ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" id="toc-ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" class="nav-link" data-scroll-target="#ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1">Ejercicio resuelto. ¿Qué peso tiene las especies <em>Artemisia cana</em> y <em>Artemisia rigida</em> en el eje 1?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -2053,24 +2053,24 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>El resumen del análisis nos muestra la proporción de la varianza explicada por cada eje. Esto lo podemos interpretar como la cantidad de información que contienen nuestros ejes con respecto a la información que contiene la base de datos.</p>
-<section id="ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje"><span style="color: blue;">Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?</span></h4>
+<section id="ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-1.-en-el-ejemplo-de-alberta-qué-porcentaje-de-variabilidad-absorbe-el-primer-eje">Ejercicio 1. En el ejemplo de Alberta ¿Qué porcentaje de variabilidad absorbe el primer eje?</h4>
 </section>
-<section id="ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1"><span style="color: blue;">Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?</span></h4>
+<section id="ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-2.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-1">Ejercicio 2. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 1?</h4>
 </section>
-<section id="ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2"><span style="color: blue;">Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?</span></h4>
+<section id="ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-3.-en-el-ejemplo-de-alberta-cuál-es-la-especie-que-tiene-mayor-peso-en-el-eje-2">Ejercicio 3. En el ejemplo de Alberta ¿Cuál es la especie que tiene mayor peso en el eje 2?</h4>
 </section>
-<section id="ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1"><span style="color: blue;">Ejercicio resuelto. ¿Qué peso tiene las especies <em>Artemisia cana</em> y <em>Artemisia rigida</em> en el eje 1?</span></h4>
+<section id="ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-resuelto.-qué-peso-tiene-las-especies-artemisia-cana-y-artemisia-rigida-en-el-eje-1">Ejercicio resuelto. ¿Qué peso tiene las especies <em>Artemisia cana</em> y <em>Artemisia rigida</em> en el eje 1?</h4>
 <div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Ahora pasamos a representar los datos</p>
 <p>También podemos hacer una representación gráfica del peso de la varianza que recoje cada eje</p>
 <div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Como podéis ver los nombres de las especies no se leen porque ocupan demasiado espacio. Una posibilidad para solucionarlo es abreviar los nombres de las especies. Para eso, por convención se cogen las cuatro letras del epiteto genérico y las cuatro primeras letras del epiteto de especie o subespecie.</p>
+<p>Como podéis ver los nombres de las especies no se leen porque ocupan demasiado espacio. Una posibilidad para solucionarlo es abreviar los nombres de las especies. Para eso, por convención se cogen las tres letras del epiteto genérico y las primeras tres del epiteto de especie o subespecie.</p>
 <p>¡OJO! En la base de datos las especies están separadas por un guión bajo. Lo primero que tenemos que hacer es sustituir el guión bajo por un espacio para lo que usaremos la función <code>gsub</code></p>
 <div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>

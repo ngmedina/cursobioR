@@ -346,7 +346,7 @@ iframe.qwebr-output-code-browse {
 // Document level settings ----
 
 // Determine if we need to install R packages
-globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects'];
+globalThis.qwebrInstallRPackagesList = ['tidyverse', 'ggplot2', 'vegan', 'FD', 'picante', 'multcomp', 'emmeans', 'effects', 'Bio'];
 
 // Specify possible locations to search for the repository
 globalThis.qwebrPackageRepoURLS = ['https://repo.r-wasm.org/'];
@@ -1710,8 +1710,7 @@ globalThis.qwebrExecuteCode = async function (
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#breve-introducción" id="toc-breve-introducción" class="nav-link active" data-scroll-target="#breve-introducción">Breve introducción</a></li>
-  <li><a href="#regresión-lineal" id="toc-regresión-lineal" class="nav-link" data-scroll-target="#regresión-lineal">1. Regresión lineal</a>
+  <li><a href="#regresión-lineal" id="toc-regresión-lineal" class="nav-link active" data-scroll-target="#regresión-lineal">1. Regresión lineal</a>
   <ul>
   <li><a href="#regresión-lineal-simple" id="toc-regresión-lineal-simple" class="nav-link" data-scroll-target="#regresión-lineal-simple">1.1 Regresión lineal simple</a>
   <ul class="collapse">
@@ -1724,10 +1723,13 @@ globalThis.qwebrExecuteCode = async function (
   </ul></li>
   <li><a href="#regresión-lineal-múltiple" id="toc-regresión-lineal-múltiple" class="nav-link" data-scroll-target="#regresión-lineal-múltiple">2. Regresión lineal múltiple</a>
   <ul>
+  <li><a href="#la-multicolinealidad" id="toc-la-multicolinealidad" class="nav-link" data-scroll-target="#la-multicolinealidad">2.1 La multicolinealidad</a>
+  <ul class="collapse">
   <li><a href="#ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" id="toc-ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" class="nav-link" data-scroll-target="#ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r">Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R</a></li>
   <li><a href="#ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta" id="toc-ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta" class="nav-link" data-scroll-target="#ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta">Ejercicio 3 Calcula la diversidad funcional de las comunidades herbáceas de alberta</a></li>
   <li><a href="#ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas" id="toc-ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas" class="nav-link" data-scroll-target="#ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas">Ejercicio 4 Estima una regresión múltiple con los herbazales de alberta en la que se emplee el índice riqueza funcional (Fric) de como variable respuesta y las variables, habitat, pendiente, orientación y humedad relativa como variables explicativas</a></li>
-  <li><a href="#selección-de-modelos-en-regresión-lineal-múltiple" id="toc-selección-de-modelos-en-regresión-lineal-múltiple" class="nav-link" data-scroll-target="#selección-de-modelos-en-regresión-lineal-múltiple">Selección de modelos en regresión lineal múltiple</a></li>
+  </ul></li>
+  <li><a href="#selección-de-modelos-en-regresión-lineal-múltiple" id="toc-selección-de-modelos-en-regresión-lineal-múltiple" class="nav-link" data-scroll-target="#selección-de-modelos-en-regresión-lineal-múltiple">3. Selección de modelos en regresión lineal múltiple</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -2042,10 +2044,7 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </header>
 
 
-<section id="breve-introducción" class="level1">
-<h1>Breve introducción</h1>
 <p>Una regresión es un modelo que analiza la relación entre una variable respuesta y una o más variables explicativas.</p>
-</section>
 <section id="regresión-lineal" class="level1">
 <h1>1. Regresión lineal</h1>
 <p>La regresión lineal es un tipo de regresión en la que se analizan relaciones lineales. Es el tipo de regresión más frecuentemente en trabajos de investigación.</p>
@@ -2130,6 +2129,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="regresión-lineal-múltiple" class="level1">
 <h1>2. Regresión lineal múltiple</h1>
 <p>Una de las propiedades más interesantes de los análisis de regresión lineal es que nos permiten evaluar el efecto de más de una variable al mismo tiempo. Además, los modelos de regresión lineal admiten tanto variables cuantitativas como cualitativas. A continuación realizaremos un modelo de regresión lineal múltiple.</p>
+<section id="la-multicolinealidad" class="level2">
+<h2 class="anchored" data-anchor-id="la-multicolinealidad">2.1 La multicolinealidad</h2>
 <p>La regresión lineal múltiple tiene que cumplir una serie de condiciones adicionales a las que tienen que cumplirse en la regresión lineal simple. Una de las más importantes a tener en cuenta es la multicolinealidad.</p>
 <p>La multicolinealidad es la correlación alta entre variables explicativas</p>
 <p>Cuando la multicolinealidad es alta puede causar los siguientes problemas:</p>
@@ -2166,8 +2167,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 </ol>
 <div id="qwebr-insertion-location-21"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r">Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R</h4>
+<section id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" class="level4">
+<h4 class="anchored" data-anchor-id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r">Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R</h4>
 <p>La variable displacement indica la cilindrada del motor en cm<sup>3</sup> la variable wt indica el peso del vehículo. Dado que tienen una correlación &gt;0.8 podemos optar por eliminar una de las dos. Por ejemplo peso del vehíulo</p>
 <p>Volvemos a estimar la regresión linear pero eliminando la variable wt</p>
 <div id="qwebr-insertion-location-22"></div>
@@ -2224,8 +2225,9 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <div id="qwebr-insertion-location-35"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
+</section>
 <section id="selección-de-modelos-en-regresión-lineal-múltiple" class="level2">
-<h2 class="anchored" data-anchor-id="selección-de-modelos-en-regresión-lineal-múltiple">Selección de modelos en regresión lineal múltiple</h2>
+<h2 class="anchored" data-anchor-id="selección-de-modelos-en-regresión-lineal-múltiple">3. Selección de modelos en regresión lineal múltiple</h2>
 <p>Es frecuente que una o varias de las variables del modelo de regresión lineal no estén asociadas a la variable respuesta. Incluir variables que no son relevantes conlleva ajustar modelos innecesariamente complejos. Por lo tanto, es frecuente realizar un paso previo de selección antes de ajustar el modelo definitivo.</p>
 <p>Una función útil en este sentido el la función <code>stepAIC</code>del paquete <strong>MASS</strong>.</p>
 <div id="qwebr-insertion-location-36"></div>

@@ -45,7 +45,7 @@ lang: es
 webr:
   show-startup-message: false
   channel-type: post-message   # recomendado para GitHub Pages
-  packages: [tidyverse, ggplot2,vegan,FD, picante, multcomp, emmeans, effects]
+  packages: [tidyverse, ggplot2,vegan,FD, picante, multcomp, emmeans, effects, Bio]
 
 filters:
     - webr

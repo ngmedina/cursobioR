@@ -12,8 +12,6 @@ filters:
   - webr
 ---
 
-# Breve introducción
-
 Una regresión es un modelo que analiza la relación entre una variable respuesta y una o más variables explicativas.
 
 # 1. Regresión lineal
@@ -170,6 +168,8 @@ summary(aov(slope ~ habitat, data = env_alberta))
 
 Una de las propiedades más interesantes de los análisis de regresión lineal es que nos permiten evaluar el efecto de más de una variable al mismo tiempo. Además, los modelos de regresión lineal admiten tanto variables cuantitativas como cualitativas. A continuación realizaremos un modelo de regresión lineal múltiple.
 
+## 2.1 La multicolinealidad
+
 La regresión lineal múltiple tiene que cumplir una serie de condiciones adicionales a las que tienen que cumplirse en la regresión lineal simple. Una de las más importantes a tener en cuenta es la multicolinealidad.
 
 La multicolinealidad es la correlación alta entre variables explicativas
@@ -230,12 +230,18 @@ La más habitual es eliminar una de las variables que estén altamente correlaci
 cor(mtcars[,c("disp", "hp", "wt", "drat")])
 ```
 
-#### Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R {.unnumbered}
+#### Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R
 
 ```{r eval=FALSE, include=FALSE}
-cormat <- cor(mtcars[,c("disp", "hp", "wt", "drat")])
-cormat[cormat == 1] <- 0
-which(cormat==max(cormat), arr.ind=TRUE)
+cormat <- mtcars %>%
+  select(disp, hp, wt, drat) %>%
+  cor()
+
+as.table(cormat) %>%                    # convertimos a fila con dos columnas
+  as.data.frame() %>%                   # pasamos a formato data.frame
+  filter(Var1 != Var2) %>%              # quitamos la diagonal
+  mutate(abs_cor = abs(Freq)) %>%       # correlación en valor absoluto
+  filter(abs_cor == max(abs_cor))
 ```
 
 La variable displacement indica la cilindrada del motor en cm^3^ la variable wt indica el peso del vehículo. Dado que tienen una correlación \>0.8 podemos optar por eliminar una de las dos. Por ejemplo peso del vehíulo
@@ -360,7 +366,7 @@ library(effects)
 plot(allEffects(lmTFric))
 ```
 
-## Selección de modelos en regresión lineal múltiple
+## 3. Selección de modelos en regresión lineal múltiple
 
 Es frecuente que una o varias de las variables del modelo de regresión lineal no estén asociadas a la variable respuesta. Incluir variables que no son relevantes conlleva ajustar modelos innecesariamente complejos. Por lo tanto, es frecuente realizar un paso previo de selección antes de ajustar el modelo definitivo.
 

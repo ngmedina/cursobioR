@@ -85,7 +85,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 
 ![](images/Imagen2.png)
 
-#### Ejercicio 1: Imprimir valores
+#### Imprimir valores
 
 ```{web-r}
 "Bienvenidos al curso de R y SIG"
@@ -95,7 +95,7 @@ Una vez hecho esto, vuelve a ejecutar los comandos apt anteriores y deberías es
 1
 ```
 
-#### Ejercicio 2: Operar
+#### Operar
 
 El uso más sencillo que se le puede dar a R es el de una calculadora. Consideremos las siguientes operaciones:
 
@@ -121,7 +121,7 @@ El uso más sencillo que se le puede dar a R es el de una calculadora. Considere
 2^7
 ```
 
-#### Ejercicio 3: Crear objetos con `<-`
+#### Crear objetos con `<-`
 
 **Objetivo**: Guardar valores en objetos para usarlos más adelante.
 
@@ -133,19 +133,27 @@ x <- 2
 x
 ```
 
-Ejercicio 3. Crea el objeto `y` y asignale el valor `3`
+#### Ejercicio 1. Crea el objeto `y` y asignale el valor `3`
 
 ```{webr-r}
 
 ```
 
-Imprime el objeto `y`
+#### Ejercicio 2. Imprime el objeto `y`
 
 ```{webr-r}
 
 ```
 
-#### Ejercicio 4: Operar con objetos
+#### Crear vectores
+
+Podemos crear vectores utilizando `c()`
+
+```{webr-r}
+mivector <- c(1, 2, 3, 4)
+```
+
+#### Operar con objetos
 
 ```{webr-r}
 x/2
@@ -158,7 +166,15 @@ z <- x^y
 z
 ```
 
-#### Ejercicio 5: Utilizar funciones
+Lo interesante de esto es que puedes operar con vectores
+
+```{webr-r}
+myvector*3
+```
+
+**¿Cuál es el resultado?**
+
+#### Utilizar funciones
 
 **¿Qué es una función en R?**
 
@@ -177,7 +193,6 @@ Para utilizar las funciones en R solo necesitas:
 **Ejemplo 1: Funciones con un argumento. Calcular la media y la raíz cuadrada**
 
 ```{webr-r}
-mean(4)
 sqrt(4)
 ```
 
@@ -189,6 +204,8 @@ Algunas funciones en R necesitan más de un dato para funcionar. Por ejemplo, si
 # round(x, digits)
 round(x = 3.14159, digits = 2)
 ```
+
+**¿Has visto la parte de código después de #?** Eso es un comentario. R ignorará todo lo que esté en esa fila y no lo ejecutará, sirve para anotar el código y que más tarde podamos recordar porqué hicimos algo
 
 ```{webr-r}
 # round(x, digits)
@@ -207,6 +224,14 @@ Pero **OJO 👀** si no nombramos los argumentos no se pueden cambiar de orden
 ```{webr-r}
 # round(x, digits)
 round(2, 3.14159)
+```
+
+**¿Cómo sé qué orden tengo que poner?**
+
+Tengo que consultar la ayuda de la función
+
+```{webr-r}
+?round 
 ```
 
 ## 3. ¿Qué es RStudio?
@@ -277,7 +302,7 @@ Consejo: Ejecuta líneas con `Ctrl + Enter` (Windows/Linux) o `Cmd + Enter` (mac
 
 -   Cada línea de código es como un paso de una receta. Puedes seguirla paso a paso, modificar ingredientes (datos) o repetirla cuando quieras. Guardar tus scripts te permite documentar tu trabajo y reproducir tus análisis fácilmente.
 
-#### Ejercicio 6: Crea y guarda tu primer script
+#### Ejercicio 3: Crea y guarda tu primer script
 
 En este ejercicio aprenderás a crear tu primer script en R usando RStudio. Un script es un archivo donde puedes escribir y guardar tu código para ejecutarlo más tarde.
 
@@ -311,7 +336,7 @@ Una vez que hayas escrito tu código en el editor de panel de edición, sigue es
 
 5.  Haz clic en **Guardar**.
 
-#### Ejercicio 7: Ejecuta el código del script
+#### Ejercicio 4: Ejecuta el código del script
 
 **Ejecutar una sola línea**
 
@@ -346,7 +371,7 @@ Función: Ver objetos creados (variables, funciones, etc.) y el historial de com
 
 En R, el entorno de trabajo es el espacio donde se almacenan los objetos que creamos (vectores, funciones, data frames, etc.). Podemos inspeccionar, modificar y limpiar este entorno usando funciones específicas.
 
-#### Ejercicio 8: Crear, listar y borrar objetos en el entorno de trabajo
+#### Crear, listar y borrar objetos en el entorno de trabajo
 
 ```{webr-r}
 # Crear algunos objetos
@@ -384,32 +409,26 @@ Paquetes Los paquetes en R son colecciones de funciones, datos y documentación 
 
 ADVERTENCIA: Los siguientes ejercicios requieren el paquete `vegan`, que no está disponible en webR. Para ejecutarlo, usa R en tu ordenador local.
 
-```{r}
-#| echo: true
-#| eval: false
-
+```{webr-r}
 install.packages("vegan")
 library(vegan)
 ```
 
-
 #### ¿Cómo se usan los paquetes?
 
-``` {r}
-#| echo: true
-#| eval: false
+Igual que con las funciones podemos buscar la ayuda
 
+```{webr-r}
 ?vegan
 help("vegan")
 ```
 
-#### Ejercicio 9. Uso de la función `specnumber` del paquete `vegan`
+#### Uso de la función `specnumber` del paquete `vegan`
 
-``` {r}
-#| echo: true
-#| eval: false
+```{webr-r}
 
 # Datos de abundancia de especies en dos sitios para el ejercicio
+
 datos <- data.frame(
   sitio1 = c(3, 0, 1, 5),
   sitio2 = c(0, 2, 0, 4),
@@ -444,7 +463,7 @@ Para cargar los datos integrados basta con escribir data() y el nombre de los da
 
 ![](images/Imagen5.png)
 
-#### Ejercicio 10: Cargar datos integrados
+#### Cargar datos integrados
 
 Durante este ejercicio vamos a utilizar el conjunto o set de datos `iris`. Este conjunto de datos, contiene datos sobre características florales de tres especies del género *Iris*.
 
@@ -491,10 +510,11 @@ Los datos de composición específica consisten típicamente en observaciones de
 
 En el ejemplo que vamos a emplear los datos provienen de un estudio de plantas que se realizó en parcelas de 20 x 20 m. Los datos de abundancia corresponden la cobertura de cada especie en proporción al total de la parcela.
 
-
 Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv)
 
 ##### NOTA: Los datos originales provienen de un taller sobre análisis de la biodiversidad en R que se pueden encontrar [aquí](https://kembellab.ca/r-workshop/).
+
+#### Ejercicio 5. Carga los datos de comunidades de Alberta
 
 Para cargar el archivo tienes que cambiar el texto "path_to_my_data" por la ruta del archivo. Para ello:
 
@@ -515,7 +535,7 @@ library(vegan)
 read.csv("C:/Users/TuNombre/grassland.community.csv")
 ```
 
-**OJO ¿Qué ha pasado?**
+**OJO**
 
 Cuando ejecutamos el código, R **lee el archivo** y muestra el contenido en la consola, pero **no lo guarda**. Es como mirar el resultado sin ponerle nombre: lo ves, pero no puedes volver a usarlo.
 
@@ -527,7 +547,7 @@ Para guardar el resultado, hay que **asignarlo a un objeto** usando `<-`:
 datos_alberta <- read.csv("C:/Users/TuNombre/grassland.community.csv")
 ```
 
-#### **Truco: Usar el panel "Área de trabajo" para cargar archivos**
+#### **Truco sucio: Usar el panel "Área de trabajo" para cargar archivos**
 
 1.  **Haz clic en el botón "Import Dataset"**\
     En el panel *Environment*, busca el botón que dice **"Import Dataset"** y haz clic.
@@ -543,12 +563,11 @@ datos_alberta <- read.csv("C:/Users/TuNombre/grassland.community.csv")
     Verás una vista previa del archivo y RStudio te mostrará el código que usará para cargarlo.\
     Puedes copiar ese código para usarlo en tus scripts.
 
-### <span style="color:darkblue">6.4 EXTRA: Importar datos desde Excell</span>
+### [6.4 EXTRA: Importar datos desde Excell]{style="color:darkblue"}
 
 Importar datos desde Excell es muy parecido a la importación de datos desde `.csv`. Las funciones que utilizaremos son `write.xlsx()` para la exportación y `read.xlsx()` para la importación.
 
-
-#### Ejercicio Extra Importar datos desde excel{.blue-title}
+#### Ejercicio Extra Importar datos desde excel {.blue-title}
 
 ```{r}
 # instalar el paquete
@@ -557,154 +576,60 @@ Importar datos desde Excell es muy parecido a la importación de datos desde `.c
 # abrir la librería
 library(xlsx)  
 
-write.xlsx(iris, "data/iris.xlsx")  # acuerdate que los vamos a guardar en la carpeta datos  
+write.xlsx(iris, "data/iris.xlsx")  # acuerdate que los vamos a guardar en la carpeta data  
 
 iris_import_xlsx <- read.xlsx("data/iris.xlsx", 1) # debemos indicar la hoja de Excell desde la cual importar los datos
 
 ```
 
+Aunque pongo esto aquí la mejor forma de cargar un archivo excel es exportarlo como csv y cargarlo ;-)
+
 ## 7. Errores comunes al cargar archivos CSV en R
 
 Comenzaremos por descargar los datos desde [aquí](https://github.com/ngmedina/cursobioR/blob/main/data/datos_con_errores.csv)
 
-Intenta cargar el archivo datos_con_errores.csv
-
-```{webr-r}
-# read.csv("C:/Users/TuNombre/datos_con_errores.csv") # Tú código debería ser algo así o bien selecciona el archivo ejecutando el siguiente código
-read.csv(choose.files())
-```
-
-### Paso 1: Verificar el entorno
-
-¿Está el archivo en el directorio correcto?
-
-```{webr-r}
-getwd()
-# ¿Ves el archivo 'datos_con_errores.csv' aquí?
-```
-
-------------------------------------------------------------------------
-
-### Paso 2: Cargar el archivo sin argumentos
-
-Intenta cargar el archivo tal cual. ¿Qué ves?
-
-```{webr-r}
-datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv")
-datos
-```
-
-**Pregunta:** ¿Qué problemas puedes detectar en los datos cargados?
-
-------------------------------------------------------------------------
-
-### Paso 3: Codificación de caracteres
-
-Algunos acentos pueden verse mal. Prueba con otra codificación:
-
-```{webr-r}
-datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1")
+```{webr-r, error=TRUE}
+datos <- read.csv("misdatos/datos_con_errores.csv", sep = ";")
 datos
 ```
 
 ------------------------------------------------------------------------
 
-### Paso 4: Separadores incorrectos
+#### Error 1: Ruta archivo incorrecta
 
-La última fila usa punto y coma. ¿Cómo lo solucionamos?
+"Cannot open de connection" o "No such file or directory"
+
+Comprobar:
 
 ```{webr-r}
-datos <- read.csv("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/datos_con_errores.csv", fileEncoding = "latin1", sep = ",")
+getwd()   # ver directorio de trabajo actual
+list.files()  # listar archivos disponibles
+```
+
+#### Ejercicio 6 Carga el archivo 
+
+```{r}
+# Escribe aquí o en tu consola de R el código para cargar el archivo
+```
+
+#### Error 2: Separadores incorrectos
+
+El archivo se carga pero todas las columnas aparecen en una sola. Esto sucede porque el archivo usa `;` como separador mientras que read.csv por defecto usa `,`
+
+```{webr-r}
+#| code-fold: true
+#| code-summary: "Mostrar/Ocultar código"
+datos <- read.csv("data/datos_con_errores.csv", sep = ";")
 datos
 ```
 
 ------------------------------------------------------------------------
 
-### Paso 5: Valores ausentes
+#### Error 3: Valores ausentes
 
 Algunas celdas están vacías. ¿Cómo las identificamos?
 
 ```{webr-r}
-datos <- read.csv("data/datos_con_errores.csv", fileEncoding = "latin1", na.strings = c("", "NA", ".", "?"))
-summary(datos)
+datos <- read.csv("data/datos_con_errores.csv", sep = ";", na.strings = c("", "NA", ".", "?"))
+datos
 ```
-
-------------------------------------------------------------------------
-
-### Paso 6: Tipos de datos
-
-¿Edad es numérica?
-
-```{webr-r}
-str(datos)
-```
-
-Corrige los tipos:
-
-```{webr-r}
-datos$Edad <- as.numeric(datos$Edad)
-
-```
-
-#### Ejercicio extra. Trabajando con fechas {style="color: blue;"}
-
-¿Fecha es tipo Date?
-
-```{webr-r}
-str(datos)
-datos$Fecha <- as.Date(datos$Fecha, format = "%Y-%m-%d")
-```
-
-NOTA: Fechas en R. Si quieres ampliar pincha [aquí](https://excelkingdom.blogspot.com/2018/11/how-to-format-date-values-in-r.html)
-
-| **Símbolo** | **Significado**  | **Ejemplo** |
-|:------------|:-----------------|:------------|
-| `%Y`        | Año con 4 cifras | `2025`      |
-| `%m`        | Mes con 2 cifras | `09`        |
-| `%d`        | Día con 2 cifras | `24`        |
-
-------------------------------------------------------------------------
-
-### Paso 7: Limpiar comillas y comentarios
-
-A veces, al importar datos, los nombres vienen entre comillas, como "Carlos" en lugar de Carlos. Esto puede causar problemas al filtrar, comparar o visualizar los datos.
-
-```{webr-r}
-datos$Nombre <- gsub('"', '', datos$Nombre)
-```
-
-**¿Qué hace esta línea?**
-
--   `gsub()` es una función que **busca y reemplaza texto**.
-
--   El primer argumento (`'"'`) indica qué queremos eliminar: las comillas dobles.
-
--   El segundo (`''`) indica con qué lo queremos reemplazar: en este caso, con nada.
-
--   El tercero (`datos$Nombre`) es la columna donde aplicamos el cambio.
-
-```{webr-r}
-# Antes
-
-datos$Nombre
-
-# [1] "\"Carlos\"" "Ana" "Luis"
-
-# Después
-
-datos$Nombre <- gsub('"', '', datos$Nombre)
-
-datos$Nombre
-
-#[1] "Carlos" "Ana" "Luis"
-```
-
-------------------------------------------------------------------------
-
-### Paso final: Ver datos limpios
-
-```{webr-r}
-View(datos)
-```
-
-**Reflexión:** ¿Qué aprendiste sobre los errores comunes al cargar datos?

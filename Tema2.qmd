@@ -49,10 +49,7 @@ Vamos a seguir trabajando con la base de datos de comunidades de Alberta que pue
 # # Escribe aquí tu respuesta
 ```
 
-<button 
-  onclick="let x=document.getElementById('sol1'); x.style.display = (x.style.display==='none') ? 'block':'none';"
-  style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;"
->
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
 
 Mostrar/Ocultar solución
 
@@ -122,10 +119,7 @@ Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%
 # Escribe aquí tu respuesta
 ```
 
-<button 
-  onclick="let x=document.getElementById('sol2'); x.style.display = (x.style.display==='none') ? 'block':'none';"
-  style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;"
->
+<button onclick="let x=document.getElementById(&#39;sol2&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
 
 Mostrar/Ocultar solución
 
@@ -144,16 +138,13 @@ v %>%
 
 Ahora vamos a trabajar con la base de datos de Alberta
 
-#### Ejercicio 3 Selecciona solo las columnas de Antennaria y filtra las parcelas donde Artemisia_frigida tenga abundancia mayor que 20.
+#### Ejercicio 3 Selecciona solo las columnas de *Antennaria* y filtra las parcelas donde *Artemisia_frigida* tenga abundancia mayor que 20.
 
 ```{webr-r}
 # Escribe aquí tu respuesta
 ```
 
-<button 
-  onclick="let x=document.getElementById('sol3'); x.style.display = (x.style.display==='none') ? 'block':'none';"
-  style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;"
->
+<button onclick="let x=document.getElementById(&#39;sol3&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
 
 Mostrar/Ocultar solución
 
@@ -196,4 +187,154 @@ alberta %>%
          perc_frigida = (Artemisia_frigida / total_abund) * 100)
 ```
 
+## 4. Reestructuración de datos: pivot_longer() y pivot_wider()
 
+Cuando trabajamos con datos de biodiversidad, muchas veces las tablas que recibimos no tienen la forma que necesitamos. A veces son anchas (muchas columnas para las especies) y queremos pasarlas a largas (una sola columna con los nombres de especies y otra con sus valores).
+
+En otras ocasiones ocurre lo contrario: tenemos los datos en formato largo y queremos volver a un formato ancho.
+
+Aquí es donde entran dos funciones clave de tidyr:
+
+`pivot_longer()` → convierte columnas en filas.
+
+`pivot_wider()` → convierte filas en columnas.
+
+**¿Por qué es importante?**
+
+-   El formato largo es mucho más flexible para análisis y visualización (por ejemplo, para graficar con ggplot2).
+
+-   El formato ancho es útil para reportes y cálculos más directos.
+
+-   Saber moverse entre ambos formatos es esencial en ecología y biodiversidad, donde trabajamos con comunidades de especies.
+
+Cuando trabajamos con datos de biodiversidad, a menudo tenemos tablas en **formato ancho** (una columna por especie) y necesitamos transformarlas a **formato largo** (una columna para especies y otra para sus valores). La función que usamos en `tidyr` para esto es:
+
+``` r
+pivot_longer(data,
+cols,
+names_to = "nombre_columna",
+values_to = "nombre_valores")
+```
+
+### Argumentos principales
+
+-   **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`%>%`).
+
+-   **cols**: columnas que quieres transformar en filas. Ejemplo: `cols = -plot` o `cols = c(Carex_filifolia, Artemisia_frigida)`.
+
+-   **names_to**: nombre de la nueva columna con los nombres de las variables originales. Ejemplo: `names_to = "species"`.
+
+-   **values_to**: nombre de la nueva columna con los valores de esas variables. Ejemplo: `values_to = "abundance"`.
+
+#### Ejemplo
+
+Supongamos que tenemos esta tabla:
+
+```{webr-r}
+datos <- data.frame(
+plot = 1:3,
+sp1 = c(5, 3, 0),
+sp2 = c(12, 20, 5),
+sp3 = c(0, 4, 8)
+)
+```
+
+Transformamos con `pivot_longer()`:
+
+```{webr-r}
+datos_long <- datos %>%
+pivot_longer(cols = -plot,
+names_to = "species",
+values_to = "abundance")
+datos_long
+```
+
+#### Ejercicio 4. Pasa la tabla de datos de comunidades de Alberta a formato largo
+
+## `pivot_wider()`: pasar a formato ancho
+
+
+Cuando trabajamos con datos de biodiversidad, a veces los tenemos en **formato largo** (una fila por especie y parcela) y necesitamos transformarlos a **formato ancho** (una columna por especie). La función que usamos en `tidyr` es:
+
+
+```{webr-r, eval=FALSE}
+pivot_wider(data,
+names_from = "nombre_columna",
+values_from = "nombre_valores")
+```
+
+### Argumentos principales
+
+1. **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`%>%`).
+2. **names_from**: columna que contiene los **nombres de las variables** que se convertirán en columnas. Por ejemplo, si tenemos una columna `species` con los nombres de las especies, cada especie se convertirá en una nueva columna.
+3. **values_from**: columna que contiene los **valores asociados** a las variables que se convertirán en columnas. Por ejemplo, si tenemos una columna `abundance` con las abundancias de cada especie, esos valores se colocarán en las nuevas columnas.
+4. **id_cols** (opcional): columnas que identifican de manera única cada fila. Si no se especifica, `pivot_wider()` intenta deducirlas automáticamente.
+5. **names_prefix** (opcional): prefijo que se puede añadir a los nombres de las nuevas columnas.
+6. **values_fill** (opcional): valor con el que rellenar las celdas vacías en el caso de que no haya datos. Por ejemplo, `values_fill = 0`.
+
+
+### Ejemplo 
+
+A partir de la tabla en formato largo que acabamos de crear:
+
+
+```{webr-r}
+datos_long
+```
+
+
+Transformamos con `pivot_wider()`:
+
+```{webr-r}
+datos_wide <- datos_long %>%
+pivot_wider(names_from = species,
+values_from = abundance)
+datos_wide
+```
+
+#### Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider()
+
+### la función rename
+
+Sirve para renombrar una variable, manteniendo todo el contenido idéntico.
+
+```{webr-r}
+library(tidyverse)
+df <- iris %>% 
+  rename(taxon = Species,
+         long_pet = Petal.Length,
+         anch_pet = Petal.Width,
+         long_sep = Sepal.Length,
+         anch_sep = Sepal.Width)
+head(df)
+```
+
+### la función arrange
+
+Sirve para cambiar el orden de la tabla en función de una o más variables. Por defecto, ordena por orden creciente (alfabético para character). Para hacerlo descendiente, se pone desc(variable).
+
+```{webr-r}
+library(tidyverse)
+# ordenar por 'length' creciente, en caso de empate por 'width' decreciente
+# se pueden poner tantos niveles como se quieran, pero el orden importa
+df <- iris %>% 
+  arrange(Sepal.Length, desc(Sepal.Width)) 
+head(df)
+```
+
+Categorización múltiple con case_when
+
+Se utiliza dentro de mutate, de modo similar a if_else, pero permitiendo más niveles.
+
+Hay que tener cuidado con casos que cumplan más de una condición (prioriza el criterio que está antes) o no cumplan ninguna (resultará un NA).
+
+```{webr-r}
+alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv") %>% 
+  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) %>% 
+  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) %>%
+  mutate(category = case_when(richness < 20 ~ "low",
+                              richness >= 20 & richness < 40 ~ "medium",
+                              richness >= 40 & richness < 55 ~ "high",
+                              richness >= 55 ~ "extreme" ))
+
+```
