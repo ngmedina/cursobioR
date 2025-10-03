@@ -242,8 +242,10 @@ Podemos hacer una única figura para guardarla después
 ```{webr-r}
 library(patchwork)
 
-bp+sp
-# bp/sp
+bp/sp
+
+# bp+sp+
+#   patchwork::plot_layout(widths = c(3,1))
 
 # ggsave("plot.png", height = 100, width = 200, units = "mm", dpi=300)
 ``` 
@@ -256,7 +258,7 @@ bp+sp
 library(terra)
 library(ggplot2)
 library(tidyterra)
-world <- vect("https://github.com/ngmedina/cursobioR/main/data/world-administrative-boundaries.shp")
+world <- vect("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/world-administrative-boundaries.shp")
 
 View(as.data.frame(world))
 
@@ -266,10 +268,10 @@ names(cols) <- c("Oceania", "Asia", "Europe", "Americas", "Africa", "Antarctica"
 
 ggplot(world)+
   geom_spatvector(aes(fill=continent), colour = "#00000033")+
-  
+
   scale_fill_manual(values = cols)+
   scale_x_continuous(breaks = seq(from = -180, to = 180, by = 30))+
-  
+
   theme(legend.position = "none",
         panel.grid = element_blank(),
         panel.background = element_rect(fill = "aliceblue"),
@@ -283,14 +285,14 @@ library(terra)
 library(ggplot2)
 library(tidyterra)
 
-mdt <- rast("https://github.com/ngmedina/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif")
+mdt <- rast("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif")
 
 ggplot()+
   geom_spatraster(data = mdt, na.rm = TRUE)+
-  
+
   scale_fill_continuous(palette = "magma", na.value = "transparent")+
   # scale_fill_binned(palette = "magma", breaks = c(0,500, 1000, 2000), na.value = "transparent")+
-  
+
   theme(panel.background = element_rect(fill = "aliceblue"))
 
 
@@ -305,14 +307,14 @@ ggplot()+
 library(ape)
 library(ggtree)
 
-phylo <- read.tree("https://github.com/ngmedina/cursobioR/main/data/pinus.tre")
+phylo <- read.tree("https://raw.githubusercontent.com/iramosgutierrez/cursobioR/main/data/pinus.tre")
 
 
 ggtree(phylo, layout="fan", size=0.15, open.angle=15,) +
   geom_tiplab(size = 3, color = "grey", offset = 1.5)+
-  
+
   theme(plot.margin = margin(20, 20, 20, 20, "mm"))
-  
+
 
 
 ```
