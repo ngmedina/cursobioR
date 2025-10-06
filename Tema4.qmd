@@ -11,21 +11,23 @@ engine: knitr
 filters:
   - webr
 ---
-
+  
 # El paquete ggplot2
-
+  
 El paquete ggplot2 se basa en la gramática interna de un gráfico; no es una función para hacer cada tipo de gráfico, sino una manera de entenderlos, y por tanto "universal". 
-Ver [presentación complementaria](https://github.com/iramosgutierrez/intro2R/blob/main/presentaciones/ggplot2.pdf)
+Ver [presentación complementaria](https://raw.githubusercontent.com/iramosgutierrez/intro2R/main/presentaciones/ggplot2.pdf)
 
 En este caso también vamos a ir añadiendo capas línea a línea, pero en vez de pipes ( %>% ) usaremos símbolo de suma ( + ) para encadenar instrucciones.
 
 Para esta sesión vamos a utilizar los datos *penguins* de Palmer
 ```{webr-r}
+library(ggplot2)
+
 data(penguins)
 penguins <- penguins %>% 
-  filter(!is.na(body_mass_g),
-         !is.na(bill_length_mm),
-         !is.na(bill_depth_mm),
+  filter(!is.na(body_mass),
+         !is.na(bill_len),
+         !is.na(bill_dep),
          !is.na(sex))
 head(penguins)
 
@@ -36,6 +38,7 @@ ggplot2 entiende los gráficos como una serie de capas (datos, posición de ejes
 
 
 Argumentos obligatorios:
+
 -   Data: un dataset. *penguins* en nuestro ejemplo.
 -   Mapping: el enlace entre nuestos datos y el gráfico. ¿Qué información guardada en cada columna va a ser referida en el gráfico (ejes, color/relleno, tamaño...)? Todo esto se encuadra dentro de la función `aes()`.
 -   Geometries: qué tipo de gráfico queremos (puntos, líneas, barras, histograma...).
@@ -44,20 +47,20 @@ Argumentos obligatorios:
 ## la capa `mapping`
 #### Ejemplo 1. ¿Hay una correlación entre masa corporal y longitud del pico?
 ```{webr-r}
-ggplot(data = penguins, mapping = aes(x = body_mass_g, y = bill_length_mm))+
+ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+
   geom_point()
 ```
 
 ¿Podríamos colorear todo de azul?
 ```{webr-r}
-ggplot(data = penguins, mapping = aes(x = body_mass_g, y = bill_length_mm))+
+ggplot(data = penguins, mapping = aes(x = body_mass, y = bill_len))+
   geom_point(color = "blue")
 
 ```
 
 #### Ejemplo 2. Mejor coloréalos dependiendo de la especie.
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm, color = species))+
+ggplot(penguins, aes(x = body_mass, y = bill_len, color = species))+
   geom_point()
 ```
 En este caso, color va dentro de `aes()` ya que está referido a una columna.
@@ -65,23 +68,24 @@ En este caso, color va dentro de `aes()` ya que está referido a una columna.
 
 Se pueden modificar muchos parámetros, como transparencia, tamaño del punto...
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
                      color = species,
-                     size = bill_depth_mm))+
+                     size = bill_dep))+
   geom_point(alpha = 0.25)
 ```
 
 ## Tipos de gráfico (la capa `geometries`)
 
-Hasta ahora, lo único que hemos graficado han sido gráficos de dispersión(`geom_piont()`), pero podemos hacer muchos otros tipos de gráfico.
+Hasta ahora, lo único que hemos graficado han sido gráficos de dispersión(`geom_point()`), pero podemos hacer muchos otros tipos de gráfico.
 
 
 
 ### Línea de regresión
 Por ejemplo, podemos añadir una línea de regresión a nuestro gráfico previo:
+
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm))+
+ggplot(penguins, aes(x = body_mass, y = bill_len))+
   geom_point(colour = "blue")+
   geom_smooth(method = "lm", color = "red")
 ```
@@ -90,7 +94,7 @@ Un gráfico comun para ver la distribución de valores de una variable es un his
 
 Para ver cómo se distribuyen los valores de masa corporal:
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g))+
+ggplot(penguins, aes(x = body_mass))+
   geom_histogram(bins = 50) # bins = número de agrupaciones
 ```
 
@@ -98,16 +102,16 @@ ggplot(penguins, aes(x = body_mass_g))+
 De manera clásica, se han utilizado boxplots para ver si hay diferencias entre grupos. Además, si queremos ver los datos "brutos" podemos poner las observaciones "agitadas" para ver cómo se distribuyen.
 
 ```{webr-r}
-ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species,))+
+ggplot(penguins, aes(x = species, y = bill_len, fill = species,))+
   geom_boxplot()+
   geom_jitter()
-  geom_violin()
+
 ```
 
-Una alternativa a esto sería hacer un gráfico de violones, en el que se muestra la distribución de la densidad de puntos por grupo.
+Una alternativa a esto sería hacer un gráfico de violines, en el que se muestra la distribución de la densidad de puntos por grupo.
 
 ```{webr-r}
-ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species))+
+ggplot(penguins, aes(x = species, y = bill_len, fill = species))+
   geom_violin()
 ```
 
@@ -115,20 +119,20 @@ ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species))+
 Los cambios de valores (color, relleno, transparencia) por defecto hay que cambiarlos utilizando la capa `scales`.
 
 ```{webr-r}
-ggplot(penguins, aes(x = species, y = bill_length_mm, fill = species))+
+ggplot(penguins, aes(x = species, y = bill_len, fill = species))+
   geom_violin()+
   scale_fill_manual(values = c(Adelie = "red", Gentoo = "yellow", Chinstrap = "blue"))
 ```
 
 O para una variable continua:
-
-```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+  
+  ```{webr-r}
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   scale_color_continuous(palette = c("red", "yellow"))
-  # scale_color_viridis_c()
+# scale_color_viridis_c()
 ```
 
 
@@ -137,18 +141,18 @@ Para ver cómo se distribuyen los casos en nuestro dataset podemos "romperlo" en
 
 
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   facet_wrap(~species)+
   scale_color_viridis_c()
 ```
 
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   facet_wrap(sex~species)+
   scale_color_viridis_c()
@@ -160,9 +164,9 @@ La capa `theme` hace referencia a todo lo que se refiere al "marco", pero no afe
 
 La función `labs()` permite fijar el nombre del eje x, y, título y descripción.
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   scale_color_viridis_c()+
   
@@ -176,9 +180,9 @@ ggplot(penguins, aes(x = body_mass_g,
 Además, podemos quitar el tema por defecto (gris) y poner otro en blanco y negro (por ejemplo).
 
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   scale_color_viridis_c()+
   
@@ -194,9 +198,9 @@ ggplot(penguins, aes(x = body_mass_g,
 Y editar el texto de los ejes, color de la cuadrícula, etc..
 
 ```{webr-r}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_length_mm, 
-                     colour = bill_depth_mm))+
+ggplot(penguins, aes(x = body_mass, 
+                     y = bill_len, 
+                     colour = bill_dep))+
   geom_point()+
   scale_color_viridis_c()+
   
@@ -213,5 +217,107 @@ ggplot(penguins, aes(x = body_mass_g,
         panel.grid.minor.y = element_blank(),
         panel.grid.major.x = element_line(linewidth = 0.75, linetype = 2, colour = "black"),
         panel.background = element_rect(fill = "aliceblue")
-        )
+  )
 ```
+
+## Combinar gráficos con `patchwork`
+
+Pongamos que tenemos dos gráficos complementarios que queremos mostrar
+```{webr-r}
+ 
+bp <- ggplot(penguins)+
+        geom_boxplot(aes(x = species, y = body_mass, fill = species))+
+        scale_fill_viridis_d()+
+        theme(legend.position = "none")
+
+bp
+
+
+sp <- ggplot(penguins)+
+        geom_point(aes(x = bill_len, y =body_mass , color = bill_dep))+
+        scale_color_viridis_c(name = "Bill depth (mm)")
+
+sp
+```
+
+Podemos hacer una única figura para guardarla después
+```{webr-r}
+library(patchwork)
+
+bp/sp
+
+# bp+sp+
+#   patchwork::plot_layout(widths = c(3,1))
+
+# ggsave("plot.png", height = 100, width = 200, units = "mm", dpi=300)
+``` 
+
+## Extensiones de ggplot
+
+### 1. mapas con `tidyterra`
+
+```{webr-r}
+library(terra)
+library(ggplot2)
+library(tidyterra)
+world <- vect("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/world-administrative-boundaries.shp")
+
+View(as.data.frame(world))
+
+cols <- c("#4573a8", "#f08c13", "#307047", "#70304b", "#f0f04f", "#80807a")
+names(cols) <- c("Oceania", "Asia", "Europe", "Americas", "Africa", "Antarctica")
+
+
+ggplot(world)+
+  geom_spatvector(aes(fill=continent), colour = "#00000033")+
+
+  scale_fill_manual(values = cols)+
+  scale_x_continuous(breaks = seq(from = -180, to = 180, by = 30))+
+
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.background = element_rect(fill = "aliceblue"),
+        axis.text.x = element_text(angle = 90, hjust = 0))
+
+
+```
+
+```{webr-r}
+library(terra)
+library(ggplot2)
+library(tidyterra)
+
+mdt <- rast("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/rasterspain_PenIber_250m_ETRS89.tif")
+
+ggplot()+
+  geom_spatraster(data = mdt, na.rm = TRUE)+
+
+  scale_fill_continuous(palette = "magma", na.value = "transparent")+
+  # scale_fill_binned(palette = "magma", breaks = c(0,500, 1000, 2000), na.value = "transparent")+
+
+  theme(panel.background = element_rect(fill = "aliceblue"))
+
+
+```
+
+### 2. filogenias con `ggtree`
+
+
+```{webr-r}
+# install.packages("BiocManager")
+# BiocManager::install("ggtree")
+library(ape)
+library(ggtree)
+
+phylo <- read.tree("https://raw.githubusercontent.com/ngmedina/cursobioR/main/data/pinus.tre")
+
+
+ggtree(phylo, layout="fan", size=0.15, open.angle=15,) +
+  geom_tiplab(size = 3, color = "grey", offset = 1.5)+
+
+  theme(plot.margin = margin(20, 20, 20, 20, "mm"))
+
+
+
+```
+
