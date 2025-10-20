@@ -99,6 +99,34 @@ f3 <- filter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)
 head(f3)
 ```
 
+### La función rename
+
+Sirve para renombrar una variable, manteniendo todo el contenido idéntico.
+
+```{webr-r}
+library(tidyverse)
+df <- iris %>% 
+  rename(taxon = Species,
+         long_pet = Petal.Length,
+         anch_pet = Petal.Width,
+         long_sep = Sepal.Length,
+         anch_sep = Sepal.Width)
+head(df)
+```
+
+### La función arrange
+
+Sirve para cambiar el orden de la tabla en función de una o más variables. Por defecto, ordena por orden creciente (alfabético para character). Para hacerlo descendiente, se pone desc(variable).
+
+```{webr-r}
+library(tidyverse)
+# ordenar por 'length' creciente, en caso de empate por 'width' decreciente
+# se pueden poner tantos niveles como se quieran, pero el orden importa
+df <- iris %>% 
+  arrange(Sepal.Length, desc(Sepal.Width)) 
+head(df)
+```
+
 ## 2. Pipes
 
 El operador pipe `%>%` (pipe) es uno de los más interesantes en tidyverse, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse podemos conectar pasos de forma secuencial usando este operador.
@@ -185,6 +213,24 @@ O calcular el porcentaje de la especie con respecto al total
 alberta %>%
   mutate(total_abund = rowSums(select(., -plot)),
          perc_frigida = (Artemisia_frigida / total_abund) * 100)
+```
+
+
+Categorización múltiple con case_when
+
+Se utiliza dentro de mutate, de modo similar a if_else, pero permitiendo más niveles.
+
+Hay que tener cuidado con casos que cumplan más de una condición (prioriza el criterio que está antes) o no cumplan ninguna (resultará un NA).
+
+```{webr-r}
+alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv") %>% 
+  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) %>% 
+  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) %>%
+  mutate(category = case_when(richness < 20 ~ "low",
+                              richness >= 20 & richness < 40 ~ "medium",
+                              richness >= 40 & richness < 55 ~ "high",
+                              richness >= 55 ~ "extreme" ))
+
 ```
 
 ## 4. Reestructuración de datos: pivot_longer() y pivot_wider()
@@ -294,47 +340,3 @@ datos_wide
 
 #### Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider()
 
-### la función rename
-
-Sirve para renombrar una variable, manteniendo todo el contenido idéntico.
-
-```{webr-r}
-library(tidyverse)
-df <- iris %>% 
-  rename(taxon = Species,
-         long_pet = Petal.Length,
-         anch_pet = Petal.Width,
-         long_sep = Sepal.Length,
-         anch_sep = Sepal.Width)
-head(df)
-```
-
-### la función arrange
-
-Sirve para cambiar el orden de la tabla en función de una o más variables. Por defecto, ordena por orden creciente (alfabético para character). Para hacerlo descendiente, se pone desc(variable).
-
-```{webr-r}
-library(tidyverse)
-# ordenar por 'length' creciente, en caso de empate por 'width' decreciente
-# se pueden poner tantos niveles como se quieran, pero el orden importa
-df <- iris %>% 
-  arrange(Sepal.Length, desc(Sepal.Width)) 
-head(df)
-```
-
-Categorización múltiple con case_when
-
-Se utiliza dentro de mutate, de modo similar a if_else, pero permitiendo más niveles.
-
-Hay que tener cuidado con casos que cumplan más de una condición (prioriza el criterio que está antes) o no cumplan ninguna (resultará un NA).
-
-```{webr-r}
-alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv") %>% 
-  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) %>% 
-  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) %>%
-  mutate(category = case_when(richness < 20 ~ "low",
-                              richness >= 20 & richness < 40 ~ "medium",
-                              richness >= 40 & richness < 55 ~ "high",
-                              richness >= 55 ~ "extreme" ))
-
-```
