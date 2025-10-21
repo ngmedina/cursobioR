@@ -504,7 +504,7 @@ names(iris) # la funcion names() nos muestra los nombres de las variables de iri
 
 Aunque esta forma de importar datos puede ser muy útil para probar funciones o aprender a escribir código lo normal es que queramos cargar una base de datos propia. Uno de los formatos más sencillo de importar y que además ofrece buenas propiedades de interoperabilidad es el `.csv`
 
-Vamos a trabajar con los datos de una base de datos de la abundancia de especies en herbazales de Alberta en Estados Unidos.
+Vamos a trabajar con los datos de una base de datos de la abundancia de especies en herbazales de Alberta en Canada.
 
 Los datos de composición específica consisten típicamente en observaciones de la presencia o abundancia de las especies en diferentes localidades.
 
@@ -606,7 +606,7 @@ getwd()   # ver directorio de trabajo actual
 list.files()  # listar archivos disponibles
 ```
 
-#### Ejercicio 6 Carga el archivo 
+#### Ejercicio 6 Carga el archivo
 
 ```{r}
 # Escribe aquí o en tu consola de R el código para cargar el archivo

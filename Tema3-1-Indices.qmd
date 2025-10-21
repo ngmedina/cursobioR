@@ -14,7 +14,7 @@ filters:
 
 # Datos de composición específica
 
-En la próxima sesión vamos a explorar índices de biodiversidad. Para ello vamos a emplear bases de datos de la abundancia de especies en herbazales de Alberta en Estados Unidos con el que ya estáis familiarizados. La base de datos original podéis descargarla [aquí](https://kembellab.ca/r-workshop/)
+En la próxima sesión vamos a explorar índices de biodiversidad. Para ello vamos a emplear bases de datos de la abundancia de especies en herbazales de Alberta en Canada con el que ya estáis familiarizados. La base de datos original podéis descargarla [aquí](https://kembellab.ca/r-workshop/)
 
 Recordad que los los datos provienen de un estudio de plantas que se realizó en parcelas de 20 x 20 m. Los datos de abundancia corresponden la cobertura de cada especie en proporción al total de la parcela.
 
