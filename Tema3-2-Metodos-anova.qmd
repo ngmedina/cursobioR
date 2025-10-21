@@ -14,7 +14,7 @@ filters:
 
 En las siguientes sesiones vamos a centrarnos en métodos de comparaciones. Hemos incluido en este apartado aquellos métodos comunes que se emplean para estudiar el efecto de uno o más factores cada uno con sus respectivos niveles.
 
-Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
+Vamos a emplear una base de datos de abundancia de especies en herbazales de Alberta en Canada. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
 
 En esta misma base de datos hay recogidas una serie de características ambientales de las parcelas como son la pendiente "slope", la orientación "aspect" y la humedad relativa "rel.moisture".
 

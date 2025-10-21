@@ -225,7 +225,8 @@ Mostrar/Ocultar solución
 Solución:\
 
 ```{webr-r}
-class(dummy)
+class(dummy$trait)
+class(dummy$abun)
 ```
 :::
 
