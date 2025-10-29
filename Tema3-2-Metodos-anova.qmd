@@ -196,6 +196,20 @@ cld <- multcomp::cld(em_moist, alpha = 0.05, Letters = LETTERS)
 cld
 ```
 
+```{webr-r}
+library(ggplot2)
+cld_df <- as.data.frame(cld)
+
+# Crear el boxplot
+ggplot(env_alberta, aes(x = rel.moisture, y = S_alberta)) +
+  geom_boxplot() +
+  geom_text(data = cld_df, aes(x = rel.moisture, y = max(S_alberta) + 1, label = .group), inherit.aes = FALSE) +
+  labs(x = "Humedad relativa", y = "Riqueza de especies") +
+  theme_bw()
+
+```
+
+
 #### Ejercicio extra ¿Cómo interpretamos el resultado de la representación compacta de las comparaciones múltiples? 
 
 Leed con cuidado esta [página 1](http://statistics-help-for-students.com/How_do_I_report_a_1_way_between_subjects_ANOVA_in_APA_style.htm#.Yy1ZA3ZByUk) y escribid un texto que describa los resultados del ANOVA y las comparaciones múltiples en el que se analiza las diferencias en temperatura media anual (bio1) entre especies.
