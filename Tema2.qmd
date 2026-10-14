@@ -33,7 +33,7 @@ El universo tidyverse es como una caja de herramientas moderna para R. Incluye p
 Lo primero que hay que hacer es instalarse los paquetes de tidyverse.
 
 ```{webr-r}
-install.packages("tidyverse")
+# install.packages("tidyverse")
 library(tidyverse)
 ```
 
@@ -41,7 +41,8 @@ Ahora aprenderemos a usar algunas de las funciones más importantes de `tidyvers
 
 ## 1. Seleccionar columnas y filtrar filas
 
-Vamos a seguir trabajando con la base de datos de comunidades de Alberta que puedes descargar [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv)
+<!-- Vamos a seguir trabajando con la base de datos de comunidades de Alberta que puedes descargar [aquí](https://github.com/ngmedina/UAMBioDivR/blob/main/Alberta%20grassland/grassland.community.csv) -->
+Vamos a trabajar con un dataset propio de R llamado penguins_raw, pero quiero cargarlo en mi entorno como "penguins"
 
 #### Ejercicio 1. ¿Recuérdas cómo se cargaba?
 
@@ -59,44 +60,47 @@ Mostrar/Ocultar solución
 Solución:\
 
 ```{webr-r}
-alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+penguins <- penguins_raw
+head(penguins)
 ```
 :::
 
 ### Seleccionar columnas
 
-Para seleccionar columnas usamos la función `select()`. Empecemos con un ejemplo sencillo, escoger las columnas plot y Carex filifolia.
+Para seleccionar columnas usamos la función `select()`. Empecemos con un ejemplo sencillo, escoger las columnas de especie,  sexo y masa corporal.
 
 ```{webr-r}
-select(alberta, plot, Carex_filifolia)
+penguins_short <- select(penguins, Species, Sex, `Body Mass (g)`)
 ```
 
 **TIP**: Prueba a seleccionar otras columnas
 
-La función `select()` es muy flexible y tiene muchos argumentos, dentro de esos argumentos podemos usar funciones. Por ejemplo, podemos seleccionar todas las columnas de las especies de Artemisia utilizando la función `starts_with()` dentro de `select()`
+<!-- La función `select()` es muy flexible y tiene muchos argumentos, dentro de esos argumentos podemos usar funciones. Por ejemplo, podemos seleccionar todas las columnas de las especies de Artemisia utilizando la función `starts_with()` dentro de `select()` -->
 
-```{webr-r}
-select(alberta, starts_with("Artemisia"))
-```
+<!-- ```{webr-r} -->
+<!-- select(alberta, starts_with("Artemisia")) -->
+<!-- ``` -->
 
-Hay muchas otras funciones para facilitar seleccionar conjuntos de columnas como `ends_with()`, `contains()`. Puedes encontrar más ejemplos en este [enlace](https://tidyselect.r-lib.org/reference/starts_with.html)
+<!-- Hay muchas otras funciones para facilitar seleccionar conjuntos de columnas como `ends_with()`, `contains()`. Puedes encontrar más ejemplos en este [enlace](https://tidyselect.r-lib.org/reference/starts_with.html) -->
 
 ### Filtrar filas
 
 También podemos filtrar filas. Para ello usamos la función filter().
 
-Por ejemplo, para filtrar todas las parcelas donde Antennaria parviflora tiene más de 2 individuos usamos:
+<!-- Por ejemplo, para filtrar todas las parcelas donde Antennaria parviflora tiene más de 2 individuos usamos: -->
 
 ```{webr-r}
-# 1. Filtrar parcelas con Antennaria_parvifolia > 0
-f1 <- filter(alberta, Antennaria_parvifolia > 0)
-head(f1)
-# 2. Filtrar parcelas con Artemisia_frigida > 20
-f2 <- filter(alberta, Artemisia_frigida > 20)
-head(f2)
-# 3. Filtrar parcelas con Antennaria_parvifolia > 0 Y Artemisia_frigida > 20
-f3 <- filter(alberta, Antennaria_parvifolia > 0, Artemisia_frigida > 20)
-head(f3)
+# 1. Filtrar individuos de la especie _Pygoscelis antarctica_
+chinstrap <- filter(penguins_short, Species == "Chinstrap penguin (Pygoscelis antarctica)")
+head(chinstrap)
+
+# 2. Filtrar individuos hembra
+females <- filter(penguins_short, Sex == "FEMALE")
+head(females)
+
+# 3. Filtrar individuos sexados y mayores de 3kg
+big_penguins <- filter(penguins_short, !is.na(Sex), `Body Mass (g)`>3500)
+head(big_penguins)
 ```
 
 ### La función rename
@@ -104,14 +108,12 @@ head(f3)
 Sirve para renombrar una variable, manteniendo todo el contenido idéntico.
 
 ```{webr-r}
-library(tidyverse)
-df <- iris %>% 
-  rename(taxon = Species,
-         long_pet = Petal.Length,
-         anch_pet = Petal.Width,
-         long_sep = Sepal.Length,
-         anch_sep = Sepal.Width)
-head(df)
+
+penguins_renamed <-  rename(penguins_short, 
+                            taxon = Species,
+                            sex = Sex,
+                            mass_g = `Body Mass (g)`)
+head(penguins_renamed)
 ```
 
 ### La función arrange
@@ -119,29 +121,30 @@ head(df)
 Sirve para cambiar el orden de la tabla en función de una o más variables. Por defecto, ordena por orden creciente (alfabético para character). Para hacerlo descendiente, se pone desc(variable).
 
 ```{webr-r}
-library(tidyverse)
-# ordenar por 'length' creciente, en caso de empate por 'width' decreciente
-# se pueden poner tantos niveles como se quieran, pero el orden importa
-df <- iris %>% 
-  arrange(Sepal.Length, desc(Sepal.Width)) 
-head(df)
+penguins_ordered <- arrange(penguins_renamed, sex, desc(mass_g))
+  
+head(penguins_ordered)
+tail(penguins_ordered)
 ```
 
 ## 2. Pipes
 
-El operador pipe `%>%` (pipe) es uno de los más interesantes en tidyverse, en vez de escribir funciones dentro de funciones (como en base R), en tidyverse podemos conectar pasos de forma secuencial usando este operador.
+El operador pipe `|> ` (pipe) es uno de los más interesantes en R (`%>%` en tidyverse), en vez de escribir funciones dentro de funciones (como en base R), en tidyverse podemos conectar pasos de forma secuencial usando este operador.
 
 Vamos con un ejemplo sencillo:
 
 ```{webr-r}
 v <- c(4, 6, 5)
-v %>% 
+
+mean(v)
+
+v |>  
   mean()
 ```
 
-Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `%>%` se puede entender como "y después haz". Lo que hace es coger el resultado del código que está a la izquierda y pasarlo como primer argumento a la función que está a la derecha
+Fíjaos que el código de arriba es equivalente a `mean(n)`. El operador pipe `|> ` se puede entender como "y después haz". Lo que hace es coger el resultado del código que está a la izquierda y pasarlo como primer argumento a la función que está a la derecha
 
-#### Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando `%>%`?
+#### Ejercicio 2 ¿Y si queremos hacer la raíz cuadrada de la media? ¿Cómo haríamos usando `|> `?
 
 ```{webr-r}
 # Escribe aquí tu respuesta
@@ -158,17 +161,20 @@ Solución:\
 
 ```{webr-r}
 v <- c(4, 6, 5)
-v %>% 
-  mean() %>% 
+v |>  
+  mean() |>  
   sqrt()
 ```
 :::
 
 Ahora vamos a trabajar con la base de datos de Alberta
 
-#### Ejercicio 3 Selecciona solo las columnas de *Antennaria* y filtra las parcelas donde *Artemisia_frigida* tenga abundancia mayor que 20.
+#### Ejercicio 3 Selecciona solo las columnas de *Artemisia* y filtra las parcelas donde *Artemisia_frigida* tenga abundancia mayor que 20.
 
 ```{webr-r}
+alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+# pista: la funcion 'starts_with("XXX")' te permite detenctar las columnas cuyo nombre empieza con el texto 'XXX' dado
+
 # Escribe aquí tu respuesta
 ```
 
@@ -183,37 +189,35 @@ Solución:\
 
 ```{webr-r}
 # Seleccionar columnas de Antennaria
-alberta %>%
-  select(plot, starts_with("Antennaria")) %>%
+subset <- alberta |> 
+  select(plot, starts_with("Artemisia"))  |> 
   filter(Artemisia_frigida > 20)
 ```
 :::
 
-Es importante tener en cuenta que el pipe pasa al primer argumento de la función. Cuando queremos pasar el resultado del pipe a un arguemnto que no es el primero de la función hay que poner un punto . para especificar donde debería ir.
+<!-- Es importante tener en cuenta que el pipe pasa al primer argumento de la función. Cuando queremos pasar el resultado del pipe a un arguemnto que no es el primero de la función hay que poner un punto . para especificar donde debería ir. -->
 
 ## 3. Mutate: Crear y modificar columnas
 
-Vamos a explorar la forma en la que podemos crear y modificar columnas con la función `mutate`. Por ejemplo, vamos a crear una nueva columna multiplicando por 10 la abundancida de la especie Antennaria parviflora
+Vamos a explorar la forma en la que podemos crear y modificar columnas con la función `mutate`. Por ejemplo, vamos a crear una nueva columna especificando la masa de pingüinos en kg
 
 ```{webr-r}
-alberta %>%
-  mutate(double_antennaria = Antennaria_parvifolia * 2)
+peng_kg <- penguins_renamed |> 
+  mutate(mass_kg = mass_g /1000)
+
+head(peng_kg)
 ```
 
 La función es muy flexible y nos permite hacer operaciones bastante complejas en un solo paso. Por ejemplo, podemos crear una variable categórica que sea "sí" cuando *Antennaria parviflora* es mayor 10 y "No" cuando es menor o igual a 10.
 
 ```{webr-r}
-alberta %>%
-  mutate(high_antennaria = if_else(Antennaria_parvifolia > 10, "Sí", "No"))
+peng_categ <- penguins_renamed   |> 
+  mutate(category = if_else(mass_g  > 3500, "big", "small"))
+
+head(peng_categ)
+
 ```
 
-O calcular el porcentaje de la especie con respecto al total
-
-```{webr-r}
-alberta %>%
-  mutate(total_abund = rowSums(select(., -plot)),
-         perc_frigida = (Artemisia_frigida / total_abund) * 100)
-```
 
 
 Categorización múltiple con case_when
@@ -223,14 +227,15 @@ Se utiliza dentro de mutate, de modo similar a if_else, pero permitiendo más ni
 Hay que tener cuidado con casos que cumplan más de una condición (prioriza el criterio que está antes) o no cumplan ninguna (resultará un NA).
 
 ```{webr-r}
-alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv") %>% 
-  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) %>% 
-  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) %>%
+alberta_categ <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv") |>  
+  select(plot, Antennaria_parvifolia, Artemisia_cana, Artemisia_frigida) |>  
+  mutate(richness = Antennaria_parvifolia + Artemisia_cana + Artemisia_frigida) |> 
   mutate(category = case_when(richness < 20 ~ "low",
                               richness >= 20 & richness < 40 ~ "medium",
                               richness >= 40 & richness < 55 ~ "high",
                               richness >= 55 ~ "extreme" ))
 
+head(alberta_categ)
 ```
 
 ## 4. Reestructuración de datos: pivot_longer() y pivot_wider()
@@ -255,16 +260,19 @@ Aquí es donde entran dos funciones clave de tidyr:
 
 Cuando trabajamos con datos de biodiversidad, a menudo tenemos tablas en **formato ancho** (una columna por especie) y necesitamos transformarlas a **formato largo** (una columna para especies y otra para sus valores). La función que usamos en `tidyr` para esto es:
 
-``` r
+
+```{webr-r}
+
 pivot_longer(data,
-cols,
-names_to = "nombre_columna",
-values_to = "nombre_valores")
+  cols,
+  names_to = "nombre_columna",
+  values_to = "nombre_valores")
+
 ```
 
 ### Argumentos principales
 
--   **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`%>%`).
+-   **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`|> `).
 
 -   **cols**: columnas que quieres transformar en filas. Ejemplo: `cols = -plot` o `cols = c(Carex_filifolia, Artemisia_frigida)`.
 
@@ -277,21 +285,23 @@ values_to = "nombre_valores")
 Supongamos que tenemos esta tabla:
 
 ```{webr-r}
+
 datos <- data.frame(
-plot = 1:3,
-sp1 = c(5, 3, 0),
-sp2 = c(12, 20, 5),
-sp3 = c(0, 4, 8)
-)
+  plot = paste0("plot", 1:3),
+  Passer_domesticus = c(5, 3, 0),
+  Passer_montanus = c(12, 20, 5),
+  Passer_hispaniolensis = c(0, 4, 8) )
+
 ```
 
 Transformamos con `pivot_longer()`:
 
 ```{webr-r}
-datos_long <- datos %>%
-pivot_longer(cols = -plot,
-names_to = "species",
-values_to = "abundance")
+datos_long <- datos |> 
+  pivot_longer(cols = -plot,
+  names_to = "species",
+  values_to = "abundance")
+
 datos_long
 ```
 
@@ -303,15 +313,17 @@ datos_long
 Cuando trabajamos con datos de biodiversidad, a veces los tenemos en **formato largo** (una fila por especie y parcela) y necesitamos transformarlos a **formato ancho** (una columna por especie). La función que usamos en `tidyr` es:
 
 
-```{webr-r, eval=FALSE}
+```{webr-r}
+
 pivot_wider(data,
-names_from = "nombre_columna",
-values_from = "nombre_valores")
+  names_from = "nombre_columna",
+  values_from = "nombre_valores")
+
 ```
 
 ### Argumentos principales
 
-1. **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`%>%`).
+1. **data**: el data frame o tibble con tus datos. Normalmente se usa dentro de un pipe (`|> `).
 2. **names_from**: columna que contiene los **nombres de las variables** que se convertirán en columnas. Por ejemplo, si tenemos una columna `species` con los nombres de las especies, cada especie se convertirá en una nueva columna.
 3. **values_from**: columna que contiene los **valores asociados** a las variables que se convertirán en columnas. Por ejemplo, si tenemos una columna `abundance` con las abundancias de cada especie, esos valores se colocarán en las nuevas columnas.
 4. **id_cols** (opcional): columnas que identifican de manera única cada fila. Si no se especifica, `pivot_wider()` intenta deducirlas automáticamente.
@@ -325,18 +337,27 @@ A partir de la tabla en formato largo que acabamos de crear:
 
 
 ```{webr-r}
-datos_long
+datos_long_transf <- datos_long |> 
+  mutate(presencia = ifelse(abundance >0, 1, 0)) |> 
+  mutate(especie_ES = case_when(species == "Passer_domesticus" ~ "comun",
+                                species == "Passer_montanus"   ~ "molinero",
+                                species == "Passer_hispaniolensis" ~ "moruno")) 
+
+
+datos_long_transf2 <- datos_long_transf |> 
+  select(plot, presencia, especie_ES) # quito las columnas que no quiero!
+datos_long_transf2
 ```
 
 
 Transformamos con `pivot_wider()`:
 
 ```{webr-r}
-datos_wide <- datos_long %>%
-pivot_wider(names_from = species,
-values_from = abundance)
+datos_wide <- datos_long_transf2 |> 
+  pivot_wider(names_from = especie_ES,
+              values_from = presencia)
 datos_wide
 ```
 
-#### Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider()
+<!-- #### Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider() -->
 
