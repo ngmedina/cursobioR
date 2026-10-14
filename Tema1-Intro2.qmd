@@ -12,13 +12,75 @@ filters:
   - webr
 ---
 
-## 1. R: un lenguaje orientado a objetos
+## R: un lenguaje orientado a objetos
 
 Ya hemos visto que R es un lenguaje orientado a objetos. En esta parte del tema nos vamos a centrar en entender esto mejor y explorar los distintos tipos de objetos.
 
-## 2. Tipos de objetos
 
 Cada tipo de objeto tiene unas propiedades determinadas que estudiaremos poco a poco. Los objetos más sencillos son los vectores. Los tipos objetos de `R` qué trabajaremos son en principio: vectores, listas, matrices y data frames.
+
+
+### **¿Qué es la clase (categoría) de un objeto en R?**
+
+En R, **cada objeto tiene una clase**, que le dice al lenguaje qué tipo de cosa es ese objeto y cómo debe tratarlo.
+
+![](images/clipboard-584212110.png){fig-align="center" width="239"}
+
+### **Metáfora: la mochila de cada objeto**
+
+Imagina que cada objeto en R lleva una **mochila** con una etiqueta que dice:
+
+> “Soy un número”, “Soy una tabla”, “Soy un texto”, “Soy una fecha”...
+
+Esa etiqueta es su **clase**. R la usa para saber qué puede hacer con ese objeto.
+
+#### **¿Cómo averiguar la clase?**
+
+Usamos la función `class()` para averiguarlo:
+
+#### Ejercicio 1. Averiguar la clase (categoría) de un objeto
+
+```{webr-r}
+x <- 5
+class(x)  # "numeric"
+
+texto <- "Hola"
+class(texto)  # "character"
+
+```
+
+#### Ejercicio 2. Explorando la importancia de la clase
+
+```{webr-r}
+x <- 5
+class(x)  # "numeric"
+mean(x)   # Resultado: 5
+
+```
+
+```{webr-r}
+texto <- "Hola"
+class(texto)  # "character"
+mean(texto)   # Error
+
+```
+
+#### **¿Qué aprendemos de esto?**
+
+-   Las funciones en R **dependen de la clase del objeto**.
+
+-   Si usas una función con una clase no compatible, R te dará un **mensaje de error**.
+
+-   Por eso es útil usar `class()` o `str()` para **diagnosticar antes de aplicar funciones**.
+
+**NOTA IMPORTANTE** todos los elementos dentro de un vector deben ser de la misma clase
+
+```{webr-r}
+c(1:5, 10.5, "next") # 
+class(c(1:5, 10.5, "next"))
+```
+
+## 2. Tipos de objetos
 
 ### 2.1 Vectores
 
@@ -62,11 +124,11 @@ misecuencia
 También podemos utilizar el símbolo `:` para hacer secuencias de números, o de números y texto. Podemos utilizar la función `class()` para preguntar de qué clase son los elementos que contiene un vector. La única regla para un vector es que solo puede contener elementos de una misma clase.
 
 ```{webr-r}
-c(1:10)  # valores numéricos
+c(1:10)  # valores numéricos consecutivos
 ```
 
 ```{webr-r}
-c(1,7:9) # secuencia de números discontínia
+c(1,7:9) # secuencia de números discontinuos
 ```
 
 #### Ejercicio 3. Averiguar la longitud de un vector
@@ -81,7 +143,7 @@ length(v)
 ¿Cuál es la longitud de este otro vector?
 
 ```{webr-r}
-v <- 10 
+v <- c(1, 3, 7:10) 
 length(v)
 ```
 
@@ -105,179 +167,117 @@ v[15] <- 30 # incluso asignarle un valor numérico
 **OJO** ¿Qué crees que pasará si le asigno un valor no numérico?
 
 ```{webr-r}
-v[14]<-"tomates"
+v[14] <- "tomates"
 ```
 
 ```{webr-r}
 rm(v) # finalmente podemos eliminar v
 ```
 
-## **2.2 ¿Qué es la clase (categoría) de un objeto en R?**
+<!-- ### 2.2 Listas -->
 
-En R, **cada objeto tiene una clase**, que le dice al lenguaje qué tipo de cosa es ese objeto y cómo debe tratarlo.
+<!-- Las listas son un tipo especial de objeto que puede contener elemento de diferentes clases. -->
 
-![](images/clipboard-584212110.png){fig-align="center" width="239"}
+<!-- Es como un **cajón de sastre**: puedes meter dentro números, textos, vectores, tablas, funciones… Incluso se pueden crear listas de listas. Vamos que puedes meter lo que quieras en una lista -->
 
-### **Metáfora: la mochila de cada objeto**
+<!-- #### **¿Qué diferencia a una lista de un vector?** -->
 
-Imagina que cada objeto en R lleva una **mochila** con una etiqueta que dice:
+<!-- -   Un **vector** normal (como `c(1, 2, 3)`) solo puede contener **elementos del mismo tipo**: todos números, o todos textos. -->
 
-> “Soy un número”, “Soy una tabla”, “Soy un texto”, “Soy una fecha”...
+<!-- -   Una **lista**, en cambio, puede mezclar tipos: puedes tener un número, un vector, una tabla, una función… todo junto. -->
 
-Esa etiqueta es su **clase**. R la usa para saber qué puede hacer con ese objeto.
+<!-- #### Cómo crear listas -->
 
-### **¿Cómo averiguar la clase?**
+<!-- Las listas se crean con la función `list()`, la cual puede tomar un número arbitrario de argumentos: -->
 
-Usamos la función `class()` para averiguarlo:
+<!-- Podemos crear una lista sencilla de elementos de la misma clase -->
 
-#### Ejercicio 4. Averiguar la clase (categoría) de un objeto
+<!-- ```{webr-r} -->
+<!-- milista <- list("Quercus","Betula","Abies","Fagus","Taxus")  # lista de 5 elementos, cada uno de ellos es una especie -->
+<!-- milista -->
+<!-- ``` -->
 
-```{webr-r}
-x <- 5
-class(x)  # "numeric"
+<!-- O listas con elementos de clases diferentes -->
 
-texto <- "Hola"
-class(texto)  # "character"
+<!-- ```{webr-r} -->
+<!-- milistamixta <- list("Quercus",10,"Abies",12,"Taxus")   -->
+<!-- milistamixta -->
 
-```
+<!-- ``` -->
 
-#### Ejercicio 5. Explorando la importancia de la clase
+<!-- O volvernos locos y anidar listas con elementos de clases diferentes -->
 
-**Caso 1: objeto**
+<!-- ```{webr-r} -->
 
-```{webr-r}
-x <- 5
-class(x)  # "numeric"
-mean(x)   # Resultado: 5
+<!-- milistasp <- list("Quercus","Betula","Abies","Fagus","Taxus")  -->
 
-```
+<!-- milistafam <- list("Fagacea", "Betulácea","Pinácea", "Fagácea", "Taxácea") -->
+<!-- milistansp <- list(12,2,6,12) -->
 
-```{webr-r}
-texto <- "Hola"
-class(texto)  # "character"
-mean(texto)   # Error
+<!-- milistadelistas <- list(milistasp, milistafam, milistansp) -->
+<!-- milistadelistas -->
+<!-- ``` -->
 
-```
+<!-- #### Cómo acceder a los elementos de una lista -->
 
-#### **¿Qué aprendemos de esto?**
+<!-- Podemos acceder por al posición de cada elemento dentro de la lista utilizando los `[]`, parecido a cómo hacíamos con los vectores. -->
 
--   Las funciones en R **dependen de la clase del objeto**.
+<!-- ```{webr-r} -->
+<!-- milista[1] -->
+<!-- ``` -->
 
--   Si usas una función con una clase no compatible, R te dará un **mensaje de error**.
+<!-- **`milista[1]`**: devuelve una sublista: -->
 
--   Por eso es útil usar `class()` o `str()` para **diagnosticar antes de aplicar funciones**.
+<!-- -   El resultado **sigue siendo una lista**, que contiene el primer elemento. -->
 
-**NOTA IMPORTANTE** todos los elementos dentro de un vector deben ser de la misma clase
+<!-- -   Es útil si quieres mantener la estructura de lista. -->
 
-```{webr-r}
-c(1:5, 10.5, "next") # 
-class(c(1:5, 10.5, "next"))
-```
+<!-- ```{webr-r} -->
+<!-- milista[[1]] -->
+<!-- ``` -->
 
-### 2.2 Listas
+<!-- **`milista[[1]]:`** devuelve el contenido del primer elemento -->
 
-Las listas son un tipo especial de objeto que puede contener elemento de diferentes clases.
+<!-- -   El resultado es **el objeto que está dentro**, no una lista. -->
 
-Es como un **cajón de sastre**: puedes meter dentro números, textos, vectores, tablas, funciones… Incluso se pueden crear listas de listas. Vamos que puedes meter lo que quieras en una lista
+<!-- Es útil si quieres trabajar directamente con el valor. -->
 
-#### **¿Qué diferencia a una lista de un vector?**
+<!-- **¿Y con las listas anidadas? ¿Cómo accedemos a los valores?** -->
 
--   Un **vector** normal (como `c(1, 2, 3)`) solo puede contener **elementos del mismo tipo**: todos números, o todos textos.
+<!-- #### Ejercicio 5. Prueba a cambiar el número de corchetes en los dos niveles de selección -->
 
--   Una **lista**, en cambio, puede mezclar tipos: puedes tener un número, un vector, una tabla, una función… todo junto.
+<!-- ```{webr-r} -->
+<!-- milistadelistas[[1]][1] -->
+<!-- ``` -->
 
-#### Cómo crear listas
+<!-- #### Los elementos de una lista pueden tener nombre -->
 
-Las listas se crean con la función `list()`, la cual puede tomar un número arbitrario de argumentos:
+<!-- Los elementos de una lista pueden tener nombre. -->
 
-Podemos crear una lista sencilla de elementos de la misma clase
+<!-- #### Ejercicio 6. Averiguar y poner nombre a los elementos de una lista -->
 
-```{webr-r}
-milista <- list("Quercus","Betula","Abies","Fagus","Taxus")  # lista de 5 elementos, cada uno de ellos es una especie
-milista
-```
+<!-- ```{webr-r} -->
+<!-- names(milista)  # comprobamos si tiene nombres -->
+<!-- ``` -->
 
-O listas con elementos de clases diferentes
+<!-- ```{webr-r} -->
+<!-- names(milista) <- c("sp1", "sp2", "sp3", "sp4", "sp5") # le asignamos nombres -->
+<!-- ``` -->
 
-```{webr-r}
-milistamixta <- list("Quercus",10,"Abies",12,"Taxus")  
-milistamixta
+<!-- ```{webr-r} -->
+<!-- names(milista)  # comprobamos si tiene nombres -->
+<!-- milista -->
+<!-- ``` -->
 
-```
+<!-- #### Ejercicio 7. Buscar el elemento de la lista por nombre -->
 
-O volvernos locos y anidar listas con elementos de clases diferentes
+<!-- ```{webr-r} -->
+<!-- milista$sp1 -->
+<!-- ``` -->
 
-```{webr-r}
+### 2.2 Matrices
 
-milistasp <- list("Quercus","Betula","Abies","Fagus","Taxus") 
-
-milistafam <- list("Fagacea", "Betulácea","Pinácea", "Fagácea", "Taxácea")
-milistansp <- list(12,2,6,12)
-
-milistadelistas <- list(milistasp, milistafam, milistansp)
-milistadelistas
-```
-
-#### Cómo acceder a los elementos de una lista
-
-Podemos acceder por al posición de cada elemento dentro de la lista utilizando los `[]`, parecido a cómo hacíamos con los vectores.
-
-```{webr-r}
-milista[1]
-```
-
-**`milista[1]`**: devuelve una sublista:
-
--   El resultado **sigue siendo una lista**, que contiene el primer elemento.
-
--   Es útil si quieres mantener la estructura de lista.
-
-```{webr-r}
-milista[[1]]
-```
-
-**`milista[[1]]:`** devuelve el contenido del primer elemento
-
--   El resultado es **el objeto que está dentro**, no una lista.
-
-Es útil si quieres trabajar directamente con el valor.
-
-**¿Y con las listas anidadas? ¿Cómo accedemos a los valores?**
-
-#### Ejercicio 5. Prueba a cambiar el número de corchetes en los dos niveles de selección
-
-```{webr-r}
-milistadelistas[[1]][1]
-```
-
-#### Los elementos de una lista pueden tener nombre
-
-Los elementos de una lista pueden tener nombre.
-
-#### Ejercicio 6. Averiguar y poner nombre a los elementos de una lista
-
-```{webr-r}
-names(milista)  # comprobamos si tiene nombres
-```
-
-```{webr-r}
-names(milista) <- c("sp1", "sp2", "sp3", "sp4", "sp5") # le asignamos nombres
-```
-
-```{webr-r}
-names(milista)  # comprobamos si tiene nombres
-milista
-```
-
-#### Ejercicio 7. Buscar el elemento de la lista por nombre
-
-```{webr-r}
-milista$sp1
-```
-
-### 2.3 Matrices
-
-En R, una **matriz** es una estructura de datos bidimensional que contiene **elementos del mismo tipo** (por ejemplo, todos numéricos o todos caracteres). Es como una **tabla sin nombres de columnas ni filas**, donde cada celda tiene una posición definida por su **fila** y **columna**.
+En R, una **matriz** es una estructura de datos bidimensional que contiene **elementos del mismo tipo** (por ejemplo, todos numéricos o todos caracteres). Es como una **tabla sin nombres de columnas ni filas**, donde cada celda tiene una posición definida por su **fila** y **columna**.
 
 #### Cómo crear una matriz
 
@@ -343,7 +343,7 @@ mimatriz[1:2,1:2] <- matrix(c(1:4),nrow=2,ncol=2) # simplemente asignamos una co
 
 ```
 
-### 2.4 Data frames
+### 2.3 Data frames
 
 Los data frames se utilizan para almacenar datos en formas de tablas. Es decir, en filas y columnas como se utilizan habitualmente en Excell. Esta tablas o data frames pueden almacenar datos de diferentes tipos: números, character, enteros (integer)...En un data frame cada columna representa una variable, y cada columna puede contener un tipo de elemento diferente. A diferencia de las matrices que solo pueden contener elementos del mismo tipo.
 
@@ -351,7 +351,7 @@ Una de las limitaciones del data frame, es que todas las columnas tienen que ten
 
 Normalmente cuando cargamos una base de datos, o importamos una colección de datos, estamos creando un data frame. Ahora podéis comprobar que la colección de datos `iris` que hemos cargado anteriormente es un data frame.
 
-#### 2.4.1 Como crear un data frame
+#### 2.3.1 Como crear un data frame
 
 Vamos a pedir ayuda a R sobre la función `data.frame()`
 
@@ -382,9 +382,7 @@ Ahora vamos a consultar diferentes atributos con las funciones `class()`, `mode(
 
 ```{webr-r}
 class(midataframe) # nos indica que tipo de objeto es
-mode(midataframe) # nos indica que es una lista, porque un data frame es un tipo de lista
 is.data.frame(midataframe) # para preguntar si se trata de un data frame.
-is.list(midataframe) # para preguntar si se trata de una lista
 ```
 
 Una característica interesantes es que un data frame también es una lista. Pero cuidado, una lista no es un data.frame. Para serlo tiene que cumplir el requisito de que todos los elementos que contiene tengan la misma longitud.
@@ -397,15 +395,15 @@ ncol(midataframe) # número de columnas
 dim(midataframe) # número de filas y columnas
 ```
 
-#### 2.4.1 Acceso a los elementos de un data frame
+#### 2.3.2 Acceso a los elementos de un data frame
 
 Para acceder a los elementos de un data frame se utilizan los `[]` y `$`, de forma similar a como hemos venido haciendo con vectores y listas.
 
 ```{webr-r}
 head(midataframe) # para explorar el data frame
-midataframe[1] # puedo ir consultando cada una de las variables/columnas del data frame
-midataframe[2]
-midataframe[3]
+midataframe[ ,1] # puedo ir consultando cada una de las variables/columnas del data frame
+midataframe[ ,2]
+midataframe[ ,3]
 ```
 
 Se pueden hacer otro tipo de consultas que nos devuelven un vector.
@@ -421,6 +419,14 @@ Vamos a acceder a los datos utilizando el simbolo `$`
 ```{webr-r}
 midataframe[,1] # le estaría diciendo: muestrame todas las filas, y la primera columna
 midataframe$especies # es otra forma de acceder a los datos.
+
+# para seleccionar varias filas y/o columnas
+midataframe[1:2,]  #las 2 primeras filas
+midataframe[,1:2]  #las 2 primeras columnas
+midataframe[,c("especies", "presencia")]  #igual, pero usando el nombre
+
+midataframe[c(1,3) , c("especies", "presencia")]  #filas 1&3 , columnas especies & presencia
+
 ```
 
 Otras consultas que puedo hacer sobre los datos del data frame es con las funciones `dimnames()`, `rownames()`, `colnames()`, `table()`, `head()` y `tail()`
