@@ -60,6 +60,7 @@ Mostrar/Ocultar solución
 Solución:\
 
 ```{webr-r}
+library(palmerpenguins) # only for R < 4.5
 penguins <- penguins_raw
 head(penguins)
 ```
@@ -360,4 +361,51 @@ datos_wide
 ```
 
 <!-- #### Ejercicio 5 Reconstruye la tabla ancha de datos de Alberta usando pivot_wider() -->
+
+## 5. Tablas resumen
+
+Podemos tener una tabla de datos pero necesitar un resumen de los casos que nuestra tabla representa (media, mediana, desviación, número de casos...). Para ello debemos agrupar nuestros datos primero, y después resumir los datos según la función estadística que queramos.
+
+
+
+```{webr-r}
+penguins <- penguins_raw |> 
+  select(Species, Sex, `Body Mass (g)`) |> 
+  rename(taxon = Species,
+         sex = Sex,
+         mass_g = `Body Mass (g)`) |> 
+  filter(!is.na(mass_g) & !is.na(sex))
+
+# Obtener valores únicos
+penguins |> 
+  distinct(sex)
+
+penguins |> 
+  distinct(sex, taxon)
+
+# Obtener valores resumidos por cada valor
+penguins |> 
+  group_by(sex)
+
+penguins |> 
+  group_by(sex) |> 
+  summarise(mean_mass_g = mean(mass_g))
+
+penguins |> 
+  group_by(taxon) |> 
+  summarise(mean_mass_g = mean(mass_g))
+
+penguins |> 
+  group_by(taxon, sex) |> 
+  summarise(mean_mass_g = mean(mass_g))
+
+penguins |> 
+  group_by(taxon) |> 
+  summarise(mass_g_mean = mean(mass_g),
+            mass_g_SD = sd(mass_g),
+            mass_g_max = max(mass_g),
+            mass_g_min = min(mass_g),
+            number_obs = n())
+
+```
 
