@@ -299,5 +299,12 @@
     "title": "Tema 4. Representación gráfica y presentación de resultados",
     "section": "",
     "text": "Please enable JavaScript to experience the dynamic code cell content on this page.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page.\n\n\n\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
+  },
+  {
+    "objectID": "Tema2.html#tablas-resumen",
+    "href": "Tema2.html#tablas-resumen",
+    "title": "Tema 2. Manejo y filtrado de datos de biodiversidad.",
+    "section": "5. Tablas resumen",
+    "text": "5. Tablas resumen\nPodemos tener una tabla de datos pero necesitar un resumen de los casos que nuestra tabla representa (media, mediana, desviación, número de casos…). Para ello debemos agrupar nuestros datos primero, y después resumir los datos según la función estadística que queramos.\n\nPlease enable JavaScript to experience the dynamic code cell content on this page."
   }
 ]
