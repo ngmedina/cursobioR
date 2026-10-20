@@ -27,7 +27,8 @@ Para ver el formato en el que los datos están almacenados en la nube pinchad [a
 Cargamos los datos:
 
 ```{webr-r}
-comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
+# completa el siguiente código de forma que carge el archivo directamente de la página, sin descargar, y escribe la respuesta en el cuestionario
+comm_alberta <- read.csv("-------")
 ```
 
 y echamos un vistazo a las primeras filas para comprobar que los datos se han cargado correctamente

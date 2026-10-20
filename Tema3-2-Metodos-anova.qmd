@@ -65,7 +65,7 @@ Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
 
 Primero representamos los datos utilizando un gráfico de caja y bigotes
 
-```{webr-}
+```{web-r}
 boxplot(env_alberta$slope ~ env_alberta$habitat)
 ```
 
@@ -83,7 +83,12 @@ summary(anova)
 ```
 
 ```{webr-r}
-anova <- aov(slope ~ habitat, data = env_alberta)
+anova <- aov(aspect ~ habitat, data = env_alberta)
+summary(anova)
+```
+
+```{webr-r}
+anova <- aov(rel.moisture ~ habitat, data = env_alberta)
 summary(anova)
 ```
 
@@ -97,12 +102,32 @@ S_alberta <- specnumber(comm_alberta[,-1])
 
 #### Ejercicio 2: Haz un gráfico de caja y bigotes que compare la riqueza entre los dos hábitat {.unnumbered}
 
+
+
 ```{webr-r}
 boxplot(S_alberta ~ env_alberta$habitat)
 
 ```
 
+
 #### Ejercicio 3: Teniendo en cuenta este gráfico ¿Crees que habrá diferencias significativas entre hábitats? 
+
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
+
+Mostrar/Ocultar solución
+
+</button>
+
+::: {#sol1 style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+Solución:\
+
+```{webr-r}
+# El boxplot puede sugerir diferencias entre hábitats si las medianas son distintas o hay poca superposición entre las distribuciones. Sin embargo, a partir del gráfico no podemos concluir si las diferencias son estadísticamente significativas. Para ello sería necesario realizar un análisis estadístico apropiado (por ejemplo, ANOVA o Kruskal-Wallis).
+```
+:::
+
+
+
 
 #### Ejercicio 4: Haz un análisis de la varianza para comprobar si existen diferencias significativas entre muestras los resultados. Guarda el análisis en un objeto que se llame "anova" y explora los resultados 
 
@@ -123,7 +148,28 @@ boxplot(S_alberta ~ env_alberta$habitat)
 
 ```
 
-¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
+Analizamos los resultados del Anova
+
+```{webr-r}
+summary(anova)
+```
+
+
+<button onclick="let x=document.getElementById(&#39;sol1&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
+
+Mostrar/Ocultar solución
+
+</button>
+
+::: {#sol1 style="display:none; margin-top:10px; border:1px solid #ccc; padding:10px; border-radius:5px;"}
+Solución:\
+
+```{webr-r}
+# E¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
+```
+:::
+
+
 
 ## 1.3 Análisis de la varianza, factores con varios niveles
 
@@ -145,18 +191,22 @@ boxplot(S_alberta ~ env_alberta$rel.moisture)
 
 ```{webr-r}
 anova_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
-summary(anova_moist)
+
 ```
 
-#### Ejercicio 5: ¿Cómo intepretamos este resultado? 
-
-Gráficos de diagnostico
+Después generar y analizar los gráficos de diagnostico
 
 ```{webr-r}
 par(mfrow = c(2,2))
 plot(anova_moist)
 hist(anova_moist$residuals)
 ```
+
+#### Ejercicio 5: ¿Cómo intepretamos este resultado? 
+```{webr-r}
+summary(anova_moist)
+```
+
 
 # 2. Comparaciones múltiples
 
@@ -176,14 +226,24 @@ aov_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
 
 ```
 
-Calculamos las medias y los intervalos de confianza para cada grupo
+Calculamos las medias y los intervalos de confianza para cada grupo.
+
+En esta línea utilizamos una función del paquete emmeans, que sirve para calcular medias ajustadas e intervalos de confianza a partir de un modelo estadístico.
+
+La sintaxis emmeans::emmeans() indica que queremos usar la función emmeans() del paquete emmeans sin necesidad de cargar previamente el paquete con library(emmeans).
+
+El argumento object = aov_moist especifica el modelo que acabamos de ajustar, mientras que specs = "rel.moisture" indica que queremos obtener las medias para cada nivel de la variable rel.moisture.
 
 ```{webr-r}
 em_moist <- emmeans::emmeans(object = aov_moist, specs = "rel.moisture", type = "response")
 
 ```
 
-Y hacemos las comparaciones múltiples
+Y hacemos las comparaciones múltiples utilizando la función pairs.
+
+Esta función compara las medias estimadas de todos los grupos por pares. El resultado indica qué grupos difieren entre sí y proporciona, para cada comparación, una estimación de la diferencia, un error estándar, un estadístico de contraste y un valor p.
+
+En otras palabras, mientras que emmeans() calcula las medias de cada grupo, pairs() evalúa si las diferencias observadas entre esas medias son estadísticamente significativas.
 
 ```{webr-r}
 pairs(em_moist)
@@ -192,6 +252,7 @@ pairs(em_moist)
 A veces cuando tenemos muchos grupos los resultados son muy poco visuales y por lo tanto difíciles de interpretar. Para facilitar la interpretación podemos acudir a una forma de representación compacta. Tenéis [aquí](https://schmidtpaul.github.io/DSFAIR/compactletterdisplay.html) una explicación detallada sobre esta forma de representar los datos.
 
 ```{webr-r}
+install.packages("multcompView")
 cld <- multcomp::cld(em_moist, alpha = 0.05, Letters = LETTERS)
 cld
 ```
