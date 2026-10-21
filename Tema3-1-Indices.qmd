@@ -22,7 +22,7 @@ Recordad que los los datos provienen de un estudio de plantas que se realizó en
 
 Vamos a cargar los datos directamente de una página web. En R esto es muy sencillo si los datos tienen el formato adecuado. De hecho, vamos a emplear el mismo código que empleamos cuando cargamos datos desde un archivo guardado en nuestro ordenador.
 
-Para ver el formato en el que los datos están almacenados en la nube pinchad [aquí](https://raw.githubusercontent.com/ngmedina/Rbiodiversidad/data/grassland.community.csv?token=GHSAT0AAAAAABW67JU2B2REWKV4YDPKDVTUYW62OKA)
+Para ver el formato en el que los datos están almacenados en la nube pinchad [aquí](https://raw.githubusercontent.com/ngmedina/cursobioR/refs/heads/main/data/grassland.community.csv)
 
 Cargamos los datos:
 
@@ -70,21 +70,26 @@ hist(comm_alberta$Antennaria_parvifolia)
 Podemos ver qué especie es la más abundante. Para ello tenemos que sumar los valores de cada columna. Podríamos hacerlo columna a columna. Por ejemplo, para la especie de la segunda columna que es *Antennaria parviflora*
 
 ```{webr-r}
-colnames(comm_alberta)[2]
-sum(comm_alberta[,2])
+colnames(comm_alberta)[2] # imprimir el nombre de la especie
+sum(comm_alberta[,2]) # calcular su abundancia total
 ```
 
 Si tenemos 100 especies esto implicaría repetir el código de arriba 100 veces. Sin embargo, existe una forma rápida y sintética de hacer esto mismo utilizando la función ColSums.
 
 ```{webr-r}
 colsums <- colSums(comm_alberta[,-1])
+colsums
 ```
 
 Además podemos ver cuál de las parcelas tiene la mayor cobertura
 
 ```{webr-r}
 rowsums <- rowSums(comm_alberta[,-1])
+comm_alberta[,1]
+rowsums
 ```
+
+ 
 
 # Índices de diversidad taxonómica
 
@@ -112,21 +117,21 @@ Primero calculamos la riqueza de especies por cada cuadrícula
 
 ```{webr-r}
 ## Riqueza de especies
-S <- specnumber(comm_alberta[,-1]) ## rowSums(comm_alberta > 0) hace lo mismo...
+S <- specnumber(comm_alberta[,-1]) ##  rowSums(comm_alberta[,-1] > 0) hace lo mismo...
 ```
 
-Pregúnta. ¿Por qué utilizo el código comm_alberta\[,-1\]?{style="color: blue;"}
+Pregunta. ¿Por qué utilizo el código comm_alberta\[,-1\]? {style="color: blue;"}
 
 Y la riqueza total
 
 ```{webr-r}
 ## Riqueza total
-Stot <- dim(comm_alberta[-1])
+Stot <- dim(comm_alberta[-1])[2]
 ```
 
 Ahora calculamos otros índices de diversidad, el índice de Shannon es uno de los más frecuentes. Para ello utilizaremos la función diversity
 
-Pregunta: ¿Recuerdas lo que era una función en R?{style="color: blue;"}
+[Pregunta: ¿Recuerdas lo que era una función en R?]{style="color: blue;"}
 
 ```{webr-r}
 H <- diversity(comm_alberta[,-1], "shannon")
@@ -177,15 +182,17 @@ Primero ordenamos la base de datos de las abundancias de las especies para que l
 
 ```{webr-r}
 
-order <- match(traits$species, colnames(comm_alberta[,-1]))
+comm_alberta_ordered <- comm_alberta %>%
+    select(plot, 
+           all_of(traits$species)
+           )
 
-comm_alberta_ordered <- comm_alberta[,-1][,order]
 ```
 
 Después comprobamos si el orden de las especies en la tabla de rasgos es alfabético
 
 ```{webr-r}
-traits$species == colnames(comm_alberta_ordered)
+traits$species == colnames(comm_alberta_ordered)[-1]
 ```
 
 ¿Ahora funciona?
@@ -262,9 +269,6 @@ head(dummy$trait)
 
 [**Pregunta: ¿Notas alguna diferencia?**]{style="color: blue;"}
 
-```{webr-r}
-# Escribe aquí tu respuesta
-```
 
 <button onclick="let x=document.getElementById(&#39;sol3&#39;); x.style.display = (x.style.display===&#39;none&#39;) ? &#39;block&#39;:&#39;none&#39;;" style="background-color:#407FD0; color:white; border:none; padding:6px 12px; border-radius:5px; cursor:pointer;">
 
@@ -280,17 +284,25 @@ Solución:\
 ```
 :::
 
-Las especies en la tabla del ejemplo ("dummy") están como nombres de fila, no como una columna separada. Para adaptar el formato de nuestra tabla tenemos que asignar los nombres de las filas y eliminar la columna sp
+Para adaptar el formato de nuestra tabla tenemos que asignar los nombres de las filas y eliminar la columna sp
 
 ```{webr-r}
-rownames(traits) <- traits$species
-traits <- traits[,-1]
+comm_alberta_ordered <- comm_alberta_ordered %>%
+  column_to_rownames("plot")
+```
+
+
+y hacer lo mismo con la tabla de traits
+
+```{webr-r}
+traits_ordered <- traits %>%
+  column_to_rownames("species")
 ```
 
 Ahora ya podemos calcular el índice de diversidad funcional
 
 ```{webr-r}
-fd <- dbFD(traits, comm_alberta_ordered)
+fd <- dbFD(traits_ordered, comm_alberta_ordered)
 ```
 
 # Diversidad filogenética
