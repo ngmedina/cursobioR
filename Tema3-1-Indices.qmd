@@ -120,7 +120,7 @@ Primero calculamos la riqueza de especies por cada cuadrícula
 S <- specnumber(comm_alberta[,-1]) ##  rowSums(comm_alberta[,-1] > 0) hace lo mismo...
 ```
 
-Pregunta. ¿Por qué utilizo el código comm_alberta\[,-1\]? {style="color: blue;"}
+[Pregunta. ¿Por qué utilizo el código comm_alberta\[,-1\]?] {style="color: blue;"}
 
 Y la riqueza total
 
@@ -184,8 +184,7 @@ Primero ordenamos la base de datos de las abundancias de las especies para que l
 
 comm_alberta_ordered <- comm_alberta %>%
     select(plot, 
-           all_of(traits$species)
-           )
+           all_of(traits$species))
 
 ```
 
