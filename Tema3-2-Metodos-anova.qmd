@@ -26,27 +26,7 @@ comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/
 env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
 ```
 
-Vamos a comenzar con una pregunta sencilla. Queremos averiguar si hay diferencias en riqueza de especies en función de las características ambientales de las parcelas.
-
-Para ello a partir de la tabla de comunidades calculamos la riqueza
-
-```{webr-r}
-library(vegan)
-S_alberta <- specnumber(comm_alberta[,-1]) 
-```
-
-Comprobamos que las cuadrículas están ordenadas de la misma manera en la tabla de condiciones ambientales y la de composición específica ¡esto es muy importante!
-
-```{webr-r}
-order <- match(comm_alberta$plot, env_alberta$plot)
-```
-
-Si no lo estuvieran podemos reordenarlos con la siguiente línea
-
-```{webr-r}
-comm_alberta <- comm_alberta[order,]
-```
-
+Vamos a empezar por una pregunta sencilla, vamos a compara las características ambientales de los dos tipos de hábitat que se han estudiado para hacernos una idea empleando Análisis de la varianza
 
 # 1. Análisis de la varianza
 
@@ -65,8 +45,9 @@ Para contestar a esta pregunta vamos a utilizar un análisis de la varianza
 
 Primero representamos los datos utilizando un gráfico de caja y bigotes
 
-```{web-r}
-boxplot(env_alberta$slope ~ env_alberta$habitat)
+```{webr-r}
+ggplot(env_alberta, aes(habitat, slope)) +
+  geom_boxplot()
 ```
 
 Ahora vamos a utilizar la función `aov` para calcular un análisis de la varianza y comprobar si las diferencias entre grupos son mayores que las diferencias intra grupos
@@ -78,34 +59,76 @@ La función **aov** tiene dos argumentos:
 -   **data** los datos que vamos a emplear
 
 ```{webr-r}
-anova <- aov(slope ~ habitat, data = env_alberta)
-summary(anova)
+anova_slope <- aov(slope ~ habitat, data = env_alberta)
 ```
 
+Comprobamos los residuos
+
 ```{webr-r}
-anova <- aov(aspect ~ habitat, data = env_alberta)
-summary(anova)
+par(mfrow = c(1,2))
+plot(anova_slope)
 ```
 
+
 ```{webr-r}
-anova <- aov(rel.moisture ~ habitat, data = env_alberta)
-summary(anova)
+anova_aspect <- aov(aspect ~ habitat, data = env_alberta)
 ```
 
-#### Ejercicio 1: Calcula la riqueza de especies de cada cuadrícula. Nota: Crea una nueva variable que se llame S_alberta
 
 ```{webr-r}
+anova_moist <- aov(rel.moisture ~ habitat, data = env_alberta)
+```
+
+#### Ejercicio 1: Analiza los residuos para las variables "aspect" y "rel.moisture"
+
+
+```{webr-r}
+# escribe aquí la respuesta
+```
+
+
+
+Una vez que hemos comprobado los residuos podemos pasar a ver los resultados del ANOVA
+```{webr-r}
+summary(anova_aspect)
+summary(anova_moist)
+
+```
+
+Ahora vamos con nuestra pregunta principal. Queremos averiguar si hay diferencias en riqueza de especies en función de las características ambientales de las parcelas.
+
+Para ello a partir de la tabla de comunidades calculamos la riqueza
+
+```{webr-r}
+library(vegan)
 S_alberta <- specnumber(comm_alberta[,-1]) 
 ```
 
+Comprobamos que las cuadrículas están ordenadas de la misma manera en la tabla de condiciones ambientales y la de composición específica ¡esto es muy importante!
+  
+```{webr-r}
+order <- match(comm_alberta$plot, env_alberta$plot)
+```
 
+Si no lo estuvieran podemos reordenarlos con la siguiente línea
+
+```{webr-r}
+comm_alberta <- comm_alberta[order,]
+```
+
+Pegamos la columna de riqueza en la tabla de variables ambientales
+
+```{webr-r}
+env_alberta <- env_alberta %>% 
+  mutate(richness = S_alberta)
+  colnames(env_alberta)
+```
 
 #### Ejercicio 2: Haz un gráfico de caja y bigotes que compare la riqueza entre los dos hábitat {.unnumbered}
 
-
-
 ```{webr-r}
-boxplot(S_alberta ~ env_alberta$habitat)
+ggplot(env_alberta, aes(x =habitat, y = richness)) +
+  geom_boxplot()
 
 ```
 
@@ -132,7 +155,7 @@ Solución:\
 #### Ejercicio 4: Haz un análisis de la varianza para comprobar si existen diferencias significativas entre muestras los resultados. Guarda el análisis en un objeto que se llame "anova" y explora los resultados 
 
 ```{webr-r}
-anova <- aov(S_alberta ~ env_alberta$habitat)
+anova <- aov(richness ~ habitat, data = env_alberta)
 summary(anova)
 ```
 
@@ -143,10 +166,6 @@ par(mfrow = c(1,2))
 plot(anova)
 ```
 
-```{webr-r}
-boxplot(S_alberta ~ env_alberta$habitat)
-
-```
 
 Analizamos los resultados del Anova
 
@@ -165,7 +184,7 @@ Mostrar/Ocultar solución
 Solución:\
 
 ```{webr-r}
-# E¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
+# ¡Las comunidades de Festuca, que son características de zonas más húmedas tienen un mayor número de especies! De hecho las comunidades de Festuca tienen unas 15 especies más que las comunidades mixtas
 ```
 :::
 
@@ -186,11 +205,12 @@ env_alberta$rel.moisture <- as.factor(env_alberta$rel.moisture)
 Como siempre, lo primero es representar los datos
 
 ```{webr-r}
-boxplot(S_alberta ~ env_alberta$rel.moisture)
+ggplot(env_alberta, aes(rel.moisture, richness)) %>%
+  geom_boxplot()
 ```
 
 ```{webr-r}
-anova_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
+anova_moist <- aov(richness ~ rel.moisture, data = env_alberta)
 
 ```
 
@@ -199,7 +219,7 @@ Después generar y analizar los gráficos de diagnostico
 ```{webr-r}
 par(mfrow = c(2,2))
 plot(anova_moist)
-hist(anova_moist$residuals)
+hi3st(anova_moist$residuals)
 ```
 
 #### Ejercicio 5: ¿Cómo intepretamos este resultado? 
@@ -222,7 +242,7 @@ library(emmeans)
 ```
 
 ```{webr-r}
-aov_moist <- aov(S_alberta ~ env_alberta$rel.moisture)
+aov_moist <- aov(richness ~ rel.moisture, data = env_alberta)
 
 ```
 
@@ -264,7 +284,7 @@ cld_df <- as.data.frame(cld)
 # Crear el boxplot
 ggplot(env_alberta, aes(x = rel.moisture, y = S_alberta)) +
   geom_boxplot() +
-  geom_text(data = cld_df, aes(x = rel.moisture, y = max(S_alberta) + 1, label = .group), inherit.aes = FALSE) +
+  # geom_text(data = cld_df, aes(x = rel.moisture, y = max(S_alberta) + 1, label = .group), inherit.aes = FALSE) +
   labs(x = "Humedad relativa", y = "Riqueza de especies") +
   theme_bw()
 
@@ -290,13 +310,13 @@ S_alberta <- specnumber(comm_alberta)
 Y creamos una nueva columna en la matriz de variables ambientales en la que guardamos los datos de riqueza.
 
 ```{webr-r}
-env_alberta$S <- S_alberta
+env_alberta$richness <- S_alberta
 ```
 
 Ahora realizamos un análisis de la varianza que compare la riqueza entre hábitat "habitat" y lugares "site"
 
 ```{webr-r}
-aovtw_alberta <- aov(S ~ habitat + rel.moisture, data = env_alberta)
+aovtw_alberta <- aov(richness ~ habitat + rel.moisture, data = env_alberta)
 summary(aovtw_alberta)
 ```
 
@@ -307,7 +327,7 @@ Siempre que tengamos más de una variable existe la posibilidad de que haya inte
 Por ejemplo, es posible que el efecto del hábitat dependa de la humedad relativa. Así que, vamos a comprobar si hay efecto de la interacción
 
 ```{webr-r}
-aovint_alberta <- aov(S ~ habitat + rel.moisture + habitat:rel.moisture, data = env_alberta)
+aovint_alberta <- aov(richness ~ habitat + rel.moisture + habitat:rel.moisture, data = env_alberta)
 summary(aovint_alberta)
 ```
 
