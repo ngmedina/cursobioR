@@ -32,7 +32,7 @@ Vamos a empezar por una pregunta sencilla, vamos a compara las características 
 
 El análisis de la varianza (ANOVA por sus siglas en inglés) es útil para comparar el efecto de uno o más factores y sus correspondientes niveles sobre la media de una variable continua.
 
-## 1.2. Análisis de la varianza, factores con dos níveles
+## 1.2. Análisis de la varianza, factores con dos niveles
 
 Ver aquí <https://biocosas.github.io/R/050_anova.html>
 
@@ -65,7 +65,7 @@ anova_slope <- aov(slope ~ habitat, data = env_alberta)
 Comprobamos los residuos
 
 ```{webr-r}
-par(mfrow = c(1,2))
+par(mfrow = c(2,2))
 plot(anova_slope)
 ```
 
@@ -91,9 +91,23 @@ anova_moist <- aov(rel.moisture ~ habitat, data = env_alberta)
 Una vez que hemos comprobado los residuos podemos pasar a ver los resultados del ANOVA
 ```{webr-r}
 summary(anova_aspect)
+emmeans::emmeans(anova_aspect, ~ habitat)
 summary(anova_moist)
-
+emmeans::emmeans(anova_moist, ~ habitat)
 ```
+
+Si queremos comprobar cómo sería el resultado con un modelo no parámetrico...
+
+```{webr-r}
+wilcox.test(aspect ~ habitat, data = env_alberta)
+summary(anova_aspect)
+```
+
+```{webr-r}
+wilcox.test(rel.moisture ~ habitat, data = env_alberta)
+summary(anova_moist)
+```
+
 
 Ahora vamos con nuestra pregunta principal. Queremos averiguar si hay diferencias en riqueza de especies en función de las características ambientales de las parcelas.
 
@@ -155,22 +169,23 @@ Solución:\
 #### Ejercicio 4: Haz un análisis de la varianza para comprobar si existen diferencias significativas entre muestras los resultados. Guarda el análisis en un objeto que se llame "anova" y explora los resultados 
 
 ```{webr-r}
-anova <- aov(richness ~ habitat, data = env_alberta)
-summary(anova)
+anova_rich <- aov(richness ~ habitat, data = env_alberta)
 ```
 
 Comprobamos los residuos
 
 ```{webr-r}
 par(mfrow = c(1,2))
-plot(anova)
+plot(anova_rich)
+hist(anova_rich$residuals)
 ```
 
 
 Analizamos los resultados del Anova
 
 ```{webr-r}
-summary(anova)
+summary(anova_rich)
+emmeans::emmeans(anova_rich, ~ habitat)
 ```
 
 
@@ -205,12 +220,12 @@ env_alberta$rel.moisture <- as.factor(env_alberta$rel.moisture)
 Como siempre, lo primero es representar los datos
 
 ```{webr-r}
-ggplot(env_alberta, aes(rel.moisture, richness)) %>%
+ggplot(env_alberta, aes(rel.moisture, richness)) +
   geom_boxplot()
 ```
 
 ```{webr-r}
-anova_moist <- aov(richness ~ rel.moisture, data = env_alberta)
+anova_rmoist <- aov(richness ~ rel.moisture, data = env_alberta)
 
 ```
 
@@ -218,13 +233,13 @@ Después generar y analizar los gráficos de diagnostico
 
 ```{webr-r}
 par(mfrow = c(2,2))
-plot(anova_moist)
-hi3st(anova_moist$residuals)
+plot(anova_rmoist)
+hist(anova_rmoist$residuals)
 ```
 
 #### Ejercicio 5: ¿Cómo intepretamos este resultado? 
 ```{webr-r}
-summary(anova_moist)
+summary(anova_rmoist)
 ```
 
 
@@ -242,8 +257,7 @@ library(emmeans)
 ```
 
 ```{webr-r}
-aov_moist <- aov(richness ~ rel.moisture, data = env_alberta)
-
+aov_rmoist <- aov(richness ~ rel.moisture, data = env_alberta)
 ```
 
 Calculamos las medias y los intervalos de confianza para cada grupo.
@@ -255,7 +269,7 @@ La sintaxis emmeans::emmeans() indica que queremos usar la función emmeans() de
 El argumento object = aov_moist especifica el modelo que acabamos de ajustar, mientras que specs = "rel.moisture" indica que queremos obtener las medias para cada nivel de la variable rel.moisture.
 
 ```{webr-r}
-em_moist <- emmeans::emmeans(object = aov_moist, specs = "rel.moisture", type = "response")
+em_rmoist <- emmeans::emmeans(aov_rmoist, ~ rel.moisture)
 
 ```
 
@@ -266,14 +280,14 @@ Esta función compara las medias estimadas de todos los grupos por pares. El res
 En otras palabras, mientras que emmeans() calcula las medias de cada grupo, pairs() evalúa si las diferencias observadas entre esas medias son estadísticamente significativas.
 
 ```{webr-r}
-pairs(em_moist)
+pairs(em_rmoist)
 ```
 
 A veces cuando tenemos muchos grupos los resultados son muy poco visuales y por lo tanto difíciles de interpretar. Para facilitar la interpretación podemos acudir a una forma de representación compacta. Tenéis [aquí](https://schmidtpaul.github.io/DSFAIR/compactletterdisplay.html) una explicación detallada sobre esta forma de representar los datos.
 
 ```{webr-r}
 install.packages("multcompView")
-cld <- multcomp::cld(em_moist, alpha = 0.05, Letters = LETTERS)
+cld <- multcomp::cld(em_rmoist, alpha = 0.05, Letters = LETTERS)
 cld
 ```
 
@@ -282,16 +296,16 @@ library(ggplot2)
 cld_df <- as.data.frame(cld)
 
 # Crear el boxplot
-ggplot(env_alberta, aes(x = rel.moisture, y = S_alberta)) +
-  geom_boxplot() +
-  # geom_text(data = cld_df, aes(x = rel.moisture, y = max(S_alberta) + 1, label = .group), inherit.aes = FALSE) +
+ggplot(env_alberta) +
+  geom_boxplot(aes(x = rel.moisture, y = S_alberta)) +
+  geom_text(data = cld_df, aes(x = rel.moisture, y = max(S_alberta) + 1, label = .group)) +
   labs(x = "Humedad relativa", y = "Riqueza de especies") +
   theme_bw()
 
 ```
 
 
-#### Ejercicio extra ¿Cómo interpretamos el resultado de la representación compacta de las comparaciones múltiples? 
+#### Ejercicio  ¿Cómo interpretamos el resultado de la representación compacta de las comparaciones múltiples? 
 
 Leed con cuidado esta [página 1](http://statistics-help-for-students.com/How_do_I_report_a_1_way_between_subjects_ANOVA_in_APA_style.htm#.Yy1ZA3ZByUk) y escribid un texto que describa los resultados del ANOVA y las comparaciones múltiples en el que se analiza las diferencias en temperatura media anual (bio1) entre especies.
 
