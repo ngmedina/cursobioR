@@ -18,36 +18,15 @@ Una regresión es un modelo que analiza la relación entre una variable respuest
 
 La regresión lineal es un tipo de regresión en la que se analizan relaciones lineales. Es el tipo de regresión más frecuentemente en trabajos de investigación.
 
-Vamos a seguir trabajando con la base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar [aquí](https://kembellab.ca/r-workshop/)
-
-Cargamos la base de datos de comunidades de alberta y la base de datos de características ambientales y la de rasgos funcionales
+La base de datos Boston Housing es un referente clásico en el análisis de regresión. Está compuesta por 506 observaciones y 14 variables, que recogen diversas características de viviendas situadas en los suburbios de Boston. Su objetivo es predecir el valor mediano de las viviendas a partir de variables como la tasa de criminalidad, la antigüedad de las viviendas, el tipo impositivo, la proporción de alumnos por profesor y otros factores socioeconómicos y ambientales.
 
 ```{webr-r}
-env_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv")
+library(MASS)
+library(car)
 
-comm_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv")
-
-traits_alberta <- read.csv("https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/species.traits.csv")
+data(Boston)
 ```
 
-Vamos a explorar qué factores afectan a la riqueza taxonómica.
-
-Para ello primero calculamos la riqueza taxonómica con la librería vegan
-
-```{webr-r}
-library(vegan)
-```
-
-```{webr-r}
-# Riqueza
-S_alberta <- specnumber(comm_alberta)
-```
-
-Para facilitar el análisis vamos a crear una columnas nuevas en la tabla de datos de variables ambientales de Alberta con los datos de riqueza y diversidad de Simpson
-
-```{webr-r}
-env_alberta$S <- S_alberta
-```
 
 ## 1.1 Regresión lineal simple
 
@@ -58,7 +37,8 @@ Vamos a comenzar por analizar la relación entre la pendiente y la riqueza
 Lo primero antes de hacer un análisis es representar los datos
 
 ```{webr-r}
-plot(env_alberta$slope, env_alberta$S)
+ggplot(Boston, aes(medv, lstat))+
+  geom_point()
 ```
 
 Hacemos la regresión empleando la función **`lm`** que tiene los siguientes argumentos
@@ -70,7 +50,7 @@ Hacemos la regresión empleando la función **`lm`** que tiene los siguientes ar
 El resultado es una lista que contiene toda la información sobre los análisis. 
 
 ```{webr-r}
-lmS <- lm(S ~ slope, data = env_alberta) # Regresión linear
+modelo1 <- lm(medv ~ lstat, data = Boston) # Regresión linear
 ```
 
 Una vez que hemos hecho el análisis y **antes de ver los resultados** vamos a comprobar que los supuestos del análisis se cumplen. Igual que en el análisis de la varianza en los modelos de regresión lineal asumimos
@@ -84,85 +64,42 @@ Una vez que hemos hecho el análisis y **antes de ver los resultados** vamos a c
 Para ello analizaremos los residuos
 
 ```{webr-r}
-resid <- rstandard(lmS) # residuos estandarizados
-fitted <- fitted(lmS)
+par(mfrow = c(2,2))
+plot(modelo1)
+par(mfrow = c(1,1))
+resid <- rstandard(modelo1) # residuos estandarizados
 hist(resid)
-plot(fitted, resid)
 ```
 
-Además, podemos hacer un gráfico Q-Q
+
+El resultado indica que hay problemas con las asunciones.
+
+#### Transformaciones
+
+| Transformación | Fórmula | Cuándo utilizarla | Ejemplo ecológico |
+|:---------------|:---------|:------------------|:------------------|
+| Logarítmica | `log(x)` o `log(x + 1)` | Datos muy asimétricos hacia la derecha o con rangos muy amplios de valores | Abundancia de individuos, biomasa, cobertura vegetal |
+| Raíz cuadrada | `sqrt(x)` | Datos de recuento con valores bajos o moderadamente asimétricos | Riqueza de especies, número de individuos, número de nidos |
+| Cuadrática | `x^2` | Para modelar relaciones unimodales o curvilíneas | Máxima riqueza a temperaturas intermedias |
+| Inversa | `1/x` | Cuando el efecto disminuye rápidamente con el aumento de la variable | Distancia a una fuente de perturbación |
+| Estandarización | `(x - media)/sd` | Para comparar variables medidas en distintas unidades | Temperatura, precipitación y altitud en un mismo modelo |
+
+Probamos con la tranformación logarítmica
 
 ```{webr-r}
-qqnorm(resid)
-qqline(resid)
+modelo2 <- lm(medv ~ log(lstat), data = Boston)
 ```
 
-Además, en los modelos de regresión suele ser necesario inspeccionar si existen puntos influyentes que tengan un peso excesivo en el análisis. Los puntos influyentes más comunes son los valores atípicos que son aquellos puntos en los que la respuesta observada no sigue el patrón establecido por el resto de los datos.
-
-Una forma de detectar puntos atípicos es empleando la distancia de Cook. La distancia de Cook se calcula eliminando un punto en el modelo y volviendo a calcular la regresión. Esto se repite para cada uno de los puntos.
+Volvemos a inspeccionar los residuos
 
 ```{webr-r}
-plot(cooks.distance(lmS))
+par(mfrow = c(2,2))
+plot(modelo2)
+par(mfrow = c(1,1))
+resid <- rstandard(modelo2) # residuos estandarizados
+hist(resid)
 ```
 
-Como ejercicio vamos a cambiar uno de los valores de la pendiente por un valor que sea 10 veces el máximo de pendiente observado
-
-```{webr-r}
-val <- env_alberta$slope[3] # guardamos el valor para restaurar los datos después de comprobar el efecto
-env_alberta$slope[3] <- 10* max(env_alberta$slope)
-```
-
-Volvemos a hacer el modelo de regresión y representamos las ditancias de cook
-
-```{webr-r}
-lmS_test <- lm(S ~ slope, data = env_alberta) # Regresión linear
-plot(cooks.distance(lmS_test))
-```
-
-Restauramos el valor original
-
-```{webr-r}
-env_alberta$slope[3] <- val
-```
-
-La función summary nos permite obtener un resumen de los resultados contenidos en el objeto lmS
-
-```{webr-r}
-summary(lmS)
-```
-
-El resultado indica que no hay una asociación significativa entre la pendiente y la riqueza de especies. Lo cual concuerda con el gráfico de dispersión en el que ya se intuía que no había relación alguna.
-
-#### Ejercicio 1 Analiza si existe relación entre la diversidad de simpson y la pendiente
-
-```{r eval=FALSE, include=FALSE}
-lmSimp <- lm(invsimp ~ slope, data = env_alberta) # Regresión linear
-summary(lmSimp)
-```
-
-### Regresión lineal con variables categóricas
-
-Los modelos de regresión son muy flexibles y permiten analizar la relación entre una variable respuesta continua y variables explicativas categóricas. Por ejemplo, vamos a analizar el efecto del hábitat en la pendiente
-
-```{webr-r}
-lmslope <- lm(slope ~ habitat, data = env_alberta)
-```
-
-inspeccionamos los resultados
-
-```{webr-r}
-summary(lmslope)
-```
-
-Cuando hay una variable categórica el modelo se construye en dos pasos.
-
-1.  Se transforma la variable categórica en tantas variables dummy (valor 0,1) como niveles -1.
-
-Una regresión con un único factor y un ANOVA son equivalentes. Vamos a comprobarlo
-
-```{webr-r}
-summary(aov(slope ~ habitat, data = env_alberta))
-```
 
 # 2. Regresión lineal múltiple
 
@@ -190,29 +127,33 @@ Pero **¡ojo!** la multicolinealidad no siempre es un problema:
 
 Para analizar el grado de multicolinealidad podemos emplear el factor de inflacción de la varianza o VIF por sus siglas en inglés.
 
-Vamos a explorar unos datos en los que la multicolinealidad es muy alta para ver sus efectos. El ejemplo es una de las bases de datos que vienen con el paquete *mtcars.*
 
-Cargamos los datos
-
-```{webr-r}
-data(mtcars)
-```
-
-Ajustamos un modelo de regresión
-
-```{webr-r}
-model <- lm(mpg ~ disp + hp + wt + drat, data = mtcars)
-```
-
-Y calculamos el factor de inflacción de la varianza (VIF). Para ello emplearemos el paquete `car`
 
 ```{webr-r}
 library(car)
 ```
 
+Ajustamos un modelo de regresión con todas las variables
+
 ```{webr-r}
-vif(model)
+modelo_full <- lm(medv ~ ., data = Boston)
 ```
+
+
+Y calculamos el factor de inflacción de la varianza (VIF). Para ello emplearemos el paquete `car`
+
+
+```{webr-r}
+vif(modelo_full)
+```
+
+
+| VIF | Interpretación |
+|------|----------------|
+| < 3 | Sin preocupación |
+| 3-5 | Vigilancia |
+| > 5 | Colinealidad potencialmente problemática |
+
 
 Para corregir los problemas de multicolinealidad existen varias estrategias.
 
@@ -222,21 +163,29 @@ La más habitual es eliminar una de las variables que estén altamente correlaci
 
 2.  Identificamos las variables más correlacionadas
 
-3.  Eliminamos una de las correlacionadas
+3.  Eliminamos, de forma razonada, una de las correlacionadas
 
-4.  Repetimos el proceso hasta que el VIF se estabilice
+4.  Repetimos el proceso hasta que los valores de VIF asean aceptables
 
+Visualizamos las relaciones
 ```{webr-r}
-cor(mtcars[,c("disp", "hp", "wt", "drat")])
+Boston %>% 
+  select(medv, everything()) %>%
+  pairs()
 ```
 
-#### Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R
+Calculamos los coeficientes de correlación para todos los pares de variables
+
+```{webr-r}
+Boston %>% 
+  select(medv, everything())
+```
+
+:::{.callout-note}
+La eliminación de variables no debe basarse únicamente en criterios estadísticos. También debe tenerse en cuenta su relevancia biológica o ecológica. Una variable puede presentar un VIF elevado y, aun así, ser fundamental para responder a la pregunta de investigación.
+:::
 
 ```{r eval=FALSE, include=FALSE}
-cormat <- mtcars %>%
-  select(disp, hp, wt, drat) %>%
-  cor()
-
 as.table(cormat) %>%                    # convertimos a fila con dos columnas
   as.data.frame() %>%                   # pasamos a formato data.frame
   filter(Var1 != Var2) %>%              # quitamos la diagonal
@@ -246,11 +195,11 @@ as.table(cormat) %>%                    # convertimos a fila con dos columnas
 
 La variable displacement indica la cilindrada del motor en cm^3^ la variable wt indica el peso del vehículo. Dado que tienen una correlación \>0.8 podemos optar por eliminar una de las dos. Por ejemplo peso del vehíulo
 
-Volvemos a estimar la regresión linear pero eliminando la variable wt
+Volvemos a estimar la regresión linear pero eliminando la variable tax
 
 ```{webr-r}
-model <- lm(mpg ~ disp + hp + drat, data = mtcars)
-vif(model)
+modelo_rd <- update(modelo_full, . ~ . - tax)
+vif(modelo_rd)
 ```
 
 También podríamos:
@@ -261,96 +210,52 @@ También podríamos:
 
 -   Hay modelos de regresión que como los modelos LASSO y Ridge que están diseñados para trabajar en casos de alta multicolinealidad. Tenéis una descripción de lo que hacen estos modelos y cómo calcularlos [aquí](https://rubenfcasal.github.io/aprendizaje_estadistico/shrinkage.html). Estos modelos reducen los coeficientes de algunas variables a valores cercanos o iguales a cero. Simplifican los modelos y favorecen una interpretación más sencilla pero aumentan el posible sesgo.
 
-    NOTA: Si es posible es preferible emplear el método de eliminar variables redundantes manualmente empleando criterios científicos claros.
-
-#### Ejercicio 3 Calcula la diversidad funcional de las comunidades herbáceas de alberta 
+    NOTA: Siempre que sea posible, es preferible identificar y eliminar de forma razonada las variables redundantes utilizando criterios biológicos o ecológicos claros. Sin embargo, cuando el objetivo principal es la predicción o el número de variables es elevado, los métodos penalizados pueden resultar más apropiados.
 
 ```{webr-r}
-library(FD)
-comm_alberta_ordered <- comm_alberta[,-1][,order(colnames(comm_alberta[,-1]))]
-rownames(traits_alberta) <- traits_alberta$species
-traits_alberta <- traits_alberta[,-1]
-fd <- dbFD(traits_alberta, comm_alberta_ordered)
+par(mfrow = c(2,2))
+plot(modelo_rd)
+par(mfrow = c(1,1))
+resid_rd <- rstandard(modelo_rd) # residuos estandarizados
+hist(resid_rd)
 ```
 
-#### Ejercicio 4 Estima una regresión múltiple con los herbazales de alberta en la que se emplee el índice riqueza funcional (Fric) de como variable respuesta y las variables, habitat, pendiente, orientación y humedad relativa como variables explicativas
+Hemos solucionado el problema de inflación de la varianza pero los residuos se desvían sustancialmente de los supuestos.
 
+Aplicamos una transformación a las variables que tengan relaciones no lineales
 ```{webr-r}
-env_alberta$Fric <- fd$FRic 
-env_alberta$rel.moisture <- factor(env_alberta$rel.moisture)
-
-lmFric <- lm(Fric ~ + habitat + slope + aspect + factor(rel.moisture), data = env_alberta)
-
-
-```
-
-Vamos a ver si se cumplen los supuestos del modelo.
-
-```{webr-r}
-vif(lmFric) # comprobamos la inflacción de la varianza
-
-resid <- rstandard(lmFric) # estimamos los residuos estandarizados
-fitted <- fitted(lmFric) # los valores ajustados
-plot(fitted, resid) # representados los residuos frente a los valores ajustados
-hist(resid) # hacemos un histograma de los residuos para comprobar la normalidad
-qqnorm(resid) # hacemos un gráfico q-q
-qqline(resid)
-```
-
-Los residuos son normales pero hay signos de heterocedasticidad. Una forma de habitual de solucionar el problema es hacer transformaciones de datos. **El objetivo de la transformación de datos es que los residuos tengan una distribución verifique los supuestos del modelo.**
-
-Suele ser útil por comprobar si nuestra variable respuesta o alguna de las variables explicativas tienen distribuciones sesgadas.
-
-```{webr-r}
-apply(env_alberta[,c("Fric","slope", "aspect")], 2, hist)
-```
-
-Como podemos ver en el gráfico la variable Fric tiene una distribución sesgada hacia valores bajos. Las tranformaciones más empleadas en estos casos son el logaritmo, la raíz cuadrada. Podemos ir probando las transformaciones para ver si alguna de ellas mejora los residuos. Sin embargo, existe un método rápido para analizar la mejora que producen diferenes tranformaciones. El método se llama Box-Cox. Cargamos la librería `car`
-
-```{webr-r}
-library(MASS)
+modelo_trans <- lm(
+  medv ~ . - lstat + log(lstat),
+  data = Boston
+)
 ```
 
 ```{webr-r}
-bm <- boxcox(lmFric)
-
+par(mfrow = c(2,2))
+plot(modelo_trans)
+par(mfrow = c(1,1))
+resid_rd <- rstandard(modelo_trans) # residuos estandarizados
+hist(resid_rd)
 ```
 
-Extraer el lambda del resultado
+
+No se soluciona del todo pero mejor. Transformamos la variable crim
 
 ```{webr-r}
-lambda <- bm$x[which.max(bm$y)] 
+modelo_trans2 <- lm(
+  medv ~ . - lstat + log(lstat) -crim + log(crim),
+  data = Boston)
 ```
-
-Tranformar la variable. Aquí hay dos opciones. Emplear el valor de lambda exacto o bien mirar al gráfico y elegir el tipo de tranformación más cercana. Por ejemplo, en este caso el valor exacto de lambda es 0,22. Hay dos transformaciones posibles. Lambda = 0 que equivale al logaritmo o Lambda = a 0,5 que equivale a la raíz cuadrada. Dado que la curva tiene un descenso más suave hacia mayores valores de Lambda elejimos 0,5. Además, este tipo de tranformación es muy común en datos de este tipo.
 
 ```{webr-r}
-env_alberta$TFric <- env_alberta$Fric ^0.5
+par(mfrow = c(2,2))
+plot(modelo_trans2)
+par(mfrow = c(1,1))
+resid_rd <- rstandard(modelo_trans2) # residuos estandarizados
+hist(resid_trans2)
 ```
 
-Ajustar el modelo empleando la variable tranformada
-
-```{webr-r}
-lmTFric <- lm(TFric ~ + habitat + slope + aspect + rel.moisture, data = env_alberta)
-```
-
-Comprobamos los residuos
-
-```{webr-r}
-residT <- rstandard(lmTFric) # estimamos los residuos estandarizados
-fittedT <- fitted(lmTFric) # los valores ajustados
-plot(fittedT, residT) # representados los residuos frente a los valores ajustados
-hist(residT) # hacemos un histograma de los residuos para comprobar la normalidad
-qqnorm(residT) # hacemos un gráfico q-q
-qqline(residT)
-```
-
-Por último, ajustamos el modelo, inspeccionamos la significación del modelo empleando un anova y los resultados de los coeficientes con el comando summary
-
-```{webr-r}
-aov(lmTFric)
-summary(lmTFric)
-```
+Ahora ya tenemos un modelo que no desvía de forma tan clara. 
 
 Los **coeficientes de una regresión múltiple** se llaman coeficientes o pendientes parciales y se interpretan en el contexto del resto de variables del modelo.
 
@@ -363,7 +268,7 @@ library(effects)
 ```
 
 ```{webr-r}
-plot(allEffects(lmTFric))
+plot(allEffects(modelo_trans2))
 ```
 
 ## 3. Selección de modelos en regresión lineal múltiple
@@ -377,19 +282,19 @@ library(MASS)
 ```
 
 ```{webr-r}
-step_lmTFric <- stepAIC(lmTFric, trace = TRUE, direction = "backward")
+step_modelo <- stepAIC(modelo_trans2, trace = TRUE, direction = "backward")
 ```
 
 Para obtener un resumen del proceso usamos:
 
 ```{webr-r}
-step_lmTFric$anova
+step_modelo$anova
 ```
 
 También podemos ver la tabla de resultados del modelo
 
 ```{webr-r}
-summary(step_lmTFric)
+summary(step_modelo)
 ```
 
 Estas dos opciones son válidas pero tienen algunas limitaciones ya que no garantiza que la combinación de variables sea optima y puede sergar tanto los valores de los parámetros. Una solución es calcular todos los modelos posibles y seleccionar el mejor. Esto se puede hacer con el paquete **glmulti**. Tenéis un ejemplo de uso del paquete [aquí](https://www.r-bloggers.com/2013/02/model-selection-and-multi-model-inference/)

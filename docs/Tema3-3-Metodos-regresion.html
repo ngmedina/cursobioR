@@ -368,7 +368,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"code":"env_alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/plot.metadata.csv\")\n\ncomm_alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/grassland.community.csv\")\n\ntraits_alberta <- read.csv(\"https://raw.githubusercontent.com/ngmedina/UAMBioDivR/main/Alberta%20grassland/species.traits.csv\")","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(vegan)","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"# Riqueza\nS_alberta <- specnumber(comm_alberta)","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"env_alberta$S <- S_alberta","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"plot(env_alberta$slope, env_alberta$S)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"lmS <- lm(S ~ slope, data = env_alberta) # Regresión linear","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"resid <- rstandard(lmS) # residuos estandarizados\nfitted <- fitted(lmS)\nhist(resid)\nplot(fitted, resid)","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"qqnorm(resid)\nqqline(resid)","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"plot(cooks.distance(lmS))","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"val <- env_alberta$slope[3] # guardamos el valor para restaurar los datos después de comprobar el efecto\nenv_alberta$slope[3] <- 10* max(env_alberta$slope)","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"lmS_test <- lm(S ~ slope, data = env_alberta) # Regresión linear\nplot(cooks.distance(lmS_test))","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"env_alberta$slope[3] <- val","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"summary(lmS)","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"lmslope <- lm(slope ~ habitat, data = env_alberta)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"summary(lmslope)","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"summary(aov(slope ~ habitat, data = env_alberta))","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"data(mtcars)","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"model <- lm(mpg ~ disp + hp + wt + drat, data = mtcars)","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-18","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(car)","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-19","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"vif(model)","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-20","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"cor(mtcars[,c(\"disp\", \"hp\", \"wt\", \"drat\")])","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-21","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"model <- lm(mpg ~ disp + hp + drat, data = mtcars)\nvif(model)","id":22,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-22","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(FD)\ncomm_alberta_ordered <- comm_alberta[,-1][,order(colnames(comm_alberta[,-1]))]\nrownames(traits_alberta) <- traits_alberta$species\ntraits_alberta <- traits_alberta[,-1]\nfd <- dbFD(traits_alberta, comm_alberta_ordered)","id":23,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-23","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"env_alberta$Fric <- fd$FRic \nenv_alberta$rel.moisture <- factor(env_alberta$rel.moisture)\n\nlmFric <- lm(Fric ~ + habitat + slope + aspect + factor(rel.moisture), data = env_alberta)\n","id":24,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-24","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"vif(lmFric) # comprobamos la inflacción de la varianza\n\nresid <- rstandard(lmFric) # estimamos los residuos estandarizados\nfitted <- fitted(lmFric) # los valores ajustados\nplot(fitted, resid) # representados los residuos frente a los valores ajustados\nhist(resid) # hacemos un histograma de los residuos para comprobar la normalidad\nqqnorm(resid) # hacemos un gráfico q-q\nqqline(resid)","id":25,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-25","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"apply(env_alberta[,c(\"Fric\",\"slope\", \"aspect\")], 2, hist)","id":26,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-26","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(MASS)","id":27,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-27","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"bm <- boxcox(lmFric)","id":28,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-28","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"lambda <- bm$x[which.max(bm$y)] ","id":29,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-29","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"env_alberta$TFric <- env_alberta$Fric ^0.5","id":30,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-30","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"lmTFric <- lm(TFric ~ + habitat + slope + aspect + rel.moisture, data = env_alberta)","id":31,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-31","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"residT <- rstandard(lmTFric) # estimamos los residuos estandarizados\nfittedT <- fitted(lmTFric) # los valores ajustados\nplot(fittedT, residT) # representados los residuos frente a los valores ajustados\nhist(residT) # hacemos un histograma de los residuos para comprobar la normalidad\nqqnorm(residT) # hacemos un gráfico q-q\nqqline(residT)","id":32,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-32","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"aov(lmTFric)\nsummary(lmTFric)","id":33,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-33","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(effects)","id":34,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-34","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"plot(allEffects(lmTFric))","id":35,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-35","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(MASS)","id":36,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-36","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"step_lmTFric <- stepAIC(lmTFric, trace = TRUE, direction = \"backward\")","id":37,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-37","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"step_lmTFric$anova","id":38,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-38","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"summary(step_lmTFric)","id":39,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-39","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
+globalThis.qwebrCellDetails = [{"code":"library(MASS)\nlibrary(car)\n\ndata(Boston)","id":1,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-1","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"ggplot(Boston, aes(medv, lstat))+\n  geom_point()","id":2,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-2","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo1 <- lm(medv ~ lstat, data = Boston) # Regresión linear","id":3,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-3","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"par(mfrow = c(2,2))\nplot(modelo1)\npar(mfrow = c(1,1))\nresid <- rstandard(modelo1) # residuos estandarizados\nhist(resid)","id":4,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-4","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo2 <- lm(medv ~ log(lstat), data = Boston)","id":5,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-5","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"par(mfrow = c(2,2))\nplot(modelo2)\npar(mfrow = c(1,1))\nresid <- rstandard(modelo2) # residuos estandarizados\nhist(resid)","id":6,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-6","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(car)","id":7,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-7","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo_full <- lm(medv ~ ., data = Boston)","id":8,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-8","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"vif(modelo_full)","id":9,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-9","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"Boston %>% \n  select(medv, everything()) %>%\n  pairs()","id":10,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-10","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"Boston %>% \n  select(medv, everything())","id":11,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-11","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo_rd <- update(modelo_full, . ~ . - tax)\nvif(modelo_rd)","id":12,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-12","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"par(mfrow = c(2,2))\nplot(modelo_rd)\npar(mfrow = c(1,1))\nresid_rd <- rstandard(modelo_rd) # residuos estandarizados\nhist(resid_rd)","id":13,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-13","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo_trans <- lm(\n  medv ~ . - lstat + log(lstat),\n  data = Boston\n)","id":14,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-14","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"par(mfrow = c(2,2))\nplot(modelo_trans)\npar(mfrow = c(1,1))\nresid_rd <- rstandard(modelo_trans) # residuos estandarizados\nhist(resid_rd)","id":15,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-15","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"modelo_trans2 <- lm(\n  medv ~ . - lstat + log(lstat) -crim + log(crim),\n  data = Boston)","id":16,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-16","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"par(mfrow = c(2,2))\nplot(modelo_trans2)\npar(mfrow = c(1,1))\nresid_rd <- rstandard(modelo_trans2) # residuos estandarizados\nhist(resid_trans2)","id":17,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-17","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(effects)","id":18,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-18","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"plot(allEffects(modelo_trans2))","id":19,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-19","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"library(MASS)","id":20,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-20","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"step_modelo <- stepAIC(modelo_trans2, trace = TRUE, direction = \"backward\")","id":21,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-21","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"step_modelo$anova","id":22,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-22","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}},{"code":"summary(step_modelo)","id":23,"options":{"autorun":"false","classes":"","comment":"","context":"interactive","dpi":72,"editor-font-scale":"1","editor-max-height":"","editor-quick-suggestions":"false","editor-word-wrap":"true","fig-cap":"","fig-height":5,"fig-width":7,"label":"unnamed-chunk-23","message":"true","out-height":"","out-width":"700px","output":"true","read-only":"false","results":"markup","warning":"true"}}];
 
 </script>
 <script type="module">
@@ -1716,19 +1716,13 @@ globalThis.qwebrExecuteCode = async function (
   <ul class="collapse">
   <li><a href="#regresión-lineal-simple-con-variables-cuantitativas" id="toc-regresión-lineal-simple-con-variables-cuantitativas" class="nav-link" data-scroll-target="#regresión-lineal-simple-con-variables-cuantitativas">Regresión lineal simple con variables cuantitativas</a>
   <ul class="collapse">
-  <li><a href="#ejercicio-1-analiza-si-existe-relación-entre-la-diversidad-de-simpson-y-la-pendiente" id="toc-ejercicio-1-analiza-si-existe-relación-entre-la-diversidad-de-simpson-y-la-pendiente" class="nav-link" data-scroll-target="#ejercicio-1-analiza-si-existe-relación-entre-la-diversidad-de-simpson-y-la-pendiente">Ejercicio 1 Analiza si existe relación entre la diversidad de simpson y la pendiente</a></li>
+  <li><a href="#transformaciones" id="toc-transformaciones" class="nav-link" data-scroll-target="#transformaciones">Transformaciones</a></li>
   </ul></li>
-  <li><a href="#regresión-lineal-con-variables-categóricas" id="toc-regresión-lineal-con-variables-categóricas" class="nav-link" data-scroll-target="#regresión-lineal-con-variables-categóricas">Regresión lineal con variables categóricas</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#regresión-lineal-múltiple" id="toc-regresión-lineal-múltiple" class="nav-link" data-scroll-target="#regresión-lineal-múltiple">2. Regresión lineal múltiple</a>
   <ul>
-  <li><a href="#la-multicolinealidad" id="toc-la-multicolinealidad" class="nav-link" data-scroll-target="#la-multicolinealidad">2.1 La multicolinealidad</a>
-  <ul class="collapse">
-  <li><a href="#ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" id="toc-ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" class="nav-link" data-scroll-target="#ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r">Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R</a></li>
-  <li><a href="#ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta" id="toc-ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta" class="nav-link" data-scroll-target="#ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta">Ejercicio 3 Calcula la diversidad funcional de las comunidades herbáceas de alberta</a></li>
-  <li><a href="#ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas" id="toc-ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas" class="nav-link" data-scroll-target="#ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas">Ejercicio 4 Estima una regresión múltiple con los herbazales de alberta en la que se emplee el índice riqueza funcional (Fric) de como variable respuesta y las variables, habitat, pendiente, orientación y humedad relativa como variables explicativas</a></li>
-  </ul></li>
+  <li><a href="#la-multicolinealidad" id="toc-la-multicolinealidad" class="nav-link" data-scroll-target="#la-multicolinealidad">2.1 La multicolinealidad</a></li>
   <li><a href="#selección-de-modelos-en-regresión-lineal-múltiple" id="toc-selección-de-modelos-en-regresión-lineal-múltiple" class="nav-link" data-scroll-target="#selección-de-modelos-en-regresión-lineal-múltiple">3. Selección de modelos en regresión lineal múltiple</a></li>
   </ul></li>
   </ul>
@@ -2048,18 +2042,8 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <section id="regresión-lineal" class="level1">
 <h1>1. Regresión lineal</h1>
 <p>La regresión lineal es un tipo de regresión en la que se analizan relaciones lineales. Es el tipo de regresión más frecuentemente en trabajos de investigación.</p>
-<p>Vamos a seguir trabajando con la base de datos de abundancia de especies en herbazales de Alberta en Estados Unidos. Los datos provienen de un taller sobre análisis de la biodiversidad en R que podéis encontrar <a href="https://kembellab.ca/r-workshop/">aquí</a></p>
-<p>Cargamos la base de datos de comunidades de alberta y la base de datos de características ambientales y la de rasgos funcionales</p>
+<p>La base de datos Boston Housing es un referente clásico en el análisis de regresión. Está compuesta por 506 observaciones y 14 variables, que recogen diversas características de viviendas situadas en los suburbios de Boston. Su objetivo es predecir el valor mediano de las viviendas a partir de variables como la tasa de criminalidad, la antigüedad de las viviendas, el tipo impositivo, la proporción de alumnos por profesor y otros factores socioeconómicos y ambientales.</p>
 <div id="qwebr-insertion-location-1"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Vamos a explorar qué factores afectan a la riqueza taxonómica.</p>
-<p>Para ello primero calculamos la riqueza taxonómica con la librería vegan</p>
-<div id="qwebr-insertion-location-2"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-3"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Para facilitar el análisis vamos a crear una columnas nuevas en la tabla de datos de variables ambientales de Alberta con los datos de riqueza y diversidad de Simpson</p>
-<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <section id="regresión-lineal-simple" class="level2">
 <h2 class="anchored" data-anchor-id="regresión-lineal-simple">1.1 Regresión lineal simple</h2>
@@ -2067,13 +2051,13 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <h3 class="anchored" data-anchor-id="regresión-lineal-simple-con-variables-cuantitativas">Regresión lineal simple con variables cuantitativas</h3>
 <p>Vamos a comenzar por analizar la relación entre la pendiente y la riqueza</p>
 <p>Lo primero antes de hacer un análisis es representar los datos</p>
-<div id="qwebr-insertion-location-5"></div>
+<div id="qwebr-insertion-location-2"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Hacemos la regresión empleando la función <strong><code>lm</code></strong> que tiene los siguientes argumentos</p>
 <p><strong>formula</strong> con la forma <strong><code>y ~ x</code></strong> en la que se especifica cuál es la variable respuesta (y) y cuál la variable explicativa (x)</p>
 <p><strong>data</strong> en el que hay que especificar la tabla en la que están los datos</p>
 <p>El resultado es una lista que contiene toda la información sobre los análisis.</p>
-<div id="qwebr-insertion-location-6"></div>
+<div id="qwebr-insertion-location-3"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Una vez que hemos hecho el análisis y <strong>antes de ver los resultados</strong> vamos a comprobar que los supuestos del análisis se cumplen. Igual que en el análisis de la varianza en los modelos de regresión lineal asumimos</p>
 <ul>
@@ -2082,47 +2066,66 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><p>Homocedasticidad</p></li>
 </ul>
 <p>Para ello analizaremos los residuos</p>
-<div id="qwebr-insertion-location-7"></div>
+<div id="qwebr-insertion-location-4"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Además, podemos hacer un gráfico Q-Q</p>
-<div id="qwebr-insertion-location-8"></div>
+<p>El resultado indica que hay problemas con las asunciones.</p>
+<section id="transformaciones" class="level4">
+<h4 class="anchored" data-anchor-id="transformaciones">Transformaciones</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 15%">
+<col style="width: 29%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Transformación</th>
+<th style="text-align: left;">Fórmula</th>
+<th style="text-align: left;">Cuándo utilizarla</th>
+<th style="text-align: left;">Ejemplo ecológico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Logarítmica</td>
+<td style="text-align: left;"><code>log(x)</code> o <code>log(x + 1)</code></td>
+<td style="text-align: left;">Datos muy asimétricos hacia la derecha o con rangos muy amplios de valores</td>
+<td style="text-align: left;">Abundancia de individuos, biomasa, cobertura vegetal</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Raíz cuadrada</td>
+<td style="text-align: left;"><code>sqrt(x)</code></td>
+<td style="text-align: left;">Datos de recuento con valores bajos o moderadamente asimétricos</td>
+<td style="text-align: left;">Riqueza de especies, número de individuos, número de nidos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cuadrática</td>
+<td style="text-align: left;"><code>x^2</code></td>
+<td style="text-align: left;">Para modelar relaciones unimodales o curvilíneas</td>
+<td style="text-align: left;">Máxima riqueza a temperaturas intermedias</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inversa</td>
+<td style="text-align: left;"><code>1/x</code></td>
+<td style="text-align: left;">Cuando el efecto disminuye rápidamente con el aumento de la variable</td>
+<td style="text-align: left;">Distancia a una fuente de perturbación</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Estandarización</td>
+<td style="text-align: left;"><code>(x - media)/sd</code></td>
+<td style="text-align: left;">Para comparar variables medidas en distintas unidades</td>
+<td style="text-align: left;">Temperatura, precipitación y altitud en un mismo modelo</td>
+</tr>
+</tbody>
+</table>
+<p>Probamos con la tranformación logarítmica</p>
+<div id="qwebr-insertion-location-5"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Además, en los modelos de regresión suele ser necesario inspeccionar si existen puntos influyentes que tengan un peso excesivo en el análisis. Los puntos influyentes más comunes son los valores atípicos que son aquellos puntos en los que la respuesta observada no sigue el patrón establecido por el resto de los datos.</p>
-<p>Una forma de detectar puntos atípicos es empleando la distancia de Cook. La distancia de Cook se calcula eliminando un punto en el modelo y volviendo a calcular la regresión. Esto se repite para cada uno de los puntos.</p>
-<div id="qwebr-insertion-location-9"></div>
+<p>Volvemos a inspeccionar los residuos</p>
+<div id="qwebr-insertion-location-6"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Como ejercicio vamos a cambiar uno de los valores de la pendiente por un valor que sea 10 veces el máximo de pendiente observado</p>
-<div id="qwebr-insertion-location-10"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Volvemos a hacer el modelo de regresión y representamos las ditancias de cook</p>
-<div id="qwebr-insertion-location-11"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Restauramos el valor original</p>
-<div id="qwebr-insertion-location-12"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>La función summary nos permite obtener un resumen de los resultados contenidos en el objeto lmS</p>
-<div id="qwebr-insertion-location-13"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>El resultado indica que no hay una asociación significativa entre la pendiente y la riqueza de especies. Lo cual concuerda con el gráfico de dispersión en el que ya se intuía que no había relación alguna.</p>
-<section id="ejercicio-1-analiza-si-existe-relación-entre-la-diversidad-de-simpson-y-la-pendiente" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-1-analiza-si-existe-relación-entre-la-diversidad-de-simpson-y-la-pendiente">Ejercicio 1 Analiza si existe relación entre la diversidad de simpson y la pendiente</h4>
 </section>
-</section>
-<section id="regresión-lineal-con-variables-categóricas" class="level3">
-<h3 class="anchored" data-anchor-id="regresión-lineal-con-variables-categóricas">Regresión lineal con variables categóricas</h3>
-<p>Los modelos de regresión son muy flexibles y permiten analizar la relación entre una variable respuesta continua y variables explicativas categóricas. Por ejemplo, vamos a analizar el efecto del hábitat en la pendiente</p>
-<div id="qwebr-insertion-location-14"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>inspeccionamos los resultados</p>
-<div id="qwebr-insertion-location-15"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Cuando hay una variable categórica el modelo se construye en dos pasos.</p>
-<ol type="1">
-<li>Se transforma la variable categórica en tantas variables dummy (valor 0,1) como niveles -1.</li>
-</ol>
-<p>Una regresión con un único factor y un ANOVA son equivalentes. Vamos a comprobarlo</p>
-<div id="qwebr-insertion-location-16"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 </section>
 </section>
 </section>
@@ -2145,100 +2148,109 @@ globalThis.qwebrCreateMonacoEditorInstance = function (cellData) {
 <li><p>Las variables con alta colinealidad son variables dummy que representan variables categóricas con tres o más niveles.</p></li>
 </ul>
 <p>Para analizar el grado de multicolinealidad podemos emplear el factor de inflacción de la varianza o VIF por sus siglas en inglés.</p>
-<p>Vamos a explorar unos datos en los que la multicolinealidad es muy alta para ver sus efectos. El ejemplo es una de las bases de datos que vienen con el paquete <em>mtcars.</em></p>
-<p>Cargamos los datos</p>
-<div id="qwebr-insertion-location-17"></div>
+<div id="qwebr-insertion-location-7"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Ajustamos un modelo de regresión</p>
-<div id="qwebr-insertion-location-18"></div>
+<p>Ajustamos un modelo de regresión con todas las variables</p>
+<div id="qwebr-insertion-location-8"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Y calculamos el factor de inflacción de la varianza (VIF). Para ello emplearemos el paquete <code>car</code></p>
-<div id="qwebr-insertion-location-19"></div>
+<div id="qwebr-insertion-location-9"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-20"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>VIF</th>
+<th>Interpretación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt; 3</td>
+<td>Sin preocupación</td>
+</tr>
+<tr class="even">
+<td>3-5</td>
+<td>Vigilancia</td>
+</tr>
+<tr class="odd">
+<td>&gt; 5</td>
+<td>Colinealidad potencialmente problemática</td>
+</tr>
+</tbody>
+</table>
 <p>Para corregir los problemas de multicolinealidad existen varias estrategias.</p>
 <p>La más habitual es eliminar una de las variables que estén altamente correlacionadas. Si dos variables están altamente correlacionadas es porque contienen información muy similar y por lo tanto son redundantes. En este escenario podemos eliminar una de ellas. Para ello:</p>
 <ol type="1">
 <li><p>Hacemos un análisis de correlación entre pares de variables</p></li>
 <li><p>Identificamos las variables más correlacionadas</p></li>
-<li><p>Eliminamos una de las correlacionadas</p></li>
-<li><p>Repetimos el proceso hasta que el VIF se estabilice</p></li>
+<li><p>Eliminamos, de forma razonada, una de las correlacionadas</p></li>
+<li><p>Repetimos el proceso hasta que los valores de VIF asean aceptables</p></li>
 </ol>
-<div id="qwebr-insertion-location-21"></div>
+<p>Visualizamos las relaciones</p>
+<div id="qwebr-insertion-location-10"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<section id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-2-encuentra-una-manera-de-identificar-la-pareja-de-variables-que-tienen-el-valor-máximo-de-correlación-utilizando-código-de-r">Ejercicio 2 Encuentra una manera de identificar la pareja de variables que tienen el valor máximo de correlación utilizando código de R</h4>
+<p>Calculamos los coeficientes de correlación para todos los pares de variables</p>
+<div id="qwebr-insertion-location-11"></div>
+<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La eliminación de variables no debe basarse únicamente en criterios estadísticos. También debe tenerse en cuenta su relevancia biológica o ecológica. Una variable puede presentar un VIF elevado y, aun así, ser fundamental para responder a la pregunta de investigación.</p>
+</div>
+</div>
 <p>La variable displacement indica la cilindrada del motor en cm<sup>3</sup> la variable wt indica el peso del vehículo. Dado que tienen una correlación &gt;0.8 podemos optar por eliminar una de las dos. Por ejemplo peso del vehíulo</p>
-<p>Volvemos a estimar la regresión linear pero eliminando la variable wt</p>
-<div id="qwebr-insertion-location-22"></div>
+<p>Volvemos a estimar la regresión linear pero eliminando la variable tax</p>
+<div id="qwebr-insertion-location-12"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>También podríamos:</p>
 <ul>
 <li><p>Combinar las dos variables relacionadas, por ejemplo sumando sus valores o empleando un índice que resuma ambas variables.</p></li>
 <li><p>Si las variables correlacionadas son muchas podemos realizar un análisis de ordenación (ver tema 3.4) con esas variables antes de hacer la regresión. Este análisis extrae unos ejes resumen de modo que podemos emplear esos ejes como variables explicativas en la regresión.</p></li>
 <li><p>Hay modelos de regresión que como los modelos LASSO y Ridge que están diseñados para trabajar en casos de alta multicolinealidad. Tenéis una descripción de lo que hacen estos modelos y cómo calcularlos <a href="https://rubenfcasal.github.io/aprendizaje_estadistico/shrinkage.html">aquí</a>. Estos modelos reducen los coeficientes de algunas variables a valores cercanos o iguales a cero. Simplifican los modelos y favorecen una interpretación más sencilla pero aumentan el posible sesgo.</p>
-<p>NOTA: Si es posible es preferible emplear el método de eliminar variables redundantes manualmente empleando criterios científicos claros.</p></li>
+<p>NOTA: Siempre que sea posible, es preferible identificar y eliminar de forma razonada las variables redundantes utilizando criterios biológicos o ecológicos claros. Sin embargo, cuando el objetivo principal es la predicción o el número de variables es elevado, los métodos penalizados pueden resultar más apropiados.</p></li>
 </ul>
-</section>
-<section id="ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-3-calcula-la-diversidad-funcional-de-las-comunidades-herbáceas-de-alberta">Ejercicio 3 Calcula la diversidad funcional de las comunidades herbáceas de alberta</h4>
-<div id="qwebr-insertion-location-23"></div>
+<div id="qwebr-insertion-location-13"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
-<section id="ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas" class="level4">
-<h4 class="anchored" data-anchor-id="ejercicio-4-estima-una-regresión-múltiple-con-los-herbazales-de-alberta-en-la-que-se-emplee-el-índice-riqueza-funcional-fric-de-como-variable-respuesta-y-las-variables-habitat-pendiente-orientación-y-humedad-relativa-como-variables-explicativas">Ejercicio 4 Estima una regresión múltiple con los herbazales de alberta en la que se emplee el índice riqueza funcional (Fric) de como variable respuesta y las variables, habitat, pendiente, orientación y humedad relativa como variables explicativas</h4>
-<div id="qwebr-insertion-location-24"></div>
+<p>Hemos solucionado el problema de inflación de la varianza pero los residuos se desvían sustancialmente de los supuestos.</p>
+<p>Aplicamos una transformación a las variables que tengan relaciones no lineales</p>
+<div id="qwebr-insertion-location-14"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Vamos a ver si se cumplen los supuestos del modelo.</p>
-<div id="qwebr-insertion-location-25"></div>
+<div id="qwebr-insertion-location-15"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Los residuos son normales pero hay signos de heterocedasticidad. Una forma de habitual de solucionar el problema es hacer transformaciones de datos. <strong>El objetivo de la transformación de datos es que los residuos tengan una distribución verifique los supuestos del modelo.</strong></p>
-<p>Suele ser útil por comprobar si nuestra variable respuesta o alguna de las variables explicativas tienen distribuciones sesgadas.</p>
-<div id="qwebr-insertion-location-26"></div>
+<p>No se soluciona del todo pero mejor. Transformamos la variable crim</p>
+<div id="qwebr-insertion-location-16"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Como podemos ver en el gráfico la variable Fric tiene una distribución sesgada hacia valores bajos. Las tranformaciones más empleadas en estos casos son el logaritmo, la raíz cuadrada. Podemos ir probando las transformaciones para ver si alguna de ellas mejora los residuos. Sin embargo, existe un método rápido para analizar la mejora que producen diferenes tranformaciones. El método se llama Box-Cox. Cargamos la librería <code>car</code></p>
-<div id="qwebr-insertion-location-27"></div>
+<div id="qwebr-insertion-location-17"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-28"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Extraer el lambda del resultado</p>
-<div id="qwebr-insertion-location-29"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Tranformar la variable. Aquí hay dos opciones. Emplear el valor de lambda exacto o bien mirar al gráfico y elegir el tipo de tranformación más cercana. Por ejemplo, en este caso el valor exacto de lambda es 0,22. Hay dos transformaciones posibles. Lambda = 0 que equivale al logaritmo o Lambda = a 0,5 que equivale a la raíz cuadrada. Dado que la curva tiene un descenso más suave hacia mayores valores de Lambda elejimos 0,5. Además, este tipo de tranformación es muy común en datos de este tipo.</p>
-<div id="qwebr-insertion-location-30"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Ajustar el modelo empleando la variable tranformada</p>
-<div id="qwebr-insertion-location-31"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Comprobamos los residuos</p>
-<div id="qwebr-insertion-location-32"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<p>Por último, ajustamos el modelo, inspeccionamos la significación del modelo empleando un anova y los resultados de los coeficientes con el comando summary</p>
-<div id="qwebr-insertion-location-33"></div>
-<noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
+<p>Ahora ya tenemos un modelo que no desvía de forma tan clara.</p>
 <p>Los <strong>coeficientes de una regresión múltiple</strong> se llaman coeficientes o pendientes parciales y se interpretan en el contexto del resto de variables del modelo.</p>
 <p>Por ejemplo, cuando el resto de variables es constante (normalmente igual a la media) podemos decir que el nivel medio de humead tiene un mayor número de especies que el nivel bajo de humedad.</p>
 <p>Es muy útil representar los efectos de cada variable explicativa sobre la variable respuesta cuando el resto de variables explicativas son constantes. Esto muestra el efecto parcial de una variable sobre la respuesta.</p>
-<div id="qwebr-insertion-location-34"></div>
+<div id="qwebr-insertion-location-18"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-35"></div>
+<div id="qwebr-insertion-location-19"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-</section>
 </section>
 <section id="selección-de-modelos-en-regresión-lineal-múltiple" class="level2">
 <h2 class="anchored" data-anchor-id="selección-de-modelos-en-regresión-lineal-múltiple">3. Selección de modelos en regresión lineal múltiple</h2>
 <p>Es frecuente que una o varias de las variables del modelo de regresión lineal no estén asociadas a la variable respuesta. Incluir variables que no son relevantes conlleva ajustar modelos innecesariamente complejos. Por lo tanto, es frecuente realizar un paso previo de selección antes de ajustar el modelo definitivo.</p>
 <p>Una función útil en este sentido el la función <code>stepAIC</code>del paquete <strong>MASS</strong>.</p>
-<div id="qwebr-insertion-location-36"></div>
+<div id="qwebr-insertion-location-20"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
-<div id="qwebr-insertion-location-37"></div>
+<div id="qwebr-insertion-location-21"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Para obtener un resumen del proceso usamos:</p>
-<div id="qwebr-insertion-location-38"></div>
+<div id="qwebr-insertion-location-22"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>También podemos ver la tabla de resultados del modelo</p>
-<div id="qwebr-insertion-location-39"></div>
+<div id="qwebr-insertion-location-23"></div>
 <noscript>Please enable JavaScript to experience the dynamic code cell content on this page.</noscript>
 <p>Estas dos opciones son válidas pero tienen algunas limitaciones ya que no garantiza que la combinación de variables sea optima y puede sergar tanto los valores de los parámetros. Una solución es calcular todos los modelos posibles y seleccionar el mejor. Esto se puede hacer con el paquete <strong>glmulti</strong>. Tenéis un ejemplo de uso del paquete <a href="https://www.r-bloggers.com/2013/02/model-selection-and-multi-model-inference/">aquí</a></p>
 <p>Sin embargo, incluso cuando calculamos todos los modelos muchas veces no hay certeza de que el modelo seleccionado sea el mejor porque sabemos que aquellos modelos que distan dos puntos de AIC en realidad son equivalentes entre sí. Por eso, recientemente se ha propuesto incorporar la incertidumbre en la selección de modelos a la hora de describir los resultados. Para esto podéis emplear el paquete <strong>MuMIn</strong>. Tenéis un ejemplo de aplicación en esta <a href="https://www.r-bloggers.com/2013/02/model-selection-and-multi-model-inference/">página</a></p>
